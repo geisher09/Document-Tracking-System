@@ -1,0 +1,72 @@
+/* custom css for DTS */
+
+/* common for all views */
+.border {
+	background-color: #696969;
+	height: 30px;
+}
+
+.navbar {
+	background-color: #000000;
+	width: 100%;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #ffffff !important;
+	background-color: #790000 !important;
+}
+
+.logo {
+	height: 200px;
+}
+
+.body {
+	height: 600px;
+	background-color: #790000;
+}
+
+/* 'All Documents' section */
+.table {
+	color: white;
+	font-size: 16px;
+	border-bottom: 0px;
+}
+
+.table-hover tbody tr:hover td {
+	background-color: #790000 !important;
+	opacity: 0.8;
+}
+
+.sbar{
+	margin-top: 10px;	
+	margin-bottom: 50px;
+	width: 60%;
+	background-color: #790000;
+	opacity: 0.8;
+	float: right;
+}
+
+.h { 
+	color: #EC7063;
+	float: left;
+}
+
+/* 'Add Documents' section */
+.form {
+	color: white;
+	width: 60%;
+	background-color: #790000;
+	opacity: 0.8;
+	float: left;
+}
+
+/* 'Login' section */
+
+.lgform {
+	margin-left: 25%;
+	color: white;
+	width: 50%;
+	background-color: #790000;
+	opacity: 0.8;
+}
