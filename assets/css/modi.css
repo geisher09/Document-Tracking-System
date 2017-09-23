@@ -26,6 +26,12 @@ a:hover {
 	background-color: #790000;
 }
 
+#intro {
+	color: white;
+	font-size: 18px;
+	font-family: Georgia;
+}
+
 /* 'All Documents' section */
 .table {
 	color: white;
@@ -69,4 +75,11 @@ a:hover {
 	width: 50%;
 	background-color: #790000;
 	opacity: 0.8;
+}
+
+/* 'Profile' section */
+.info {
+	color: white;
+	font-size: 24px;
+	font-family: Georgia;
 }

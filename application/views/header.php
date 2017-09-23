@@ -37,7 +37,7 @@
 				<a href="<?php echo site_url('Home'); ?>" class="navbar-brand" >Home</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="#">Profile</a></li>
+				<li><a href="<?php echo site_url('Home/profile'); ?>">Profile</a></li>
 				<li><a href="<?php echo site_url('Home/docu'); ?>"> All Documents </a></li>
 				<li><a href="<?php echo site_url('Home/add'); ?>">Add Documents</a></li>
 				<li><a href="#">Offices & Employees</a></li>
