@@ -35,6 +35,7 @@
 					<button type="submit" class="btn btn-danger btn-lg"> LOGIN </button>
 				</div>
 			</form>
+			<a href="<?php echo site_url('Home/signup'); ?>" id="newaccountlink">Create an account</a>
 		</div>
 	</div>
 	

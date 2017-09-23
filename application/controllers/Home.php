@@ -57,10 +57,23 @@ class Home extends CI_Controller {
 		$this->load->view('edit');
 		$this->load->view('footer');
 	}
+	
+	public function offices(){
+		$header_data['title']="Offices";
+		
+		$this->load->view('header',$header_data);
+		$this->load->view('offices');
+		$this->load->view('footer');
+	}
 
 	public function login(){
 		$header_data['title']="Login";		
 		$this->load->view('login',$header_data);
+	}
+	
+	public function signup(){
+		$header_data['title']="Sign Up";		
+		$this->load->view('signup',$header_data);
 	}
 
 	public function save(){
