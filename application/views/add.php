@@ -1,81 +1,94 @@
-<div class= "container-fluid">
-	<!--border-->
+<!--border-->
 	<div class="row">
 		<div class=" col-md-12 col-sm-12 col-xs-12 border">
 			 
 		</div>
 	</div>
-	
-	<!--logo-->
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 logo">
-			<h1 align="center"><b> DOCUMENT TRACKING SYSTEM </b>
-		</div>
-	</div>
-	
-	<!--navigation bar-->
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a href="<?php echo base_url(); ?>" class="navbar-brand" >Home</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="#">Profile</a></li>
-				<li><a href="<?php echo site_url('Home/docu'); ?>">All Documents</a></li>
-				<li><a href="#">Add Documents</a></li>
-				<li><a href="#">Offices & Employees</a></li>
-			</ul>
-    
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-phone"></span> Contacts</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-			</ul>
-		</div>
-	</nav>
-	
-	<!--border-->
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 border">
-			 
-		</div>
-	</div>
-	
+
 	<!--body-->
-	<div class="row">
+	<div class="row" onload="setup()">
 		<div class=" col-md-12 col-sm-12 col-xs-12 body " > 
 		<div class="container">
-			<h2 class="h" > Add Documents </h2> <br /> <br /><br /> <br />
-			<form role="form" class="form" method="post">
-				<div class="form-group">
-					<label for="dtn"> Document Tracking Number: </label>
-					<input type="text" class="form-control" id="dtn" name="dtn" />
-				</div>
-				<div class="form-group">
-					<label for="title"> Title: </label>
-					<input type="text" class="form-control" id="title" name="title" />
-				</div>
-				<div class="form-group">
-					<label for="desc"> Description: </label>
-					<textarea class="form-control" id="desc" name="desc" rows="3"> </textarea>
-				</div>
-				<div class="form-group">
-					<label for="file"> Attach File: </label>
-					<div class="input-group">
-						<input type="text" class="form-control" id="file" name="file" />
-						<span class="input-group-btn">
-							<button type="submit" class="btn btn-warning"> Choose file </button>
-						</span>
+			<h2 class="h" > Add Documents </h2> <br /><br /><br /> <br />
+			<?php if( $error = $this->session->flashdata('response')): ?>
+			<div class="alert alert-dismissible alert-success">
+				<?php echo $error; ?>
+			</div> 
+			<?php endif; ?>
+				<?php echo form_open_multipart('home/save',['class'=>'form']); ?>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<label for="dtn"> Document Tracking Number: </label>
+						<?php echo form_input(['name'=>'document_id','class'=>'form-control','placeholder'=>'Tracking no', 'value'=>set_value('document_id')]); ?>
 					</div>
+
+					<div class="col-lg-12">
+						<?php echo form_error('document_id'); ?>
+			  		</div>	
 				</div>
-				<div class="form-group">
-					<label for="sign"> Signatories: </label>
-					<input type="text" class="form-control" id="sign" name="sign" />
+
+
+				<div class="row">
+					<div class="col-lg-12">
+					  		<div><br /></div>			
+						<label for="title"> Title: </label>
+						<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
+					</div>
+
+					<div class="col-lg-12">
+						<?php echo form_error('document_title'); ?>
+			  		</div>	
 				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+					  		<div><br /></div>			
+						<label for="desc"> Description: </label>
+						<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
+					</div>
+
+					<div class="col-lg-12">
+						<?php echo form_error('document_desc'); ?>
+			  		</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+					  		<div><br /></div>			
+						<label for="file"> Attach File: </label>
+						<div class="input-group">
+						<?php echo form_upload(['name'=>'file','class'=>'form-control']); ?>
+						</div>
+					</div>
+
+					<div class="col-lg-12">
+						<?php echo form_error('file'); ?>
+			  		</div>
+				</div>
+
+				<!-- <div class="row">
+					<div class="col-lg-12">
+					  		<div><br /></div>			
+						<label for="sign"> Signatories: </label>
+						<?php echo form_input(['name'=>'signatories','class'=>'form-control','placeholder'=>'Signatories', 'value'=>set_value('signatories')]); ?>
+					</div>
+
+					<div class="col-lg-12">
+						<?php echo form_error('signatories'); ?>
+			  		</div>
+				</div> -->
 				
+				<div><br /></div>			
 				<div class="form-group">
-					<button type="submit" class="btn btn-danger">
-						Save <span class="glyphicon glyphicon-save"></span> 
-					</button>
+					<?php $data = array(
+					'type'      => 'submit',
+					'content'   => 'Save <span class="btn-label"><i class="glyphicon glyphicon-save"></i></span>',
+					'class'     => 'btn btn-md btn-labeled btn-danger',
+					'value'		=> 'upload'
+					);
+
+					echo form_button($data);?>
 				</div>
 			</form>
 		</div>
