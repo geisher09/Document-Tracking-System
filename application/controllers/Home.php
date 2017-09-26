@@ -33,10 +33,47 @@ class Home extends CI_Controller {
 		$this->load->view('add');
 		$this->load->view('footer');
 	}
+	
+	public function profile(){
+		$header_data['title']="Profile";
+		
+		$this->load->view('header',$header_data);
+		$this->load->view('profile');
+		$this->load->view('footer');
+	}
+	
+	public function myd(){
+		$header_data['title']="My Documents";
+		
+		$this->load->view('header',$header_data);
+		$this->load->view('mydocu');
+		$this->load->view('footer');
+	}
+	
+	public function edit(){
+		$header_data['title']="Edit Profile";
+		
+		$this->load->view('header',$header_data);
+		$this->load->view('edit');
+		$this->load->view('footer');
+	}
+	
+	public function offices(){
+		$header_data['title']="Offices";
+		
+		$this->load->view('header',$header_data);
+		$this->load->view('offices');
+		$this->load->view('footer');
+	}
 
 	public function login(){
 		$header_data['title']="Login";		
 		$this->load->view('login',$header_data);
+	}
+	
+	public function signup(){
+		$header_data['title']="Sign Up";		
+		$this->load->view('signup',$header_data);
 	}
 
 	public function save(){

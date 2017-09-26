@@ -11,7 +11,7 @@
 	width: 100%;
 }
 
-a:hover {
+li:hover {
 	text-decoration: none;
 	color: #ffffff !important;
 	background-color: #790000 !important;
@@ -24,6 +24,12 @@ a:hover {
 .body {
 	height: 600px;
 	background-color: #790000;
+}
+
+#intro {
+	color: white;
+	font-size: 18px;
+	font-family: Georgia;
 }
 
 /* 'All Documents' section */
@@ -69,4 +75,29 @@ a:hover {
 	width: 50%;
 	background-color: #790000;
 	opacity: 0.8;
+}
+
+/* 'Profile' section */
+.info {
+	color: white;
+	font-size: 24px;
+	font-family: Georgia;
+}
+
+/* Sign up */
+#newaccountlink {
+	font-size:15px;
+	color:#fff;
+}
+#newaccountlink:hover,
+#newaccountlink:focus {
+	text-decoration:underline;
+	color:#ff8080 !important;
+}
+
+/* 'Offices and Employees' Section */
+
+.o {
+	color: white;
+	float: left;
 }
