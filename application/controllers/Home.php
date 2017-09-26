@@ -65,7 +65,23 @@ class Home extends CI_Controller {
 		$this->load->view('offices');
 		$this->load->view('footer');
 	}
-
+		// in-indent ko lang nang kaunti ung function for offices para di confusing haha    -Carlo   
+			public function irtc(){
+				$header_data['title']="Integrated Research and Training Center";
+				
+				$this->load->view('header',$header_data);
+				$this->load->view('offices/IRTC');
+				$this->load->view('footer');
+			}
+	
+			public function collegeofscience(){
+				$header_data['title']="College Of Science";
+				
+				$this->load->view('header',$header_data);
+				$this->load->view('offices/COS');
+				$this->load->view('footer');
+			}
+			// end ng function for offices
 	public function login(){
 		$header_data['title']="Login";		
 		$this->load->view('login',$header_data);

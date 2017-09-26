@@ -18,7 +18,7 @@
 
 	
 	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 body " style="height:1000px;">
+		<div class=" col-md-12 col-sm-12 col-xs-12 body " style="height:1100px;">
 		    <h1 align="center" style="color:white; margin-top: 50px"><b> DOCUMENT TRACKING SYSTEM </b> </h1>
 		    <h1 align="center" style="color:white;"><b> SIGN UP </b> </h1>
 			<form class="lgform">
@@ -44,7 +44,7 @@
 						<div class="radio">
 						  <label><input type="radio" name="optradio">Female</label>
 						</div>
-						</div>
+					</div>
 				  </div>
 				<div class="form-group">
 					<label for="department">Department:</label>
@@ -63,6 +63,10 @@
 				  <div class="form-group">
 					<label for="pwd">Password:</label>
 					<input type="password" class="form-control" id="pwd">
+				  </div>
+				  <div class="form-group">
+					<label for="pwd_2">Re-enter Password:</label>
+					<input type="password" class="form-control" id="pwd_2">
 				  </div>
 				  <br />
 				  <button type="submit" class="btn btn-danger btn-md">Create account</button>
