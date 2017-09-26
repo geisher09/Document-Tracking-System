@@ -45,6 +45,33 @@
 	
 </div>
 	
+		<!--modal-->
+		<div id="details" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #E74C3C">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title" style="color: #641E16 text-align: center;">DOCUMENT DETAILS</h3>
+					</div>
+			
+					<div class="modal-body">
+					 <div>
+						<h4 style="font-weight: bold"> 
+							Document Tracking Number: <br /><br />
+							Title: <br /><br />
+							Description: <br /><br /><br /><br /><br /><br />
+							Date Submitted: <br /><br />
+							Date Received: <br /><br />
+							Status: <br /><br />
+							Signatories: <br /><br /><br /><br />
+						</h4>
+					 </div>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+		
 <div class="row">
 	<div class=" col-md-12 col-sm-12 col-xs-12 border">
 			    

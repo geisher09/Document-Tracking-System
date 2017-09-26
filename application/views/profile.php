@@ -28,9 +28,6 @@
 					Employee ID: <?php echo $employee_id; ?> <br />
 					Department ID: <?php echo $department_id; ?> <br /><br />
 				</p>
-				<a href="<?php echo site_url('Home/edit'); ?>" class="btn btn-info btn-md"> 
-					<span class="glyphicon glyphicon-pencil"></span> Edit Profile 
-				</a>
 				
 				<a href="<?php echo site_url('Home/myd'); ?>" class="btn btn-success btn-md"> 
 					<span class="glyphicon glyphicon-file"></span> My Documents 
