@@ -82,6 +82,7 @@ class Home extends CI_Controller {
 				$this->load->view('footer');
 			}
 			// end ng function for offices
+			
 	public function login(){
 		$header_data['title']="Login";		
 		$this->load->view('login',$header_data);

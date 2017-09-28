@@ -27,13 +27,12 @@
  
 			
 			<!-- table -->
-		    <table class="table table-list-search table-hover table-condensed table-responsive ">
+		    <table class="table table-list-search table-hover table-responsive ">
 				<thead>
 					<tr>
 						<th>TRACKING NO. </th>
 						<th>TITLE</th>
 						<th>STATUS</th>
-						<th>ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,9 +42,6 @@
 						<td><?php echo $document['document_id']; ?></td>
 						<td><?php echo $document['document_title']; ?></td>
 						<td><?php echo $document['action']; ?></td>
-						<td>
-							<?php echo anchor("home/view/{$document['document_id']}", 'View document', ['class'=>'btn btn-primary btn-sm'],['data-toggle'=>'modal'],['data-target'=>'#details']); ?>
-							</td>
 					</tr>
 					<?php } ?>
 					<?php else: ?>
