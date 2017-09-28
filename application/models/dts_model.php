@@ -22,6 +22,10 @@
 			$this->db->set('document_file',$url);
 			return $this->db->insert('document', $data,$url);
 		}
+		
+		public function saveDepartment($data){
+			return $this->db->insert('department', $data);
+		}
 
 
 	}

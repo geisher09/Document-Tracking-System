@@ -101,3 +101,12 @@ li:hover {
 	color: white;
 	float: left;
 }
+
+.o:hover {
+	color: #696969;
+	text-decoration: none;
+}
+
+#adept {
+	float: right;
+}
