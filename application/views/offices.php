@@ -6,7 +6,7 @@
 	</div>
 
 	<!--body-->
-	<div class="row" onload="setup()">
+	<div class="row">
 		<div class=" col-md-12 col-sm-12 col-lg-12 body " > 
 		<div class="container">
 			<div class="h">

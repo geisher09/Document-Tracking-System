@@ -42,6 +42,16 @@ class Home extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function contacts(){
+		$header_data['title']="Contacts";
+		
+		
+		
+		$this->load->view('header',$header_data);
+		$this->load->view('contacts');
+		$this->load->view('footer');
+	}
+	
 	public function myd(){
 		$header_data['title']="My Documents";
 		

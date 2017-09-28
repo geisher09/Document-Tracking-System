@@ -74,9 +74,10 @@ li:hover {
 	margin-left: 25%;
 	color: white;
 	width: 50%;
-	background-color: #790000;
+	background-color: #790000; 
 	opacity: 0.8;
 }
+
 
 /* 'Profile' section */
 .info {
@@ -126,3 +127,6 @@ li:hover {
 	font-size:17px;
 	color:#FFFFFF;
 }
+
+
+
