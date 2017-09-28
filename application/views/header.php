@@ -26,7 +26,7 @@
 	
 	<div class="row">
 		<div class=" col-md-12 col-sm-12 col-xs-12 logo">
-			<h1 align="center"><b> DOCUMENT TRACKING SYSTEM </b>
+			<h1 align="center" style="color:#000;"><b> DOCUMENT TRACKING SYSTEM </b><h1>
 		</div>
 	</div>
 	

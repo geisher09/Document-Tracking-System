@@ -20,11 +20,11 @@
 
 <div class="row">
 	<div class=" col-md-12 col-sm-12 col-xs-12 body " > 
-		<div class="container" >
+		<div class="container-fluid" >
 			<div class="row" >
 				<br />
 				<!-- temporary profile picture & sample profile info  --> 
-				<div class="col-md-3 col-sm-12 col-xs-12">
+				<div class="col-md-3 col-sm-12 col-xs-12" style="margin-left:50px;">
 				<br />
 					<div class="row">
 							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive" 
