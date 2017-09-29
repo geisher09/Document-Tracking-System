@@ -75,23 +75,23 @@ class Home extends CI_Controller {
 		$this->load->view('offices');
 		$this->load->view('footer');
 	}
-		// in-indent ko lang nang kaunti ung function for offices para di confusing haha    -Carlo   
-			public function irtc(){
-				$header_data['title']="Integrated Research and Training Center";
-				
-				$this->load->view('header',$header_data);
-				$this->load->view('offices/IRTC');
-				$this->load->view('footer');
-			}
 	
-			public function collegeofscience(){
-				$header_data['title']="College Of Science";
-				
-				$this->load->view('header',$header_data);
-				$this->load->view('offices/COS');
-				$this->load->view('footer');
-			}
-			// end ng function for offices
+	public function dept(){
+		$header_data['title']="Departments";
+		
+		$this->load->view('header',$header_data);
+		$this->load->view('departments');
+		$this->load->view('footer');
+	}
+	
+	public function addDept(){
+	$header_data['title']="Add Department";
+		
+	$this->load->view('header',$header_data);
+	$this->load->view('addDept');
+	$this->load->view('footer');
+	}
+  
 	public function login(){
 		$header_data['title']="Login";		
 		$this->load->view('login',$header_data);
@@ -129,8 +129,6 @@ class Home extends CI_Controller {
 				$this->load->view('footer');
 				echo "WAAAAAAAAAAAAAa";
         }
-	
-
 	}
 
 	public function do_upload(){
@@ -144,6 +142,32 @@ class Home extends CI_Controller {
 								return $url;
 
 		return redirect('home/add');					
+	}
+	
+	public function saveDept(){
+		$this->form_validation->set_rules('department_id', 'Department ID', 'required');
+	 	$this->form_validation->set_rules('department_desc', 'Department Name', 'required');
+  		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
+
+        if ($this->form_validation->run()){
+
+               	$data = $this->input->post();
+             	$this->load->model('dts_model');
+             	if ($this->dts_model->saveDepartment($data)){
+             		$this->session->set_flashdata('response', 'Saved Succesfully!');
+				 }
+				 else{
+             		$this->session->set_flashdata('response', 'Failed :(');
+				 }
+				 return redirect('home/addDept');
+
+        }
+        else{
+            	$header_data['title']="Add Documents";		
+				$this->load->view('header',$header_data);
+				$this->load->view('addDept');
+				$this->load->view('footer');
+        }
 	}
 
 
