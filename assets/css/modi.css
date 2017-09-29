@@ -103,26 +103,12 @@ li:hover {
 	float: left;
 	cursor:pointer;
 }
-.o:hover,
-.o:focus {
-	text-decoration:underline;
-	color:#ff8080 !important;
+
+.o:hover {
+	color: #696969;
+	text-decoration: none;
 }
 
-/* 'Sub-Offices and Employees' Section */
-.o2 {
-	color: white;
-	float: left;
-	cursor:pointer;
-	font-size:18px;
-}
-.o2:hover, .o2:focus {
-	text-decoration:underline;
-	color:#ff8080 !important;
-}
-
-/* office's info section */
-.off p,.off li{
-	font-size:17px;
-	color:#FFFFFF;
+#adept {
+	float: right;
 }
