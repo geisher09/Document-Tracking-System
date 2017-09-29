@@ -81,7 +81,7 @@ class Home extends CI_Controller {
 	$this->load->view('addDept');
 	$this->load->view('footer');
 	}
-
+  
 	public function login(){
 		$header_data['title']="Login";		
 		$this->load->view('login',$header_data);
