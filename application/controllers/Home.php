@@ -157,7 +157,6 @@ class Home extends CI_Controller {
 				$this->load->view('header',$header_data);
 				$this->load->view('addDept');
 				$this->load->view('footer');
-				echo "WAAAAAAAAAAAAAa";
         }
 	}
 

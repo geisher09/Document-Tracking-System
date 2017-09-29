@@ -24,6 +24,7 @@ li:hover {
 .body {
 	height: 600px;
 	background-color: #790000;
+	overflow:auto;
 }
 
 #intro {
@@ -95,11 +96,12 @@ li:hover {
 	color:#ff8080 !important;
 }
 
-/* 'Offices and Employees' Section */
+/* 'Offices' Section */
 
 .o {
 	color: white;
 	float: left;
+	cursor:pointer;
 }
 
 .o:hover {
