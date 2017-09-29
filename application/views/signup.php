@@ -1,14 +1,4 @@
-<head>
-<title> <?php echo $title; ?> </title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" />
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.css");?>" />
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/modi.css");?>" />
-	
-	<script src="<?php echo base_url("assets/js/jquery.min.js"); ?>" /></script>
-	<script src="<?php echo base_url("assets/js/bootstrap.min.js"); ?>" /></script>
-</head>
+
 <div class= "container-fluid">
 	<div class="row">
 		<div class=" col-md-12 col-sm-12 col-xs-12 border">
@@ -21,57 +11,76 @@
 		<div class=" col-md-12 col-sm-12 col-xs-12 body " style="height:1100px;">
 		    <h1 align="center" style="color:white; margin-top: 50px"><b> DOCUMENT TRACKING SYSTEM </b> </h1>
 		    <h1 align="center" style="color:white;"><b> SIGN UP </b> </h1>
-			<form class="lgform">
+				
+				<?php echo form_open('home/create_member',['class'=>'lgform']);?>
 				<h3>PROFILE</h3>
 				<div class="form-group">
-					<label for="lname">Last Name:</label>
-					<input type="text" class="form-control" id="lname">
-				  </div>
+			  			<label for="lname">Last Name:</label>
+						<input type="text" name= "lname" class="form-control" id="lname">
+			  			<?php echo form_error('lname'); ?>
+				</div>
+				
 				<div class="form-group">
 					<label for="fname">First Name:</label>
-					<input type="text" class="form-control" id="fname">
+					<input type="text" name="fname" class="form-control" id="fname">
+					<?php echo form_error('fname'); ?>
 				  </div>
 				<div class="form-group">
 					<label for="mname">Middle Name:</label>
-					<input type="text" class="form-control" id="mname">
+					<input name="mname" type="text" class="form-control" id="mname">
+					<?php echo form_error('mname'); ?>
 				  </div>
 				<div class="form-group">
 					<label for="sex">Sex:</label>
 					<div class="radio-inline">
 						<div class="radio">
-						  <label><input type="radio" name="optradio">Male</label>
+						  <label><input name="sex" value="male" type="radio" name="optradio">Male</label>
 						</div>
 						<div class="radio">
-						  <label><input type="radio" name="optradio">Female</label>
+						  <label><input name="sex" value="female" type="radio" name="optradio">Female</label>
 						</div>
 					</div>
 				  </div>
 				<div class="form-group">
 					<label for="department">Department:</label>
-					<input type="text" class="form-control" id="department">
-				  </div>
+					<div class="col-lg-12">
+							      <div class="col-sm-6">
+							        <select name="department" class="form-control">							        	
+									<?php foreach ($dp as $depart){ ?>
+							          <option value="<?php echo $depart->department_id; ?>"><?php echo $depart->department_id; ?></option>
+							        <?php } ?>
+							        </select> 
+							      </div>
+				     </div>
+
+				 </div>
+				 <br><br>
 				<div class="form-group">
 					<label for="status">Position:</label>
-					<input type="text" class="form-control" id="status">
-				  </div>
+					<input name="position" type="text" class="form-control" id="status">
+					<?php echo form_error('position'); ?>
+				</div>
 				  <br/>
 				  <h3>ACCOUNT</h3>
 				<div class="form-group">
-					<label for="email">Username:</label>
-					<input type="text" class="form-control" id="email" disabled>
+					<label for="username">Username:</label>
+					<input name="username" type="text" class="form-control" id="username">
+					<?php echo form_error('username'); ?>
 				  </div>
 				  <div class="form-group">
 					<label for="pwd">Password:</label>
-					<input type="password" class="form-control" id="pwd">
+					<input name="password" type="password" class="form-control" id="pwd">
+					<?php echo form_error('password'); ?>
 				  </div>
 				  <div class="form-group">
 					<label for="pwd_2">Re-enter Password:</label>
-					<input type="password" class="form-control" id="pwd_2">
+					<input name="password_confirm" type="password" class="form-control" id="pwd_2">
+					<?php echo form_error('password_confirm'); ?>
 				  </div>
 				  <br />
 				  <button type="submit" class="btn btn-danger btn-md">Create account</button>
 				  <a href="<?php echo site_url('Home/login'); ?>" class="btn btn-default btn-md" role="button">Cancel</a>
-			</form>
+				<?php  echo form_close(); ?>
 		</div>
 	</div>
 	

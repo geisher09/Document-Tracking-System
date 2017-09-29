@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title> <?php echo $title; ?> </title>
-
-	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" />
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.css");?>" />
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/modi.css");?>" />
-	
-	<script src="<?php echo base_url("assets/js/ajax.js"); ?>" /></script>
-	<script src="<?php echo base_url("assets/js/jquery.min.js"); ?>" /></script>
-	<script src="<?php echo base_url("assets/js/bootstrap.min.js"); ?>" /></script>
-	<script src="<?php echo base_url("assets/js/search.js"); ?>" /></script>
-
-	
-</head>
 <body>
 	<div class= "container-fluid">
 	<div class="row">
@@ -34,7 +16,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a href="<?php echo site_url('Home'); ?>" class="navbar-brand" >Home</a>
+				<a href="<?php echo site_url('Home/home'); ?>" class="navbar-brand" >Home</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="<?php echo site_url('Home/profile'); ?>">Profile</a></li>
@@ -45,7 +27,7 @@
     
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="<?php echo site_url('Home/contacts'); ?>"><span class="glyphicon glyphicon-phone"></span> Contacts</a></li>
-				<li><a href="<?php echo site_url('Home/login'); ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				<li><a href="<?php echo site_url('Home'); ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
 	</nav>

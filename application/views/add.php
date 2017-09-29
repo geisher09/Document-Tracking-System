@@ -10,11 +10,7 @@
 		<div class=" col-md-12 col-sm-12 col-xs-12 body " > 
 		<div class="container">
 			<h2 class="h" > Add Documents </h2> <br /><br /><br /> <br />
-			<?php if( $error = $this->session->flashdata('response')): ?>
-			<div class="alert alert-dismissible alert-success">
-				<?php echo $error; ?>
-			</div> 
-			<?php endif; ?>
+
 				<?php echo form_open_multipart('home/save',['class'=>'form']); ?>
 
 				<div class="row">
