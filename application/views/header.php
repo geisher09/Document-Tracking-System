@@ -31,7 +31,7 @@
 	</div>
 	
 	
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse navbar-fixed">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a href="<?php echo site_url('Home'); ?>" class="navbar-brand" >Home</a>
@@ -44,7 +44,7 @@
 			</ul>
     
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-phone"></span> Contacts</a></li>
+				<li><a href="<?php echo site_url('Home/contacts'); ?>"><span class="glyphicon glyphicon-phone"></span> Contacts</a></li>
 				<li><a href="<?php echo site_url('Home/login'); ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>

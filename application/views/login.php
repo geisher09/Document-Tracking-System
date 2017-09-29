@@ -18,7 +18,9 @@
 
 	
 	<div class="row">
+	
 		<div class=" col-md-12 col-sm-12 col-xs-12 body " >
+		
 		    <h1 align="center" style="color:white; margin-top: 50px"><b> DOCUMENT TRACKING SYSTEM </b> </h1>
 		    <h1 align="center" style="color:white;"><b> LOG IN </b> <br /><br />
 			<form class="lgform">

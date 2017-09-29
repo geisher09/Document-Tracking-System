@@ -1,3 +1,4 @@
+	
 	<div class="row">
 		<div class=" col-md-12 col-sm-12 col-xs-12 border">
 			 
@@ -6,7 +7,11 @@
 	
 	<div class="row">
 		<div class=" col-md-12 col-sm-12 col-xs-12 body " > 
+		
+			
+			
 			<div class="container" >
+			
 				<h2 class="h" > Welcome to Document Tracking System </h2> <br /><br /><br /><br />
 				<p id="intro"> 
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Many years ago before the advent of modern technology, people were just scribbling					on dried leaves using coals 
