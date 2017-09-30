@@ -11,8 +11,8 @@
 			
 			
 			<div class="container" >
-			
-				<h2 class="h" > Welcome to Document Tracking System </h2> <br /><br /><br /><br />
+				
+				<h2 class="h" >Welcome <?php echo $uname;?> to Document Tracking System! </h2> <br /><br /><br /><br />
 				<p id="intro"> 
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Many years ago before the advent of modern technology, people were just scribbling					on dried leaves using coals 
 					from burned wood as pens. Soon, mankind discovered how to make paper out of trees, while quills and ink came 

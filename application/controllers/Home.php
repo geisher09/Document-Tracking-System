@@ -162,16 +162,21 @@ class Home extends CI_Controller {
 	public function validation(){
 		$this->load->model('dts_model');
 		$query=$this->dts_model->validate();
-
 		// echo $query;
-		
+		$uname['uname'] = $this->input->post('uname');	
 		if($query){
 			$data = array(
 				'username' => $uname,
 				'is_logged_in' => true
 			);
 			$this->session->set_userdata($data);
-			redirect('home/home');
+			$header_data['title']="DTS";
+			$uname['uname'] = $this->input->post('uname');		
+			$this->load->view('header2',$header_data);
+			$this->load->view('header');
+			$this->load->view('home',$uname);			
+			$this->load->view('footer');
+			
 		} 
 		else{
 
