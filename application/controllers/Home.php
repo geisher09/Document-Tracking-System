@@ -163,20 +163,20 @@ class Home extends CI_Controller {
 		$this->load->model('dts_model');
 		$query=$this->dts_model->validate();
 
-		echo $query;
+		// echo $query;
 		
-		// if($query){
-		// 	$data = array(
-		// 		'username' => $uname,
-		// 		'is_logged_in' => true
-		// 	);
-		// 	$this->session->set_userdata($data);
-		// 	redirect('home/home');
-		// } 
-		// else{
+		if($query){
+			$data = array(
+				'username' => $uname,
+				'is_logged_in' => true
+			);
+			$this->session->set_userdata($data);
+			redirect('home/home');
+		} 
+		else{
 
-		// 	$this->index();
-		// }
+			$this->index();
+		}
 	}
 
 	public function create_member(){

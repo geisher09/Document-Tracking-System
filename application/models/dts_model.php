@@ -47,17 +47,13 @@
 
 		public function validate(){
 			$uname = $this->input->post('uname');
-			$pword = $this->input->post('password');
+			$pword = md5($this->input->post('password'));
 			$this->db->where('username',$uname);
+			$this->db->where('password',$pword);
 			$query = $this->db->get('employee');
 
-			if($query->num_rows>0){
-				while($query->result()){
-					if(password_verify($pword,$query->result()->password)){
-						return $query->num_rows();
-					}
-				}
-			}
+			return $query->num_rows();
+
 
 
 		}
@@ -73,7 +69,7 @@
 				'position'	=>$this->input->post('position'),
 				'department_id'	=>$this->input->post('department'),
 				'employee_id'	=>$now.'-'.$this->input->post('department').'-'.$lastid,
-				'password'	=>password_hash($this->input->post('password'),PASSWORD_DEFAULT),
+				'password'	=>md5($this->input->post('password')),
 				'username'	=>$this->input->post('username')
 			);
 
