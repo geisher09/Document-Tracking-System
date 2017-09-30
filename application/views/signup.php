@@ -14,20 +14,21 @@
 				
 				<?php echo form_open('home/create_member',['class'=>'lgform']);?>
 				<h3>PROFILE</h3>
+				
 				<div class="form-group">
 			  			<label for="lname">Last Name:</label>
-						<input type="text" name= "lname" class="form-control" id="lname">
+			  			<?php echo form_input(['name'=>'lname','class'=>'form-control','placeholder'=>'Last name', 'value'=>set_value('lname')]); ?>
 			  			<?php echo form_error('lname'); ?>
 				</div>
 				
 				<div class="form-group">
 					<label for="fname">First Name:</label>
-					<input type="text" name="fname" class="form-control" id="fname">
+			  		<?php echo form_input(['name'=>'fname','class'=>'form-control','placeholder'=>'First name', 'value'=>set_value('fname')]); ?>
 					<?php echo form_error('fname'); ?>
 				  </div>
 				<div class="form-group">
 					<label for="mname">Middle Name:</label>
-					<input name="mname" type="text" class="form-control" id="mname">
+			  		<?php echo form_input(['name'=>'mname','class'=>'form-control','placeholder'=>'Middle name', 'value'=>set_value('mname')]); ?>
 					<?php echo form_error('mname'); ?>
 				  </div>
 				<div class="form-group">
@@ -47,7 +48,7 @@
 							      <div class="col-sm-6">
 							        <select name="department" class="form-control">							        	
 									<?php foreach ($dp as $depart){ ?>
-							          <option value="<?php echo $depart->department_id; ?>"><?php echo $depart->department_id; ?></option>
+							          <option value="<?php echo $depart->department_id; ?>"><?php echo $depart->department_desc; ?></option>
 							        <?php } ?>
 							        </select> 
 							      </div>
@@ -57,19 +58,19 @@
 				 <br><br>
 				<div class="form-group">
 					<label for="status">Position:</label>
-					<input name="position" type="text" class="form-control" id="status">
+			  		<?php echo form_input(['name'=>'position','class'=>'form-control','placeholder'=>'Position', 'value'=>set_value('position')]); ?>
 					<?php echo form_error('position'); ?>
 				</div>
 				  <br/>
 				  <h3>ACCOUNT</h3>
 				<div class="form-group">
 					<label for="username">Username:</label>
-					<input name="username" type="text" class="form-control" id="username">
+			  		<?php echo form_input(['name'=>'username','class'=>'form-control','placeholder'=>'Username', 'value'=>set_value('username')]); ?>
 					<?php echo form_error('username'); ?>
 				  </div>
 				  <div class="form-group">
 					<label for="pwd">Password:</label>
-					<input name="password" type="password" class="form-control" id="pwd">
+			  		<?php echo form_input(['name'=>'password','type'=>'password','class'=>'form-control','placeholder'=>'Password', 'value'=>set_value('password')]); ?>
 					<?php echo form_error('password'); ?>
 				  </div>
 				  <div class="form-group">
@@ -79,7 +80,7 @@
 				  </div>
 				  <br />
 				  <button type="submit" class="btn btn-danger btn-md">Create account</button>
-				  <a href="<?php echo site_url('Home/login'); ?>" class="btn btn-default btn-md" role="button">Cancel</a>
+				  <a href="<?php echo site_url('Home/index'); ?>" class="btn btn-default btn-md" role="button">Cancel</a>
 				<?php  echo form_close(); ?>
 		</div>
 	</div>

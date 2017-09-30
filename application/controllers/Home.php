@@ -112,8 +112,9 @@ class Home extends CI_Controller {
 		$header_data['title']="Sign Up";	
 		$this->load->view('header2',$header_data);	
 		$this->load->model('dts_model');
-			$departments = $this->dts_model->getDepartments();
-			$this->load->view('signup', ['dp'=>$departments]);
+		$lastEmp = $this->dts_model->getLastEmployee();
+		$departments = $this->dts_model->getDepartments();
+		$this->load->view('signup', ['dp'=>$departments,'le'=>$lastEmp]);
 
 	}
 
@@ -142,7 +143,6 @@ class Home extends CI_Controller {
 				$this->load->view('header',$header_data);
 				$this->load->view('add');
 				$this->load->view('footer');
-				echo "WAAAAAAAAAAAAAa";
         }
 	}
 
@@ -161,27 +161,32 @@ class Home extends CI_Controller {
 		
 	public function validation(){
 		$this->load->model('dts_model');
-		$uname = $this->input->post('uname');
-		$pword = md5($this->input->post('password'));
-		
-		$query=$this->dts_model->validate($uname,$pword);
+		$query=$this->dts_model->validate();
 
-		if($query){
-			redirect('home/home');
-		} 
-		else{
-			$this->index();
-		}
+		echo $query;
+		
+		// if($query){
+		// 	$data = array(
+		// 		'username' => $uname,
+		// 		'is_logged_in' => true
+		// 	);
+		// 	$this->session->set_userdata($data);
+		// 	redirect('home/home');
+		// } 
+		// else{
+
+		// 	$this->index();
+		// }
 	}
 
 	public function create_member(){
 		$this->form_validation->set_rules('lname', 'Last Name', 'required');
-	 // 	$this->form_validation->set_rules('fname', 'First Name', 'trim|required');
-		// $this->form_validation->set_rules('mname', 'Middle Name', 'trim|required');
-	 // 	$this->form_validation->set_rules('position', 'Position', 'trim|required');
-	 // 	$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[6]|max_length[20]|callback_check_if_username_exists');
-		// $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|max_length[32]');
-	 // 	$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required|matches[password]');
+	 	$this->form_validation->set_rules('fname', 'First Name', 'trim|required');
+		$this->form_validation->set_rules('mname', 'Middle Name', 'trim|required');
+	 	$this->form_validation->set_rules('position', 'Position', 'trim|required');
+	 	$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[6]|max_length[20]|callback_check_if_username_exists');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|max_length[32]');
+	 	$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required|matches[password]');
   		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
 
         if ($this->form_validation->run()){

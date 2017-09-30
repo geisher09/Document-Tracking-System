@@ -27,6 +27,13 @@
 			return $this->db->insert('department', $data);
 		}
 
+		public function getLastEmployee(){
+			$query = $this->db->get('employee');
+			$maxid = $query->num_rows();
+			return $maxid+1;
+					    
+		}
+
 		public function check_if_username_exists($username){
 			$this->db->where('username', $username);
 			$result = $this->db->get('employee');
@@ -38,16 +45,25 @@
 			}
 		}
 
-		public function validate($uname,$pword){
+		public function validate(){
+			$uname = $this->input->post('uname');
+			$pword = $this->input->post('password');
 			$this->db->where('username',$uname);
-			$this->db->where('password',$pword);
 			$query = $this->db->get('employee');
 
-			return $query->num_rows();
+			if($query->num_rows>0){
+				while($query->result()){
+					if(password_verify($pword,$query->result()->password)){
+						return $query->num_rows();
+					}
+				}
+			}
+
 
 		}
 		public function saveMember(){
 			$username = $this->input->post('username');
+			$lastid = $this->getLastEmployee();
 			$now = date('y');
 			$data = array(
 				'fname' =>$this->input->post('fname'),
@@ -56,8 +72,8 @@
 				'sex'	=>$this->input->post('sex'),
 				'position'	=>$this->input->post('position'),
 				'department_id'	=>$this->input->post('department'),
-				'employee_id'	=>$now.'-'.$this->input->post('department'),
-				'password'	=>md5($this->input->post('password')),
+				'employee_id'	=>$now.'-'.$this->input->post('department').'-'.$lastid,
+				'password'	=>password_hash($this->input->post('password'),PASSWORD_DEFAULT),
 				'username'	=>$this->input->post('username')
 			);
 
