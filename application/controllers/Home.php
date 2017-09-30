@@ -116,9 +116,10 @@ class Home extends CI_Controller {
 			$condition = array('office_id'=>$office_id);
 			$this->load->model('dts_model');
 			$hold = $this->dts_model->getDepartment2($condition);
+			//$hold2 = $this->dts_model->getDepartment_id($condition);
 			$data['dept'] = $hold;
 			$data['office'] = $condition;
-			// print_r($data);
+			//print_r($data);
 			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
@@ -145,17 +146,46 @@ class Home extends CI_Controller {
 		public function addDept($office_id){
 		$header_data['title']="Add Department";
 		$data['val'] = $office_id;
-	//	print_r($data);
+		$this->load->model('dts_model');
+		$hold = $this->dts_model->getDepartment_id($office_id);
+		$data['dept_id'] = $hold;
+		//print_r($hold);
+
+		//$hold + 1;
+		$ar = $hold++;
+		$ar2 = array(1);
+		for($a=0;$a<=99;$a++){
+		if(isset($hold[$a])){
+			//echo "yes";
+
+		} else {
+		//	echo "no";
+		//	Echo $a+1;
+			$num = $a+1;
+			break;
+		}
+	}
+	//echo $num;
+	if($num<=9){
+		$id = $office_id.'0'.$num;
+	}
+ else{
+	 $id = $office_id.$num;
+ }
+		$data['id']=$id;
+		//print_r($data);
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
 		$this->load->view('addDept',$data);
 		$this->load->view('footer');
 		}
-		public function saveDept($val){
-		$this->form_validation->set_rules('department_id', 'Department ID', 'required');
+		public function saveDept($val,$id){
+//			$this->form_validation->set_rules('department_id', 'Department ID', 'required');
+//echo "pasok";
 	 	$this->form_validation->set_rules('department_desc', 'Department Name', 'required');
   		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
 $data['office_id'] = $val;
+$data['department_id'] = $id;
 //print_r($data);
         if ($this->form_validation->run()){
 
@@ -167,6 +197,8 @@ $data['office_id'] = $val;
 				 else{
              		$this->session->set_flashdata('response', 'Failed :(');
 				 }
+				 print_r($id);
+				 print_r($val);
 					return redirect('home/offices');
         }
         else{

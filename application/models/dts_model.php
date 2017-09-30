@@ -104,6 +104,15 @@
 			return $query-> result_array();
 		}
 
+		public function getDepartment_id($condition)
+		{
+			$this->db->select('department_id');
+			$this->db->where('office_id', $condition);
+			$this->db->from('department');
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+
 		public function getEmployee($condition){
 			$this->db->select('*');
 			$this->db->from('employee');

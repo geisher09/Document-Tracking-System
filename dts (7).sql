@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2017 at 07:08 AM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Generation Time: Sep 30, 2017 at 07:45 PM
+-- Server version: 5.7.14
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,20 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `dts`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ci_sessions`
---
-
-CREATE TABLE `ci_sessions` (
-  `session_id` varchar(40) NOT NULL DEFAULT '0',
-  `ip_address` varchar(45) NOT NULL DEFAULT '0',
-  `user_agent` varchar(120) NOT NULL,
-  `last_activity` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `user_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -55,10 +41,22 @@ INSERT INTO `department` (`department_id`, `department_desc`, `office_id`) VALUE
 (102, 'Computer Department', 1),
 (103, 'Construction Engineering and Management Department', 1),
 (104, 'Electrical Department', 1),
-(201, 'Dean''s Office', 2),
+(105, 'sssss', 1),
+(106, 'efdfdsfsdf', 1),
+(201, 'Dean\'s Office', 2),
 (202, 'Math Department', 2),
 (203, 'Physics Department', 2),
-(204, 'Chemistry Department', 2);
+(204, 'Chemistry Department', 2),
+(301, 'New', 3),
+(302, 'Ancheta', 3),
+(303, 'Entry', 3),
+(304, 'Yo', 3),
+(305, 'Hello', 3),
+(401, 'Another Dummy Department', 4),
+(402, 'Name', 4),
+(403, 'Last na to', 4),
+(404, 'ABC', 4),
+(405, 'Dummy Department', 4);
 
 -- --------------------------------------------------------
 
@@ -80,8 +78,7 @@ CREATE TABLE `document` (
 
 INSERT INTO `document` (`document_id`, `document_title`, `document_desc`, `document_file`, `date_created`) VALUES
 (1, 'Ancheta', 'Dummy Data ni Ancheta', 0x6e6577, '2017-09-28'),
-(2, 'Christian', 'Pangalawang Dummy ni Ancheta', 0x5231203d2031202031202d35207c330d0a5232203d2031202030202d32207c312020200d0a5233203d2032202d31202d31207c302020200d0a0d0a52312b2d315232203d2052320d0a2d3152323d2d3128312030202d322031293d202d312030202032202d310d0a090920202020312031202d352020330d0a2020202020202020202020202020202020202020302031202d32202d3220202d3e205231203d2031202031202d352020330d0a202020202020202020202020202020202020202020202020202020202020202020205232203d2030202031202d32202d320d0a202020202020202020202020202020202020202020202020202020202020202020205233203d2032202d31202d312020300d0a20200909090920200d0a200d0a0d0a0d0a200d0a, '2017-09-28'),
-(123, 'Hays', 'Hayss', 0x2e2f75706c6f6164732f3130313839353963653030396530323735662e706466, '0000-00-00');
+(2, 'Christian', 'Pangalawang Dummy ni Ancheta', 0x5231203d2031202031202d35207c330d0a5232203d2031202030202d32207c312020200d0a5233203d2032202d31202d31207c302020200d0a0d0a52312b2d315232203d2052320d0a2d3152323d2d3128312030202d322031293d202d312030202032202d310d0a090920202020312031202d352020330d0a2020202020202020202020202020202020202020302031202d32202d3220202d3e205231203d2031202031202d352020330d0a202020202020202020202020202020202020202020202020202020202020202020205232203d2030202031202d32202d320d0a202020202020202020202020202020202020202020202020202020202020202020205233203d2032202d31202d312020300d0a20200909090920200d0a200d0a0d0a0d0a200d0a, '2017-09-28');
 
 -- --------------------------------------------------------
 
@@ -105,8 +102,8 @@ CREATE TABLE `documentation` (
 
 INSERT INTO `documentation` (`documentation_id`, `employee_id`, `document_id`, `action`, `document_status`, `date_of_action`, `signatory`) VALUES
 (1, '15-101-001', 1, 'Pending', 'sent', '2017-09-28', '15-101-002'),
-(2, '15-101-001', 1, 'Pending', 'sent', '2017-09-28', '15-201-001'),
-(3, '15-202-001', 2, 'Approved', 'received', '2017-09-28', '15-201-001'),
+(2, '15-101-001', 1, 'Pending', 'sent', '2017-09-28', '15-201-005'),
+(3, '15-202-001', 2, 'Approved', 'received', '2017-09-28', '15-201-005'),
 (4, '15-202-001', 2, 'Approved', 'received', '2017-09-28', '15-201-002');
 
 -- --------------------------------------------------------
@@ -118,13 +115,13 @@ INSERT INTO `documentation` (`documentation_id`, `employee_id`, `document_id`, `
 CREATE TABLE `employee` (
   `employee_id` varchar(15) NOT NULL,
   `department_id` int(3) NOT NULL,
-  `username` varchar(20) NOT NULL,
+  `username` varchar(60) NOT NULL,
   `position` varchar(30) NOT NULL,
   `lname` varchar(20) NOT NULL,
   `fname` varchar(30) NOT NULL,
   `mname` varchar(20) NOT NULL,
   `sex` varchar(1) NOT NULL,
-  `password` varchar(60) NOT NULL
+  `password` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -132,17 +129,12 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employee_id`, `department_id`, `username`, `position`, `lname`, `fname`, `mname`, `sex`, `password`) VALUES
-('17-101-10', 101, 'kimberly19', 'Professor', 'Bernabe', 'Kim', 'Gonzalo', 'f', '$2y$10$QsvTgfhjqlBu7lv7ztglBOChUoInxk7MyexicFs/j7JGRbKD6ChmW'),
-('17-101-7', 101, 'sheiraman', 'Professor', 'Man-awit', 'Sheira', 'Custodio', 'f', '$2y$10$GGMGpgQg6XKJWGLD247CEOOYY'),
-('17-101-8', 101, 'juliamiano', 'Professor', 'Miano', 'Julia', 'Consultado', 'f', '$2y$10$LxM3IZV60sNv/T/qwXrttuKWh'),
-('17-101-9', 101, 'sample_acc', 'sample_acc', 'sample_acc', 'sample_acc', 'sample_acc', 'f', '$2y$10$z60op6/mzVGK7b.nruXPs.08V1zCALG8o.lQEvoWg5yvjqnAnMccy'),
-('17-102-2', 102, 'geisher08', 'Professor', 'Bernabe', 'Geisher', 'Gonzalo', 'f', '266ffde4e65cd3dd250bf87d88634d85'),
-('17-103-11', 103, 'audreywaje', 'Dean', 'Waje', 'Audrey', 'Pabillaran', 'f', '$2y$10$dL5Xz/trFplHi9SQwCpbIeRFMZvmmpOPKF012p.FoCnQV4ilaUmF2'),
-('17-103-6', 103, 'glenwin21', 'Professor', 'Bernabe', 'Glenwin', 'Gonzalo', 'm', '8e69db0089bc6f5ba2bc4a3d62bafd60'),
-('17-104-5', 104, 'glenwin20', 'Professor', 'Bernabe', 'Glenwin', 'Gonzalo', 'm', '8e69db0089bc6f5ba2bc4a3d62bafd60'),
-('17-202-1', 202, 'geisher09', 'Professor', 'Bernabe', 'Geisher', 'Bernabe', 'f', 'd06554a84241e1cfaadc84cea0a1d43f'),
-('17-203-4', 203, 'glenwin19', 'Professor', 'Bernabe', 'Glenwin', 'Gonzalo', 'm', '8e69db0089bc6f5ba2bc4a3d62bafd60'),
-('17-204-3', 204, 'glenwin18', 'Professor', 'Bernabe', 'Glenwin', 'Gonzalo', 'm', '8e69db0089bc6f5ba2bc4a3d62bafd60');
+('15-101-001', 101, 'Ancheta29', 'Professor', 'Ancheta', 'Christian Daniel', 'Mozo', 'm', 'mozo'),
+('15-101-002', 101, 'DummyMo', 'Professor', 'Dummy', 'Employee', 'Entry', 'f', 'dummy'),
+('15-201-002', 102, 'Jung', 'Professor', 'Jungkook', 'BTS', 'kpop', 'm', 'pop'),
+('15-201-005', 201, 'Mozo', 'Head', 'Mozo', 'Daniella', 'Gagote', 'f', 'part'),
+('15-202-001', 102, 'Dummy', 'Professor', 'Dummy', 'Dummy', 'Dummy', 'f', 'full'),
+('17-101-6', 101, 'Lenovo', 'Intern', 'Lenovo', 'Daniel', 'Asus', 'm', '25d55ad283aa400af464c76d713c07ad');
 
 -- --------------------------------------------------------
 
@@ -163,25 +155,18 @@ INSERT INTO `office` (`office_id`, `office_desc`) VALUES
 (1, 'Integrated Research and Training Center'),
 (2, 'College of Science'),
 (3, 'Office of the Vice President for Research and Extension'),
-(4, 'Office of the University Research and development Services');
+(4, 'Office of the University Research and development Services'),
+(5, 'Dummy Office');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `ci_sessions`
---
-ALTER TABLE `ci_sessions`
-  ADD PRIMARY KEY (`session_id`),
-  ADD KEY `last_activity_idx` (`last_activity`);
-
---
 -- Indexes for table `department`
 --
 ALTER TABLE `department`
-  ADD PRIMARY KEY (`department_id`),
-  ADD KEY `office_id` (`office_id`);
+  ADD PRIMARY KEY (`department_id`);
 
 --
 -- Indexes for table `document`
@@ -220,30 +205,6 @@ ALTER TABLE `office`
 --
 ALTER TABLE `documentation`
   MODIFY `documentation_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `department`
---
-ALTER TABLE `department`
-  ADD CONSTRAINT `department_ibfk_1` FOREIGN KEY (`office_id`) REFERENCES `office` (`office_id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `documentation`
---
-ALTER TABLE `documentation`
-  ADD CONSTRAINT `documentation_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `documentation_ibfk_2` FOREIGN KEY (`document_id`) REFERENCES `document` (`document_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `documentation_ibfk_3` FOREIGN KEY (`signatory`) REFERENCES `employee` (`employee_id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `employee`
---
-ALTER TABLE `employee`
-  ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON UPDATE CASCADE;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

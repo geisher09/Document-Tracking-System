@@ -13,7 +13,7 @@
 				<?php echo $error; ?>
 			</div>
 			<?php endif; ?>
-				<?php echo form_open_multipart('home/saveDept/'.$val,['class'=>'form']); ?>
+				<?php echo form_open_multipart('home/saveDept/'.$val.$id,['class'=>'form']); ?>
 
 				<div class="row">
 					<div class="col-lg-12">
@@ -25,11 +25,11 @@
 						<?php echo form_error('department_id'); ?>
 			  		</div>
 				</div>
-
+<!-- <?php echo $id; ?> -->
 				<div class="row">
 					<div class="col-lg-12">
 						<label for="ID"> Department ID: </label>
-						<?php echo form_input(['name'=>'department_id','class'=>'form-control','placeholder'=>'ID', 'value'=>set_value('department_id')]); ?>
+						<?php echo form_input(['name'=>'department_id','class'=>'form-control','placeholder'=>'ID', 'value'=>$id,'readonly'=>'true']); ?>
 					</div>
 
 					<div class="col-lg-12">
