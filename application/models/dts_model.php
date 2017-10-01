@@ -23,7 +23,8 @@
 			return $this->db->insert('document', $data,$url);
 		}
 
-		public function saveDepartment($data){
+		public function saveDepartment($data,$data2){
+			$this->db->set('office_id',$data2);
 			return $this->db->insert('department', $data);
 		}
 
