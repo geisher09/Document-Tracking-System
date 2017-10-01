@@ -80,7 +80,7 @@
 				  </div>
 				  <br />
 				  <button type="submit" class="btn btn-danger btn-md">Create account</button>
-				  <a href="<?php echo site_url('Home/index'); ?>" class="btn btn-default btn-md" role="button">Cancel</a>
+				  <a href="<?php echo site_url('Home'); ?>" class="btn btn-default btn-md" role="button">Cancel</a>
 				<?php  echo form_close(); ?>
 		</div>
 	</div>

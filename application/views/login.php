@@ -1,45 +1,77 @@
-<div class= "container-fluid">
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 border">
-			 
+<div class="container-fluid">
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+		<div class="item active">
+			<img src="assets/images/1.jpg" alt="one">
 		</div>
-	</div>
 
-	
-	<div class="row">
-	
-		<div class=" col-md-12 col-sm-12 col-xs-12 body " >
-			<?php echo form_open('home/validation');?>
-		    <h1 align="center" style="color:white; margin-top: 50px"><b> DOCUMENT TRACKING SYSTEM </b> </h1>
-		    <?php if(isset($account_created)) {?>
-		    	<h3 align="center" style="color:white;"><b><?php echo $account_created; ?></b><br />You may now log in!<br /></h3>
-		    <?php } else { ?>
-		    	<h1 align="center" style="color:white;"><b> LOG IN </b> <br /><br /></h1>
-		    <?php } ?>
-				<div align="center" class="lgform input-group">
-					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					<input align="center" id="uname" type="text" class="form-control" name="uname" placeholder="User Name">
-				</div> <br /> 
+		<div class="item">
+			<img src="assets/images/2.jpg" alt="two">
+		</div>
     
-				<div class="input-group lgform">
-					<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-					<input id="password" type="password" class="form-control" name="password" placeholder="Password">
-				</div> </b> <br />
-				
-				<div align="center" class="form-group">
-					<button align="center" type="submit" class="btn btn-danger btn-lg"> LOGIN </button>
-				</div>
-				<div align="center" class="form-group">
-					<a align="center" href="<?php echo site_url('Home/signup'); ?>" id="newaccountlink">Create an account</a>
-				</div>
+		<div class="item">
+			<img src="assets/images/3.jpg" alt="three">
 		</div>
-		<?php form_close(); ?>
+		
+		<div class="item">
+			<img src="assets/images/4.jpg" alt="four">
+		</div>
+    </div>
 	</div>
 	
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 border">
-			    
+	<div  class="box">
+		<?php echo form_open('home/validation');?>
+		<h1  style="color: White; "> Login </h1> <br /><br /><br />
+		
+			<!--
+			<?php // if(isset($account_created)) {?>
+		    	<h3 align="center" style="color:white;"><b><?php // echo $account_created; ?></b><br />You may now log in!<br /></h3>
+		    <?php // } else { ?>
+		    	<h1 align="center" style="color:white;"><b> LOG IN </b> <br /><br /></h1>
+		    <?php // } ?>
+			-->
+		
+		<div class="form-group">
+			<input align="center" id="uname" type="text" class="form-control input-underline" name="uname" placeholder="User Name">
+		</div> <br /> 
+    
+		<div class="form-group">
+			<input align="center" id="password" type="password" class="form-control input-underline" name="password" placeholder="Password">
+		</div> <br /><br />
+				
+		<div class="form-group">
+			<button align="center" type="submit" class="btn btn-md lgbtn"> SIGN IN </button> <br /><br /><br /><br /><br /><br /><br >
+		</div>
+		
+		<div class="form-group" align="right" style="color: white;">
+			Not yet a member? &nbsp; <a href="<?php echo site_url('Home/signup'); ?>" align="right" type="submit" class="btn btn-md subtn"> Sign Up </a>
 		</div>
 	</div>
-
+	<?php form_close(); ?>
+	
+	<div id="title">
+		<p> Document Tracking System </p>
+	</div>
+	
+	<div id="tbar">
+		<form>
+			<div class="form-group input-group">
+				<input type="text" class="form-control bar" id="track" name="track" placeholder="Track a Document">
+				<span class="input-group-btn">
+					<button type="submit" class="btn btn-danger tbtn">
+						<span class="glyphicon glyphicon-search"></span> Track
+					</button>
+				</span>
+			</div>
+		</form> 
+	</div> <br />
+	
+	<!--
+	<div id="outputbox">
+		<div class="container">	
+			<h3 class="txtbox"> Status : </h3>
+		</div>
+	</div>
+	-->
+	
 </div>
