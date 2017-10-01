@@ -120,7 +120,10 @@ class Home extends CI_Controller {
 			$data['dept'] = $hold;
 			$data['office'] = $condition;
 			//print_r($data);
-			// print_r($office_id);
+			if($office_id == 1)
+{
+	echo "same";
+}			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
 			$this->load->view('header');
@@ -149,23 +152,15 @@ class Home extends CI_Controller {
 		$this->load->model('dts_model');
 		$hold = $this->dts_model->getDepartment_id($office_id);
 		$data['dept_id'] = $hold;
-		//print_r($hold);
-
-		//$hold + 1;
 		$ar = $hold++;
 		$ar2 = array(1);
 		for($a=0;$a<=99;$a++){
 		if(isset($hold[$a])){
-			//echo "yes";
-
 		} else {
-		//	echo "no";
-		//	Echo $a+1;
 			$num = $a+1;
 			break;
 		}
 	}
-	//echo $num;
 	if($num<=9){
 		$id = $office_id.'0'.$num;
 	}
@@ -173,33 +168,73 @@ class Home extends CI_Controller {
 	 $id = $office_id.$num;
  }
 		$data['id']=$id;
-		//print_r($data);
+	//print_r($hold);
+
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
 		$this->load->view('addDept',$data);
 		$this->load->view('footer');
 		}
-		public function saveDept($val,$id){
+		public function saveDept($id){
 //			$this->form_validation->set_rules('department_id', 'Department ID', 'required');
 //echo "pasok";
 	 	$this->form_validation->set_rules('department_desc', 'Department Name', 'required');
   		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
-$data['office_id'] = $val;
-$data['department_id'] = $id;
-//print_r($data);
-        if ($this->form_validation->run()){
+			$data['office_id'] = $val;
 
+        if ($this->form_validation->run()){
+					for($a=0;$a<=100;$a++){
+						for($b=100;$b<=199;$b++){
+							if($b==$id){
+								echo "same id";
+								$data2= 1;
+								break;
+								$a=100;
+							}
+						}
+						for($b=200;$b<=299;$b++){
+							if($b==$id){
+								echo "same id";
+								$data2= 2;
+								break;
+								$a=100;
+							}
+						}
+						for($b=300;$b<=399;$b++){
+							if($b==$id){
+								echo "same id";
+								$data2= 3;
+								break;
+								$a=100;
+							}
+						}
+						for($b=400;$b<=499;$b++){
+							if($b==$id){
+								echo "same id";
+								$data2= 4;
+								break;
+								$a=100;
+							}
+						}
+						for($b=500;$b<=599;$b++){
+							if($b==$id){
+								echo "same id";
+								$data2= 5;
+								break;
+								$a=100;
+							}
+						}
+					}
                	$data = $this->input->post();
              	$this->load->model('dts_model');
-             	if ($this->dts_model->saveDepartment($data)){
+             	if ($this->dts_model->saveDepartment($data,$data2)){
+								print_r($data);
              		$this->session->set_flashdata('response', 'Saved Succesfully!');
 				 }
 				 else{
              		$this->session->set_flashdata('response', 'Failed :(');
 				 }
-				 print_r($id);
-				 print_r($val);
-					return redirect('home/offices');
+					return redirect('home/dept/'.$data2);
         }
         else{
         $header_data['title']="Add Documents";
@@ -262,6 +297,14 @@ $data['department_id'] = $id;
 				'is_logged_in' => true
 			);
 			$this->session->set_userdata($data);
+
+			date_default_timezone_set('Asia/Manila');  //balak gamitin sa history
+			$time =date("h:i:sa");// time());
+			$date = date("Y-m-d");
+			$uname['time'] = $time;
+			$uname['date'] = $date;
+
+
 			$header_data['title']="DTS";
 			$uname['uname'] = $this->input->post('uname');
 			$this->load->view('header2',$header_data);

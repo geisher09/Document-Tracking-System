@@ -13,19 +13,8 @@
 				<?php echo $error; ?>
 			</div>
 			<?php endif; ?>
-				<?php echo form_open_multipart('home/saveDept/'.$val.$id,['class'=>'form']); ?>
+				<?php echo form_open_multipart('home/saveDept/'.$id,['class'=>'form']); ?>
 
-				<div class="row">
-					<div class="col-lg-12">
-						<label for="ID"> Office ID: </label>
-					<?php echo form_input(array('name'=>'office_id','class'=>'form-control','value'=>$val,'readonly'=>'true'));	?>
-					</div>
-
-					<div class="col-lg-12">
-						<?php echo form_error('department_id'); ?>
-			  		</div>
-				</div>
-<!-- <?php echo $id; ?> -->
 				<div class="row">
 					<div class="col-lg-12">
 						<label for="ID"> Department ID: </label>
@@ -59,7 +48,7 @@
 					'class'     => 'btn btn-md btn-labeled btn-danger',
 					);
 
-					echo form_button($data,$val);?>
+					echo form_button($data);?>
 				</div>
 			</form>
 		</div>
