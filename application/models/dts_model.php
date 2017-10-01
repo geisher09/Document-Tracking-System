@@ -4,9 +4,9 @@
 
 		public function getDocuments(){
 			$this->db->select('d.document_id,d.document_title,do.action');
-		    $this->db->from('document d'); 
-		    $this->db->join('documentation do', 'do.document_id=d.document_id');         
-		    $query = $this->db->get(); 
+		    $this->db->from('document d');
+		    $this->db->join('documentation do', 'do.document_id=d.document_id');
+		    $query = $this->db->get();
 		    if($query->num_rows() != 0)
 		    {
 		        return $query->result_array();
@@ -22,7 +22,7 @@
 			$this->db->set('document_file',$url);
 			return $this->db->insert('document', $data,$url);
 		}
-		
+
 		public function saveDepartment($data){
 			return $this->db->insert('department', $data);
 		}
@@ -31,7 +31,7 @@
 			$query = $this->db->get('employee');
 			$maxid = $query->num_rows();
 			return $maxid+1;
-					    
+
 		}
 
 		public function check_if_username_exists($username){
@@ -81,6 +81,44 @@
 		public function getDepartments(){
 			$query = $this->db->get('department');
 			return $query->result();
+
+		}
+
+		public function getOffices()
+		{
+			$this->db->select('*');
+			$this->db->from('office');
+			// $this->db->from('department');
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+
+		public function getDepartment2($condition) //for offices and employees
+		{
+			$this->db->select('*');
+			$this->db->from('department');
+			// $this->db->from('department');
+
+			if ( isset($condition)) $this->db->where($condition);
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+
+		public function getDepartment_id($condition)
+		{
+			$this->db->select('department_id');
+			$this->db->where('office_id', $condition);
+			$this->db->from('department');
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+
+		public function getEmployee($condition){
+			$this->db->select('*');
+			$this->db->from('employee');
+			if ( isset($condition)) $this->db->where($condition);
+			$query= $this->db->get();
+			return $query-> result_array();
 
 		}
 

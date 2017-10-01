@@ -15,10 +15,8 @@
 	
 	<nav class="navbar navbar-inverse navbar-fixed">
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<a href="<?php echo site_url('Home/home'); ?>" class="navbar-brand" >Home</a>
-			</div>
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav navbar-left">
+				<li><a href="<?php echo site_url('Home/home'); ?>" >Home</a></li>
 				<li><a href="<?php echo site_url('Home/profile'); ?>">Profile</a></li>
 				<li><a href="<?php echo site_url('Home/docu'); ?>"> All Documents </a></li>
 				<li><a href="<?php echo site_url('Home/add'); ?>">Send a Document</a></li>
