@@ -58,7 +58,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 .h { 
 	color: #EC7063;
 	float: left;
-}
+} /* end of 'All Documents' section */
 
 /* 'Add Documents' section */
 .form {
@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 	background-color: #790000;
 	opacity: 0.8;
 	float: left;
-}
+}/* end of 'Add Documents' section */
 
 /* 'Profile' section */
 .info {
@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 #profilepic:hover{ cursor:pointer; }
 
 .cen{ text-align:center; }
-
+/* end of 'Profile' section */
 
 /* 'Offices' Section */
 
@@ -102,10 +102,10 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 
 #adept {
 	float: right;
-}
+} /* end of 'Offices' Section */
+
 
 /* 'Login' section */
-
 .input-underline {
 	background: 0 0;
 	border: none;
@@ -171,8 +171,8 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 
 #tbar {
 	margin-top: 50px;
-	margin-left: 110px;
-	margin-right: 560px;
+	width:650px;
+	margin-left:70px;
 }
 
 .bar {
@@ -201,4 +201,17 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 
 .txtbox {
 	color: white;
+}
+/* end of 'Login' section */
+
+/* 'Sign Up' section */
+label{
+	color:white;
+}
+#outer-div{
+	width:70%;
+	background-color:rgba(169,50,38,0.9);
+	margin:40px auto 60px;
+	padding:20px 100px 60px;
+	border-radius:10px;
 }
