@@ -1,31 +1,19 @@
-<div class="container-fluid">
-
+<div class="container-fluid" id="bgimage">
+<!----
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
-			<div class="item active">
-				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="one" />
-			</div>
-
 			<div class="item">
-				<img src="<?php echo base_url('assets/images/2.jpg') ?>" alt="two" />
+				<img src="<?php //echo base_url('assets/images/3.jpg') ?>" alt="three" />
 			</div>
-		
 			<div class="item">
-				<img src="<?php echo base_url('assets/images/3.jpg') ?>" alt="three" />
-			</div>
-			
-			<div class="item">
-				<img src="<?php echo base_url('assets/images/4.jpg') ?>" alt="four" />
 			</div>
 		</div>
-	</div>
+	</div> ---->
 	
 	<div id="outer-div">
 		<h1 align="center" style="color:white;"><b> SIGN UP </b> </h1> <hr />
 	
-		<div>
-		<!--    <h1 align="center" style="color:white; margin-top: 50px"><b> DOCUMENT TRACKING SYSTEM </b> </h1>
-		    <h1 align="center" style="color:white;"><b> SIGN UP </b> </h1> -->
+		<div id="inner-div">
 				
 				<?php echo form_open('home/create_member',['class'=>'lgform']);?>
 				<h3>PROFILE</h3>
@@ -93,8 +81,7 @@
 					<input name="password_confirm" type="password" class="form-control" id="pwd_2">
 					<?php echo form_error('password_confirm'); ?>
 				  </div>
-				<br />
-				<br />
+				<hr />
 				<div class="text-center"> 
 				<button type="submit" class="btn btn-danger btn-lg">Create account</button>
 				<a href="<?php echo site_url('Home'); ?>" class="btn btn-default btn-lg" role="button">Cancel</a>
