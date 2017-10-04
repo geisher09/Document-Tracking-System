@@ -205,8 +205,10 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 /* end of 'Login' section */
 
 /* 'Sign Up' section */
-label{
+#inner-div label{
 	color:white;
+	font-family:Arial;
+	font-size:16px;
 }
 #outer-div{
 	width:70%;
@@ -214,4 +216,11 @@ label{
 	margin:40px auto 60px;
 	padding:20px 100px 60px;
 	border-radius:10px;
+}
+#bgimage{
+	background:url(http://[::1]/DTS/assets/images/3.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
