@@ -1,22 +1,23 @@
 <div class="container-fluid">
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-		<div class="item active">
-			<img src="assets/images/1.jpg" alt="one">
-		</div>
 
-		<div class="item">
-			<img src="assets/images/2.jpg" alt="two">
-		</div>
-    
-		<div class="item">
-			<img src="assets/images/3.jpg" alt="three">
-		</div>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<div class="carousel-inner">
+			<div class="item active">
+				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="one" />
+			</div>
+
+			<div class="item">
+				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="two" />
+			</div>
 		
-		<div class="item">
-			<img src="assets/images/4.jpg" alt="four">
+			<div class="item">
+				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="three" />
+			</div>
+			
+			<div class="item">
+				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="four" />
+			</div>
 		</div>
-    </div>
 	</div>
 	
 	<div  class="box">
