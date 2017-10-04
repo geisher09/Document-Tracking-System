@@ -1,3 +1,4 @@
+
 <!--border-->
 	<div class="row">
 		<div class=" col-md-12 col-sm-12 col-xs-12 border">
@@ -11,7 +12,7 @@
 		<div class="container">
 			<div class="h">
 				<h1>CONTACTS</h1>	
-				<br>
+				<hr><br>
 				<!---------------WARNING! DUMMY DATA AHEAD!-------------->
 					<div style="height: 400px; width: 1140px; overflow: auto">
 <table id="mytable" class="table">
