@@ -1,3 +1,4 @@
+<body>
 <div class="container-fluid">
 
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">

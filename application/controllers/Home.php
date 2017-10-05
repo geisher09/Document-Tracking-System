@@ -13,6 +13,7 @@ class Home extends CI_Controller {
 		$header_data['title']="Login";
 		$this->load->view('header2',$header_data);
 		$this->load->view('login');
+		$this->load->view('footer');
 	}
 
 	public function home(){
@@ -94,7 +95,7 @@ class Home extends CI_Controller {
 		$lastEmp = $this->dts_model->getLastEmployee();
 		$departments = $this->dts_model->getDepartments();
 		$this->load->view('signup', ['dp'=>$departments,'le'=>$lastEmp]);
-
+		$this->load->view('footer');
 	}
 
 	//OFFICES & EMPLOYEES
