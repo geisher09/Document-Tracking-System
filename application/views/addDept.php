@@ -1,12 +1,7 @@
-<div class="row">
-	<div class=" col-md-12 col-sm-12 col-xs-12 border">
-
-	</div>
-</div>
-
+<div class="container-fluid body">
 	<div class="row" onload="setup()">
-		<div class=" col-md-12 col-sm-12 col-xs-12 body " >
-		<div class="container">
+		<div class=" col-md-12 col-sm-12 col-xs-12" >
+		<div class="container red">
 			<h2 class="h" > Add Departments </h2> <br /><br /><br /> <br />
 			<?php if( $error = $this->session->flashdata('response')): ?>
 			<div class="alert alert-dismissible alert-success">
@@ -52,12 +47,6 @@
 				</div>
 			</form>
 		</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 border">
-
 		</div>
 	</div>
 

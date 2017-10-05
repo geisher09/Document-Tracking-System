@@ -1,30 +1,43 @@
 /* custom css for DTS */
 
 /* common for all views */
-.border {
-	background-color: #696969;
-	height: 30px;
-}
-
 .navbar {
-	background-color: #000000;
-	width: 100%;
+	border-width: 0px;
+    -webkit-box-shadow: 0px 0px;
+    box-shadow: 0px 0px;
+    background-color: rgba(0,0,0,0.0);
+    background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
+    background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+    background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+	margin-bottom: 0px;
+	border-radius: 0px;
+	color: #000000 !important;
 }
 
 li:hover {
 	text-decoration: none;
-	color: #ffffff !important;
+	color: white !important;
 	background-color: #790000 !important;
-}
-
-.logo {
-	height: 200px;
+	opacity: 0.7;
 }
 
 .body {
-	height: 600px;
+	background:url(http://[::1]/DTS/assets/images/5.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.red {
 	background-color: #790000;
-	overflow:auto;
+	opacity: 0.8;
+	margin-bottom: 50px;
+	margin-top: 100px;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 30px;
+	padding-bottom: 50px;
 }
 
 #intro {
@@ -49,7 +62,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 .sbar{
 	margin-top: 10px;	
 	margin-bottom: 50px;
-	width: 60%;
+	width: 50%;
 	background-color: #790000;
 	opacity: 0.8;
 	float: right;
@@ -102,7 +115,8 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 
 #adept {
 	float: right;
-} /* end of 'Offices' Section */
+} 
+/* end of 'Offices' Section */
 
 
 /* 'Login' section */
@@ -124,13 +138,8 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 .carousel { z-index: -99; } /* keeps this behind all content */
 .carousel .item {
 	position: fixed;
-	width: 100%;
-	height: 100%;
-	
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+	max-width: 100%;
+	height: auto;
 }
 
 .box {

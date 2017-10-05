@@ -1,20 +1,13 @@
-<!--border-->
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 border">
-			 
-		</div>
-	</div>
-
+<div class="container-fluid body">
 	<!--body-->
 	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-lg-12 body " > 
-		<div class="container">
+		<div class=" col-md-12 col-sm-12 col-lg-12" > 
+		<div class="container red">
 			<div class="h">
-				<h1>CONTACTS</h1>	
+				<h1>Contacts</h1>	
 				<br>
 				<!---------------WARNING! DUMMY DATA AHEAD!-------------->
-				
-				<div style="height:400px; width:1140px; overflow:auto">
+<div style="height:400px; width:1140px; overflow:auto">
 				<table id="mytable" class="table">
 						<thead>
 						<tr>
@@ -31,7 +24,6 @@
 							<td>09</td>
 							<td>134.8723</td>
 							<td>cafa@gmail.com</td>
-
 						</tr>
 						<tr>
 							<td><li>College of Industrial Education (CIE)-Dean's Office</td>
@@ -112,8 +104,4 @@
 
 	</div>
 </div>
-	<!--border-->
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 border">  
-		</div>
-	</div>
+</div>

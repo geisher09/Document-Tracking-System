@@ -1,16 +1,8 @@
-
-	
-	<!--border-->
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 border">
-			 
-		</div>
-	</div>
-
+<div class="container-fluid body">
 	<!--body-->
 	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 body " > 
-		<div class="container">
+		<div class=" col-md-12 col-sm-12 col-xs-12" > 
+		<div class="container red">
 			<h2 class="h" > All Documents </h2> <br />
 			
 			<!-- search bar -->
@@ -80,11 +72,5 @@
 		</div>
 	</div>
 	
-	<!--border-->
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 border">
-			    
-		</div>
-	</div>
 
 </div>

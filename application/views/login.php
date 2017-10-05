@@ -8,15 +8,15 @@
 			</div>
 
 			<div class="item">
-				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="two" />
+				<img src="<?php echo base_url('assets/images/2.jpg') ?>" alt="two" />
 			</div>
 		
 			<div class="item">
-				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="three" />
+				<img src="<?php echo base_url('assets/images/3.jpg') ?>" alt="three" />
 			</div>
 			
 			<div class="item">
-				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="four" />
+				<img src="<?php echo base_url('assets/images/4.jpg') ?>" alt="four" />
 			</div>
 		</div>
 	</div>
