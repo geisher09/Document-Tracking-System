@@ -122,9 +122,10 @@ class Home extends CI_Controller {
 			$data['office'] = $condition;
 			//print_r($data);
 			if($office_id == 1)
-{
-	echo "same";
-}			// print_r($office_id);
+			{
+				//echo "same";
+			}			
+			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
 			$this->load->view('header');

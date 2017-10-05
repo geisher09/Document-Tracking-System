@@ -5,9 +5,10 @@
 		<div class="container red">
 			<div class="h">
 				<h1>Contacts</h1>	
-				<br>
+				<br/>
+			</div>
 				<!---------------WARNING! DUMMY DATA AHEAD!-------------->
-<div style="height:400px; width:1140px; overflow:auto">
+			<div style="height:400px;width:100%;overflow:auto">
 				<table id="mytable" class="table">
 						<thead>
 						<tr>
@@ -96,10 +97,10 @@
 
 				</table>
 			</div>
-			</div>
+			
 		
 		</div>
-		<br><br><br>
+		<br/><br/><br/>
 
 
 	</div>

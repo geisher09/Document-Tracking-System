@@ -11,7 +11,6 @@
     background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
 	margin-bottom: 0px;
 	border-radius: 0px;
-	color: #000000 !important;
 }
 
 li:hover {
@@ -21,23 +20,27 @@ li:hover {
 	opacity: 0.7;
 }
 
-.body {
+body {
 	background:url(http://[::1]/DTS/assets/images/5.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
 }
+#navigation{
+	max-width:1050px;
+	margin:0px auto;
+}
 
 .red {
 	background-color: #790000;
 	opacity: 0.8;
-	margin-bottom: 50px;
-	margin-top: 100px;
+	margin:50px auto 80px;
 	padding-left: 50px;
 	padding-right: 50px;
-	padding-top: 30px;
+	padding-top: 20px;
 	padding-bottom: 50px;
+	max-width:1100px;
 }
 
 #intro {
@@ -45,13 +48,13 @@ li:hover {
 	font-size: 18px;
 	font-family: Georgia;
 }
-h1, h2, h3, h4, h5, h6 { color:#EC7063; }
+h2, h3, h4, h5, h6 { color:#EC7063; }
+h1{ color:#000000;font-weight:bold; }
 
 /* 'All Documents' section */
 .table {
 	color: white;
 	font-size: 16px;
-	border-bottom: 0px;
 }
 
 .table-hover tbody tr:hover td {
@@ -64,7 +67,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 	margin-bottom: 50px;
 	width: 50%;
 	background-color: #790000;
-	opacity: 0.8;
+	opacity: 1;
 	float: right;
 }
 
@@ -215,8 +218,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 
 .txtbox {
 	color: white;
-}
-/* end of 'Login' section */
+}/* end of 'Login' section */
 
 /* 'Sign Up' section */
 #inner-div label{
