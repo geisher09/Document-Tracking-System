@@ -1,6 +1,6 @@
 <body>
 	
-	<h1 class="text-center">DOCUMENT TRACKING SYSTEM</h1><br />
+	<h1 class="text-center title">DOCUMENT TRACKING SYSTEM</h1><br />
 	
 	<nav class="navbar navbar-inverse navbar-fixed">
 		<div id="navigation">
