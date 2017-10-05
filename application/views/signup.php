@@ -1,14 +1,6 @@
+<body>
 <div class="container-fluid" id="bgimage">
-<!----
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		<div class="carousel-inner">
-			<div class="item">
-				<img src="<?php //echo base_url('assets/images/3.jpg') ?>" alt="three" />
-			</div>
-			<div class="item">
-			</div>
-		</div>
-	</div> ---->
+
 	
 	<div id="outer-div">
 		<h1 align="center" style="color:white;"><b> SIGN UP </b> </h1> <hr />
