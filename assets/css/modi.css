@@ -49,7 +49,12 @@ body {
 	font-family: Georgia;
 }
 h1, h2, h3, h4, h5, h6 { color:#EC7063; }
-.title{ color:#000000;font-weight:bold; }
+.title{ 
+	color:#790000;
+	font-weight:bold; 
+	margin-top: 50px;
+	margin-bottom: 0px;
+}
 
 /* 'All Documents' section */
 .table {
@@ -74,7 +79,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 .h { 
 	color: #EC7063;
 	float: left;
-} /* end of 'All Documents' section */
+}
 
 /* 'Add Documents' section */
 .form {
@@ -83,9 +88,15 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 	background-color: #790000;
 	opacity: 0.8;
 	float: left;
-}/* end of 'Add Documents' section */
+}
 
 /* 'Profile' section */
+
+.roundbox {
+	background-color: #E74C3C;
+	border-radius: 6px;
+}
+
 .info {
 	color: white;
 	font-size: 18px;
@@ -94,14 +105,61 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 .info p:first-child{ font-size:35px;font-weight:bold; }
 
 #profilepic{
-	height:190px;
-	width:190px;
+	height:100px;
+	width:100px;
 	border-radius:10px;
 }
 #profilepic:hover{ cursor:pointer; }
 
 .cen{ text-align:center; }
-/* end of 'Profile' section */
+
+.tab {
+    overflow: hidden;
+    border: none;
+    background-color: none;
+}
+
+.tab button {
+    background-color: #EC7063;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 6px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+	font-weight: bold;
+	color: white;
+	margin-right: 4px;
+}
+
+.tab button:hover {
+	color: black;
+	font-weight: bold;
+}
+
+.tab button.active {
+    background-color: #E74C3C;
+}
+
+.tabcontent {
+    display: none;
+    padding: 10px 12px;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s;
+	background-color: #E74C3C;
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
 
 /* 'Offices' Section */
 
@@ -119,7 +177,6 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 #adept {
 	float: right;
 } 
-/* end of 'Offices' Section */
 
 
 /* 'Login' section */
@@ -218,7 +275,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 
 .txtbox {
 	color: white;
-}/* end of 'Login' section */
+}
 
 /* 'Sign Up' section */
 #inner-div label{
@@ -239,4 +296,4 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-}/* end of 'Sign Up' section */
+}
