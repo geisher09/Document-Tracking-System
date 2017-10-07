@@ -130,7 +130,7 @@
 
 			$id = $result->row('employee_id');
 
-			$stat = "sent";
+			$stat = "received";
 			$act = "Pending";
 			$this->db->select('a.employee_id,a.document_id,a.document_status,b.document_id,b.document_title,a.action,');
 			$this->db->from('documentation a');
