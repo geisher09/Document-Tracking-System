@@ -1,17 +1,11 @@
-<!--border-->
-<div class="row">
-	<div class=" col-md-12 col-sm-12 col-xs-12 border">
-
-	</div>
-</div>
-
+<div class="container-fluid body">
 
 <!--body-->
 <div class="row">
-	<div class=" col-md-12 col-sm-12 col-xs-12 body">
-		<div class="container">
+	<div class=" col-md-12 col-sm-12 col-xs-12">
+		<div class="container red">
 			<div class="h">
-			<h1>Offices</h1><br>
+			<h1>Offices</h1>
 			<?php foreach($offices as $o) :?>
 			<!-- <?php echo $o; ?> -->
 			<h3><a href="<?php echo site_url('Home/dept/'.$o["office_id"]); ?>"><?php echo $o["office_desc"]; ?></a></h3>
@@ -27,9 +21,4 @@
 	</div>
 </div>
 
-<!--border-->
-<div class="row">
-	<div class=" col-md-12 col-sm-12 col-xs-12 border">
-
-	</div>
 </div>

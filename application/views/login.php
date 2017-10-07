@@ -1,3 +1,4 @@
+<body>
 <div class="container-fluid">
 
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -7,21 +8,22 @@
 			</div>
 
 			<div class="item">
-				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="two" />
+				<img src="<?php echo base_url('assets/images/2.jpg') ?>" alt="two" />
 			</div>
 		
 			<div class="item">
-				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="three" />
+				<img src="<?php echo base_url('assets/images/3.jpg') ?>" alt="three" />
 			</div>
 			
 			<div class="item">
-				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="four" />
+				<img src="<?php echo base_url('assets/images/4.jpg') ?>" alt="four" />
 			</div>
 		</div>
 	</div>
 	
 	<div  class="box">
-		<?php echo form_open('home/validation');?>
+
+		<?php echo form_open('home/login_validation');?>
 		<h1  style="color: White; "> Login </h1> <br /><br /><br />
 		
 			<!--
@@ -31,17 +33,23 @@
 		    	<h1 align="center" style="color:white;"><b> LOG IN </b> <br /><br /></h1>
 		    <?php // } ?>
 			-->
-		
+		<?php 
+			echo '<label style="color: White; "><strong>'.$this->session->flashdata("error").'</strong></label>'
+		?>
 		<div class="form-group">
-			<input align="center" id="uname" type="text" class="form-control input-underline" name="uname" placeholder="User Name">
+			<?php echo form_input(['type'=>'text','align'=>'center','name'=>'uname','id'=>'uname','class'=>'form-control input-underline','placeholder'=>'User name', 'value'=>set_value('uname')]); ?>
+			<!-- <input align="center" id="uname" type="text" class="form-control input-underline" name="uname" placeholder="User Name" value='uname'> -->
+			<span style="color: White; "><?php echo form_error('uname'); ?></span>
 		</div> <br /> 
     
 		<div class="form-group">
-			<input align="center" id="password" type="password" class="form-control input-underline" name="password" placeholder="Password">
+			<?php echo form_input(['type'=>'password','align'=>'center','name'=>'password','id'=>'password','class'=>'form-control input-underline','placeholder'=>'Password', 'value'=>set_value('password')]); ?>
+			<!-- <input align="center" id="password" type="password" class="form-control input-underline" name="password" placeholder="Password" value='password'> -->
+			<span style="color: White; "><?php echo form_error('password'); ?></span>	
 		</div> <br /><br />
 				
 		<div class="form-group">
-			<button align="center" type="submit" class="btn btn-md lgbtn"> SIGN IN </button> <br /><br /><br /><br /><br /><br /><br >
+			<button align="center" type="submit" class="btn btn-md lgbtn"> LOG IN </button> <br /><br /><br /><br /><br /><br /><br >
 		</div>
 		
 		<div class="form-group" align="right" style="color: white;">

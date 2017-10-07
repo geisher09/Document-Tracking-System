@@ -10,23 +10,71 @@ class Home extends CI_Controller {
 
 
 	public function index(){
-		$header_data['title']="Login";
-		$this->load->view('header2',$header_data);
-		$this->load->view('login');
+			$header_data['title']="Login";
+			$this->load->view('header2',$header_data);
+			$this->load->view('login');
+			$this->load->view('footer');
 	}
 
+	public function login_validation(){
+		$this->form_validation->set_rules('uname', 'Username', 'trim|required');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required');
+		if($this->form_validation->run()){
+			//true
+			$username = $this->input->post('uname');
+			
+			//model function
+			$this->load->model('dts_model');
+			if($this->dts_model->can_login($username)){
+				$session_data = array(
+					'username' => $username
+				);
+				$this->session->set_userdata($session_data);
+				redirect('home/home');
+			}
+			else{
+				$this->session->set_flashdata('error', 'Invalid username or password!');
+				redirect('home/index');
+			}
+		}
+
+		else{
+			//false
+			$this->index();
+		}
+
+
+	}
+
+
 	public function home(){
-		$header_data['title']="DTS";
-		date_default_timezone_set('Asia/Manila');
-		//$time =date("g:i a");// time());
-		$time =date("h:i:sa");// time());
-		$date = date("Y-m-d");
-		$data['time'] = $time;
-		$data['date'] = $date;
-		$this->load->view('header2',$header_data);
-		$this->load->view('header');
-		$this->load->view('home',$data);
-		$this->load->view('footer');
+
+		if($this->session->userdata('username') != ''){
+
+			$user=$this->session->userdata('username');
+			$header_data['title']="DTS";
+			date_default_timezone_set('Asia/Manila');
+			$time =date("h:i:sa");
+			$date = date("Y-m-d");
+			$data['time'] = $time;
+			$data['date'] = $date;
+			$data['username'] = $user;
+			$this->load->view('header2',$header_data);
+			$this->load->view('header');
+			$this->load->view('home',$data);
+			$this->load->view('footer');
+		} 
+
+		else{
+			redirect('home/index','refresh');
+		}
+		
+	}
+
+	public function logout(){
+		$this->session->unset_userdata('username');
+		$this->session->session_destroy();
+		redirect('home/index','refresh');
 	}
 
 	public function docu(){
@@ -50,11 +98,18 @@ class Home extends CI_Controller {
 	}
 
 	public function profile(){
+		$user['username']=$this->session->userdata('username');
+		$this->load->model('dts_model');
+		$profile = $this->dts_model->get_profile($user);
+		$inbox = $this->dts_model->get_profile_inbox($user);
+		$sent = $this->dts_model->get_profile_sent($user);
+		$pending = $this->dts_model->get_inbox_pending($user);
+		//print_r($inbox);
 		$header_data['title']="Profile";
 
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
-		$this->load->view('profile');
+		$this->load->view('profile',['pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending]);
 		$this->load->view('footer');
 	}
 
@@ -96,8 +151,8 @@ class Home extends CI_Controller {
 		$this->load->model('dts_model');
 		$lastEmp = $this->dts_model->getLastEmployee();
 		$departments = $this->dts_model->getDepartments();
-		$this->load->view('signup', ['dp'=>$departments,'le'=>$lastEmp]);
-
+		$this->load->view('signup', ['dp'=>$departments,'le'=>$lastEmp]);	
+		$this->load->view('footer');
 	}
 
 	//OFFICES & EMPLOYEES
@@ -124,9 +179,10 @@ class Home extends CI_Controller {
 			$data['office'] = $condition;
 			//print_r($data);
 			if($office_id == 1)
-{
-	echo "same";
-}			// print_r($office_id);
+			{
+				//echo "same";
+			}			
+			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
 			$this->load->view('header');
@@ -289,38 +345,7 @@ class Home extends CI_Controller {
 		return redirect('home/add');
 	}
 
-	public function validation(){
-		$this->load->model('dts_model');
-		$query=$this->dts_model->validate();
-		// echo $query;
-		$uname['uname'] = $this->input->post('uname');
-		if($query){
-			$data = array(
-				'username' => $uname,
-				'is_logged_in' => true
-			);
-			$this->session->set_userdata($data);
 
-			date_default_timezone_set('Asia/Manila');  //balak gamitin sa history
-			$time =date("h:i:sa");// time());
-			$date = date("Y-m-d");
-			$uname['time'] = $time;
-			$uname['date'] = $date;
-
-
-			$header_data['title']="DTS";
-			$uname['uname'] = $this->input->post('uname');
-			$this->load->view('header2',$header_data);
-			$this->load->view('header');
-			$this->load->view('home',$uname);
-			$this->load->view('footer');
-
-		}
-		else{
-
-			$this->index();
-		}
-	}
 
 	public function create_member(){
 		$this->form_validation->set_rules('lname', 'Last Name', 'required');

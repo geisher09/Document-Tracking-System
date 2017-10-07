@@ -1,14 +1,10 @@
-
+<div class="container-fluid body">
 	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 border">
+		<div class=" col-md-12 col-sm-12 col-xs-12 " >
 
-		</div>
-	</div>
+			<div class="container red" >
 
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 body " >
-
-
+<<<<<<< HEAD
 
 			<div class="container" >
 <<<<<<< HEAD
@@ -20,6 +16,9 @@
 =======
 
 				<h2 class="h" > Welcome to Document Tracking System </h2> <br /><br /><br /><br />
+=======
+				<h1 class="h" > Welcome <?php echo $username; ?> to Document Tracking System </h1> <br /><br /><br /><br />
+>>>>>>> 89762567eb4e6dd8c1bdcd805cdeff2570db3d5b
 				<p id="intro">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Many years ago before the advent of modern technology, people were just scribbling					on dried leaves using coals
 					from burned wood as pens. Soon, mankind discovered how to make paper out of trees, while quills and ink came
@@ -45,16 +44,11 @@
 
 					The current time is: <?php echo $time; ?>
 					Today is: <?php echo $date; ?>
-					Ancheta Cute <3
+					<?php echo $username; ?> Cute <3
 				</p>
 			</div>
 		</div>
 	</div>
 
-	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 border">
-
-		</div>
-	</div>
 
 </div>

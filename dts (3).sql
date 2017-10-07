@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2017 at 07:45 PM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
+-- Generation Time: Oct 07, 2017 at 02:17 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `dts`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ci_sessions`
+--
+
+CREATE TABLE `ci_sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(45) NOT NULL DEFAULT '0',
+  `user_agent` varchar(120) NOT NULL,
+  `last_activity` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `user_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -43,7 +57,7 @@ INSERT INTO `department` (`department_id`, `department_desc`, `office_id`) VALUE
 (104, 'Electrical Department', 1),
 (105, 'sssss', 1),
 (106, 'efdfdsfsdf', 1),
-(201, 'Dean\'s Office', 2),
+(201, 'Dean''s Office', 2),
 (202, 'Math Department', 2),
 (203, 'Physics Department', 2),
 (204, 'Chemistry Department', 2),
@@ -102,9 +116,9 @@ CREATE TABLE `documentation` (
 
 INSERT INTO `documentation` (`documentation_id`, `employee_id`, `document_id`, `action`, `document_status`, `date_of_action`, `signatory`) VALUES
 (1, '15-101-001', 1, 'Pending', 'sent', '2017-09-28', '15-101-002'),
-(2, '15-101-001', 1, 'Pending', 'sent', '2017-09-28', '15-201-005'),
-(3, '15-202-001', 2, 'Approved', 'received', '2017-09-28', '15-201-005'),
-(4, '15-202-001', 2, 'Approved', 'received', '2017-09-28', '15-201-002');
+(2, '15-202-002', 1, 'Pending', 'sent', '2017-09-28', '15-201-005'),
+(3, '15-202-002', 2, 'Pending', 'sent', '2017-09-28', '15-201-005'),
+(4, '15-202-002', 2, 'Approved', 'received', '2017-09-28', '15-201-002');
 
 -- --------------------------------------------------------
 
@@ -131,10 +145,11 @@ CREATE TABLE `employee` (
 INSERT INTO `employee` (`employee_id`, `department_id`, `username`, `position`, `lname`, `fname`, `mname`, `sex`, `password`) VALUES
 ('15-101-001', 101, 'Ancheta29', 'Professor', 'Ancheta', 'Christian Daniel', 'Mozo', 'm', 'mozo'),
 ('15-101-002', 101, 'DummyMo', 'Professor', 'Dummy', 'Employee', 'Entry', 'f', 'dummy'),
-('15-201-002', 102, 'Jung', 'Professor', 'Jungkook', 'BTS', 'kpop', 'm', 'pop'),
 ('15-201-005', 201, 'Mozo', 'Head', 'Mozo', 'Daniella', 'Gagote', 'f', 'part'),
 ('15-202-001', 102, 'Dummy', 'Professor', 'Dummy', 'Dummy', 'Dummy', 'f', 'full'),
-('17-101-6', 101, 'Lenovo', 'Intern', 'Lenovo', 'Daniel', 'Asus', 'm', '25d55ad283aa400af464c76d713c07ad');
+('15-202-002', 202, 'Jung', 'Professor', 'Jungkook', 'BTS', 'kpop', 'm', '25d55ad283aa400af464c76d713c07ad'),
+('17-101-6', 101, 'Lenovo', 'Intern', 'Lenovo', 'Daniel', 'Asus', 'm', '25d55ad283aa400af464c76d713c07ad'),
+('17-104-7', 104, 'geisher09', 'Dean', 'Bernabe', 'Geisher', 'Gonzalo', 'f', '56ad349e35056b1b289fae48e8e03830');
 
 -- --------------------------------------------------------
 
@@ -161,6 +176,13 @@ INSERT INTO `office` (`office_id`, `office_desc`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `ci_sessions`
+--
+ALTER TABLE `ci_sessions`
+  ADD PRIMARY KEY (`session_id`),
+  ADD KEY `last_activity_idx` (`last_activity`);
 
 --
 -- Indexes for table `department`
