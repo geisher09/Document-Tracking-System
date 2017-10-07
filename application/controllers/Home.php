@@ -9,12 +9,93 @@ class Home extends CI_Controller {
     }
 
 
+	// public function index($employee=null,$action=null,$date=null,$dept_case=null){
 	public function index(){
-			$header_data['title']="Login";
-			$this->load->view('header2',$header_data);
-			$this->load->view('login');
-			$this->load->view('footer');
+		$header_data['title']="Login";
+			// if(isset($employee,$action,$date,$dept_case)){
+			// 	$data['employee_id'] = $employee;
+			// 	$data['action'] = $action;
+			// 	$data['date'] = $date;
+			// 	$data['department'] = $dept_case;
+			// 	$this->load->view('header2',$header_data);
+			// 	$this->load->view('login',$data);
+			// 	$this->load->view('footer');
+			// }
+			// else{
+			 	$data['employee_id'] = "";
+				$data['action'] = "";
+				$data['date'] = "";
+				$data['department'] = "";
+				$this->load->view('header2',$header_data);
+				$this->load->view('login',$data);
+				$this->load->view('footer');
+			//}
 	}
+
+	public function track_docu(){
+		$this->form_validation->set_rules('track_num', 'track_num', 'trim|required');
+		if($this->form_validation->run()){
+			//true
+			$track_num = $this->input->post('track_num');
+
+			//model function
+			$this->load->model('dts_model');
+			$emp = $this->dts_model->track_docu_employee_id($track_num);
+			// print_r($emp);
+			if($emp!=null){
+				foreach ($emp as $r) {
+					$emp2 = array(
+						'employee_id' => $r['employee_id'],
+						'document_id' => $r['document_id'],
+						'document_status' => $r['document_status'],
+						'action' => $r['action'],
+						'date_of_action' => $r['date_of_action'],
+						'signatory' => $r['signatory']
+					);
+					$emp3[] = $emp2;
+				}
+				$employee=$emp2['employee_id'];
+				$action=$emp2['action'];
+				$date=$emp2['date_of_action'];
+ 				//print_r($employee);
+				$dept_id=$this->dts_model->getEmployee_id($employee);
+				 //print_r($dept_id);
+				foreach ($dept_id as $r) {
+ 					$dept_id2 = array(
+ 						'department_id' => $r['department_id']
+ 					);
+				}
+				$department_desc=$this->dts_model->getDepartment2_id($dept_id2['department_id']);
+				 //print_r($department_desc);
+				foreach ($department_desc as $r) {
+					$name = array(
+						'department_desc' => $r['department_desc']
+					);
+				}
+			 	$dept_desc = $name['department_desc'];
+				echo $employee;
+				echo $action;
+				echo $date;
+				echo $dept_desc;
+				$e = "Ancheta";
+				$this->session->set_flashdata('track',
+				// 'Recived at: '.$dept_desc.'<br/>('.$date.')<br/>Status: '.$action.'<br/>Last handled by: '.$employee);
+				'Received at: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>Status: '.$action.'<br/>Last handled by: '.$employee);
+				// redirect('home/index/'.$employee.$action.$date.$dept_case);
+				redirect('home/index');
+			}
+
+			else if($emp['document_status']!='received'){
+				$this->session->set_flashdata('error1', 'Document not yet received or invalid!');
+				redirect('home/index');
+			}
+			}
+			else{
+				$this->session->set_flashdata('error1', 'Please Enter a Document ID!');
+				redirect('home/index');
+			}
+		}
+
 
 	public function login_validation(){
 		$this->form_validation->set_rules('uname', 'Username', 'trim|required');
@@ -22,7 +103,7 @@ class Home extends CI_Controller {
 		if($this->form_validation->run()){
 			//true
 			$username = $this->input->post('uname');
-			
+
 			//model function
 			$this->load->model('dts_model');
 			if($this->dts_model->can_login($username)){
@@ -63,12 +144,12 @@ class Home extends CI_Controller {
 			$this->load->view('header');
 			$this->load->view('home',$data);
 			$this->load->view('footer');
-		} 
+		}
 
 		else{
 			redirect('home/index','refresh');
 		}
-		
+
 	}
 
 	public function logout(){
@@ -148,7 +229,7 @@ class Home extends CI_Controller {
 		$this->load->model('dts_model');
 		$lastEmp = $this->dts_model->getLastEmployee();
 		$departments = $this->dts_model->getDepartments();
-		$this->load->view('signup', ['dp'=>$departments,'le'=>$lastEmp]);	
+		$this->load->view('signup', ['dp'=>$departments,'le'=>$lastEmp]);
 		$this->load->view('footer');
 	}
 
@@ -178,7 +259,7 @@ class Home extends CI_Controller {
 			if($office_id == 1)
 			{
 				//echo "same";
-			}			
+			}
 			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);

@@ -76,7 +76,7 @@
 
 			$this->db->select('a.username,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
 			$this->db->from('employee a');
-			$this->db->join('department b','a.department_id = b.department_id');    
+			$this->db->join('department b','a.department_id = b.department_id');
 			$this->db->where('a.username',$user['username']);
 			$result = $this->db->get();
 
@@ -105,7 +105,7 @@
 			return $query->result_array();
 		}
 
-		public function get_profile_sent($user){  
+		public function get_profile_sent($user){
 
 			$this->db->where('username', $user['username']);
 			$result = $this->db->get('employee');
@@ -123,7 +123,7 @@
 			return $query->result_array();
 		}
 
-		public function get_inbox_pending($user){ 
+		public function get_inbox_pending($user){
 
 			$this->db->where('username', $user['username']);
 			$result = $this->db->get('employee');
@@ -197,7 +197,6 @@
 			$query= $this->db->get();
 			return $query-> result_array();
 		}
-
 		public function getEmployee($condition){
 			$this->db->select('*');
 			$this->db->from('employee');
@@ -207,6 +206,33 @@
 
 		}
 
+		public function track_docu_employee_id($track_num){  //tracking
+			$this->db->select('*');
+			$this->db->from('documentation');
+			if ( isset($track_num)) {
+				$this->db->where('document_id',$track_num);
+				$this->db->where('document_status','received');
+			}
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+		public function getEmployee_id($condition){
+			$this->db->select('department_id');
+			$this->db->from('employee');
+			if ( isset($condition)) $this->db->where('employee_id',$condition);
+			$query= $this->db->get();
+			return $query-> result_array();
+
+		}
+
+		public function getDepartment2_id($condition) //for offices and employees
+		{
+			$this->db->select('department_desc');
+			$this->db->where('department_id',$condition);
+			$this->db->from('department');
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
 
 	}
 
