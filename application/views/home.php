@@ -29,7 +29,7 @@
 
 					The current time is: <?php echo $time; ?>
 					Today is: <?php echo $date; ?>
-					Ancheta Cute <3
+					<?php echo $username; ?> Cute <3
 				</p>
 			</div>
 		</div>

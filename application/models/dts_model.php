@@ -46,6 +46,31 @@
 			}
 		}
 
+		// public function login($username,$password){
+		// 	$this->db->select('employee_id,username,lname,fname,mname,password');
+		// 	$this->db->from('employee');
+		// 	$this->db->where('username',$username);
+		// 	$this->db->where('password',$password)
+		// }
+
+		public function can_login($username){
+			$password = md5($this->input->post('password'));
+			$this->db->where('username',$username);
+			$this->db->where('password',$password);
+			$query = $this->db->get('employee');
+			//Select * from employee table
+
+			if($query->num_rows() == 1){
+				return true;
+			}
+
+			else{
+				return false;
+			}
+
+		}
+
+
 		public function validate(){
 			$uname = $this->input->post('uname');
 			$pword = md5($this->input->post('password'));
