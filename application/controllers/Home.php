@@ -98,11 +98,18 @@ class Home extends CI_Controller {
 	}
 
 	public function profile(){
+		$user['username']=$this->session->userdata('username');
+		$this->load->model('dts_model');
+		$profile = $this->dts_model->get_profile($user);
+		$inbox = $this->dts_model->get_profile_inbox($user);
+		$sent = $this->dts_model->get_profile_sent($user);
+		$pending = $this->dts_model->get_inbox_pending($user);
+		//print_r($inbox);
 		$header_data['title']="Profile";
 
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
-		$this->load->view('profile');
+		$this->load->view('profile',['pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending]);
 		$this->load->view('footer');
 	}
 

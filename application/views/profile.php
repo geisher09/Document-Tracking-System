@@ -27,11 +27,20 @@
 						</div>
 					<div class="row">
 							<div class="info">
-								<p><?php echo $name; ?> </p>
+
+								<?php foreach ($pro as $prof){ ?>
+									<p><?php echo $prof['username']; ?></p>
+									<p>Employee ID: <?php echo $prof['employee_id']; ?> </p>
+									<p>Department: <?php echo $prof['department_desc']; ?> </p>
+									<p>Department ID: <?php echo $prof['department_id']; ?> </p>
+									<p>Position: <?php echo $prof['position']; ?> </p> <br />
+								<?php } ?>
+
+								<!-- <p><?php echo $username; ?> </p>
 								<p>Employee ID: <?php echo $employee_id; ?> </p>
 								<p>Department: <?php echo $dept; ?> </p>
 								<p>Department ID: <?php echo $department_id; ?> </p>
-								<p>Position: <?php echo $position; ?> </p> <br />
+								<p>Position: <?php echo $position; ?> </p> <br /> -->
 							</div>
 						</div>
 				</div>
@@ -57,7 +66,21 @@
 								</tr>
 							</thead>
 							<tbody>
+
+								<?php foreach ($inb as $inboxes){ ?>
 								<tr>
+									<td><?php echo $inboxes['document_id']; ?></td>
+									<td><?php echo $inboxes['document_title']; ?></td>
+									<td><?php echo $inboxes['action']; ?></td>
+									<td>
+										<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#details">Details</button> 
+										<button class="btn btn-success btn-sm">
+											Download <span class="glyphicon glyphicon-download-alt"></span>
+										</button>
+									</td>
+								</tr>
+								<?php } ?>
+								<!-- <tr>
 									<td><?php echo $dtn; ?></td>
 									<td><?php echo $title; ?></td>
 									<td><?php echo $status; ?></td>
@@ -67,7 +90,7 @@
 											Download <span class="glyphicon glyphicon-download-alt"></span>
 										</button>
 									</td>
-								</tr>
+								</tr> -->
 							</tbody>
 						</table>
 					</div>
@@ -87,27 +110,31 @@
 									</tr>
 								</thead>
 								<tbody>
+									<?php foreach ($snt as $sents){ ?>
 									<tr>
-										<td><?php echo $dtn; ?></td>
-										<td><?php echo $title; ?></td>
-										<td><?php echo $status; ?></td>
+										<td><?php echo $sents['document_id']; ?></td>
+										<td><?php echo $sents['document_title']; ?></td>
+										<td><?php echo $sents['action']; ?></td>
 										<td>
-										<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#details">Details</button> 
-										<button class="btn btn-success btn-sm">
-											Download <span class="glyphicon glyphicon-download-alt"></span>
-										</button>
+											<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#details">Details</button> 
+											<button class="btn btn-success btn-sm">
+												Download <span class="glyphicon glyphicon-download-alt"></span>
+											</button>
 										</td>
 									</tr>
+									<?php } ?>
 								</tbody>
 							</table> <br/>
 					</div>
 					
 					<div id="Response" class="tabcontent">
 						<br /><p style=" color:white; font-size:18px;"> SELECT FILE: </p>
-						<div class="dropdown">
-							<button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius: 0px; width: 150px;">
-							Files <span class="caret"></span></button>
-							
+						<div class="col-sm-6">
+							        <select name="file" class="form-control">							        	
+									<?php foreach ($pen as $pendings){ ?>
+							          <option value="<?php echo $pendings['action']; ?>"><?php echo $pendings['document_title']; ?></option>
+							        <?php } ?>
+							        </select> 
 						</div> <br /><br />
 						
 						<button class="btn btn-success">APPROVE</button>
