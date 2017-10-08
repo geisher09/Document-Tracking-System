@@ -205,35 +205,37 @@
 			return $query-> result_array();
 
 		}
-
-		public function track_docu_employee_id($track_num){  //tracking
+		public function track_docu_latest_date($track_num){ //get the latest date of the file
 			$this->db->select('*');
 			$this->db->from('documentation');
 			if ( isset($track_num)) {
 				$this->db->where('document_id',$track_num);
-				$this->db->where('document_status','received');
 			}
 			$query= $this->db->get();
 			return $query-> result_array();
 		}
-		public function getEmployee_id($condition){
-			$this->db->select('department_id');
+		public function track_docu_info($cdate,$track_num){  //track the file with the latest date and info
+			$this->db->select('*');
+			$this->db->from('documentation');
+			$this->db->join('document', 'documentation.document_id=document.document_id');
+			if ( isset($cdate,$track_num)) {
+				$this->db->where('documentation.document_id',$track_num);
+				$this->db->where('documentation.document_status','sent');
+				$this->db->where('documentation.date_of_action',$cdate);
+			}
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+		public function track_docu_from($employee){ //track the department
+			$this->db->select('*');
 			$this->db->from('employee');
-			if ( isset($condition)) $this->db->where('employee_id',$condition);
-			$query= $this->db->get();
-			return $query-> result_array();
-
-		}
-
-		public function getDepartment2_id($condition) //for offices and employees
-		{
-			$this->db->select('department_desc');
-			$this->db->where('department_id',$condition);
-			$this->db->from('department');
+			$this->db->join('department', 'employee.department_id=department.department_id');
+			if ( isset($employee)) {
+				$this->db->where('employee.employee_id',$employee);
+			}
 			$query= $this->db->get();
 			return $query-> result_array();
 		}
-
 	}
 
 ?>

@@ -65,6 +65,20 @@
 	<div id="tbar">
 
 		<?php echo form_open('home/track_docu');?>
+		<form>
+			<div class="form-group">
+
+				<?php
+				echo '<label style="color: Black; "><strong>'.$this->session->flashdata("error1").'</strong></label>'
+				?>
+				<?php echo form_input(['type'=>'text','name'=>'track_num','id'=>'track_num','class'=>'form-control bar','placeholder'=>'Track a Document', 'value'=>set_value('track_num')]); ?>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-danger tbtn">
+					<span class="glyphicon glyphicon-search"></span> Track
+				</button>
+			</div>
+		</form>
 		<!-- <form>
 			<div class="form-group">
 				<input type="text" class="form-control bar" id="track" name="track" placeholder="Track a Document">
@@ -75,24 +89,10 @@
 				</span>
 			</div>
 		</form> -->
-		<div class="form-group">
-			<form>
-
-				<?php
-				echo '<label style="color: Black; "><strong>'.$this->session->flashdata("error1").'</strong></label>'
-				?>
-			<?php echo form_input(['type'=>'text','name'=>'track_num','id'=>'track_num','class'=>'form-control','placeholder'=>'Track a Document', 'value'=>set_value('track_num')]); ?>
-			<span class="input-group-btn">
-				<button type="submit" class="btn btn-danger tbtn">
-					<span class="glyphicon glyphicon-search"></span> Track
-				</button>
-			</span>
-		</form>
-		</div>
 		<?php
 		echo '<label style="color: Black; "><strong>'.$this->session->flashdata("track").'</strong></label>'
 		?>
-<?php echo $employee_id .$action; ?>
+<!-- <?php echo $employee_id .$action; ?> -->
 		<?php echo form_close(); ?>
 	</div> <br />
 

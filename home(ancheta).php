@@ -12,9 +12,24 @@ class Home extends CI_Controller {
 	// public function index($employee=null,$action=null,$date=null,$dept_case=null){
 	public function index(){
 		$header_data['title']="Login";
-		$this->load->view('header2',$header_data);
-		$this->load->view('login');
-		$this->load->view('footer');
+			// if(isset($employee,$action,$date,$dept_case)){
+			// 	$data['employee_id'] = $employee;
+			// 	$data['action'] = $action;
+			// 	$data['date'] = $date;
+			// 	$data['department'] = $dept_case;
+			// 	$this->load->view('header2',$header_data);
+			// 	$this->load->view('login',$data);
+			// 	$this->load->view('footer');
+			// }
+			// else{
+			 	$data['employee_id'] = "";
+				$data['action'] = "";
+				$data['date'] = "";
+				$data['department'] = "";
+				$this->load->view('header2',$header_data);
+				$this->load->view('login',$data);
+				$this->load->view('footer');
+			//}
 	}
 
 	public function track_docu(){
@@ -30,8 +45,12 @@ class Home extends CI_Controller {
           );
           $dates2[]=$dates;
         }
+        print_r($dates2);
+        echo "<br/>";
         asort($dates2);
+        //$date_close=key($dates2);
         $date_close=($dates2);
+        print_r($date_close);
         $cdate = $date_close[0];
 
         foreach ($date_close as $d) {
@@ -41,6 +60,9 @@ class Home extends CI_Controller {
           $dates3[]=$cdates;
         }
         $use_date = $cdates['date_of_action'];
+        echo "<br/>".$use_date."<br/>";
+        // print_r($date_close);
+        // print_r($cdate);
         $info = $this->dts_model->track_docu_info($use_date,$track_num);
 				foreach ($info as $r) {
 					$emp2 = array(
@@ -55,6 +77,7 @@ class Home extends CI_Controller {
 					);
             $rec[]=$emp2;
         }
+        //print_r($rec);
       	$employee=$emp2['employee_id'];
 				$title=$emp2['document_title'];
 				$action=$emp2['action'];
@@ -69,12 +92,20 @@ class Home extends CI_Controller {
 				}
 			 	$dept_desc = $track_from['department_desc'];
 			 	$dept_id = $track_from['department_id'];
+				echo $employee;
+				echo $title;
+				echo $action;
+				echo $date;
+        echo $dept_desc;
+        echo $dept_id;
 				$this->session->set_flashdata('track',
-				'The File: '.$title. '<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
+        // 'The file: '.$title. '<br/>Is: '.$action.'<br/>Received at: '.$dept_desc.'<br/>As of:'.$date);
+				'The file: '.$title. '<br/>Received at: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
 				redirect('home/index');
+        // redirect('home/index/'.$employee.$action.$date.$dept_case);
 			}
-			else if($emp['document_status']!='sent'){
-				$this->session->set_flashdata('error1', 'File not yet sent or invalid!');
+			else if($emp['document_status']!='received'){
+				$this->session->set_flashdata('error1', 'Document not yet received or invalid!');
 				redirect('home/index');
 			}
 			}
