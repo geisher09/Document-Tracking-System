@@ -6,7 +6,7 @@
 			$this->db->select('d.document_id,d.document_title,do.action,do.document_status');
 		    $this->db->from('document d');
 		    $this->db->join('documentation do', 'do.document_id=d.document_id');
-		    $stat="received";
+		    $stat="sent";
 		    $this->db->where('do.document_status', $stat);
 		    $query = $this->db->get();
 		    if($query->num_rows() != 0)
@@ -94,13 +94,12 @@
 
 			$id = $result->row('employee_id');
 
-			$stat = "received";
+			// $stat = "received";
 
-			$this->db->select('a.employee_id,a.document_id,a.document_status,b.document_id,b.document_title,a.action,');
-			$this->db->from('documentation a');
+			$this->db->select('a.signatory_id,a.employee_id,a.document_id,a.response,a.comment,b.document_desc, b.document_id,b.document_title');
+			$this->db->from('signatory a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->where('a.employee_id', $id);
-			$this->db->where('a.document_status', $stat);
 			$query = $this->db->get();
 			return $query->result_array();
 		}
@@ -114,13 +113,70 @@
 
 			$stat = "sent";
 
-			$this->db->select('a.employee_id,a.document_id,a.document_status,b.document_id,b.document_title,a.action,');
+			$this->db->select('a.employee_id,a.document_id,a.document_status,b.document_id,b.document_title,a.action');
 			$this->db->from('documentation a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->where('a.employee_id', $id);
 			$this->db->where('a.document_status', $stat);
 			$query = $this->db->get();
 			return $query->result_array();
+		}
+
+		public function getEmployees($user){
+			$this->db->select('*');
+			$this->db->from('employee');
+			$this->db->where_not_in('username', $user['username']);
+			$query = $this->db->get();
+			return $query->result();
+
+		}
+
+		public function get_by_id($id)
+		{
+
+			$this->db->select('a.document_id,b.document_id,b.document_desc,a.signatory,a.action,a.date_of_action,b.document_title');
+			$this->db->from('documentation a');
+			$this->db->join('document b','a.document_id = b.document_id');    
+			$this->db->where('a.document_id',$id);
+			$query = $this->db->get();
+
+			return $query->row();
+		}
+
+		public function getSignatory_by_id($id)
+		{
+
+			$this->db->select('a.signatory_id,a.employee_id,b.employee_id,a.response,a.comment,a.document_id,b.lname,b.fname,b.mname,a.date_responded');
+			$this->db->from('signatory a');
+			$this->db->join('employee b','a.employee_id = b.employee_id');    
+			$this->db->where('a.signatory_id',$id);
+			$query = $this->db->get();	
+
+
+			return $query->row();
+		}
+
+		public function get_ownSignatories($id){
+			$this->db->select('a.document_id,b.document_id,b.response,b.employee_id,b.signatory_id');
+			$this->db->from('documentation a');
+			$this->db->join('signatory b','a.document_id = b.document_id');    
+			$this->db->where('a.document_id',$id);
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function getInbox_by_id($id){
+			$this->db->select('a.signatory_id,a.response,a.comment,a.document_id,a.date_responded,b.document_id,b.document_title,b.document_desc,c.employee_id,c.document_id,d.employee_id,d.lname,d.fname,d.mname');
+			$this->db->from('signatory a');
+			$this->db->join('document b','a.document_id = b.document_id');
+			$this->db->join('documentation c', 'a.document_id = c.document_id');
+			$this->db->join('employee d', 'c.employee_id = d.employee_id');     
+			$this->db->where('a.signatory_id',$id);
+			$query = $this->db->get();	
+
+
+			return $query->row();
 		}
 
 		public function get_inbox_pending($user){ 
@@ -161,6 +217,31 @@
 			$insert = $this->db->insert('employee', $data);
 			return $insert;
 
+		}
+
+		public function saveAddSig(){
+			$id = $this->input->post('adddocuno');
+			$sigdata = $this->get_by_id($this->input->post('adddocuno'));
+			date_default_timezone_set('Asia/Manila');
+			$time =date("h:i:sa");
+			$date = date("Y-m-d");
+			$data['date'] = $date;
+			$data['time'] = $time;
+			$sdata = array(
+				  'signatory_id' => '',
+			      'employee_id' => $this->input->post('employee'),
+			      'document_id' => $this->input->post('adddocuno') ,
+			      'response' => 'Pending' ,
+			      'comment' => 'none' ,
+			      'date_responded' => $data['date'].' '.$data['time']
+			   );
+			//print_r($pdata);
+			$this->db->set('signatory',((int)($sigdata->signatory)+1));
+			$this->db->where('document_id', $id);
+			$this->db->update('documentation');
+
+
+			return $this->db->insert('signatory', $sdata);
 		}
 
 		public function getDepartments(){

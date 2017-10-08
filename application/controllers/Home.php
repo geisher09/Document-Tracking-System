@@ -104,14 +104,50 @@ class Home extends CI_Controller {
 		$inbox = $this->dts_model->get_profile_inbox($user);
 		$sent = $this->dts_model->get_profile_sent($user);
 		$pending = $this->dts_model->get_inbox_pending($user);
+		$employees = $this->dts_model->getEmployees($user);
 		//print_r($inbox);
 		$header_data['title']="Profile";
 
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
-		$this->load->view('profile',['pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending]);
+		$this->load->view('profile',['pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending,'emp'=>$employees]);
 		$this->load->view('footer');
 	}
+
+	public function ajax_list()
+	{
+		$this->load->model('dts_model');
+		$sent = $this->dts_model->get_by_id($this->input->post('id'));
+		$signatories = $this->dts_model->get_ownSignatories($this->input->post('id'));
+		$signatory = $this->dts_model->getSignatory_by_id($this->input->post('id'));
+		$inbox = $this->dts_model->getInbox_by_id($this->input->post('id'));
+		$output = array(
+
+						"sent" => $sent,
+						"signatories" => $signatories,
+						"signatory" => $signatory,
+						"inbox" => $inbox
+
+				);
+		//output to json format
+		echo json_encode($output);
+	}
+
+
+	public function savesig(){
+
+		$this->load->model('dts_model');
+		$id = $this->input->post('docuno');
+        $this->dts_model->saveAddSig();
+        // $this->session->set_flashdata('response', 'Saved Succesfully!');
+
+		return redirect('home/profile');
+
+
+
+
+	}
+
 
 	public function contacts(){
 		$header_data['title']="Contacts";
@@ -120,7 +156,7 @@ class Home extends CI_Controller {
 
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
-		$this->load->view('contacts');
+	 		$this->load->view('contacts');
 		$this->load->view('footer');
 	}
 
