@@ -65,30 +65,19 @@
 	<div id="tbar">
 
 		<?php echo form_open('home/track_docu');?>
-		<form>
-			<div class="form-group">
+				<?php echo '<label style="color: Black; "><strong>'.$this->session->flashdata("error1").'</strong></label>'?>
+			<form>
+				<div class="form-group">
 
-				<?php
-				echo '<label style="color: Black; "><strong>'.$this->session->flashdata("error1").'</strong></label>'
-				?>
-				<?php echo form_input(['type'=>'text','name'=>'track_num','id'=>'track_num','class'=>'form-control bar','placeholder'=>'Track a Document', 'value'=>set_value('track_num')]); ?>
-			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-danger tbtn">
-					<span class="glyphicon glyphicon-search"></span> Track
-				</button>
-			</div>
-		</form>
-		<!-- <form>
-			<div class="form-group">
-				<input type="text" class="form-control bar" id="track" name="track" placeholder="Track a Document">
-				<span class="input-group-btn">
-					<button type="submit" class="btn btn-danger tbtn">
-						<span class="glyphicon glyphicon-search"></span> Track
-					</button>
-				</span>
-			</div>
-		</form> -->
+					<?php echo form_input(['type'=>'text','name'=>'track_num','align'=>'center','id'=>'track_num','class'=>'form-control bar','placeholder'=>'Track a Document', 'value'=>set_value('track_num')]); ?>
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-danger tbtn">
+							<span class="glyphicon glyphicon-search"></span> Track
+						</button>
+					</span>
+				</div>
+			</form>
+
 		<?php
 		echo '<label style="color: Black; "><strong>'.$this->session->flashdata("track").'</strong></label>'
 		?>
@@ -97,8 +86,8 @@
 	</div> <br />
 
 	<!--
+	<div class="container">
 	<div id="outputbox">
-		<div class="container">
 			<h3 class="txtbox"> Status : </h3>
 		</div>
 	</div>
