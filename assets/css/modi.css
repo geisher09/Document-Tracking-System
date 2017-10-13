@@ -6,6 +6,7 @@
 .list-group-item {
 	border:0;
 	font-size: 15px;
+	height:83px;
 }
 
 
@@ -15,7 +16,6 @@
 	padding:0; 
 	width:11%;
 	background-color:blue; 
-	height:10px;
 	float:left;
 	position:fixed;
 	left:0;
@@ -76,7 +76,7 @@ body {
 	-webkit-text-stroke:2px black;
 }
 .red {
-	background-color: #424242;
+	background-color: rgba(66,66,66,0.9);
 	margin: 0px 10px 0px 65px;
 	padding-left: 50px;
 	padding-right: 50px;

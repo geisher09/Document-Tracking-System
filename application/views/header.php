@@ -9,6 +9,8 @@
         </a>
         <a href="<?php echo site_url('Home/docu'); ?>" class="list-group-item">
          <h3 class="glyphicon glyphicon-file"></h3><br/>All Documents
+        <a href="<?php echo site_url('Home/docu'); ?>" class="list-group-item text-center">
+         <h3 class="glyphicon glyphicon-dashboard"></h3><br/>Dashboard
         </a>
         <a href="<?php echo site_url('Home/offices'); ?>" class="list-group-item">
          <h3 class="glyphicon glyphicon-briefcase"></h3><br/>Offices

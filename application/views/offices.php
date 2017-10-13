@@ -1,7 +1,8 @@
 <div class="container body">
 
 <!--body-->
-		<div class="container red">
+		
+	<div class="container red">
 			<div class="h">
 			<h1>Offices</h1>
 			<?php foreach($offices as $o) :?>
