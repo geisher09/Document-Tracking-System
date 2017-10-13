@@ -1,28 +1,14 @@
 <div class="container-fluid body">
 	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12 " >
+		<div class=" col-md-10 col-sm-10 col-xs-10 " >
 
 			<div class="container red" >
+		
+				<h2> Welcome <?php echo $username; ?> to Document Tracking System </h2> <br /><br /><br /><br />
 
-<<<<<<< HEAD
-
-			<div class="container" >
-<<<<<<< HEAD
-				
-				<h2 class="h" >Welcome <?php echo $uname; ?> to Document Tracking System! </h2> <br /><br /><br /><br />
-				<p id="intro"> 
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Many years ago before the advent of modern technology, people were just scribbling					on dried leaves using coals 
-					from burned wood as pens. Soon, mankind discovered how to make paper out of trees, while quills and ink came 
-=======
-
-				<h2 class="h" > Welcome to Document Tracking System </h2> <br /><br /><br /><br />
-=======
-				<h1 class="h" > Welcome <?php echo $username; ?> to Document Tracking System </h1> <br /><br /><br /><br />
->>>>>>> 89762567eb4e6dd8c1bdcd805cdeff2570db3d5b
 				<p id="intro">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Many years ago before the advent of modern technology, people were just scribbling					on dried leaves using coals
 					from burned wood as pens. Soon, mankind discovered how to make paper out of trees, while quills and ink came
->>>>>>> 249d3d9f92181f9b1a0925d364d4ab611a28f635
 					immediately thereafter. Many brilliant minds convened and soon, the concept of technology became the talk of the town.
 					Technology improved over the course of time, witnessing the greatest wars in the world, surpassing the most dreadful
 					diseases that humankind has ever faced. And here it is now, continues to be modernized by many of the world's cleverest

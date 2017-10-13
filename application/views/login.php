@@ -1,6 +1,7 @@
 <body>
-<div class="container-fluid">
+<div class="container-fluid" style="background-color: #424242; height:100%;">
 
+	<!--
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="item active">
@@ -20,11 +21,12 @@
 			</div>
 		</div>
 	</div>
+	-->
 
 	<div  class="box">
 
 		<?php echo form_open('home/login_validation');?>
-		<h1  style="color: White; "> Login </h1> <br /><br /><br />
+		<h1  style="color: #ffffff; "> Login</h1> <br /><br /><br />
 
 			<!--
 			<?php // if(isset($account_created)) {?>
@@ -67,14 +69,14 @@
 		<?php echo form_open('home/track_docu');?>
 				<?php echo '<label style="color: Black; "><strong>'.$this->session->flashdata("error1").'</strong></label>'?>
 			<form>
-				<div class="form-group">
+				<div class="form-group input-group" style="font-color: black; color: black;">
 
 					<?php echo form_input(['type'=>'text','name'=>'track_num','align'=>'center','id'=>'track_num','class'=>'form-control bar','placeholder'=>'Track a Document', 'value'=>set_value('track_num')]); ?>
 					<span class="input-group-btn">
-						<button type="submit" class="btn btn-danger tbtn">
-							<span class="glyphicon glyphicon-search"></span> Track
-						</button>
-					</span>
+					<button type="submit" class="btn btn-default tbtn">
+						<span class="glyphicon glyphicon-search"></span> Track
+					</button>
+				</span>
 				</div>
 			</form>
 
@@ -83,6 +85,7 @@
 		?>
 <!-- <?php echo $employee_id .$action; ?> -->
 		<?php echo form_close(); ?>
+
 	</div> <br />
 
 	<!--

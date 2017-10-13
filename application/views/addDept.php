@@ -13,6 +13,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<label for="ID"> Department ID: </label>
+						<input 
 						<?php echo form_input(['name'=>'department_id','class'=>'form-control','placeholder'=>'ID', 'value'=>$id,'readonly'=>'true']); ?>
 					</div>
 
