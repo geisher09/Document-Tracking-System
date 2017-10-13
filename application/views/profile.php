@@ -20,7 +20,7 @@
 			<div class="row" >
 				<br />
 				<!-- temporary profile picture & sample profile info  --> 
-				<div class="col-md-3 col-sm-12 col-xs-12 roundbox" style="margin-left:50px;">
+				<div class="col-md-3 col-sm-12 col-xs-12 roundbox" style="margin-left:0px;">
 				
 					<div class="row">
 							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"
@@ -46,7 +46,7 @@
 						</div>
 				</div>
 
-				</div>
+				
 
 				<div class="col-md-8 col-sm-12 col-xs-12" >
 					<h2> My Documents </h2> <br />
@@ -100,6 +100,7 @@
 						</table>
 					</div>
 
+
 					<div id="Sent" class="tabcontent"> <br />
 
 					<button class="btn btn-danger btn-md" data-toggle="modal" data-target="#send_docu" style="float:right;"> 
@@ -133,7 +134,7 @@
 								</tbody>
 							</table> <br/>
 					</div>
-
+				</div>
 					
 				</div>
 
@@ -152,7 +153,7 @@
 					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">DOCUMENT DETAILS</h3>
 				</div>
 
-				<div class="modal-body">
+				<div class="modal-body zoomIn animated">
 					<div id="basicid">
 
 					</div>
