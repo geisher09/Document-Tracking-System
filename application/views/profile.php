@@ -169,56 +169,59 @@
 		</div>
 	</div>
 
-	<div id="inbox_response" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
 
-	    <!-- Modal content-->
-	    <div class="modal-content">
-	      <div class="modal-header" style="background-color: #555555">
+<!-- modal of add a response-->
+	<div id="inbox_response" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #555555">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">RESPOND TO THIS FILE</h3>
-		  </div>
-	      <div class="modal-body">
-		        <div class="col-md-12">
-		        	<div class="row">
-						<div class="col-md-8">
-								    <label for="">Document ID:</label>
-									<input type="text" class="form-control" id="document_id" name="document_id" disabled></textarea>
-						</div>
-					</div>
-					<br>
-					<div class="row">
+					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">RESPOND TO A FILE</h3>
+				</div>
+			
+				<div class="modal-body">
+					<div class="container-fluid window" id="addSig">
+					<p class="lead text-center">Add a Signatory</p>
+					<div class="col-md-2"></div>
+					<form></form>
+					<?php echo form_open('home/savesig', ['class'=>'form-horizontal']); ?>
+					<div class="col-md-8">
+							<div class="col-md-6">
+							      <label for="">Document ID:</label>
+								  <input type="text" class="form-control" id="document_id" name="document_id" disabled></textarea>
+							</div>
+
 							<div class="form-group">
 								<input type="hidden" id="signatory_id" name="signatory_id"/>
 							</div>
-					</div>
-					<div class="row">
+					
 							<div class="col-md-6">
 								<label for="">Response:</label>
-							        <select name="response" class="form-control">
+							        <select name="response">
 										  <option value="Approve">Approve</option>
-										  <option value="Reject">Reject</option>
+										  <option value="Reject">Approve</option>
 									</select>
 							</div>
-					</div>
-							
-					<div class="row">
-						<br><br><br>
 							<div class="col-md-12 form-group">
-								<label for="">Comments :</label>
-								<textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+										<label for="">Comments :</label>
+										<textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
 							</div>
-					</div>
-							
-				</div>
-	      </div>
-	      <br><br><br>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">Save</button>
-	      </div>
-	    </div>
 
-	  </div>
+						<div>
+							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+						<?php echo form_close();?>
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+				</div>
+				
+			</div>
+		</div>
+
+	<div id="inbox_response" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
 	</div>
 	
 </div>

@@ -16,13 +16,81 @@ class Home extends CI_Controller {
 			$this->load->view('footer');
 	}
 
+	public function track_docu(){
+		$this->form_validation->set_rules('track_num', 'track_num', 'trim|required');
+		if($this->form_validation->run()){
+			$track_num = $this->input->post('track_num');
+			$this->load->model('dts_model');
+			$doc_date = $this->dts_model->track_docu_latest_date($track_num);
+			if($doc_date!=null){
+        foreach ($doc_date as $d) {
+          $dates = array(
+            'date_of_action' => $d['date_of_action']
+          );
+          $dates2[]=$dates;
+        }
+        asort($dates2);
+        $date_close=($dates2);
+        $cdate = $date_close[0];
+
+        foreach ($date_close as $d) {
+          $cdates = array(
+            'date_of_action' => $d['date_of_action']
+          );
+          $dates3[]=$cdates;
+        }
+        $use_date = $cdates['date_of_action'];
+        $info = $this->dts_model->track_docu_info($use_date,$track_num);
+				foreach ($info as $r) {
+					$emp2 = array(
+						'employee_id' => $r['employee_id'],
+						'document_id' => $r['document_id'],
+						'document_status' => $r['document_status'],
+						'action' => $r['action'],
+						'date_of_action' => $r['date_of_action'],
+						'signatory' => $r['signatory'],
+						'document_title' => $r['document_title'],
+					  'document_desc' => $r['document_desc']
+					);
+            $rec[]=$emp2;
+        }
+      	$employee=$emp2['employee_id'];
+				$title=$emp2['document_title'];
+				$action=$emp2['action'];
+				$date=$emp2['date_of_action'];
+				$from=$this->dts_model->track_docu_from($employee);
+				foreach ($from as $r) {
+ 					$track_from = array(
+ 						'employee_id' => $r['employee_id'],
+ 						'department_id' => $r['department_id'],
+ 						'department_desc' => $r['department_desc']
+ 					);
+				}
+			 	$dept_desc = $track_from['department_desc'];
+			 	$dept_id = $track_from['department_id'];
+				$this->session->set_flashdata('track',
+				'The File: '.$title. '<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
+				redirect('home/index');
+			}
+			else if($emp['document_status']!='sent'){
+				$this->session->set_flashdata('error1', 'File not yet sent or invalid!');
+				redirect('home/index');
+			}
+			}
+			else{
+				$this->session->set_flashdata('error1', 'Please Enter a Document ID!');
+				redirect('home/index');
+			}
+		}
+
+
 	public function login_validation(){
 		$this->form_validation->set_rules('uname', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		if($this->form_validation->run()){
 			//true
 			$username = $this->input->post('uname');
-			
+
 			//model function
 			$this->load->model('dts_model');
 			if($this->dts_model->can_login($username)){
@@ -63,12 +131,12 @@ class Home extends CI_Controller {
 			$this->load->view('header');
 			$this->load->view('home',$data);
 			$this->load->view('footer');
-		} 
+		}
 
 		else{
 			redirect('home/index','refresh');
 		}
-		
+
 	}
 
 	public function logout(){
@@ -79,7 +147,6 @@ class Home extends CI_Controller {
 
 	public function docu(){
 		$header_data['title']="All Documents";
-
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
 		$this->load->model('dts_model');
@@ -187,7 +254,7 @@ class Home extends CI_Controller {
 		$this->load->model('dts_model');
 		$lastEmp = $this->dts_model->getLastEmployee();
 		$departments = $this->dts_model->getDepartments();
-		$this->load->view('signup', ['dp'=>$departments,'le'=>$lastEmp]);	
+		$this->load->view('signup', ['dp'=>$departments,'le'=>$lastEmp]);
 		$this->load->view('footer');
 	}
 
@@ -217,7 +284,7 @@ class Home extends CI_Controller {
 			if($office_id == 1)
 			{
 				//echo "same";
-			}			
+			}
 			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
@@ -347,7 +414,7 @@ class Home extends CI_Controller {
   		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
 
         if ($this->form_validation->run()){
-
+				
                	$data = $this->input->post();
                	$url = $this->do_upload();
              	$this->load->model('dts_model');
