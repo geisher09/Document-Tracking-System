@@ -1,8 +1,6 @@
-<div class="container-fluid body">
+<div class="container body">
 <!--body-->
-<div class="row">
-	<div class=" col-md-10 col-sm-10 col-xs-10">
-		<div class="container red" style="opacity: 0.90">
+		<div class="container red">
 
 				<h2>Departments</h2><br />
 				<br>
@@ -36,13 +34,11 @@
 					</tbody>
 				</table>
 				
-				<a class="btn btn-danger btn-md" data-toggle="modal" data-target="#add_dept" >
+				<a class="btn btn-success btn-md" data-toggle="modal" data-target="#add_dept" >
 					<!-- matic na sa office of VP of research and extensions muna to -->
 					<span class="glyphicon glyphicon-plus"></span> Add Department
 				</a>
 		</div>
-	</div>
-</div>
 
 <div class="modal fade" id="add_dept" role="dialog">
     <div class="modal-dialog modal-md">

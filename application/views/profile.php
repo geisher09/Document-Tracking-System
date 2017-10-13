@@ -12,11 +12,9 @@
 	$status = "Pending";
 ?>
 
-<div class="container-fluid body">
-<div class="row">
+<div class="container body">
+		<div class="container red" >
 
-	<div class=" col-md-11 col-sm-11 col-xs-11" > 
-		<div class="container red" style="opacity: 0.90">
 			<div class="row" >
 				<br />
 				<!-- temporary profile picture & sample profile info  --> 
@@ -139,8 +137,6 @@
 				</div>
 
 			</div>
-		</div>
-	</div>
 
 </div>
 

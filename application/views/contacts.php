@@ -1,17 +1,15 @@
 
-<div class="container-fluid body">
+<div class="container body">
 
 	<!--body-->
-	<div class="row">
-		<div class=" col-md-10 col-sm-10 col-lg-10" > 
-		<div class="container red" style="opacity: 0.90">
+		<div class="container red">
 			<div class="h">
 
 				<h1>Contacts</h1>	
 				<br/>
 			</div>
 				<!---------------WARNING! DUMMY DATA AHEAD!-------------->
-			<div style="height:400px;width:100%;overflow:auto">
+			<div style="width:100%;overflow:auto">
 				<table id="mytable" class="table">
 						<thead>
 						<tr>
@@ -105,7 +103,4 @@
 		</div>
 		<br/><br/><br/>
 
-
-	</div>
-</div>
 </div>
