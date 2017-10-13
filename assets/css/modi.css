@@ -1,46 +1,74 @@
 /* custom css for DTS */
 
 /* common for all views */
-.navbar {
-	border-width: 0px;
-    -webkit-box-shadow: 0px 0px;
-    box-shadow: 0px 0px;
-    background-color: rgba(0,0,0,0.0);
-    background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
-    background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
-    background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
-	margin-bottom: 0px;
-	border-radius: 0px;
+
+
+.list-group-item {
+	border: 0;
+	overflow: auto;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 0px;
 }
 
-li:hover {
-	text-decoration: none;
-	color: white !important;
-	background-color: #790000 !important;
-	opacity: 0.7;
+
+.tab-menu .list-group{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 10%;
+	height: 100%;
+	float: left;
+	position: fixed;
+	
+}
+
+.tab-menu .list-group .list-group-item{
+	background-color: #424242;
+}
+
+.tab-menu .list-group .list-group-item:hover {
+	background-color: #48C9B0;
+}
+
+.list-group {
+	margin-bottom: 0;
+	height: 100%;
+}
+
+.tab-menu .list-group>a .glyphicon {
+	color: #ffffff;
+}
+
+.tab-menu .list-group>a .glyphicon:hover {
+	background-color: #48C9B0;
+}
+
+.tab-menu .list-group>a {
+	color: #ffffff;
 }
 
 body {
-	background:url(http://[::1]/DTS/assets/images/5.jpg) no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-}
-#navigation{
-	max-width:1050px;
-	margin:0px auto;
+	 background:url(http://[::1]/DTS/assets/images/1.jpg) no-repeat center center fixed;  
+	 -webkit-background-size: cover; 
+	 -moz-background-size: cover; 
+	 -o-background-size: cover; 
+	 background-size: cover; 
+	padding: 0px;
+	margin: 0;
 }
 
 .red {
-	background-color: #790000;
-	opacity: 0.8;
-	margin:50px auto 80px;
-	padding-left: 50px;
-	padding-right: 50px;
+	background-color: #424242;
+	
+	margin: 150px 20px 0px 80px;
+	padding-left: 30px;
+	padding-right: 30px;
 	padding-top: 20px;
 	padding-bottom: 50px;
 	max-width:1100px;
+	
 }
 
 #intro {
@@ -48,12 +76,11 @@ body {
 	font-size: 18px;
 	font-family: Georgia;
 }
-h1, h2, h3, h4, h5, h6 { color:#EC7063; }
+h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 .title{ 
 	color:#790000;
 	font-weight:bold; 
-	margin-top: 50px;
-	margin-bottom: 0px;
+
 }
 
 /* 'All Documents' section */
@@ -63,7 +90,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 }
 
 .table-hover tbody tr:hover td {
-	background-color: #790000 !important;
+	background-color: #48C9B0 !important;
 	opacity: 0.8;
 }
 
@@ -93,8 +120,10 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 /* 'Profile' section */
 
 .roundbox {
-	background-color: #E74C3C;
+	background-color: #48C9B0;
 	border-radius: 6px;
+	padding: 20px 20px 20px 20px;
+	margin-left: 20px;
 }
 
 .info {
@@ -120,7 +149,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 }
 
 .tab button {
-    background-color: #EC7063;
+    background-color: #48C9B0;
     float: left;
     border: none;
     outline: none;
@@ -147,7 +176,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
     padding: 10px 12px;
     -webkit-animation: fadeEffect 1s;
     animation: fadeEffect 1s;
-	background-color: #E74C3C;
+	background-color: #48C9B0;
 }
 
 @-webkit-keyframes fadeEffect {
@@ -184,7 +213,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 	background: 0 0;
 	border: none;
 	box-shadow: none;
-	border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+	border-bottom: 2px solid #ffffff;
 	border-radius: 0;
 	width: 100%;
 	color: white;
@@ -205,8 +234,8 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 .box {
 	width: 440px;
 	height: 550px;
-	background-color: #A93226;
-	opacity: 0.8;
+	background-color: #48C9B0;
+	opacity: 0.9;
 	border: none;
 	float: right;
 	margin-top: 70px;
@@ -224,19 +253,23 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 }
 
 .lgbtn:hover {
-	color: red;
+	color: #48C9B0;
 }
 
 .subtn {
 	border-radius: 50px;
-	background-color: #A93226;
+	background-color: #424949;
 	opacity: 0.8;
 	border-color: white;
 	color: white;
 }
 
+.subtn:hover {
+	color: white;
+}
+
 #title {
-	color: #A93226;
+	color: #ffffff;
 	margin-top: 150px;
 	margin-left: 70px;
 	font-size: 40px;
@@ -251,8 +284,8 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 
 .bar {
 	border-radius: 0;
-	background-color: grey;
-	border-color: grey;
+	background-color: #ffffff;
+	border-color: #ffffff;
 	opacity: 0.7;
 	color: white;
 	height: 41px;
@@ -262,6 +295,15 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 	border-radius: 0;
 	width: 100px;
 	height: 41px;
+	background-color: #48C9B0;
+	border-color: #48C9B0;
+	color: #000000;
+}
+
+.tbtn:hover {
+	background-color: #48C9B0;
+	border-color: #48C9B0;
+	color: #000000;
 }
 
 #outputbox {
@@ -291,7 +333,7 @@ h1, h2, h3, h4, h5, h6 { color:#EC7063; }
 	border-radius:7px;
 }
 #bgimage{
-	background:url(http://[::1]/DTS/assets/images/3.jpg) no-repeat center center fixed; 
+	background:url(http://[::1]/DTS/assets/images/5.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
