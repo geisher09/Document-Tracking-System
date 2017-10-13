@@ -6,17 +6,36 @@
 		<div class="container red">
 			<h2 class="h" > Add Documents </h2> <br /><br /><br /> <br />
 
-				
+
 				<?php echo form_open_multipart('home/save',['class'=>'form']); ?>
 
 				<div class="row">
 					<div class="col-lg-12">
 						<label for="dtn"> Document Tracking Number: </label>
-						<?php echo form_input(['name'=>'document_id','class'=>'form-control','placeholder'=>'Tracking no', 'value'=>set_value('document_id')]); ?>
+						<?php echo form_input(['name'=>'document_id','class'=>'form-control','placeholder'=>'Tracking no', 'value'=>set_value('document_id
+						')]); ?>
 					</div>
 
 					<div class="col-lg-12">
 						<?php echo form_error('document_id'); ?>
+			  		</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<br />
+						<label for="dtn"> Date: </label>
+						<?php
+						date_default_timezone_set('Asia/Manila');
+						$time =date("h:i:sa");
+						$date = date("Y-m-d");
+						$data['time'] = $time;
+						$data['date'] = $date;
+						echo form_input(['name'=>'date_created','class'=>'form-control','placeholder'=>$date, 'value'=>$date,'readonly'=>'true']); ?>
+					</div>
+
+					<div class="col-lg-12">
+						<?php echo form_error('date_created'); ?>
 			  		</div>
 				</div>
 
