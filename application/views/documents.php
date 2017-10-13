@@ -1,23 +1,27 @@
-<div class="container-fluid body">
+<div class="container body">
 	<!--body-->
-	<div class="row">
-
-		<div class=" col-md-10 col-sm-10 col-xs-10" > 
 		<div class="container red">
-			<h2> All Documents </h2> <br />
-		
+		  <div class="row">
+		  <div class="col-md-6">
+			<h2> All Documents </h2>
+		  </div>
+		  <div class="col-md-6">
 			<!-- search bar -->
 			<form>
 				<div class="form-group sbar input-group">
 					<input type="text" class="form-control" id="system-search" name="q" placeholder="Search for" required/>
 					<span class="input-group-btn">
-						<button type="submit" class="btn btn-danger">
+						<button type="submit" class="btn btn-success" >
 							<span class="glyphicon glyphicon-search"></span> Search
 						</button>
 					</span>
 				</div>
 			</form>
-
+		   </div>
+		   </div>
+			<br />
+			<br />
+			
 
 			<!-- table -->
 		    <table class="table table-list-search table-hover table-responsive ">
@@ -70,8 +74,6 @@
 				</div>
 			</div>
 		</div>
-		</div>
-	</div>
 
 
 </div>

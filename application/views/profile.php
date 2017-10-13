@@ -12,10 +12,8 @@
 	$status = "Pending";
 ?>
 
-<div class="container-fluid body">
-<div class="row">
+<div class="container body">
 
-	<div class=" col-md-11 col-sm-11 col-xs-11" > 
 		<div class="container red" >
 			<div class="row" >
 				<br />
@@ -151,8 +149,6 @@
 				</div>
 
 			</div>
-		</div>
-	</div>
 
 </div>
 
