@@ -171,6 +171,7 @@
 		</div>
 	</div>
 
+
 <!-- modal of add a response-->
 	<div id="inbox_response" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-md">
@@ -220,6 +221,9 @@
 
 			</div>
 		</div>
+
+	<div id="inbox_response" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
 	</div>
 
 </div>

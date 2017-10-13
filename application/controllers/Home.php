@@ -179,7 +179,7 @@ class Home extends CI_Controller {
 		$ul = array();
 		foreach($inbox as $a){
 			$as = array('document_file' => $a['document_file']);
-			print_r($as);
+			// print_r($as);
 			$ul[] = $as;
 		}
 		$sent = $this->dts_model->get_profile_sent($user);
@@ -272,6 +272,9 @@ class Home extends CI_Controller {
 	 		$this->load->view('contacts');
 		$this->load->view('footer');
 	}
+
+
+
 
 	public function myd(){
 		$header_data['title']="My Documents";

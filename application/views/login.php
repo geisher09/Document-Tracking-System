@@ -49,7 +49,7 @@
 		</div> <br /><br />
 
 		<div class="form-group">
-			<button align="center" type="submit" class="btn btn-md lgbtn"> LOG IN </button> <br /><br /><br /><br /><br /><br /><br >
+			<button align="center" type="submit" class="btn btn-md lgbtn"> LOG IN </button> <br /><br /><br /><br >
 		</div>
 
 		<div class="form-group" align="right" style="color: white;">

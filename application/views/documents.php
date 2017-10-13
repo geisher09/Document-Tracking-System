@@ -1,10 +1,10 @@
 <div class="container-fluid body">
 	<!--body-->
 	<div class="row">
-		<div class=" col-md-12 col-sm-12 col-xs-12" > 
+		<div class=" col-md-12 col-sm-12 col-xs-12" >
 		<div class="container red">
 			<h2 class="h" > All Documents </h2> <br />
-			
+
 			<!-- search bar -->
 			<form>
 				<div class="form-group sbar input-group">
@@ -15,9 +15,9 @@
 						</button>
 					</span>
 				</div>
-			</form> 
- 
-			
+			</form>
+
+
 			<!-- table -->
 		    <table class="table table-list-search table-hover table-responsive ">
 				<thead>
@@ -42,7 +42,7 @@
 				</tbody>
 			</table>
 		</div>
-		
+
 		<!--modal-->
 		<div id="details" class="modal fade" role="dialog">
 			<div class="modal-dialog modal-md">
@@ -51,10 +51,10 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h3 class="modal-title" style="color: #641E16 text-align: center;">Document Details</h3>
 					</div>
-			
+
 					<div class="modal-body">
 					 <div>
-						<h4 style="font-weight: bold"> 
+						<h4 style="font-weight: bold">
 							Document Tracking Number: <br /><br />
 							Title: <br /><br />
 							Description: <br /><br /><br /><br /><br /><br />
@@ -65,12 +65,12 @@
 						</h4>
 					 </div>
 					</div>
-				
+
 				</div>
 			</div>
 		</div>
 		</div>
 	</div>
-	
+
 
 </div>
