@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css"  type="text/css"/>
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/modi.css" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/animate.css" type="text/css" />
 	
 
 	<script src="<?php echo base_url('assets/js/jquery.js');?>"></script>

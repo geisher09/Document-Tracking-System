@@ -16,7 +16,7 @@
 <div class="row">
 
 	<div class=" col-md-11 col-sm-11 col-xs-11" > 
-		<div class="container red" >
+		<div class="container red" style="opacity: 0.90">
 			<div class="row" >
 				<br />
 				<!-- temporary profile picture & sample profile info  --> 
@@ -53,7 +53,6 @@
 					<div class="tab">
 						<button class="tablinks" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Inbox </button>
 						<button class="tablinks" onclick="openFolder(event, 'Sent')"> Sent </button>
-						<button class="tablinks" onclick="openFolder(event, 'Response')"> Response </button>
 					</div>
 
 					<div id="Inbox" class="tabcontent"> <br /><br />
@@ -77,7 +76,7 @@
 									<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
 
-												<button class="btn btn-success btn-sm">
+												<button class="btn btn-default btn-sm">
 													<a href="<?php echo site_url('Home/download_docu/'.$inboxes["document_title"].'?file='.$inboxes["document_file"]); ?>">Download<span class="glyphicon glyphicon-download-alt"></span></a>
 												</button>
 
@@ -135,19 +134,7 @@
 							</table> <br/>
 					</div>
 
-					<div id="Response" class="tabcontent">
-						<br /><p style=" color:white; font-size:18px;"> SELECT FILE: </p>
-						<div class="col-sm-6">
-							        <select name="file" class="form-control">
-									<?php foreach ($pen as $pendings){ ?>
-							          <option value="<?php echo $pendings['action']; ?>"><?php echo $pendings['document_title']; ?></option>
-							        <?php } ?>
-							        </select>
-						</div> <br /><br />
-
-						<button class="btn btn-success">APPROVE</button>
-						<button class="btn btn-danger">REJECT</button>
-					</div>
+					
 				</div>
 
 			</div>
@@ -309,7 +296,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">View Details</h3>
 					<button class="tablink btn btn-basic" onclick="details(event, 'clientDet')">Document Details</button>
-					<button class="tablink btn btn-basic" onclick="details(event, 'addPet')">Add Signatory</button>
+					<button class="tablink btn btn-basic" onclick="details(event, 'addSig')">Add Signatory</button>
 			</div>
 
 			<div class="modal-body">
@@ -403,7 +390,7 @@
 					</div>
 				</div>
 
-				<div class="container-fluid window" id="addPet">
+				<div class="container-fluid window" id="addSig">
 					<p class="lead text-center">Add a Signatory</p>
 					<div class="col-md-2"></div>
 					<form></form>

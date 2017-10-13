@@ -3,13 +3,15 @@
 	<div class="row">
 
 		<div class=" col-md-10 col-sm-10 col-xs-10" > 
-		<div class="container red">
+		<div class="container red" style="opacity: 0.90">
 			<h2> All Documents </h2> <br />
 		
 			<!-- search bar -->
 			<form>
 				<div class="form-group sbar input-group">
-					<input type="text" class="form-control" id="system-search" name="q" placeholder="Search for" required/>
+										<!-- <input type="text" name="q" onkeyup="search()" placeholder="Search" id="search"/> -->
+
+					<input type="text" class="form-control" id="search" onkeyup="search()" name="q" placeholder="Search for" required/>
 					<span class="input-group-btn">
 						<button type="submit" class="btn btn-danger">
 							<span class="glyphicon glyphicon-search"></span> Search
@@ -20,7 +22,8 @@
 
 
 			<!-- table -->
-		    <table class="table table-list-search table-hover table-responsive ">
+			<table class="table table-list-search table-hover table-responsive" id="mytable">
+		    <!-- <table class="table table-list-search table-hover table-responsive "> -->
 				<thead>
 					<tr>
 						<th>TRACKING NO. </th>

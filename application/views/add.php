@@ -3,7 +3,7 @@
 	<!--body-->
 	<div class="row" onload="setup()">
 		<div class=" col-md-12 col-sm-12 col-xs-12" >
-		<div class="container red">
+		<div class="container red" style="opacity: 0.90">
 			<h2 class="h" > Add Documents </h2> <br /><br /><br /> <br />
 
 

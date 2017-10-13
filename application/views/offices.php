@@ -3,7 +3,7 @@
 <!--body-->
 <div class="row">
 	<div class=" col-md-10 col-sm-10 col-xs-10">
-		<div class="container red">
+		<div class="container red" style="opacity: 0.90">
 			<div class="h">
 			<h1>Offices</h1>
 			<?php foreach($offices as $o) :?>

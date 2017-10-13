@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class=" col-md-10 col-sm-10 col-xs-10 " >
 
-			<div class="container red" >
+			<div class="container red" style="opacity: 0.90">
 		
 				<h2> Welcome <?php echo $username; ?> to Document Tracking System </h2> <br /><br /><br /><br />
 
