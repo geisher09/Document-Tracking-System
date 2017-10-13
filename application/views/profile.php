@@ -14,13 +14,13 @@
 
 <div class="container-fluid body">
 <div class="row">
-	<div class=" col-md-12 col-sm-12 col-xs-12" > 
+	<div class=" col-md-11 col-sm-11 col-xs-11" > 
 		<div class="container red" >
 			<div class="row" >
 				<br />
 				<!-- temporary profile picture & sample profile info  --> 
-				<div class="col-md-3 col-sm-12 col-xs-12" style="margin-left:50px;">
-				<div class="roundbox">
+				<div class="col-md-3 col-sm-12 col-xs-12 roundbox" style="margin-left:50px;">
+				
 					<div class="row">
 							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive" 
 								alt="Profile Picture" id="profilepic" />
@@ -44,7 +44,7 @@
 							</div>
 						</div>
 				</div>
-				</div>
+				
 				
 				<div class="col-md-8 col-sm-12 col-xs-12" >
 					<h2> My Documents </h2> <br />
@@ -98,9 +98,9 @@
 					</div>
 					
 					<div id="Sent" class="tabcontent"> <br />
-					<a href="<?php echo site_url('Home/add'); ?>" class="btn btn-danger btn-md" style="float:right;"> 
+					<button class="btn btn-danger btn-md" data-toggle="modal" data-target="#send_docu" style="float:right;"> 
 						<span class="glyphicon glyphicon-share"></span> Send a Document 
-					</a> <br /><br /><br />
+					</button> <br /><br /><br />
 						<!--- sent docus table -->
 							<table class="table table-list-search table-hover table-condensed table-responsive ">
 								<thead>
@@ -223,6 +223,74 @@
 	
 </div>
 
+<div class="modal fade" id="send_docu" role="dialog">
+    <div class="modal-dialog modal-md">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #555555">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">Add Document</h3>
+        </div>
+        <div class="modal-body">
+			
+			<div class="row">
+				<div class=" col-md-10 form-group">
+					<label for="">Document Tracking no:</label>
+					<?php echo form_input(['name'=>'document_id','class'=>'form-control','placeholder'=>'Tracking no', 'value'=>set_value('document_id')]); ?>
+					</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('document_id'); ?>
+			  		</div>
+			</div>
+			
+			<div class="row">
+				<div class=" col-md-10 form-group">
+					<label for="">Title:</label>
+					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('document_title'); ?>
+			  		</div>	
+			</div>
+			
+			<div class="row">
+				<div class=" col-md-10 form-group">
+					<label for="">Description:</label>
+					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('document_desc'); ?>
+			  		</div>	
+			</div>
+			
+			<div class="row">
+				<div class=" col-md-10 form-group">
+					<label for="">Attach File:</label>
+					<div class="input-group">
+						<?php echo form_upload(['name'=>'file','class'=>'form-control']); ?>
+						</div>
+					</div>	
+					
+					<div class="col-lg-10">
+						<?php echo form_error('file'); ?>
+			  		</div>
+				</div> <br><br>
+			<div>
+			
+				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+			</form>
+        </div>
+        
+      </div>
+      
+   </div>
+ </div>
 
 <div class="modal fade" id="clientModal" role="dialog">
     <div class="modal-dialog modal-lg">

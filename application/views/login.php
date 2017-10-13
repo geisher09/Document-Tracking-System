@@ -1,6 +1,7 @@
 <body>
-<div class="container-fluid">
-
+<div class="container-fluid" style="background-color: #424242; height:100%;">
+	
+	<!--
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="item active">
@@ -20,11 +21,12 @@
 			</div>
 		</div>
 	</div>
+	-->
 	
 	<div  class="box">
 
 		<?php echo form_open('home/login_validation');?>
-		<h1  style="color: White; "> Login </h1> <br /><br /><br />
+		<h1  style="color: #ffffff; "> Login </h1> <br /><br /><br />
 		
 			<!--
 			<?php // if(isset($account_created)) {?>
@@ -64,10 +66,10 @@
 	
 	<div id="tbar">
 		<form>
-			<div class="form-group input-group">
+			<div class="form-group input-group" style="font-color: black; color: black;">
 				<input type="text" class="form-control bar" id="track" name="track" placeholder="Track a Document">
 				<span class="input-group-btn">
-					<button type="submit" class="btn btn-danger tbtn">
+					<button type="submit" class="btn btn-default tbtn">
 						<span class="glyphicon glyphicon-search"></span> Track
 					</button>
 				</span>

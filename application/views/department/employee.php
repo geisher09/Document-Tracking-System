@@ -1,8 +1,8 @@
 <div class="container-fluid body">
 <div class="row">
-	<div class=" col-md-12 col-sm-12 col-xs-12">
+	<div class=" col-md-10 col-sm-10 col-xs-10">
 		<div class="container red">
-			<h2 class="h">Department</h2><br /><br /><br />
+			<h2>Employees</h2><br /><br /><br />
             <table class="table table-list-search table-hover table-responsive ">
   				<thead>
   					<tr>
