@@ -3,7 +3,7 @@
 	class dts_model extends CI_Model{
 
 		public function getDocuments(){
-			$this->db->select('d.document_id,d.document_title,do.action,do.document_status');
+			$this->db->select('d.document_id,d.document_title,d.document_file,do.action,do.document_status');
 		    $this->db->from('document d');
 		    $this->db->join('documentation do', 'do.document_id=d.document_id');
 		    $stat="sent";
@@ -19,7 +19,13 @@
 		    }
 
 		}
-
+		public function download_file($fileName,$inbox){
+			$this->db->select('document_file');
+		    $this->db->from('document');
+		    $this->db->where('document_title', $inbox);
+		    $query = $this->db->get();
+				return $query->result_array();
+		}
 		public function saveDocuments($data,$url){
 			$this->db->set('document_file',$url);
 			// $this->db->insert('document_file',$url);
@@ -97,7 +103,7 @@
 
 			// $stat = "received";
 
-			$this->db->select('a.signatory_id,a.employee_id,a.document_id,a.response,a.comment,b.document_desc, b.document_id,b.document_title');
+			$this->db->select('a.signatory_id,a.employee_id,a.document_id,a.response,a.comment,b.document_desc, b.document_id,b.document_title,b.document_file'); //for download
 			$this->db->from('signatory a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->where('a.employee_id', $id);
@@ -319,6 +325,20 @@
 			return $query-> result_array();
 		}
 
+		//proper tracking of document
+		public function countSigantories($document_id){
+			//DOCUMENTATION.REJECTED | DOCUMENTATION.APPROVED | DOCUMENTATION.DOCUMENT_ID | SIGNATORY.SIGNATORY_ID | SIGNATORY.RESPONSE
+			$this->db->select('*');
+			$this->db->from('sigantory');
+			$this->db->insert('documentation', 'signatory.document_id = documentation.document_id');
+			if ( isset($employee)) {
+      	$this->db->where('signatory.document_id',$document_id);
+			}
+			$query= $this->db->get();
+			return $query-> result_array();
+
+
+		}
 	}
 
 ?>

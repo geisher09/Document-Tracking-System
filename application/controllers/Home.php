@@ -73,7 +73,7 @@ class Home extends CI_Controller {
 				redirect('home/index');
 			}
 			else if($emp['document_status']!='sent'){
-				$this->session->set_flashdata('error1', 'File not yet sent or invalid!');
+				$this->session->set_flashdata('error1', 'File not yet accepted or invalid!');
 				redirect('home/index');
 			}
 			}
@@ -151,6 +151,13 @@ class Home extends CI_Controller {
 		$this->load->view('header');
 		$this->load->model('dts_model');
 		$documents = $this->dts_model->getDocuments();
+		foreach($documents as $a){
+			$as = array('document_file' => $a['document_file']);
+			$type = explode('.', $a['document_title']);
+			$type = strtolower($type[count($type)-1]);
+			$url = "./uploads/".$a['document_title'];
+//			print_r($as);
+		}
 		$this->load->view('documents',['do'=>$documents]);
 		$this->load->view('footer');
 	}
@@ -169,17 +176,60 @@ class Home extends CI_Controller {
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
 		$inbox = $this->dts_model->get_profile_inbox($user);
+		$ul = array();
+		foreach($inbox as $a){
+			$as = array('document_file' => $a['document_file']);
+			print_r($as);
+			$ul[] = $as;
+		}
 		$sent = $this->dts_model->get_profile_sent($user);
 		$pending = $this->dts_model->get_inbox_pending($user);
 		$employees = $this->dts_model->getEmployees($user);
-		//print_r($inbox);
 		$header_data['title']="Profile";
-
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
-		$this->load->view('profile',['pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending,'emp'=>$employees]);
+		$this->load->view('profile',['pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending,'emp'=>$employees,'docu'=>$ul]);
 		$this->load->view('footer');
 	}
+	public function download_docu($inbox){
+		if(isset($inbox)){
+				$data = $this->input->post();
+			if(isset($_GET['file'])){
+				$filenam = array();
+				$fileName = array('file' => $_GET['file']);
+				print_r($fileName);
+				echo "<br/>";
+				print_r($inbox);
+				$name = basename($_GET['file']);
+				echo "<br/> basenaname <br/>";
+				print_r($name);
+				$filePath = 'uploads/'.$name;
+				echo "<br/>";
+				print_r($filePath);
+				$this->load->model('dts_model');
+				//$DL = $this->dts_model->download_file($fileName,$inbox);
+				if(!empty($fileName) && file_exists($filePath)){
+					$name_dl= $name	;
+					header('Content-Description: File Transfer');
+					header('Content-Type: application/force-download');
+					header("Content-Disposition: attachment; filename=\"" . $name_dl . "\";");
+					header('Content-Transfer-Encoding: binary');
+					header('Expires: 0');
+					header('Cache-Control: must-revalidate');
+					header('Pragma: public');
+					ob_clean();
+					flush();
+					readfile("uploads/".$name_dl); //show the path where the file is to be download
+					exit;
+				}
+				else {
+					return redirect('home/profile');
+				}
+	//			print_r($ul);
+			}
+		}
+	}
+
 
 	public function ajax_list()
 	{
@@ -209,10 +259,6 @@ class Home extends CI_Controller {
         // $this->session->set_flashdata('response', 'Saved Succesfully!');
 
 		return redirect('home/profile');
-
-
-
-
 	}
 
 
@@ -411,7 +457,7 @@ class Home extends CI_Controller {
   		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
 
         if ($this->form_validation->run()){
-				
+
                	$data = $this->input->post();
                	$url = $this->do_upload();
              	$this->load->model('dts_model');
@@ -421,7 +467,7 @@ class Home extends CI_Controller {
 				 else{
              		$this->session->set_flashdata('response', 'Failed :(');
 				 }
-				 return redirect('home/add');
+				return redirect('home/add');
 
         }
         else{
@@ -432,18 +478,36 @@ class Home extends CI_Controller {
         }
 	}
 
+	// public function do_upload(){
+	// 	$type = explode('.', $_FILES["file"]["name"]);
+	// 	$type = strtolower($type[count($type)-1]);
+	// 	$url = "./uploads/".uniqid(rand()).'.'.$type;
+	// 	//print_r($type);
+	// 	print_r($url);
+	// 	if(in_array($type, array("doc", "docs", "pdf", "txt")))
+	// 				if(is_uploaded_file($_FILES["file"]["tmp_name"]))
+	// 					if(move_uploaded_file($_FILES["file"]["tmp_name"],$url))
+	// 							return $url;
+	//
+	//
+	// 	//return redirect('home/add');
+	// }
 	public function do_upload(){
 		$type = explode('.', $_FILES["file"]["name"]);
 		$type = strtolower($type[count($type)-1]);
-		$url = "./uploads/".uniqid(rand()).'.'.$type;
-
+		// 	$url = "./uploads/".uniqid(rand()).'.'.$type;
+		$url = "./uploads/".$_FILES["file"]["name"];  //para mas makuha yung mga document (ayusin nalang kung mas gusto na unique yung mga id nila)
+		//print_r($type);
+		print_r($url);
 		if(in_array($type, array("doc", "docs", "pdf", "txt")))
 					if(is_uploaded_file($_FILES["file"]["tmp_name"]))
 						if(move_uploaded_file($_FILES["file"]["tmp_name"],$url))
 								return $url;
 
+
 		return redirect('home/add');
 	}
+
 
 
 
