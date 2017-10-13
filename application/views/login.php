@@ -1,6 +1,5 @@
-<body>
-<div class="container-fluid" style="background-color: #424242; height:100%;">
-
+<!--<body>
+<div class="container-fluid" style="background-color: #424242; height:100%;">-->
 	<!--
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
@@ -26,7 +25,8 @@
 	<div  class="box">
 
 		<?php echo form_open('home/login_validation');?>
-		<h1  style="color: #ffffff; "> Login</h1> <br /><br /><br />
+		<h1  style="color: #ffffff; "> Login </h1> <br /><br /><br />
+
 
 			<!--
 			<?php // if(isset($account_created)) {?>
