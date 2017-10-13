@@ -1,12 +1,28 @@
+<<<<<<< HEAD
+
+<!--border-->
+	<div class="row">
+		<div class=" col-md-12 col-sm-12 col-xs-12 border">
+			 
+		</div>
+	</div>
+
+=======
 <div class="container-fluid body">
+>>>>>>> 89762567eb4e6dd8c1bdcd805cdeff2570db3d5b
 	<!--body-->
 	<div class="row">
 		<div class=" col-md-12 col-sm-12 col-lg-12" > 
 		<div class="container red">
 			<div class="h">
+<<<<<<< HEAD
+				<h1>CONTACTS</h1>	
+				<hr><br>
+=======
 				<h1>Contacts</h1>	
 				<br/>
 			</div>
+>>>>>>> 89762567eb4e6dd8c1bdcd805cdeff2570db3d5b
 				<!---------------WARNING! DUMMY DATA AHEAD!-------------->
 			<div style="height:400px;width:100%;overflow:auto">
 				<table id="mytable" class="table">
