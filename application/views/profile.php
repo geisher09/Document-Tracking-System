@@ -14,6 +14,7 @@
 
 <div class="container-fluid body">
 <div class="row">
+
 	<div class=" col-md-11 col-sm-11 col-xs-11" > 
 		<div class="container red" >
 			<div class="row" >
@@ -22,7 +23,7 @@
 				<div class="col-md-3 col-sm-12 col-xs-12 roundbox" style="margin-left:50px;">
 				
 					<div class="row">
-							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive" 
+							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"
 								alt="Profile Picture" id="profilepic" />
 						</div>
 					<div class="row">
@@ -44,8 +45,9 @@
 							</div>
 						</div>
 				</div>
-				
-				
+
+				</div>
+
 				<div class="col-md-8 col-sm-12 col-xs-12" >
 					<h2> My Documents </h2> <br />
 					<div class="tab">
@@ -53,7 +55,7 @@
 						<button class="tablinks" onclick="openFolder(event, 'Sent')"> Sent </button>
 						<button class="tablinks" onclick="openFolder(event, 'Response')"> Response </button>
 					</div>
-					
+
 					<div id="Inbox" class="tabcontent"> <br /><br />
 						<!--- inbox table -->
 						<table class="table table-list-search table-hover table-condensed table-responsive ">
@@ -74,9 +76,11 @@
 									<td><?php echo $inboxes['response']; ?></td>
 									<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<button class="btn btn-success btn-sm">
-												Download <span class="glyphicon glyphicon-download-alt"></span>
-											</button>
+
+												<button class="btn btn-success btn-sm">
+													<a href="<?php echo site_url('Home/download_docu/'.$inboxes["document_title"].'?file='.$inboxes["document_file"]); ?>">Download<span class="glyphicon glyphicon-download-alt"></span></a>
+												</button>
+
 											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)">Respond<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
 
 									</td>
@@ -87,7 +91,7 @@
 									<td><?php echo $title; ?></td>
 									<td><?php echo $status; ?></td>
 									<td>
-										<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#details">Details</button> 
+										<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#details">Details</button>
 										<button class="btn btn-success btn-sm">
 											Download <span class="glyphicon glyphicon-download-alt"></span>
 										</button>
@@ -96,11 +100,13 @@
 							</tbody>
 						</table>
 					</div>
-					
+
 					<div id="Sent" class="tabcontent"> <br />
+
 					<button class="btn btn-danger btn-md" data-toggle="modal" data-target="#send_docu" style="float:right;"> 
 						<span class="glyphicon glyphicon-share"></span> Send a Document 
 					</button> <br /><br /><br />
+
 						<!--- sent docus table -->
 							<table class="table table-list-search table-hover table-condensed table-responsive ">
 								<thead>
@@ -128,26 +134,26 @@
 								</tbody>
 							</table> <br/>
 					</div>
-					
+
 					<div id="Response" class="tabcontent">
 						<br /><p style=" color:white; font-size:18px;"> SELECT FILE: </p>
 						<div class="col-sm-6">
-							        <select name="file" class="form-control">							        	
+							        <select name="file" class="form-control">
 									<?php foreach ($pen as $pendings){ ?>
 							          <option value="<?php echo $pendings['action']; ?>"><?php echo $pendings['document_title']; ?></option>
 							        <?php } ?>
-							        </select> 
+							        </select>
 						</div> <br /><br />
-						
+
 						<button class="btn btn-success">APPROVE</button>
 						<button class="btn btn-danger">REJECT</button>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
-	
+
 </div>
 
 <!-- modal of details about the document-->
@@ -158,69 +164,72 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">DOCUMENT DETAILS</h3>
 				</div>
-			
+
 				<div class="modal-body">
 					<div id="basicid">
-						
+
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
 
-	<div id="inbox_response" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
 
-	    <!-- Modal content-->
-	    <div class="modal-content">
-	      <div class="modal-header" style="background-color: #555555">
+<!-- modal of add a response-->
+	<div id="inbox_response" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #555555">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">RESPOND TO THIS FILE</h3>
-		  </div>
-	      <div class="modal-body">
-		        <div class="col-md-12">
-		        	<div class="row">
-						<div class="col-md-8">
-								    <label for="">Document ID:</label>
-									<input type="text" class="form-control" id="document_id" name="document_id" disabled></textarea>
-						</div>
-					</div>
-					<br>
-					<div class="row">
+					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">RESPOND TO A FILE</h3>
+				</div>
+
+				<div class="modal-body">
+					<div class="container-fluid window" id="addSig">
+					<p class="lead text-center">Add a Signatory</p>
+					<div class="col-md-2"></div>
+					<form></form>
+					<?php echo form_open('home/savesig', ['class'=>'form-horizontal']); ?>
+					<div class="col-md-8">
+							<div class="col-md-6">
+							      <label for="">Document ID:</label>
+								  <input type="text" class="form-control" id="document_id" name="document_id" disabled></textarea>
+							</div>
+
 							<div class="form-group">
 								<input type="hidden" id="signatory_id" name="signatory_id"/>
 							</div>
-					</div>
-					<div class="row">
+
 							<div class="col-md-6">
 								<label for="">Response:</label>
-							        <select name="response" class="form-control">
+							        <select name="response">
 										  <option value="Approve">Approve</option>
-										  <option value="Reject">Reject</option>
+										  <option value="Reject">Approve</option>
 									</select>
 							</div>
-					</div>
-							
-					<div class="row">
-						<br><br><br>
 							<div class="col-md-12 form-group">
-								<label for="">Comments :</label>
-								<textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+										<label for="">Comments :</label>
+										<textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
 							</div>
-					</div>
-							
-				</div>
-	      </div>
-	      <br><br><br>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">Save</button>
-	      </div>
-	    </div>
 
-	  </div>
+						<div>
+							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+						<?php echo form_close();?>
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+				</div>
+
+			</div>
+		</div>
+
+	<div id="inbox_response" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
 	</div>
-	
+
 </div>
 
 <div class="modal fade" id="send_docu" role="dialog">
@@ -302,11 +311,11 @@
 					<button class="tablink btn btn-basic" onclick="details(event, 'clientDet')">Document Details</button>
 					<button class="tablink btn btn-basic" onclick="details(event, 'addPet')">Add Signatory</button>
 			</div>
-		
+
 			<div class="modal-body">
-		
+
 					<div class="container-fluid window" id="clientDet">
-					<p class="lead text-center">Document Details</p>	
+					<p class="lead text-center">Document Details</p>
 						<div class="row">
 							<div class=" col-md-5 form-group">
 								<label for="">Tracking no:</label>
@@ -315,14 +324,14 @@
 							<div class=" col-md-7 form-group">
 								<label for="">Title:</label>
 								<input type="text" class="form-control form-inline" id="docutitle" name="docutitle" value="" disabled="true"/>
-							</div>	
+							</div>
 						</div>
 						<div class="row">
 								<div class=" col-md-8 form-group">
 									<label for="">Description:</label>
 									<textarea id="docudesc"class="form-control" name="docudesc" rows="2" readonly></textarea>
 								</div>
-							</div>		
+							</div>
 						<div class="row">
 							<div class="col-md-6 form-group">
 								<label for="">Document Status:</label>
@@ -331,9 +340,9 @@
 							<div class="col-md-6 form-group">
 								<label for="">As of:</label>
 								<input type="text" class="form-control" id="docudate" name="docudate" value="" disabled="true"/>
-							</div>		
+							</div>
 						</div>
-			
+
 					<div class="row">
 						<div class="col-md-6">
 								<p class="lead text-center">List of Signatory(s)</p>
@@ -352,7 +361,7 @@
 									</table>
 								</div>
 						</div>
-					
+
 						<div class="col-md-6 collapse" id="sig_detail">
 							<p class="lead text-center">Signatory Details</p>
 									<div class="form-group">
@@ -361,30 +370,30 @@
 										<input type="text" class="form-control" id="employee_name" name="employee_name" value="" disabled="true">
 										</span>
 									</div>
-							
+
 									<div class="form-group">
 										<label for="">Employee id:</label>
 										<input type="text" class="form-control" id="employee_id" name="employee_id" value="" disabled="true"/>
 									</div>
-							
+
 									<div class="form-group">
 										<label for="">Response:</label>
 										<input type="text" class="form-control" id="response" name="response" value="" disabled="true"/>
 									</div>
-							
-							
+
+
 									<div class="form-group">
 										<label for="">As of:</label>
 										<input type="text" class="form-control" id="asof" name="asof" value="" disabled="true"/>
-									</div>	
-							
+									</div>
+
 									<div class="row">
 										<div class="col-md-12 form-group">
 											<label for="">Comment:</label>
 											<textarea id="comment" class="form-control" name="comment" rows="2" readonly>None.</textarea>
-										</div>	
-									</div>		
-									
+										</div>
+									</div>
+
 						</div>
 					</div>
 
@@ -393,7 +402,7 @@
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
-					
+
 				<div class="container-fluid window" id="addPet">
 					<p class="lead text-center">Add a Signatory</p>
 					<div class="col-md-2"></div>
@@ -402,11 +411,11 @@
 					<div class="col-md-8">
 							<div class="col-lg-12">
 							      <div class="col-sm-6">
-							        <select name="employee" class="form-control">							        	
+							        <select name="employee" class="form-control">
 									<?php foreach ($emp as $empoy){ ?>
 							          <option value="<?php echo $empoy->employee_id; ?>"><?php echo $empoy->lname.','.$empoy->fname.'  '.$empoy->mname; ?></option>
 							        <?php } ?>
-							        </select> 
+							        </select>
 							      </div>
 				     		</div>
 
@@ -422,9 +431,9 @@
 					</div>
 					<div class="col-md-2"></div>
 				</div>
-				
-						
-			
+
+
+
 			<!-----------------FOOTER ------------>
 			<!-- <div class="modal-footer">
 				<button type="button" onclick="" class="btn btn-primary" data-dismiss="modal">Save</button>
@@ -446,7 +455,7 @@ function openFolder (event, folderName) {
 	for (x=0; x < tabcontent.length; x++) {
 		tabcontent[x].style.display = "none";
 	}
-		
+
 	tablinks= document.getElementsByClassName ("tablinks");
 	for (x=0; x < tablinks.length; x++) {
 		tablinks[x].className= tablinks[x].className.replace("active", "");
@@ -454,7 +463,7 @@ function openFolder (event, folderName) {
 	document.getElementById(folderName).style.display = "block";
 	//evt.currentTarget.className += " active";
 }
-	
+
 document.getElementById("defaultOpen").click();
 
 $('.modal').on('hidden.bs.modal', function (e) {
@@ -477,7 +486,7 @@ $('.modal').on('hidden.bs.modal', function (e) {
 		document.getElementById(windowName).style.display = "block";
 		evt.currentTarget.classList.add("w3-light-grey");
 		};
-		
+
 		$(document).ready(function() {
 		  $('#modal-6').on('show.bs.modal', function(e) {
 		    var id = $(e.relatedTarget).data('id');
@@ -508,8 +517,8 @@ function wow(id){
 							// Description: <br /><br /><br /><br /><br /><br />
 							// Date Received: <br /><br />
 							// Status: <br /><br />
-				          $('#basicid').html(s);	
-				          $('#inbox_details').modal('show');				          
+				          $('#basicid').html(s);
+				          $('#inbox_details').modal('show');
 				        }
 				    });
 		}
@@ -536,8 +545,8 @@ function sos(id){
 							// Description: <br /><br /><br /><br /><br /><br />
 							// Date Received: <br /><br />
 							// Status: <br /><br />
-				          // $('#basicid').html(s);	
-				          $('#inbox_response').modal('show');				          
+				          // $('#basicid').html(s);
+				          $('#inbox_response').modal('show');
 				        }
 				    });
 		}
@@ -556,8 +565,8 @@ function pop(id){
 				          	$("#response").val(obj.signatory.response);
 				        	$("#asof").val(obj.signatory.date_responded);
 				        	$("#comment").val(obj.signatory.comment);
-				        	
-				          $('#sig_detail').show();				          
+
+				          $('#sig_detail').show();
 				        }
 				    });
 		}
@@ -579,15 +588,15 @@ function lol(id){
 				        	var s = "";
 				        	var v = "";
 
-				        	
+
 								for(var i=0; i<parseInt(obj.signatories.length); i++){
 									s += '<tr><td>'+obj.signatories[i].employee_id+'</td><td>'+obj.signatories[i].response+'</td><td><button class="btn btn-info" id="'+obj.signatories[i].signatory_id+'"type="button" onclick="pop(this.id)"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button></td></tr>';
 		 					        //v += '<option value='+obj.pets[i].petid+'>'+obj.pets[i].pname+'</option>';
 								}
 								$("#Signatories").html(s);
 								//$("#VpetsOwned").html(v);
-								
-							
+
+
 							$('#adddocuno').val(id);
 				        	$('#docuno').val(obj.sent.document_id);
 				        	$('#docutitle').val(obj.sent.document_title);
@@ -603,4 +612,3 @@ function lol(id){
 
 
 </script>
-

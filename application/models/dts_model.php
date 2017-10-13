@@ -3,7 +3,7 @@
 	class dts_model extends CI_Model{
 
 		public function getDocuments(){
-			$this->db->select('d.document_id,d.document_title,do.action,do.document_status');
+			$this->db->select('d.document_id,d.document_title,d.document_file,do.action,do.document_status');
 		    $this->db->from('document d');
 		    $this->db->join('documentation do', 'do.document_id=d.document_id');
 		    $stat="sent";
@@ -19,9 +19,16 @@
 		    }
 
 		}
-
+		public function download_file($fileName,$inbox){
+			$this->db->select('document_file');
+		    $this->db->from('document');
+		    $this->db->where('document_title', $inbox);
+		    $query = $this->db->get();
+				return $query->result_array();
+		}
 		public function saveDocuments($data,$url){
 			$this->db->set('document_file',$url);
+			// $this->db->insert('document_file',$url);
 			return $this->db->insert('document', $data,$url);
 		}
 
@@ -76,7 +83,7 @@
 
 			$this->db->select('a.username,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
 			$this->db->from('employee a');
-			$this->db->join('department b','a.department_id = b.department_id');    
+			$this->db->join('department b','a.department_id = b.department_id');
 			$this->db->where('a.username',$user['username']);
 			$result = $this->db->get();
 
@@ -96,7 +103,7 @@
 
 			// $stat = "received";
 
-			$this->db->select('a.signatory_id,a.employee_id,a.document_id,a.response,a.comment,b.document_desc, b.document_id,b.document_title');
+			$this->db->select('a.signatory_id,a.employee_id,a.document_id,a.response,a.comment,b.document_desc, b.document_id,b.document_title,b.document_file'); //for download
 			$this->db->from('signatory a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->where('a.employee_id', $id);
@@ -104,7 +111,7 @@
 			return $query->result_array();
 		}
 
-		public function get_profile_sent($user){  
+		public function get_profile_sent($user){
 
 			$this->db->where('username', $user['username']);
 			$result = $this->db->get('employee');
@@ -153,6 +160,7 @@
 			$query = $this->db->get();	
 
 
+
 			return $query->row();
 		}
 
@@ -171,16 +179,16 @@
 			$this->db->from('signatory a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->join('documentation c', 'a.document_id = c.document_id');
+
 			$this->db->join('employee d', 'c.employee_id = d.employee_id');     
 			$this->db->where('a.signatory_id',$id);
 			$query = $this->db->get();	
 
-
 			return $query->row();
 		}
 
-		public function get_inbox_pending($user){ 
 
+		public function get_inbox_pending($user){ 
 			$this->db->where('username', $user['username']);
 			$result = $this->db->get('employee');
 
@@ -285,10 +293,53 @@
 			if ( isset($condition)) $this->db->where($condition);
 			$query= $this->db->get();
 			return $query-> result_array();
-
+		}
+		public function track_docu_latest_date($track_num){ //get the latest date of the file
+			$this->db->select('*');
+			$this->db->from('documentation');
+			if ( isset($track_num)) {
+				$this->db->where('document_id',$track_num);
+			}
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+		public function track_docu_info($cdate,$track_num){  //track the file with the latest date and info
+			$this->db->select('*');
+			$this->db->from('documentation');
+			$this->db->join('document', 'documentation.document_id=document.document_id');
+			if ( isset($cdate,$track_num)) {
+				$this->db->where('documentation.document_id',$track_num);
+				$this->db->where('documentation.document_status','sent');
+				$this->db->where('documentation.date_of_action',$cdate);
+			}
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+		public function track_docu_from($employee){ //track the department
+			$this->db->select('*');
+			$this->db->from('employee');
+			$this->db->join('department', 'employee.department_id=department.department_id');
+			if ( isset($employee)) {
+				$this->db->where('employee.employee_id',$employee);
+			}
+			$query= $this->db->get();
+			return $query-> result_array();
 		}
 
+		//proper tracking of document
+		public function countSigantories($document_id){
+			//DOCUMENTATION.REJECTED | DOCUMENTATION.APPROVED | DOCUMENTATION.DOCUMENT_ID | SIGNATORY.SIGNATORY_ID | SIGNATORY.RESPONSE
+			$this->db->select('*');
+			$this->db->from('sigantory');
+			$this->db->insert('documentation', 'signatory.document_id = documentation.document_id');
+			if ( isset($employee)) {
+      	$this->db->where('signatory.document_id',$document_id);
+			}
+			$query= $this->db->get();
+			return $query-> result_array();
 
+
+		}
 	}
 
 ?>
