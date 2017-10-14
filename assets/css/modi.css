@@ -147,13 +147,32 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 	padding: 20px 20px 20px 20px;
 	margin-left: 20px;
 }
+/* 'DINAGDAG MO GELO' */
+.userinfo{
+	padding-left: 10px;
+	color: white;
+	font-size: 28px;
+	font-family: "Arial", "Helvetica", "sans-serif";
+}
+.usertitle{ 
+	color:white;
+	font-weight:bold; 
+	font-size: 28px;
+	font-family: "Arial", "Helvetica", "sans-serif";
+}
+.glypic{
 
+  float:left;
+  postion:relative;
+         }
+/*****************************************************************/
 .info {
+	padding: 20px 20px 20px 20px;
 	color: white;
 	font-size: 18px;
 	font-family: "Arial", "Helvetica", "sans-serif";
 }
-.info p:first-child{ font-size:35px;font-weight:bold; }
+/*.info p:first-child{ font-size:35px;font-weight:bold; }*/
 
 #profilepic{
 	height:100px;
