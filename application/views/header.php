@@ -46,6 +46,7 @@
 	
 <div class="container">
 	<div class="title-banner">
+	<img src="<?php echo base_url('assets/images/colored.png'); ?>" alt="logo" id="logo" class="img-reponsive" />
 	<banner id="bannertitle">DOCUMENT TRACKING SYSTEM</banner>
 	</div>
 </div>

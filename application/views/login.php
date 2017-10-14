@@ -1,3 +1,24 @@
+<div class="container-fluid">
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+		<div class="item active">
+			<img src="<?php echo base_url('assets/images/1.jpg'); ?>" alt="one">
+		</div>
+
+		<div class="item">
+			<img src="<?php echo base_url('assets/images/2.jpg'); ?>" alt="two">
+		</div>
+    
+		<div class="item">
+			<img src="<?php echo base_url('assets/images/3.jpg'); ?>" alt="three">
+		</div>
+		
+		<div class="item">
+			<img src="<?php echo base_url('assets/images/4.jpg'); ?>" alt="four">
+		</div>
+    </div>
+	</div>
+	
 	<div  class="box">
 
 		<?php echo form_open('home/login_validation');?>
@@ -37,6 +58,7 @@
 
 	<?php echo form_close(); ?>
 	<div id="title">
+		<img src="<?php echo base_url('assets/images/white.png'); ?>" alt="logo" id="logo" class="img-reponsive" />
 		<p> Document Tracking System </p>
 	</div>
 
