@@ -1,7 +1,6 @@
 <div class="container">
 	<div class="container red" >
-	<!--- dummy data!! 
-	(sinubukan kong maglagay ng info galing sa db pero di ako nagtagumpay... ewan ko ba tsk tsk -Carlo T_T)-->
+	<!--- dummy data!! -->
 	<?php
 	$lname="Santos";
 	$fname="Josefina";
@@ -119,13 +118,16 @@
 						<span id="phototitle">Choose picture...</span>
 					  </label>
 					  <input type="file" name="photo" id="file" multiple="true"/>
-				  </form>
+					  <p>^ note: ang plano ko sana is itago tong input file (display:none;) tapos ung filename sa button magdidisplay -Carlo</p>
+				  
 			  </div>
 			  
 			  
 			</div>
 			<div class="modal-footer">
+			  <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
 			  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			  </form>
 			</div>
 		  </div>
 		  

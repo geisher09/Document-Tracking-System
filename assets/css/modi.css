@@ -395,7 +395,7 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 	background-color:#298976;
 	cursor:pointer;
  }
-#file{ display:none; }
+#file{ /* display:none; */ }
 /* end of 'Settings' */
 
 /* 'Sign Up' section */
