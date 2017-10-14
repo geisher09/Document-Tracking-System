@@ -12,14 +12,15 @@
 	$status = "Pending";
 ?>
 
-<div class="container body">
-		<div class="container red" >
+<div class="container-fluid body">
 
+
+	
+		<div class="container red" >
 			<div class="row" >
 				<br />
 				<!-- temporary profile picture & sample profile info  --> 
-
-				<div class="col-md-3 col-sm-12 col-xs-9 roundbox" style="margin-left:10px;">
+				<div class="col-md-3 col-sm-12 col-xs-9 roundbox" style="margin-left:50px;">
 					
 
 					<div class="usertitle">
@@ -30,9 +31,6 @@
 					
 					<hr>
 					
-
-				
-
 							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"
 								alt="Profile Picture" id="profilepic" />
 						
@@ -53,13 +51,14 @@
 						
 				</div>
 
-				
+				</div>
 
 				<div class="col-md-8 col-sm-12 col-xs-12" >
 					<h2> My Documents </h2> <br />
 					<div class="tab">
 						<button class="tablinks" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Inbox </button>
 						<button class="tablinks" onclick="openFolder(event, 'Sent')"> Sent </button>
+						<button class="tablinks" onclick="openFolder(event, 'Response')"> Response </button>
 					</div>
 
 					<div id="Inbox" class="tabcontent"> <br /><br />
@@ -83,7 +82,7 @@
 									<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
 
-												<button class="btn btn-default btn-sm">
+												<button class="btn btn-success btn-sm">
 													<a href="<?php echo site_url('Home/download_docu/'.$inboxes["document_title"].'?file='.$inboxes["document_file"]); ?>">Download<span class="glyphicon glyphicon-download-alt"></span></a>
 												</button>
 
@@ -106,7 +105,6 @@
 							</tbody>
 						</table>
 					</div>
-
 
 					<div id="Sent" class="tabcontent"> <br />
 
@@ -141,11 +139,25 @@
 								</tbody>
 							</table> <br/>
 					</div>
-				</div>
-					
+
+					<div id="Response" class="tabcontent">
+						<br /><p style=" color:white; font-size:18px;"> SELECT FILE: </p>
+						<div class="col-sm-6">
+							        <select name="file" class="form-control">
+									<?php foreach ($pen as $pendings){ ?>
+							          <option value="<?php echo $pendings['action']; ?>"><?php echo $pendings['document_title']; ?></option>
+							        <?php } ?>
+							        </select>
+						</div> <br /><br />
+
+						<button class="btn btn-success">APPROVE</button>
+						<button class="btn btn-danger">REJECT</button>
+					</div>
 				</div>
 
 			</div>
+		</div>
+	</div>
 
 </div>
 
@@ -158,7 +170,7 @@
 					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">DOCUMENT DETAILS</h3>
 				</div>
 
-				<div class="modal-body zoomIn animated">
+				<div class="modal-body">
 					<div id="basicid">
 
 					</div>
@@ -302,7 +314,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">View Details</h3>
 					<button class="tablink btn btn-basic" onclick="details(event, 'clientDet')">Document Details</button>
-					<button class="tablink btn btn-basic" onclick="details(event, 'addSig')">Add Signatory</button>
+					<button class="tablink btn btn-basic" onclick="details(event, 'addPet')">Add Signatory</button>
 			</div>
 
 			<div class="modal-body">
@@ -396,7 +408,7 @@
 					</div>
 				</div>
 
-				<div class="container-fluid window" id="addSig">
+				<div class="container-fluid window" id="addPet">
 					<p class="lead text-center">Add a Signatory</p>
 					<div class="col-md-2"></div>
 					<form></form>
