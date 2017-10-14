@@ -285,6 +285,41 @@
 			return $this->db->insert('signatory', $sdata);
 		}
 
+
+		public function saveAddRes(){
+			$id = $this->input->post('doc_id');
+			$rid = $this->input->post('sig_id');
+			$resdata = $this->get_by_id($this->input->post('doc_id'));
+			date_default_timezone_set('Asia/Manila');
+			$time =date("h:i:sa");
+			$date = date("Y-m-d");
+			$data['date'] = $date;
+			$data['time'] = $time;
+
+			$response = $this->input->post('response');
+			$comment = $this->input->post('comment');
+			$date = $data['date'].' '.$data['time'];
+			
+			//print_r($pdata);
+			if($response=="Approved"){
+				$this->db->set('approved',((int)($resdata->approved)+1));
+				$this->db->where('document_id', $id);
+				$this->db->update('documentation');
+			}
+
+			elseif($response=="Rejected"){
+				$this->db->set('rejected',((int)($resdata->rejected)+1));
+				$this->db->where('document_id', $id);
+				$this->db->update('documentation');
+			}
+			
+			$this->db->set('response',$response);
+			$this->db->set('comment',$comment);
+			$this->db->set('date_responded',$date);
+			$this->db->where('signatory_id', $rid);
+			$this->db->update('signatory');
+		}
+
 		public function getDepartments(){
 			$query = $this->db->get('department');
 			return $query->result();

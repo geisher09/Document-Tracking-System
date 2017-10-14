@@ -242,51 +242,51 @@
 	</div>
 
 
-<!-- modal of add a response-->
+<!-- modal of details about the document-->
 	<div id="inbox_response" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header" style="background-color: #555555">
+			<!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header" style="background-color: #555555">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">RESPOND TO A FILE</h3>
+					<h3 class="modal-title" style="text-align:center;">RESPOND TO THIS FILE</h3>
 				</div>
-				<div class="modal-body">
-					<form></form>
-					<?php echo form_open('home/savesig', ['class'=>'form-horizontal']); ?>
-					<div class="col-md-8">
-
-							<div class="col-md-6">
-							      <label for="">Document ID:</label>
-								  <input type="text" class="form-control" id="document_id" name="document_id" disabled></textarea>
+			      		<div class"form-group">
+			      			<?php echo form_open('home/saverespond', ['class'=>'form-horizontal']); ?>
+			      			<div class="col-md-12 form-group">
+			      			<br />
+							<label for="">Tracking no:</label>
+								  <input type="text" class="form-control" id="track_no" name="track_no" disabled></textarea>
 							</div>
-							<div class="form-group">
-								<input type="hidden" id="signatory_id" name="signatory_id"/>
+							<div class="col-md-12 form-group">
+								<input type="hidden" id="sig_id" name="sig_id"/>
 							</div>
-
-							<div class="col-md-6">
+							<div class="col-md-12 form-group">
+								<input type="hidden" id="doc_id" name="doc_id"/>
+							</div>
+							<div class="col-md-12 form-group">
 								<label for="">Response:</label>
 							        <select class="form-control" name="response">
-										  <option value="Approve">Approve</option>
-										  <option value="Reject">Reject</option>
+										  <option value="Approved">Approve</option>
+										  <option value="Rejected">Reject</option>
 									</select>
 							</div>
-							<br /><br /><br />
+							
 							<div class="col-md-12 form-group">
+								<br /><br />
 										<label for="">Comments :</label>
-										<textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+										<textarea class="form-control" id="comment" name="comment" rows="3">None</textarea>
 							</div>
 
-						<div>
-							<button type="submit" class="btn btn-primary">Save</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-						<?php echo form_close();?>
-					</div>
-				</div>
-				</div>
-
-			</div>
+							<div class="form-group">
+							        &emsp;&nbsp;<button type="submit" class="btn btn-primary">Save</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						    </div>
+						    <?php echo form_close(); ?>
+						</div>    
+			    </div>
 		</div>
+	</div>
 
 
 </div>
@@ -382,7 +382,7 @@
 									<div class="row">
 										<div class="col-md-12 form-group">
 											<label for="">Comment:</label>
-											<textarea id="comment" class="form-control" name="comment" rows="2" readonly>None.</textarea>
+											<textarea id="comments" class="form-control" name="comments" rows="2" readonly></textarea>
 										</div>
 									</div>
 
@@ -536,21 +536,13 @@ function sos(id){
 			        data:{id: id},
 				        success: function(data) {
 				        	var obj = JSON.parse(data);
-				        	console.log(obj.inbox);
+				        	console.log(obj.inbox.document_id);
 
 				        	var s="";
 
-							// s = '<h4 style="font-weight:bold; color:#000;">Document Tracking Number: '+obj.inbox.document_id+'<br /><br />'
-							// +'Title: '+obj.inbox.document_title+'<br /><br />'
-							// +'Description: '+obj.inbox.document_desc+'<br /><br /><br /><br /><br /><br />'
-							// +'Response: '+obj.inbox.response+'<br /><br />'
-							// +'As of: '+obj.inbox.date_responded+'<br /><br />'
-							// +'From (Employee No.): '+obj.inbox.employee_id+'<br /><br />'
-							// +'From (Employee Name.): '+obj.inbox.lname+','+obj.inbox.fname+'&nbsp'+obj.inbox.mname+'<br /><br />'+'</h4>';
-							// Description: <br /><br /><br /><br /><br /><br />
-							// Date Received: <br /><br />
-							// Status: <br /><br />
-				          // $('#basicid').html(s);
+						  $('#track_no').val(obj.inbox.tracking_no);
+						  $('#doc_id').val(obj.inbox.document_id);
+						  $('#sig_id').val(obj.inbox.signatory_id);
 				          $('#inbox_response').modal('show');
 				        }
 				    });
@@ -569,7 +561,7 @@ function pop(id){
 				        	$("#employee_name").val(obj.signatory.lname+','+obj.signatory.fname+' '+obj.signatory.mname);
 				          	$("#response").val(obj.signatory.response);
 				        	$("#asof").val(obj.signatory.date_responded);
-				        	$("#comment").val(obj.signatory.comment);
+				        	$("#comments").val(obj.signatory.comment);
 
 				          $('#sig_detail').show();
 				        }

@@ -268,6 +268,15 @@ class Home extends CI_Controller {
 		return redirect('home/profile');
 	}
 
+	public function saverespond(){
+
+		$this->load->model('dts_model');
+        $this->dts_model->saveAddRes();
+        // $this->session->set_flashdata('response', 'Saved Succesfully!');
+
+		return redirect('home/profile');
+	}
+
 
 	public function contacts(){
 		$header_data['title']="Contacts";
