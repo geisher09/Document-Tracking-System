@@ -1,32 +1,8 @@
-<body>
-<div class="container-fluid" style="background-color: #424242; height:100%;">
-	
-	<!--
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		<div class="carousel-inner">
-			<div class="item active">
-				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="one" />
-			</div>
-
-			<div class="item">
-				<img src="<?php echo base_url('assets/images/2.jpg') ?>" alt="two" />
-			</div>
-
-			<div class="item">
-				<img src="<?php echo base_url('assets/images/3.jpg') ?>" alt="three" />
-			</div>
-
-			<div class="item">
-				<img src="<?php echo base_url('assets/images/4.jpg') ?>" alt="four" />
-			</div>
-		</div>
-	</div>
-	-->
-	
 	<div  class="box">
 
 		<?php echo form_open('home/login_validation');?>
 		<h1  style="color: #ffffff; "> Login </h1> <br /><br /><br />
+
 
 			<!--
 			<?php // if(isset($account_created)) {?>
@@ -67,11 +43,11 @@
 	<div id="tbar">
 
 		<?php echo form_open('home/track_docu');?>
-				<?php echo '<label style="color: Black; "><strong>'.$this->session->flashdata("error1").'</strong></label>'?>
+				<?php echo '<h4 class="pulse animated" style="color: red; "><strong>'.$this->session->flashdata("error1").'</strong></h4>'?>
 			<form>
-				<div class="form-group input-group" style="font-color: black; color: black;">
+				<div class="form-group input-group">
 
-					<?php echo form_input(['type'=>'text','name'=>'track_num','align'=>'center','id'=>'track_num','class'=>'form-control bar','placeholder'=>'Track a Document', 'value'=>set_value('track_num')]); ?>
+					<?php echo form_input(['type'=>'text','style'=>'color: black;','name'=>'track_num','align'=>'center','id'=>'track_num','class'=>'form-control bar','placeholder'=>'Track a Document', 'value'=>set_value('track_num')]); ?>
 					<span class="input-group-btn">
 					<button type="submit" class="btn btn-default tbtn">
 						<span class="glyphicon glyphicon-search"></span> Track
@@ -80,20 +56,15 @@
 				</div>
 			</form>
 
+		<?php if($this->session->flashdata("track")){?>
 		<?php
-		echo '<label style="color: Black; "><strong>'.$this->session->flashdata("track").'</strong></label>'
+		echo '<div class="col-md-8 col-sm-12 col-xs-12 roundbox flipInX animated" style="margin-left:0px;"><h4 style="color: Black; "><strong>'.$this->session->flashdata("track").'</strong></h4></div>'
 		?>
-<!-- <?php echo $employee_id .$action; ?> -->
+		<?php }?>
 		<?php echo form_close(); ?>
 
 	</div> <br />
 
-	<!--
-	<div class="container">
-	<div id="outputbox">
-			<h3 class="txtbox"> Status : </h3>
-		</div>
-	</div>
-	-->
+	
 
 </div>

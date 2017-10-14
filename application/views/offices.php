@@ -1,9 +1,8 @@
-<div class="container-fluid body">
+<div class="container body">
 
 <!--body-->
-<div class="row">
-	<div class=" col-md-10 col-sm-10 col-xs-10">
-		<div class="container red">
+		
+	<div class="container red">
 			<div class="h">
 			<h1>Offices</h1>
 			<?php foreach($offices as $o) :?>
@@ -18,7 +17,5 @@
 
 		   </div>
 	   </div>
-	</div>
-</div>
 
 </div>
