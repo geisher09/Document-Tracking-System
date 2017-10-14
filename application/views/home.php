@@ -4,12 +4,12 @@
 	   <div class="col-md-6">
 		<h1> Welcome <?php echo $username; ?>!</h1>
 	   </div>
-	   <div class="col-md-6">
+	   <!-- <div class="col-md-6">
 		
 		<h3 style="color:#48C9B0;float:right;margin-top:20px;">
 		  <?php echo $date; ?> | <span id='time'></span>
 		</h3>
-	   </div>
+	   </div> -->
 
 	   
 	</div>
