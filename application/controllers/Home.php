@@ -162,20 +162,21 @@ class Home extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function add(){
-		$header_data['title']="Add Documents";
+	// public function add(){
+	// 	$header_data['title']="Add Documents";
 
-		$this->load->view('header2',$header_data);
-		$this->load->view('header');
-		$this->load->view('add');
-		$this->load->view('footer');
-	}
+	// 	$this->load->view('header2',$header_data);
+	// 	$this->load->view('header');
+	// 	$this->load->view('add');
+	// 	$this->load->view('footer');
+	// }
 
 	public function profile(){
 		$user['username']=$this->session->userdata('username');
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
 		$inbox = $this->dts_model->get_profile_inbox($user);
+		// $employid = $profile['employee_id'];
 		$ul = array();
 		foreach($inbox as $a){
 			$as = array('document_file' => $a['document_file']);
@@ -282,11 +283,14 @@ class Home extends CI_Controller {
 	}
 
 	public function edit(){
-		$header_data['title']="Edit Profile";
+		$user['username']=$this->session->userdata('username');
+		$this->load->model('dts_model');
+		$profile = $this->dts_model->get_profile($user);
 
+		$header_data['title']="Edit Profile";
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
-		$this->load->view('edit');
+		$this->load->view('accountsettings', ['prof'=>$profile]);
 		$this->load->view('footer');
 	}
 
@@ -323,10 +327,25 @@ class Home extends CI_Controller {
 			$data['dept'] = $hold;
 			$data['office'] = $condition;
 			//print_r($data);
-			if($office_id == 1)
-			{
-				//echo "same";
+			$hold = $this->dts_model->getDepartment_id($office_id);
+			$data['dept_id'] = $hold;
+			$ar = $hold++;
+			$ar2 = array(1);
+			for($a=0;$a<=99;$a++){
+			if(isset($hold[$a])){
+			} else {
+				$num = $a+1;
+				break;
 			}
+		}
+		if($num<=9){
+			$id = $office_id.'0'.$num;
+		}
+	 else{
+		 $id = $office_id.$num;
+	 }
+			$data['id']=$id;
+
 			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
@@ -350,36 +369,36 @@ class Home extends CI_Controller {
 			$this->load->view('footer');
 		}
 
-		public function addDept($office_id){
-		$header_data['title']="Add Department";
-		$data['val'] = $office_id;
-		$this->load->model('dts_model');
-		$hold = $this->dts_model->getDepartment_id($office_id);
-		$data['dept_id'] = $hold;
-		$ar = $hold++;
-		$ar2 = array(1);
-		for($a=0;$a<=99;$a++){
-		if(isset($hold[$a])){
-		} else {
-			$num = $a+1;
-			break;
-		}
-	}
-	if($num<=9){
-		$id = $office_id.'0'.$num;
-	}
- else{
-	 $id = $office_id.$num;
- }
-		$data['id']=$id;
-	//print_r($hold);
-
-		$this->load->view('header2',$header_data);
-		$this->load->view('header');
-		$this->load->view('addDept',$data);
-		$this->load->view('footer');
-		}
-		public function saveDept($id){
+ // 	public function addDept($office_id){
+ // 	$header_data['title']="Add Department";
+ // 	$data['val'] = $office_id;
+ // 	$this->load->model('dts_model');
+ // 	$hold = $this->dts_model->getDepartment_id($office_id);
+ // 	$data['dept_id'] = $hold;
+ // 	$ar = $hold++;
+ // 	$ar2 = array(1);
+ // 	for($a=0;$a<=99;$a++){
+ // 	if(isset($hold[$a])){
+ // 	} else {
+ // 		$num = $a+1;
+ // 		break;
+ // 	}
+ // }
+ // if($num<=9){
+ // 	$id = $office_id.'0'.$num;
+ // }
+ // else{
+ //  $id = $office_id.$num;
+ // }
+ // 	$data['id']=$id;
+ // //print_r($hold);
+ //
+ // 	$this->load->view('header2',$header_data);
+ // 	$this->load->view('header');
+ // 	$this->load->view('addDept',$data);
+ // 	$this->load->view('footer');
+ // 	}
+ 	public function saveDept($id){
 //			$this->form_validation->set_rules('department_id', 'Department ID', 'required');
 //echo "pasok";
 	 	$this->form_validation->set_rules('department_desc', 'Department Name', 'required');
@@ -450,30 +469,28 @@ class Home extends CI_Controller {
 	}
 
 	public function save(){
-		$this->form_validation->set_rules('document_id', 'Tracking No', 'required');
-	  	$this->form_validation->set_rules('document_title', 'Title', 'required');
+		//$this->form_validation->set_rules('document_id', 'Tracking No', 'required');
+	  	//$this->form_validation->set_rules('document_title', 'Title', 'required');
 	 	$this->form_validation->set_rules('document_desc', 'Description', 'required');
   		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
 
         if ($this->form_validation->run()){
 
-               	$data = $this->input->post();
+               	//$data = $this->input->post();
                	$url = $this->do_upload();
              	$this->load->model('dts_model');
-             	if ($this->dts_model->saveDocuments($data,$url)){
+             	if (($this->dts_model->saveDocuments($url))&&($this->dts_model->saveDocumentation())){
              		$this->session->set_flashdata('response', 'Saved Succesfully!');
 				 }
 				 else{
-             		$this->session->set_flashdata('response', 'Failed :(');
+             		// $this->session->set_flashdata('response', 'Failed to save!');
 				 }
-				 return redirect('home/add');
+				return redirect('home/profile');
 
         }
         else{
-            	$header_data['title']="Add Documents";
-				$this->load->view('header',$header_data);
-				$this->load->view('add');
-				$this->load->view('footer');
+        		$this->session->set_flashdata('responsed', 'Failed to save! (Please input necessary details)');
+            	return redirect('home/profile');
         }
 	}
 
@@ -487,7 +504,7 @@ class Home extends CI_Controller {
 						if(move_uploaded_file($_FILES["file"]["tmp_name"],$url))
 								return $url;
 
-		return redirect('home/add');
+		return redirect('home/profile');
 	}
 
 

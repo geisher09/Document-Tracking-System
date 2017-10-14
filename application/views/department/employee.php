@@ -1,13 +1,11 @@
-<div class="container-fluid body">
-<div class="row">
-	<div class=" col-md-10 col-sm-10 col-xs-10">
+<div class="container body">
 		<div class="container red">
-			<h2>Employees</h2><br /><br /><br />
+			<h2>Employees</h2><br /><br />
             <table class="table table-list-search table-hover table-responsive ">
   				<thead>
   					<tr>
   						<th>EMPLOYEE ID</th>
-  						<th colspan="3">NAME</th>
+  						<th>NAME</th>
   						<th>POSITION</th>
   						<th>SEX</th>
   					</tr>
@@ -16,15 +14,7 @@
   					<?php foreach ($employees as $e){ ?>
   					<tr>
   						<td><?php echo $e['employee_id']; ?></td>
-  						<td><?php echo $e['lname'].', '.$e['fname'].' '.$e['mname'];?></td> 
-						
-							<!--- sorry kung ginalaw ko tong part na to ah, inayos ko lang ung 
-								  pagkaka-display ng name ng employee hehe. XD   -Carlo
-								  PS: okay lang kung ibalik niyo sa dati
-								  PPS: remove this and all the other comments pag defense na nakakahiya sa panels haha.
-							--->
-								<td><?php //echo $e['fname'].' '; ?></td>   
-								<td><?php //echo $e['mname']; ?></td>	
+  						<td><?php echo $e['lname'].', '.$e['fname'].' '.$e['mname'];?></td>
   						<td><?php echo $e['position']; ?></td>		
   						<td><?php echo $e['sex']; ?></td>
 
@@ -34,7 +24,5 @@
   			</table>
 
 		</div>
-	</div>
-</div>
 </div>
 

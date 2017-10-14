@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 <head>
 	<title> <?php echo $title; ?> </title>
@@ -6,13 +7,16 @@
 	<link rel="icon" href="<?php echo base_url();?>assets/images/dummy_icon.png" type="image/png" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css"  type="text/css"/>
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/timeline-css.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/modi.css" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/animate.css" type="text/css" />
 	
 
 	<script src="<?php echo base_url('assets/js/jquery.js');?>"></script>
 	<script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/js/search.js');?>"></script>
+	<script src="<?php echo base_url('assets/js/uploadphoto.js');?>"></script>
 
-	
+
 </head>

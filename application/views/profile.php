@@ -12,15 +12,13 @@
 	$status = "Pending";
 ?>
 
-<div class="container-fluid body">
-<div class="row">
-
-	<div class=" col-md-11 col-sm-11 col-xs-11" > 
+<div class="container body">
 		<div class="container red" >
+
 			<div class="row" >
 				<br />
 				<!-- temporary profile picture & sample profile info  --> 
-				<div class="col-md-3 col-sm-12 col-xs-12 roundbox" style="margin-left:50px;">
+				<div class="col-md-3 col-sm-12 col-xs-12 roundbox" style="margin-left:0px;">
 				
 					<div class="row">
 							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"
@@ -46,14 +44,24 @@
 						</div>
 				</div>
 
-				</div>
+				
 
 				<div class="col-md-8 col-sm-12 col-xs-12" >
 					<h2> My Documents </h2> <br />
+					<?php if( $error = $this->session->flashdata('responsed')): ?>
+							<div class="alert alert-dismissible alert-danger">
+								<?php echo $error; ?>
+							</div> 
+					<?php endif; ?>
+
+					<?php if( $error = $this->session->flashdata('response')): ?>
+							<div class="alert alert-dismissible alert-success">
+								<?php echo $error; ?>
+							</div> 
+					<?php endif; ?>
 					<div class="tab">
 						<button class="tablinks" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Inbox </button>
 						<button class="tablinks" onclick="openFolder(event, 'Sent')"> Sent </button>
-						<button class="tablinks" onclick="openFolder(event, 'Response')"> Response </button>
 					</div>
 
 					<div id="Inbox" class="tabcontent"> <br /><br />
@@ -71,13 +79,13 @@
 
 								<?php foreach ($inb as $inboxes){ ?>
 								<tr>
-									<td><?php echo $inboxes['document_id']; ?></td>
+									<td><?php echo $inboxes['tracking_no']; ?></td>
 									<td><?php echo $inboxes['document_title']; ?></td>
 									<td><?php echo $inboxes['response']; ?></td>
 									<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
 
-												<button class="btn btn-success btn-sm">
+												<button class="btn btn-default btn-sm">
 													<a href="<?php echo site_url('Home/download_docu/'.$inboxes["document_title"].'?file='.$inboxes["document_file"]); ?>">Download<span class="glyphicon glyphicon-download-alt"></span></a>
 												</button>
 
@@ -101,12 +109,14 @@
 						</table>
 					</div>
 
+
 					<div id="Sent" class="tabcontent"> <br />
-
-					<button class="btn btn-danger btn-md" data-toggle="modal" data-target="#send_docu" style="float:right;"> 
-						<span class="glyphicon glyphicon-share"></span> Send a Document 
-					</button> <br /><br /><br />
-
+						<?php foreach ($pro as $profi){ ?>
+									<button class="btn btn-danger btn-md" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
+										<span class="glyphicon glyphicon-share"></span>Send a Document
+									</button> <br /><br /><br />
+						<?php } ?>
+					
 						<!--- sent docus table -->
 							<table class="table table-list-search table-hover table-condensed table-responsive ">
 								<thead>
@@ -120,7 +130,7 @@
 								<tbody>
 									<?php foreach ($snt as $sents){ ?>
 									<tr>
-										<td><?php echo $sents['document_id']; ?></td>
+										<td><?php echo $sents['tracking_no']; ?></td>
 										<td><?php echo $sents['document_title']; ?></td>
 										<td><?php echo $sents['action']; ?></td>
 										<td>
@@ -134,126 +144,33 @@
 								</tbody>
 							</table> <br/>
 					</div>
-
-					<div id="Response" class="tabcontent">
-						<br /><p style=" color:white; font-size:18px;"> SELECT FILE: </p>
-						<div class="col-sm-6">
-							        <select name="file" class="form-control">
-									<?php foreach ($pen as $pendings){ ?>
-							          <option value="<?php echo $pendings['action']; ?>"><?php echo $pendings['document_title']; ?></option>
-							        <?php } ?>
-							        </select>
-						</div> <br /><br />
-
-						<button class="btn btn-success">APPROVE</button>
-						<button class="btn btn-danger">REJECT</button>
-					</div>
+				</div>
+					
 				</div>
 
 			</div>
-		</div>
-	</div>
 
 </div>
+
+
+
 
 <!-- modal of details about the document-->
-	<div id="inbox_details" class="modal fade" role="dialog">
+	<div id="send_details" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header" style="background-color: #555555">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">DOCUMENT DETAILS</h3>
-				</div>
-
-				<div class="modal-body">
-					<div id="basicid">
-
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-
-<!-- modal of add a response-->
-	<div id="inbox_response" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header" style="background-color: #555555">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">RESPOND TO A FILE</h3>
-				</div>
-
-				<div class="modal-body">
-					<div class="container-fluid window" id="addSig">
-					<p class="lead text-center">Add a Signatory</p>
-					<div class="col-md-2"></div>
-					<form></form>
-					<?php echo form_open('home/savesig', ['class'=>'form-horizontal']); ?>
-					<div class="col-md-8">
-							<div class="col-md-6">
-							      <label for="">Document ID:</label>
-								  <input type="text" class="form-control" id="document_id" name="document_id" disabled></textarea>
-							</div>
-
-							<div class="form-group">
-								<input type="hidden" id="signatory_id" name="signatory_id"/>
-							</div>
-
-							<div class="col-md-6">
-								<label for="">Response:</label>
-							        <select name="response">
-										  <option value="Approve">Approve</option>
-										  <option value="Reject">Approve</option>
-									</select>
-							</div>
-							<div class="col-md-12 form-group">
-										<label for="">Comments :</label>
-										<textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
-							</div>
-
-						<div>
-							<button type="submit" class="btn btn-primary">Save</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-						<?php echo form_close();?>
-					</div>
-					<div class="col-md-2"></div>
-				</div>
-				</div>
-
-			</div>
-		</div>
-
-	<div id="inbox_response" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
-	</div>
-
-</div>
-
-<div class="modal fade" id="send_docu" role="dialog">
-    <div class="modal-dialog modal-md">
-    
-      <!-- Modal content-->
+	<!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header" style="background-color: #555555">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
           <h3 class="modal-title text-center">Add Document</h3>
         </div>
         <div class="modal-body">
 			
+			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
 			<div class="row">
-				<div class=" col-md-10 form-group">
-					<label for="">Document Tracking no:</label>
-					<?php echo form_input(['name'=>'document_id','class'=>'form-control','placeholder'=>'Tracking no', 'value'=>set_value('document_id')]); ?>
-					</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_id'); ?>
-			  		</div>
+					<input type="hidden" id="empid" name="empid"/>
 			</div>
-			
 			<div class="row">
 				<div class=" col-md-10 form-group">
 					<label for="">Title:</label>
@@ -289,17 +206,93 @@
 			  		</div>
 				</div> <br><br>
 			<div>
-			
 				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="reset" class="btn btn-default">Reset</button>
 			</div>
-			</form>
+			<?php echo form_close();?>
         </div>
-        
       </div>
-      
-   </div>
- </div>
+
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+<!-- modal of details about the document-->
+	<div id="inbox_details" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #555555">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title" style="text-align:center;">DOCUMENT DETAILS</h3>
+				</div>
+
+				<div class="modal-body zoomIn animated">
+					<div id="basicid">
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+<!-- modal of add a response-->
+	<div id="inbox_response" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #555555">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">RESPOND TO A FILE</h3>
+				</div>
+				<div class="modal-body">
+					<form></form>
+					<?php echo form_open('home/savesig', ['class'=>'form-horizontal']); ?>
+					<div class="col-md-8">
+
+							<div class="col-md-6">
+							      <label for="">Document ID:</label>
+								  <input type="text" class="form-control" id="document_id" name="document_id" disabled></textarea>
+							</div>
+							<div class="form-group">
+								<input type="hidden" id="signatory_id" name="signatory_id"/>
+							</div>
+
+							<div class="col-md-6">
+								<label for="">Response:</label>
+							        <select class="form-control" name="response">
+										  <option value="Approve">Approve</option>
+										  <option value="Reject">Reject</option>
+									</select>
+							</div>
+							<br /><br /><br />
+							<div class="col-md-12 form-group">
+										<label for="">Comments :</label>
+										<textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+							</div>
+
+						<div>
+							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+						<?php echo form_close();?>
+					</div>
+				</div>
+				</div>
+
+			</div>
+		</div>
+
+
+</div>
+
+
 
 <div class="modal fade" id="clientModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -307,9 +300,9 @@
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #555555">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">View Details</h3>
+				<h3 class="modal-title" style="text-align:center;">View Details</h3>
 					<button class="tablink btn btn-basic" onclick="details(event, 'clientDet')">Document Details</button>
-					<button class="tablink btn btn-basic" onclick="details(event, 'addPet')">Add Signatory</button>
+					<button class="tablink btn btn-basic" onclick="details(event, 'addSig')">Add Signatory</button>
 			</div>
 
 			<div class="modal-body">
@@ -396,14 +389,9 @@
 
 						</div>
 					</div>
-
-					<div>
-						<button type="button" onclick="" class="btn btn-primary" data-dismiss="modal">Save</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
 				</div>
 
-				<div class="container-fluid window" id="addPet">
+				<div class="container-fluid window" id="addSig">
 					<p class="lead text-center">Add a Signatory</p>
 					<div class="col-md-2"></div>
 					<form></form>
@@ -425,7 +413,7 @@
 
 						<div>
 							<button type="submit" class="btn btn-primary">Save</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="reset" class="btn btn-default">Reset</button>
 						</div>
 						<?php echo form_close();?>
 					</div>
@@ -507,7 +495,7 @@ function wow(id){
 
 				        	var s="";
 
-							s = '<h4 style="font-weight:bold; color:#000;">Document Tracking Number: '+obj.inbox.document_id+'<br /><br />'
+							s = '<h4 style="font-weight:bold; color:#000;">Document Tracking Number: '+obj.inbox.tracking_no+'<br /><br />'
 							+'Title: '+obj.inbox.document_title+'<br /><br />'
 							+'Description: '+obj.inbox.document_desc+'<br /><br />'
 							+'Response: '+obj.inbox.response+'<br /><br />'
@@ -522,6 +510,24 @@ function wow(id){
 				        }
 				    });
 		}
+
+
+function send(id){
+			$.ajax({
+			        type: 'POST',
+			        url: 'ajax_list',
+			         data:{id: id},
+				        success: function(data) {
+				        	var obj = JSON.parse(data);
+				        	console.log(id);
+
+				          $('#empid').val(id);
+				          $('#send_details').modal('show');
+
+				        }
+				    });
+		}
+
 
 
 function sos(id){
@@ -598,12 +604,11 @@ function lol(id){
 
 
 							$('#adddocuno').val(id);
-				        	$('#docuno').val(obj.sent.document_id);
+				        	$('#docuno').val(obj.sent.tracking_no);
 				        	$('#docutitle').val(obj.sent.document_title);
 				        	$("#docudesc").val(obj.sent.document_desc);
 				        	$("#docustat").val(obj.sent.action);
 				        	$("#docudate").val(obj.sent.date_of_action);
-
 				        	$('#clientModal').modal('show');
 				        }
 			});

@@ -1,27 +1,27 @@
-<!--<body>
-<div class="container-fluid" style="background-color: #424242; height:100%;">-->
-	<!--
+<div class="container-fluid">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		<div class="carousel-inner">
-			<div class="item active">
-				<img src="<?php echo base_url('assets/images/1.jpg') ?>" alt="one" />
-			</div>
-
-			<div class="item">
-				<img src="<?php echo base_url('assets/images/2.jpg') ?>" alt="two" />
-			</div>
-
-			<div class="item">
-				<img src="<?php echo base_url('assets/images/3.jpg') ?>" alt="three" />
-			</div>
-
-			<div class="item">
-				<img src="<?php echo base_url('assets/images/4.jpg') ?>" alt="four" />
-			</div>
+    <div class="carousel-inner">
+		<div class="item active">
+			<img src="<?php echo base_url('assets/images/1.jpg'); ?>" alt="one">
 		</div>
-	</div>
-	-->
 
+		<div class="item">
+			<img src="<?php echo base_url('assets/images/2.jpg'); ?>" alt="two">
+		</div>
+    
+		<div class="item">
+			<img src="<?php echo base_url('assets/images/3.jpg'); ?>" alt="three">
+		</div>
+		
+		<div class="item">
+			<img src="<?php echo base_url('assets/images/4.jpg'); ?>" alt="four">
+		</div>
+    </div>
+	</div>
+	
+		<canvas id="canvas" width="130" height="130"
+		style="background-color:66,66,66,0.9; float: left; margin-top:20px; margin-left:60px;">
+		</canvas>
 	<div  class="box">
 
 		<?php echo form_open('home/login_validation');?>
@@ -61,17 +61,18 @@
 
 	<?php echo form_close(); ?>
 	<div id="title">
+		<img src="<?php echo base_url('assets/images/white.png'); ?>" alt="logo" id="logo" class="img-reponsive" />
 		<p> Document Tracking System </p>
 	</div>
 
 	<div id="tbar">
 
 		<?php echo form_open('home/track_docu');?>
-				<?php echo '<label style="color: Black; "><strong>'.$this->session->flashdata("error1").'</strong></label>'?>
+				<?php echo '<h4 class="pulse animated" style="color: red; "><strong>'.$this->session->flashdata("error1").'</strong></h4>'?>
 			<form>
-				<div class="form-group input-group" style="font-color: black; color: black;">
+				<div class="form-group input-group">
 
-					<?php echo form_input(['type'=>'text','name'=>'track_num','align'=>'center','id'=>'track_num','class'=>'form-control bar','placeholder'=>'Track a Document', 'value'=>set_value('track_num')]); ?>
+					<?php echo form_input(['type'=>'text','style'=>'color: black;','name'=>'track_num','align'=>'center','id'=>'track_num','class'=>'form-control bar','placeholder'=>'Track a Document', 'value'=>set_value('track_num')]); ?>
 					<span class="input-group-btn">
 					<button type="submit" class="btn btn-default tbtn">
 						<span class="glyphicon glyphicon-search"></span> Track
@@ -80,20 +81,99 @@
 				</div>
 			</form>
 
+		<?php if($this->session->flashdata("track")){?>
 		<?php
-		echo '<label style="color: Black; "><strong>'.$this->session->flashdata("track").'</strong></label>'
+		echo '<div class="col-md-8 col-sm-12 col-xs-12 roundbox flipInX animated" style="margin-left:0px;"><h4 style="color: Black; "><strong>'.$this->session->flashdata("track").'</strong></h4></div>'
 		?>
-<!-- <?php echo $employee_id .$action; ?> -->
+		<?php }?>
 		<?php echo form_close(); ?>
 
 	</div> <br />
 
-	<!--
-	<div class="container">
-	<div id="outputbox">
-			<h3 class="txtbox"> Status : </h3>
-		</div>
-	</div>
-	-->
+	
 
 </div>
+
+
+<script type="text/javascript">
+	var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + "px arial";
+  ctx.textBaseline="middle";
+  ctx.textAlign="center";
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+</script>
+</script>
