@@ -39,7 +39,7 @@
 					<?php if(isset($do)): ?>
 					<?php foreach ($do as $document){ ?>
 					<tr>
-						<td><?php echo $document['document_id']; ?></td>
+						<td><?php echo $document['tracking_no']; ?></td>
 						<td><?php echo $document['document_title']; ?></td>
 						<td><?php echo $document['action']; ?></td>
 					</tr>

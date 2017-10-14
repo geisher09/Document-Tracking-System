@@ -3,7 +3,7 @@
 	class dts_model extends CI_Model{
 
 		public function getDocuments(){
-			$this->db->select('d.document_id,d.document_title,d.document_file,do.action,do.document_status');
+			$this->db->select('d.document_id,d.document_title,d.document_file,d.tracking_no,do.action,do.document_status');
 		    $this->db->from('document d');
 		    $this->db->join('documentation do', 'do.document_id=d.document_id');
 		    $stat="sent";
@@ -136,7 +136,7 @@
 
 			// $stat = "received";
 
-			$this->db->select('a.signatory_id,a.employee_id,a.document_id,a.response,a.comment,b.document_desc, b.document_id,b.document_title,b.document_file'); //for download
+			$this->db->select('a.signatory_id,a.employee_id,a.document_id,a.response,a.comment,b.tracking_no,b.document_desc, b.document_id,b.document_title,b.document_file'); //for download
 			$this->db->from('signatory a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->where('a.employee_id', $id);
@@ -153,7 +153,7 @@
 
 			$stat = "sent";
 
-			$this->db->select('a.employee_id,a.document_id,a.document_status,b.document_id,b.document_title,a.action');
+			$this->db->select('a.employee_id,a.document_id,a.document_status,b.tracking_no,b.document_id,b.document_title,a.action');
 			$this->db->from('documentation a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->where('a.employee_id', $id);
@@ -174,7 +174,7 @@
 		public function get_by_id($id)
 		{
 
-			$this->db->select('a.document_id,b.document_id,b.document_desc,a.signatory,a.action,a.date_of_action,b.document_title');
+			$this->db->select('a.document_id,b.document_id,b.tracking_no,b.document_desc,a.signatory,a.action,a.date_of_action,b.document_title');
 			$this->db->from('documentation a');
 			$this->db->join('document b','a.document_id = b.document_id');    
 			$this->db->where('a.document_id',$id);
@@ -208,7 +208,7 @@
 		}
 
 		public function getInbox_by_id($id){
-			$this->db->select('a.signatory_id,a.response,a.comment,a.document_id,a.date_responded,b.document_id,b.document_title,b.document_desc,c.employee_id,c.document_id,d.employee_id,d.lname,d.fname,d.mname');
+			$this->db->select('a.signatory_id,a.response,a.comment,a.document_id,a.date_responded,b.tracking_no,b.document_id,b.document_title,b.document_desc,c.employee_id,c.document_id,d.employee_id,d.lname,d.fname,d.mname');
 			$this->db->from('signatory a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->join('documentation c', 'a.document_id = c.document_id');

@@ -79,7 +79,7 @@
 
 								<?php foreach ($inb as $inboxes){ ?>
 								<tr>
-									<td><?php echo $inboxes['document_id']; ?></td>
+									<td><?php echo $inboxes['tracking_no']; ?></td>
 									<td><?php echo $inboxes['document_title']; ?></td>
 									<td><?php echo $inboxes['response']; ?></td>
 									<td>
@@ -130,7 +130,7 @@
 								<tbody>
 									<?php foreach ($snt as $sents){ ?>
 									<tr>
-										<td><?php echo $sents['document_id']; ?></td>
+										<td><?php echo $sents['tracking_no']; ?></td>
 										<td><?php echo $sents['document_title']; ?></td>
 										<td><?php echo $sents['action']; ?></td>
 										<td>
@@ -495,7 +495,7 @@ function wow(id){
 
 				        	var s="";
 
-							s = '<h4 style="font-weight:bold; color:#000;">Document Tracking Number: '+obj.inbox.document_id+'<br /><br />'
+							s = '<h4 style="font-weight:bold; color:#000;">Document Tracking Number: '+obj.inbox.tracking_no+'<br /><br />'
 							+'Title: '+obj.inbox.document_title+'<br /><br />'
 							+'Description: '+obj.inbox.document_desc+'<br /><br />'
 							+'Response: '+obj.inbox.response+'<br /><br />'
@@ -604,7 +604,7 @@ function lol(id){
 
 
 							$('#adddocuno').val(id);
-				        	$('#docuno').val(obj.sent.document_id);
+				        	$('#docuno').val(obj.sent.tracking_no);
 				        	$('#docutitle').val(obj.sent.document_title);
 				        	$("#docudesc").val(obj.sent.document_desc);
 				        	$("#docustat").val(obj.sent.action);
