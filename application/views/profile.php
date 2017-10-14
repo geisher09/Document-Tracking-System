@@ -17,9 +17,9 @@
 
 			<div class="row" >
 				<br />
-				<!-- temporary profile picture & sample profile info  --> 
+				<!-- temporary profile picture & sample profile info  -->
 				<div class="col-md-3 col-sm-12 col-xs-12 roundbox" style="margin-left:0px;">
-				
+
 					<div class="row">
 							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"
 								alt="Profile Picture" id="profilepic" />
@@ -44,20 +44,20 @@
 						</div>
 				</div>
 
-				
+
 
 				<div class="col-md-8 col-sm-12 col-xs-12" >
 					<h2> My Documents </h2> <br />
 					<?php if( $error = $this->session->flashdata('responsed')): ?>
 							<div class="alert alert-dismissible alert-danger">
 								<?php echo $error; ?>
-							</div> 
+							</div>
 					<?php endif; ?>
 
 					<?php if( $error = $this->session->flashdata('response')): ?>
 							<div class="alert alert-dismissible alert-success">
 								<?php echo $error; ?>
-							</div> 
+							</div>
 					<?php endif; ?>
 					<div class="tab">
 						<button class="tablinks" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Inbox </button>
@@ -84,12 +84,10 @@
 									<td><?php echo $inboxes['response']; ?></td>
 									<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-
-											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/'.$inboxes["document_title"].'?file='.$inboxes["document_file"]) ?>'">Download<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
-
+											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$inboxes["document_file"]) ?>'">Download<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)">Respond<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
 
-									
+
 									</td>
 								</tr>
 								<?php } ?>
@@ -115,7 +113,7 @@
 										<span class="glyphicon glyphicon-share"></span>Send a Document
 									</button> <br /><br /><br />
 						<?php } ?>
-					
+
 						<!--- sent docus table -->
 							<table class="table table-list-search table-hover table-condensed table-responsive ">
 								<thead>
@@ -134,9 +132,11 @@
 										<td><?php echo $sents['action']; ?></td>
 										<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $sents['document_id']; ?>" type="button" onclick="lol(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<button class="btn btn-default btn-sm">
+											<button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$sents["document_file"]) ?>'">Download<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+
+											<!-- <button class="btn btn-default btn-sm">
 												Download <span class="glyphicon glyphicon-download-alt"></span>
-											</button>
+											</button> -->
 										</td>
 									</tr>
 									<?php } ?>
@@ -144,7 +144,7 @@
 							</table> <br/>
 					</div>
 				</div>
-					
+
 				</div>
 
 			</div>
@@ -161,11 +161,11 @@
       <div class="modal-content">
         <div class="modal-header" style="background-color: #555555">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          
+
           <h3 class="modal-title text-center">Add Document</h3>
         </div>
         <div class="modal-body">
-			
+
 			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
 			<div class="row">
 					<input type="hidden" id="empid" name="empid"/>
@@ -178,9 +178,9 @@
 
 					<div class="col-lg-10">
 						<?php echo form_error('document_title'); ?>
-			  		</div>	
+			  		</div>
 			</div>
-			
+
 			<div class="row">
 				<div class=" col-md-10 form-group">
 					<label for="">Description:</label>
@@ -189,17 +189,17 @@
 
 					<div class="col-lg-10">
 						<?php echo form_error('document_desc'); ?>
-			  		</div>	
+			  		</div>
 			</div>
-			
+
 			<div class="row">
 				<div class=" col-md-10 form-group">
 					<label for="">Attach File:</label>
 					<div class="input-group">
 						<?php echo form_upload(['name'=>'file','class'=>'form-control']); ?>
 						</div>
-					</div>	
-					
+					</div>
+
 					<div class="col-lg-10">
 						<?php echo form_error('file'); ?>
 			  		</div>

@@ -53,7 +53,7 @@
 
 		public function saveDocumentation(){
 			$id = ($this->getLastDoc());
-			
+
 			$docdata = array(
 				  'employee_id' =>	$this->input->post('empid'),
 				  'document_id' => $id,
@@ -153,7 +153,7 @@
 
 			$stat = "sent";
 
-			$this->db->select('a.employee_id,a.document_id,a.document_status,b.tracking_no,b.document_id,b.document_title,a.action');
+			$this->db->select('a.employee_id,a.document_id,a.document_status,b.tracking_no,b.document_id,b.document_title,b.document_file,a.action');
 			$this->db->from('documentation a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->where('a.employee_id', $id);
@@ -176,7 +176,7 @@
 
 			$this->db->select('a.document_id,b.document_id,b.tracking_no,b.document_desc,a.signatory,a.action,a.date_of_action,b.document_title');
 			$this->db->from('documentation a');
-			$this->db->join('document b','a.document_id = b.document_id');    
+			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->where('a.document_id',$id);
 			$query = $this->db->get();
 
@@ -188,9 +188,9 @@
 
 			$this->db->select('a.signatory_id,a.employee_id,b.employee_id,a.response,a.comment,a.document_id,b.lname,b.fname,b.mname,a.date_responded');
 			$this->db->from('signatory a');
-			$this->db->join('employee b','a.employee_id = b.employee_id');    
+			$this->db->join('employee b','a.employee_id = b.employee_id');
 			$this->db->where('a.signatory_id',$id);
-			$query = $this->db->get();	
+			$query = $this->db->get();
 
 
 
@@ -200,7 +200,7 @@
 		public function get_ownSignatories($id){
 			$this->db->select('a.document_id,b.document_id,b.response,b.employee_id,b.signatory_id');
 			$this->db->from('documentation a');
-			$this->db->join('signatory b','a.document_id = b.document_id');    
+			$this->db->join('signatory b','a.document_id = b.document_id');
 			$this->db->where('a.document_id',$id);
 			$query = $this->db->get();
 
@@ -213,15 +213,15 @@
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->join('documentation c', 'a.document_id = c.document_id');
 
-			$this->db->join('employee d', 'c.employee_id = d.employee_id');     
+			$this->db->join('employee d', 'c.employee_id = d.employee_id');
 			$this->db->where('a.signatory_id',$id);
-			$query = $this->db->get();	
+			$query = $this->db->get();
 
 			return $query->row();
 		}
 
 
-		public function get_inbox_pending($user){ 
+		public function get_inbox_pending($user){
 			$this->db->where('username', $user['username']);
 			$result = $this->db->get('employee');
 
