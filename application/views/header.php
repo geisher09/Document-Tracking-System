@@ -7,8 +7,6 @@
         <a href="<?php echo site_url('Home/profile'); ?>" class="list-group-item">
          <h3 class="glyphicon glyphicon-user"></h3><br/>Profile
         </a>
-        <a href="<?php echo site_url('Home/docu'); ?>" class="list-group-item">
-         <h3 class="glyphicon glyphicon-file"></h3><br/>All Documents
         <a href="<?php echo site_url('Home/docu'); ?>" class="list-group-item text-center">
          <h3 class="glyphicon glyphicon-dashboard"></h3><br/>Dashboard
         </a>

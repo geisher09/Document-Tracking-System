@@ -1,11 +1,11 @@
 <div class="container body">
 		<div class="container red">
-			<h2>Employees</h2><br /><br /><br />
+			<h2>Employees</h2><br /><br />
             <table class="table table-list-search table-hover table-responsive ">
   				<thead>
   					<tr>
   						<th>EMPLOYEE ID</th>
-  						<th colspan="3">NAME</th>
+  						<th>NAME</th>
   						<th>POSITION</th>
   						<th>SEX</th>
   					</tr>
