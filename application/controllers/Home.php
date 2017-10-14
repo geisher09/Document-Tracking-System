@@ -286,7 +286,6 @@ class Home extends CI_Controller {
 		$user['username']=$this->session->userdata('username');
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
-
 		$header_data['title']="Edit Profile";
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');

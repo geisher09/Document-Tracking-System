@@ -17,7 +17,6 @@
 
 					</tbody>
 				</table>
-
 				<a class="btn btn-success btn-md" data-toggle="modal" data-target="#add_dept" >
 					<!-- matic na sa office of VP of research and extensions muna to -->
 					<span class="glyphicon glyphicon-plus"></span> Add Department
