@@ -1,7 +1,6 @@
 <div class="container">
 	<div class="container red" >
-	<!--- dummy data!! 
-	(sinubukan kong maglagay ng info galing sa db pero di ako nagtagumpay... ewan ko ba tsk tsk -Carlo T_T)-->
+	<!--- dummy data!! -->
 	<?php
 	$lname="Santos";
 	$fname="Josefina";
@@ -14,8 +13,9 @@
 	<hr/>
 	<div class="row" id="settingsdiv">
 				<div class="col-md-4 col-sm-12 text-center">
-					<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"alt="Profile Picture" id="profilepic-settings" />
+					<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"alt="Profile Picture" id="profilepic-settings" data-toggle="tooltip" title="Profile Picture" />
 					<br />
+					<p id="settings-uname"><?php echo $username; ?></p>
 					<a href="#" class="btn btn-default btn-sm" role="button" data-toggle="modal" data-target="#change-dp">
 						Change Profile Picture...</a>
 					<br /><br /><br /><br />
@@ -107,25 +107,45 @@
 		  <div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Change Profile Picture </h4>
 			</div>
-			<div class="modal-body">
-			  <p>Some text in the modal.</p>
+			<div class="modal-body text-center">
+			  <img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"alt="Profile Picture" id="profilepic-settings"/>
+			  <div class="upload-pic-form">
+				  <form>
+					  <label for="file" class="upload-photo-label">
+						<span class="glyphicon glyphicon-picture"></span> 
+						<span id="phototitle">Choose picture...</span>
+					  </label>
+					  <input type="file" name="photo" id="file" multiple="true"/>
+					  <p>^ note: ang plano ko sana is itago tong input file (display:none;) tapos ung filename sa button magdidisplay -Carlo</p>
+				  
+			  </div>
+			  
+			  
 			</div>
 			<div class="modal-footer">
+			  <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
 			  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			  </form>
 			</div>
 		  </div>
 		  
 		</div>
 	  </div>
 	
-<!-- script for show/hide -->
+<!-- script  -->
 <script>
 	$(document).ready(function(){
 		$("#show").click(function(){
 			$("#password-change").show(300);
 		});
 	});
+	
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+	
 </script>
 	
 	</div>
