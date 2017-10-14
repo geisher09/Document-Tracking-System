@@ -192,26 +192,26 @@ class Home extends CI_Controller {
 		$this->load->view('profile',['pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending,'emp'=>$employees,'docu'=>$ul]);
 		$this->load->view('footer');
 	}
-	public function download_docu($inbox){
+	public function download_docu(){
 
 		//echo $this->input->post('track_num');
 		// echo "hahaha";
-		if(isset($inbox)){
-				$data = $this->input->post();
+		// if(isset($title)){
+		//
+		// 		$data = $this->input->post();
 			if(isset($_GET['file'])){
 				$filenam = array();
 				$fileName = array('file' => $_GET['file']);
 				print_r($fileName);
 				echo "<br/>";
-				print_r($inbox);
+		//		print_r($title);
 				$name = basename($_GET['file']);
 				echo "<br/> basenaname <br/>";
-				print_r($name);
+				//print_r($name);
 				$filePath = 'uploads/'.$name;
 				echo "<br/>";
 				print_r($filePath);
 				$this->load->model('dts_model');
-				//$DL = $this->dts_model->download_file($fileName,$inbox);
 				if(!empty($fileName) && file_exists($filePath)){
 					$name_dl= $name	;
 					header('Content-Description: File Transfer');
@@ -227,11 +227,14 @@ class Home extends CI_Controller {
 					exit;
 				}
 				else {
+				//	$this->session->set_flashdata('error', 'Missing file!');
 					return redirect('home/profile');
 				}
-				print_r($ul);
 			}
-		}
+			else{
+				return redirect('home/home');
+			}
+
 	}
 
 
