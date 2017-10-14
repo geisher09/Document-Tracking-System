@@ -20,30 +20,35 @@
 			<div class="row" >
 				<br />
 				<!-- temporary profile picture & sample profile info  --> 
-				<div class="col-md-3 col-sm-12 col-xs-12 roundbox" style="margin-left:50px;">
-				
-					<div class="row">
+				<div class="col-md-3 col-sm-12 col-xs-9 roundbox" style="margin-left:10px;">
+					
+
+					<div class="usertitle">
+					<span class="div"><i class="glyphicon glyphicon-user"></i>
+						<span>USER INFO</span>
+
+					</span>
+					
+					<hr>
+					
 							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"
 								alt="Profile Picture" id="profilepic" />
-						</div>
+						
 					<div class="row">
 							<div class="info">
 
 								<?php foreach ($pro as $prof){ ?>
-									<p><?php echo $prof['username']; ?></p>
+									<p>Name: <?php echo $prof['username']; ?></p>
 									<p>Employee ID: <?php echo $prof['employee_id']; ?> </p>
 									<p>Department: <?php echo $prof['department_desc']; ?> </p>
 									<p>Department ID: <?php echo $prof['department_id']; ?> </p>
 									<p>Position: <?php echo $prof['position']; ?> </p> <br />
 								<?php } ?>
 
-								<!-- <p><?php echo $username; ?> </p>
-								<p>Employee ID: <?php echo $employee_id; ?> </p>
-								<p>Department: <?php echo $dept; ?> </p>
-								<p>Department ID: <?php echo $department_id; ?> </p>
-								<p>Position: <?php echo $position; ?> </p> <br /> -->
+								
 							</div>
-						</div>
+					</div>
+						
 				</div>
 
 				</div>
