@@ -193,6 +193,9 @@ class Home extends CI_Controller {
 		$this->load->view('footer');
 	}
 	public function download_docu($inbox){
+
+		//echo $this->input->post('track_num');
+		// echo "hahaha";
 		if(isset($inbox)){
 				$data = $this->input->post();
 			if(isset($_GET['file'])){
@@ -226,7 +229,7 @@ class Home extends CI_Controller {
 				else {
 					return redirect('home/profile');
 				}
-	//			print_r($ul);
+				print_r($ul);
 			}
 		}
 	}

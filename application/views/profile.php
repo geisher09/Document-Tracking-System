@@ -85,12 +85,11 @@
 									<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
 
-												<button class="btn btn-default btn-sm">
-													<a href="<?php echo site_url('Home/download_docu/'.$inboxes["document_title"].'?file='.$inboxes["document_file"]); ?>">Download<span class="glyphicon glyphicon-download-alt"></span></a>
-												</button>
+											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/'.$inboxes["document_title"].'?file='.$inboxes["document_file"]) ?>'">Download<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 
 											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)">Respond<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
 
+									
 									</td>
 								</tr>
 								<?php } ?>
@@ -135,7 +134,7 @@
 										<td><?php echo $sents['action']; ?></td>
 										<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $sents['document_id']; ?>" type="button" onclick="lol(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<button class="btn btn-success btn-sm">
+											<button class="btn btn-default btn-sm">
 												Download <span class="glyphicon glyphicon-download-alt"></span>
 											</button>
 										</td>
