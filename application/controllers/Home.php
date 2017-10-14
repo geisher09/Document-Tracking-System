@@ -162,20 +162,21 @@ class Home extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function add(){
-		$header_data['title']="Add Documents";
+	// public function add(){
+	// 	$header_data['title']="Add Documents";
 
-		$this->load->view('header2',$header_data);
-		$this->load->view('header');
-		$this->load->view('add');
-		$this->load->view('footer');
-	}
+	// 	$this->load->view('header2',$header_data);
+	// 	$this->load->view('header');
+	// 	$this->load->view('add');
+	// 	$this->load->view('footer');
+	// }
 
 	public function profile(){
 		$user['username']=$this->session->userdata('username');
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
 		$inbox = $this->dts_model->get_profile_inbox($user);
+		// $employid = $profile['employee_id'];
 		$ul = array();
 		foreach($inbox as $a){
 			$as = array('document_file' => $a['document_file']);
@@ -453,30 +454,28 @@ class Home extends CI_Controller {
 	}
 
 	public function save(){
-		$this->form_validation->set_rules('document_id', 'Tracking No', 'required');
-	  	$this->form_validation->set_rules('document_title', 'Title', 'required');
+		//$this->form_validation->set_rules('document_id', 'Tracking No', 'required');
+	  	//$this->form_validation->set_rules('document_title', 'Title', 'required');
 	 	$this->form_validation->set_rules('document_desc', 'Description', 'required');
   		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
 
         if ($this->form_validation->run()){
 
-               	$data = $this->input->post();
+               	//$data = $this->input->post();
                	$url = $this->do_upload();
              	$this->load->model('dts_model');
-             	if ($this->dts_model->saveDocuments($data,$url)){
+             	if (($this->dts_model->saveDocuments($url))&&($this->dts_model->saveDocumentation())){
              		$this->session->set_flashdata('response', 'Saved Succesfully!');
 				 }
 				 else{
-             		$this->session->set_flashdata('response', 'Failed :(');
+             		// $this->session->set_flashdata('response', 'Failed to save!');
 				 }
-				 return redirect('home/add');
+				return redirect('home/profile');
 
         }
         else{
-            	$header_data['title']="Add Documents";
-				$this->load->view('header',$header_data);
-				$this->load->view('add');
-				$this->load->view('footer');
+        		$this->session->set_flashdata('responsed', 'Failed to save! (Please input necessary details)');
+            	return redirect('home/profile');
         }
 	}
 
@@ -490,7 +489,7 @@ class Home extends CI_Controller {
 						if(move_uploaded_file($_FILES["file"]["tmp_name"],$url))
 								return $url;
 
-		return redirect('home/add');
+		return redirect('home/profile');
 	}
 
 

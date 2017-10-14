@@ -48,6 +48,17 @@
 
 				<div class="col-md-8 col-sm-12 col-xs-12" >
 					<h2> My Documents </h2> <br />
+					<?php if( $error = $this->session->flashdata('responsed')): ?>
+							<div class="alert alert-dismissible alert-danger">
+								<?php echo $error; ?>
+							</div> 
+					<?php endif; ?>
+
+					<?php if( $error = $this->session->flashdata('response')): ?>
+							<div class="alert alert-dismissible alert-success">
+								<?php echo $error; ?>
+							</div> 
+					<?php endif; ?>
 					<div class="tab">
 						<button class="tablinks" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Inbox </button>
 						<button class="tablinks" onclick="openFolder(event, 'Sent')"> Sent </button>
@@ -100,10 +111,12 @@
 
 
 					<div id="Sent" class="tabcontent"> <br />
-					<button class="btn btn-danger btn-md" type="button" onclick="send()" style="float:right;">
-						<span class="glyphicon glyphicon-share"></span>Send a Document
-					</button> <br /><br /><br />
-
+						<?php foreach ($pro as $profi){ ?>
+									<button class="btn btn-danger btn-md" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
+										<span class="glyphicon glyphicon-share"></span>Send a Document
+									</button> <br /><br /><br />
+						<?php } ?>
+					
 						<!--- sent docus table -->
 							<table class="table table-list-search table-hover table-condensed table-responsive ">
 								<thead>
@@ -145,25 +158,19 @@
 <!-- modal of details about the document-->
 	<div id="send_details" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-md">
-			<!-- Modal content-->
+	<!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header" style="background-color: #555555">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
           <h3 class="modal-title text-center">Add Document</h3>
         </div>
         <div class="modal-body">
 			
+			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
 			<div class="row">
-				<div class=" col-md-10 form-group">
-					<label for="">Document Tracking no:</label>
-					<?php echo form_input(['name'=>'document_id','class'=>'form-control','placeholder'=>'Tracking no', 'value'=>set_value('document_id')]); ?>
-					</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_id'); ?>
-			  		</div>
+					<input type="hidden" id="empid" name="empid"/>
 			</div>
-			
 			<div class="row">
 				<div class=" col-md-10 form-group">
 					<label for="">Title:</label>
@@ -199,14 +206,13 @@
 			  		</div>
 				</div> <br><br>
 			<div>
-			
 				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="reset" class="btn btn-default">Reset</button>
 			</div>
-			</form>
+			<?php echo form_close();?>
         </div>
-        
       </div>
+
 		</div>
 	</div>
 
@@ -223,7 +229,7 @@
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #555555">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">DOCUMENT DETAILS</h3>
+					<h3 class="modal-title" style="text-align:center;">DOCUMENT DETAILS</h3>
 				</div>
 
 				<div class="modal-body zoomIn animated">
@@ -249,11 +255,11 @@
 					<form></form>
 					<?php echo form_open('home/savesig', ['class'=>'form-horizontal']); ?>
 					<div class="col-md-8">
+
 							<div class="col-md-6">
 							      <label for="">Document ID:</label>
 								  <input type="text" class="form-control" id="document_id" name="document_id" disabled></textarea>
 							</div>
-
 							<div class="form-group">
 								<input type="hidden" id="signatory_id" name="signatory_id"/>
 							</div>
@@ -277,7 +283,6 @@
 						</div>
 						<?php echo form_close();?>
 					</div>
-					<div class="col-md-2"></div>
 				</div>
 				</div>
 
@@ -287,74 +292,7 @@
 
 </div>
 
-<div class="modal fade" id="send_docu" role="dialog">
-    <div class="modal-dialog modal-md">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #555555">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title text-center">Add Document</h3>
-        </div>
-        <div class="modal-body">
-			
-			<div class="row">
-				<div class=" col-md-10 form-group">
-					<label for="">Document Tracking no:</label>
-					<?php echo form_input(['name'=>'document_id','class'=>'form-control','placeholder'=>'Tracking no', 'value'=>set_value('document_id')]); ?>
-					</div>
 
-					<div class="col-lg-10">
-						<?php echo form_error('document_id'); ?>
-			  		</div>
-			</div>
-			
-			<div class="row">
-				<div class=" col-md-10 form-group">
-					<label for="">Title:</label>
-					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_title'); ?>
-			  		</div>	
-			</div>
-			
-			<div class="row">
-				<div class=" col-md-10 form-group">
-					<label for="">Description:</label>
-					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_desc'); ?>
-			  		</div>	
-			</div>
-			
-			<div class="row">
-				<div class=" col-md-10 form-group">
-					<label for="">Attach File:</label>
-					<div class="input-group">
-						<?php echo form_upload(['name'=>'file','class'=>'form-control']); ?>
-						</div>
-					</div>	
-					
-					<div class="col-lg-10">
-						<?php echo form_error('file'); ?>
-			  		</div>
-				</div> <br><br>
-			<div>
-			
-				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-			</form>
-        </div>
-        
-      </div>
-      
-   </div>
- </div>
 
 <div class="modal fade" id="clientModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -362,7 +300,7 @@
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #555555">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h3 class="modal-title" style="color:#FFFFFF; text-align:center;">View Details</h3>
+				<h3 class="modal-title" style="text-align:center;">View Details</h3>
 					<button class="tablink btn btn-basic" onclick="details(event, 'clientDet')">Document Details</button>
 					<button class="tablink btn btn-basic" onclick="details(event, 'addSig')">Add Signatory</button>
 			</div>
@@ -451,11 +389,6 @@
 
 						</div>
 					</div>
-
-					<div>
-						<button type="button" onclick="" class="btn btn-primary" data-dismiss="modal">Save</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
 				</div>
 
 				<div class="container-fluid window" id="addSig">
@@ -480,7 +413,7 @@
 
 						<div>
 							<button type="submit" class="btn btn-primary">Save</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="reset" class="btn btn-default">Reset</button>
 						</div>
 						<?php echo form_close();?>
 					</div>
@@ -579,13 +512,18 @@ function wow(id){
 		}
 
 
-function send(){
+function send(id){
 			$.ajax({
 			        type: 'POST',
 			        url: 'ajax_list',
-			        
+			         data:{id: id},
 				        success: function(data) {
+				        	var obj = JSON.parse(data);
+				        	console.log(id);
+
+				          $('#empid').val(id);
 				          $('#send_details').modal('show');
+
 				        }
 				    });
 		}

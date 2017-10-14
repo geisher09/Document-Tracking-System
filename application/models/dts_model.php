@@ -26,10 +26,43 @@
 		    $query = $this->db->get();
 				return $query->result_array();
 		}
-		public function saveDocuments($data,$url){
-			$this->db->set('document_file',$url);
-			// $this->db->insert('document_file',$url);
-			return $this->db->insert('document', $data,$url);
+
+		public function getLastDoc(){
+			$query = $this->db->get('document');
+
+			return $query->num_rows();
+		}
+
+		public function saveDocuments($url){
+			$id = ($this->getLastDoc())+1;
+			date_default_timezone_set('Asia/Manila');
+			$yr=date('ymd');
+			$length = 5;
+			$randomletter = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
+
+			$ddata = array(
+				  'document_id' => $id,
+				  'tracking_no' => $yr.'-'.$randomletter.'-'.$id,
+			      'document_title' => $this->input->post('document_title') ,
+			      'document_desc' => $this->input->post('document_desc') ,
+			      'document_file' => $url
+			   );
+
+			return $this->db->insert('document', $ddata);
+		}
+
+		public function saveDocumentation(){
+			$id = ($this->getLastDoc());
+			
+			$docdata = array(
+				  'employee_id' =>	$this->input->post('empid'),
+				  'document_id' => $id,
+				  'action' => 'Pending',
+				  'document_status' => 'sent',
+			      'signatory' => 0
+			   );
+
+			return $this->db->insert('documentation', $docdata);
 		}
 
 		public function saveDepartment($data,$data2){
