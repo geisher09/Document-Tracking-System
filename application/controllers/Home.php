@@ -286,7 +286,6 @@ class Home extends CI_Controller {
 		$user['username']=$this->session->userdata('username');
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
-		
 		$header_data['title']="Edit Profile";
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
@@ -327,10 +326,25 @@ class Home extends CI_Controller {
 			$data['dept'] = $hold;
 			$data['office'] = $condition;
 			//print_r($data);
-			if($office_id == 1)
-			{
-				//echo "same";
+			$hold = $this->dts_model->getDepartment_id($office_id);
+			$data['dept_id'] = $hold;
+			$ar = $hold++;
+			$ar2 = array(1);
+			for($a=0;$a<=99;$a++){
+			if(isset($hold[$a])){
+			} else {
+				$num = $a+1;
+				break;
 			}
+		}
+		if($num<=9){
+			$id = $office_id.'0'.$num;
+		}
+	 else{
+		 $id = $office_id.$num;
+	 }
+			$data['id']=$id;
+
 			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
@@ -354,36 +368,36 @@ class Home extends CI_Controller {
 			$this->load->view('footer');
 		}
 
-		public function addDept($office_id){
-		$header_data['title']="Add Department";
-		$data['val'] = $office_id;
-		$this->load->model('dts_model');
-		$hold = $this->dts_model->getDepartment_id($office_id);
-		$data['dept_id'] = $hold;
-		$ar = $hold++;
-		$ar2 = array(1);
-		for($a=0;$a<=99;$a++){
-		if(isset($hold[$a])){
-		} else {
-			$num = $a+1;
-			break;
-		}
-	}
-	if($num<=9){
-		$id = $office_id.'0'.$num;
-	}
- else{
-	 $id = $office_id.$num;
- }
-		$data['id']=$id;
-	//print_r($hold);
-
-		$this->load->view('header2',$header_data);
-		$this->load->view('header');
-		$this->load->view('addDept',$data);
-		$this->load->view('footer');
-		}
-		public function saveDept($id){
+ // 	public function addDept($office_id){
+ // 	$header_data['title']="Add Department";
+ // 	$data['val'] = $office_id;
+ // 	$this->load->model('dts_model');
+ // 	$hold = $this->dts_model->getDepartment_id($office_id);
+ // 	$data['dept_id'] = $hold;
+ // 	$ar = $hold++;
+ // 	$ar2 = array(1);
+ // 	for($a=0;$a<=99;$a++){
+ // 	if(isset($hold[$a])){
+ // 	} else {
+ // 		$num = $a+1;
+ // 		break;
+ // 	}
+ // }
+ // if($num<=9){
+ // 	$id = $office_id.'0'.$num;
+ // }
+ // else{
+ //  $id = $office_id.$num;
+ // }
+ // 	$data['id']=$id;
+ // //print_r($hold);
+ //
+ // 	$this->load->view('header2',$header_data);
+ // 	$this->load->view('header');
+ // 	$this->load->view('addDept',$data);
+ // 	$this->load->view('footer');
+ // 	}
+ 	public function saveDept($id){
 //			$this->form_validation->set_rules('department_id', 'Department ID', 'required');
 //echo "pasok";
 	 	$this->form_validation->set_rules('department_desc', 'Department Name', 'required');
