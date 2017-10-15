@@ -2,25 +2,25 @@
 <div class="tab-menu">
     <ul class="list-group text-center">
         <a href="<?php echo site_url('Home/home'); ?>" class="list-group-item">
-         <h3 class="glyphicon glyphicon-home"></h3><br/>Home
+         <span class="glyphicon glyphicon-home"></span><br/>Home
         </a>
         <a href="<?php echo site_url('Home/profile'); ?>" class="list-group-item">
-         <h3 class="glyphicon glyphicon-user"></h3><br/>Profile
+         <span class="glyphicon glyphicon-user"></span><br/>Profile
         </a>
         <a href="<?php echo site_url('Home/docu'); ?>" class="list-group-item text-center">
-         <h3 class="glyphicon glyphicon-dashboard"></h3><br/>Dashboard
+         <span class="glyphicon glyphicon-dashboard"></span><br/>Dashboard
         </a>
         <a href="<?php echo site_url('Home/offices'); ?>" class="list-group-item">
-         <h3 class="glyphicon glyphicon-briefcase"></h3><br/>Offices
+         <span class="glyphicon glyphicon-briefcase"></span><br/>Offices
         </a>
         <a href="<?php echo site_url('Home/edit'); ?>" class="list-group-item">
-         <h3 class="glyphicon glyphicon-cog"></h3><br/>Settings
+         <span class="glyphicon glyphicon-cog"></span><br/>Settings
         </a>
 		<a href="<?php echo site_url('Home/contacts'); ?>" class="list-group-item">
-         <h3 class="glyphicon glyphicon-phone"></h3><br/>Contacts
+         <span class="glyphicon glyphicon-phone"></span><br/>Contacts
         </a>
 		<a href="<?php echo site_url('Home'); ?>" class="list-group-item">
-         <h3 class="glyphicon glyphicon-log-out"></h3><br/>Logout
+         <span class="glyphicon glyphicon-log-out"></span><br/>Logout
         </a>
     </ul>
 </div>
@@ -46,13 +46,13 @@
 	
 <div class="container">
 	<div class="title-banner">
-	<img src="<?php echo base_url('assets/images/colored.png'); ?>" alt="logo" id="logo" class="img-reponsive" />
-	<banner id="bannertitle">DOCUMENT TRACKING SYSTEM</banner>
+		<img src="<?php echo base_url('assets/images/colored.png'); ?>" alt="logo" id="logo" class="img-reponsive" />
+		<banner id="bannertitle">DOCUMENT TRACKING SYSTEM</banner>
 	</div>
 	<div class="col-md-6">
 		<?php date_default_timezone_set('Asia/Manila');
 			$date=date('y-m-d'); ?>
-		<h3 class="roundbox"style="color:#555555;float:right;margin-top:-85px;margin-right:-600px;">
+		<h3 class="roundbox"style="color:#555555;float:right;margin-top:-85px;margin-right:-660px;">
 		  <?php echo $date; ?> | <span id='time'></span>
 		</h3>
 	</div>

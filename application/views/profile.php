@@ -23,12 +23,12 @@
 					<div class="row">
 							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"
 								alt="Profile Picture" id="profilepic" />
-						</div>
+					</div>
 					<div class="row">
 							<div class="info">
 
 								<?php foreach ($pro as $prof){ ?>
-									<p><?php echo $prof['username']; ?></p>
+									<p><?php echo $prof['username']; ?></p><br />
 									<p>Employee ID: <?php echo $prof['employee_id']; ?> </p>
 									<p>Department: <?php echo $prof['department_desc']; ?> </p>
 									<p>Department ID: <?php echo $prof['department_id']; ?> </p>
@@ -41,7 +41,7 @@
 								<p>Department ID: <?php echo $department_id; ?> </p>
 								<p>Position: <?php echo $position; ?> </p> <br /> -->
 							</div>
-						</div>
+					</div>
 				</div>
 
 
@@ -83,15 +83,15 @@
 									<td><?php echo $inboxes['document_title']; ?></td>
 									<td><?php echo $inboxes['response']; ?></td>
 									<td>
-											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$inboxes["document_file"]) ?>'">Download<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
+											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$inboxes["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 											
 											<?php if(($inboxes['response'])=='Approved'){ ?>
-											<button class="btn btn-success btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already approved this file!" disabled>Approved<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>
+											<button class="btn btn-success btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already approved this file!" disabled>Approved&nbsp;<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>
 											<?php }elseif(($inboxes['response'])=='Rejected'){?>
-											<button class="btn btn-danger btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already rejected this file!" disabled>Rejected<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
+											<button class="btn btn-danger btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already rejected this file!" disabled>Rejected&nbsp;<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
 											<?php }else{?>
-											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" >Respond<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
+											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" >Respond&nbsp;<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
 											<?php }?>
 									</td>
 								</tr>
@@ -114,8 +114,8 @@
 
 					<div id="Sent" class="tabcontent"> <br />
 						<?php foreach ($pro as $profi){ ?>
-									<button class="btn btn-danger btn-md" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
-										<span class="glyphicon glyphicon-share"></span>Send a Document
+									<button class="btn btn-success btn-md" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
+										<span class="glyphicon glyphicon-share"></span> Send a Document
 									</button> <br /><br /><br />
 						<?php } ?>
 
@@ -136,8 +136,8 @@
 										<td><?php echo $sents['document_title']; ?></td>
 										<td><?php echo $sents['action']; ?></td>
 										<td>
-											<button class="btn btn-primary btn-sm" id="<?php echo $sents['document_id']; ?>" type="button" onclick="lol(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$sents["document_file"]) ?>'">Download<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+											<button class="btn btn-primary btn-sm" id="<?php echo $sents['document_id']; ?>" type="button" onclick="lol(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
+											<button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$sents["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 
 											<!-- <button class="btn btn-default btn-sm">
 												Download <span class="glyphicon glyphicon-download-alt"></span>
@@ -176,7 +176,7 @@
 					<input type="hidden" id="empid" name="empid"/>
 			</div>
 			<div class="row">
-				<div class=" col-md-10 form-group">
+				<div class=" col-md-10">
 					<label for="">Title:</label>
 					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
 				</div>
@@ -185,9 +185,9 @@
 						<?php echo form_error('document_title'); ?>
 			  		</div>
 			</div>
-
+			<br/>
 			<div class="row">
-				<div class=" col-md-10 form-group">
+				<div class=" col-md-10">
 					<label for="">Description:</label>
 					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
 				</div>
@@ -196,19 +196,17 @@
 						<?php echo form_error('document_desc'); ?>
 			  		</div>
 			</div>
-
+			<br/>
 			<div class="row">
-				<div class=" col-md-10 form-group">
+				<div class=" col-md-10">
 					<label for="">Attach File:</label>
-					<div class="input-group">
-						<?php echo form_upload(['name'=>'file','class'=>'form-control']); ?>
-						</div>
+						<?php echo form_upload(['name'=>'file']); ?>
 					</div>
 
 					<div class="col-lg-10">
 						<?php echo form_error('file'); ?>
 			  		</div>
-				</div> <br><br>
+				</div> <br/><br/>
 			<div>
 				<button type="submit" class="btn btn-primary">Save</button>
 				<button type="reset" class="btn btn-default">Reset</button>
@@ -595,7 +593,7 @@ function lol(id){
 
 
 								for(var i=0; i<parseInt(obj.signatories.length); i++){
-									s += '<tr><td>'+obj.signatories[i].employee_id+'</td><td>'+obj.signatories[i].response+'</td><td><button class="btn btn-info" id="'+obj.signatories[i].signatory_id+'"type="button" onclick="pop(this.id)"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button></td></tr>';
+									s += '<tr><td>'+obj.signatories[i].employee_id+'</td><td>'+obj.signatories[i].response+'</td><td><button class="btn btn-info" id="'+obj.signatories[i].signatory_id+'"type="button" onclick="pop(this.id)">&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button></td></tr>';
 		 					        //v += '<option value='+obj.pets[i].petid+'>'+obj.pets[i].pname+'</option>';
 								}
 								$("#Signatories").html(s);

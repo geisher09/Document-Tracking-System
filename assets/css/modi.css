@@ -2,16 +2,18 @@
 
 /* common for all views */
 
-
+.btn, input[type=submit]{
+	box-shadow:none;
+	outline:0;
+}
 .list-group-item {
 	border:0;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 
 .tab-menu .list-group{
 	list-style-type:none;
-	padding:auto; 
 	width:11%;
 	float:left;
 	position:fixed;
@@ -21,6 +23,8 @@
 .tab-menu .list-group .list-group-item{
 	background-color: #424242;
 	transition:0.3s;
+	height:95.5px;
+	padding-top:20px;
 }
 
 .tab-menu .list-group .list-group-item:hover {
@@ -28,18 +32,10 @@
 	font-weight:bold;
 	color:#424242;
 }
-
-.list-group {
-	margin-bottom: 0;
+.tab-menu .list-group .list-group-item span{
+	font-size:24px;
 }
 
-.tab-menu .list-group>a h3.glyphicon {
-	color: #ffffff;
-}
-
-.tab-menu .list-group >a h3.glyphicon:hover {
-	color: #424242 !important;
-}
 
 .tab-menu .list-group>a {
 	color: #ffffff;
@@ -71,11 +67,11 @@ body {
 	padding-top:20px;
 }
 #bannertitle{
-	font-family: "Arial", "Helvetica", "sans-serif";
-	font-size:40px;
-	font-weight:bold;
+	font-family: "Impact";
+	font-size:65px;
 	margin:0;
 	color:#48C9B0;
+	-webkit-text-stroke:0.5px #000;
 }
 
 .red {
@@ -84,9 +80,9 @@ body {
 	padding-left: 50px;
 	padding-right: 50px;
 	padding-top: 20px;
-	padding-bottom:0px;
+	padding-bottom:50px;
 	max-width:1160px;
-	min-height:1300px;
+	min-height:1000px;
 	
 }
 
@@ -174,17 +170,18 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
          }
 /*****************************************************************/
 .info {
-	padding: 20px 20px 20px 20px;
+	padding: 10px 20px 20px 20px;
 	color: white;
 	font-size: 18px;
 	font-family: "Arial", "Helvetica", "sans-serif";
 }
-/*.info p:first-child{ font-size:35px;font-weight:bold; }*/
+.info p:first-child{ text-align:center; }
 
 #profilepic{
-	height:100px;
-	width:100px;
+	height:150px;
+	width:150px;
 	border-radius:10px;
+	margin:0px auto;
 }
 #profilepic:hover{ cursor:pointer; }
 
@@ -390,19 +387,26 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 	cursor:pointer;
 	filter:blur(1px);
 }
-.upload-pic-form{ margin:20px; }
-.upload-photo-label{ 
+.upload-pic-form{ 
+	margin:30px auto; 
+	padding:0px auto; 
+	width:230px;
+}
+ input[type="file"]::-webkit-file-upload-button
+ {
+	font-family:Arial;
+	font-size:16px;
 	background-color:#35b198;
-	padding:10px 50px;
+	padding:10px;
 	color:#FFFFFF;
-	border-radius:10px;
-	transition:0.1s;
+	border-radius:5px;
+	border:none;
+	margin:auto;
  }
- .upload-photo-label:hover{ 
+ input[type="file"]:hover::-webkit-file-upload-button{ 
 	background-color:#298976;
 	cursor:pointer;
  }
-#file{ /* display:none; */ }
 /* end of 'Settings' */
 
 /* 'Sign Up' section */

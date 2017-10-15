@@ -22,7 +22,7 @@
 
 					<a href="#" class="btn btn-default btn-sm" role="button" data-toggle="modal" data-target="#change-dp">
 						Change Profile Picture...</a>
-					<br /><br /><br /><br />
+					<br /><br /><br />
 					<button type="button" class="btn btn-success btn-md btn-block">Save Changes</button>
 					<button type="button" class="btn btn-danger btn-md btn-block">Discard Changes</button>
 				</div>
@@ -78,7 +78,8 @@
 							<input name="password_confirm" type="password" class="form-control" id="pwd_2" placeholder="Password Confirmation">
 						</div>
 					</div>
-					<button type="button" class="btn btn-info btn-sm" id="show">Change Password</button>
+					<button type="button" class="btn btn-info btn-sm" id="change">Change Password</button>
+					<button type="button" class="btn btn-danger btn-sm collapse" id="cancel">Cancel Change</button>
 						
 						
 					</form>				
@@ -98,14 +99,8 @@
 			  <img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"alt="Profile Picture" id="profilepic-settings"/>
 			  <div class="upload-pic-form">
 				  <form>
-					  <label for="file" class="upload-photo-label">
-						<span class="glyphicon glyphicon-picture"></span> 
-						<span id="phototitle">Choose picture...</span>
-					  </label>
-					  <input type="file" name="photo" id="file" multiple="true" style="display:none"/>
-				  
+					  <input type="file" name="photo" id="uploadfile"/>
 			  </div>
-			  
 			  
 			</div>
 			<div class="modal-footer">
@@ -121,8 +116,15 @@
 <!-- script  -->
 <script>
 	$(document).ready(function(){
-		$("#show").click(function(){
-			$("#password-change").show(300);
+		$("#change").click(function(){
+			$("#password-change").show(200);
+			$("#change").hide(200);
+			$("#cancel").show(200);
+		});
+		$("#cancel").click(function(){
+			$("#password-change").hide(200);
+			$("#cancel").hide(200);
+			$("#change").show(200);
 		});
 	});
 	
@@ -147,7 +149,6 @@
 			});
 		
 	});
-
 	
 </script>
 	

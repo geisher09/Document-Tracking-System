@@ -54,7 +54,7 @@
 			</form>
 		<!-- bale nakatago pa ung details about sa tracking ng document [na may id na "map"] tapos lalabas na lang pag pinindot na ung button [na may id na [show] -->
 			<div id="map" class="collapse" style="margin-left:100px;">
-			<h2><i>Detail Map Of your Document...</i></h2>
+			<h2><i>Tracking Details Of your Document...</i></h2>
 				<div class="main">
 					<ul class="cbp_tmtimeline">
 						<li>
