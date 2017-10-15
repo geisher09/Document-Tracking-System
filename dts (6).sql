@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2017 at 10:44 AM
+-- Generation Time: Oct 15, 2017 at 06:02 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -96,7 +96,8 @@ INSERT INTO `document` (`document_id`, `tracking_no`, `document_title`, `documen
 (2, '', 'Christian', 'Pangalawang Dummy ni Ancheta', 'R1 = 1  1 -5 |3\r\nR2 = 1  0 -2 |1   \r\nR3 = 2 -1 -1 ', '2017-09-28 00:00:00'),
 (3, '', 'Dummy', 'Dummy', './uploads/1408559e0cec705379.pdf', '0000-00-00 00:00:00'),
 (4, '171014-QMSUL-4', 'try', 'try', './uploads/69959e1ca20b4300.pdf', '2017-10-10 21:05:52'),
-(5, '171014-LWMTG-5', '2nd Try', '2nd Try Gei', './uploads/589859e1cc31acc3b.pdf', '2017-10-14 16:34:57');
+(5, '171014-LWMTG-5', '2nd Try', '2nd Try Gei', './uploads/589859e1cc31acc3b.pdf', '2017-10-14 16:34:57'),
+(6, '171014-GNIJU-6', '3rd test', '3rd test', './uploads/206959e1e796eaeb8.pdf', '2017-10-14 18:31:51');
 
 -- --------------------------------------------------------
 
@@ -109,21 +110,23 @@ CREATE TABLE `documentation` (
   `employee_id` varchar(15) NOT NULL,
   `document_id` int(3) NOT NULL,
   `action` varchar(10) NOT NULL,
-  `document_status` varchar(10) NOT NULL,
   `date_of_action` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `signatory` int(2) NOT NULL
+  `signatory` int(2) NOT NULL,
+  `approved` int(2) NOT NULL,
+  `rejected` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `documentation`
 --
 
-INSERT INTO `documentation` (`documentation_id`, `employee_id`, `document_id`, `action`, `document_status`, `date_of_action`, `signatory`) VALUES
-(2, '15-202-002', 2, 'Pending', 'sent', '2017-09-28 00:00:00', 3),
-(3, '15-202-002', 1, 'Pending', 'sent', '2017-09-28 00:00:00', 2),
-(4, '17-101-6', 3, 'pending', 'sent', '2017-10-13 00:00:00', 2),
-(5, '17-101-6', 4, 'Pending', 'sent', '2017-10-10 21:05:52', 2),
-(6, '17-104-7', 5, 'Pending', 'sent', '2017-10-14 16:34:58', 1);
+INSERT INTO `documentation` (`documentation_id`, `employee_id`, `document_id`, `action`, `date_of_action`, `signatory`, `approved`, `rejected`) VALUES
+(2, '15-202-002', 2, 'Rejected', '2017-10-15 11:53:13', 3, 2, 1),
+(3, '15-202-002', 1, 'Pending', '2017-09-28 00:00:00', 2, 0, 0),
+(4, '17-101-6', 3, 'pending', '2017-10-13 00:00:00', 2, 0, 0),
+(5, '17-101-6', 4, 'Rejected', '2017-10-15 11:50:19', 2, 1, 1),
+(6, '17-104-7', 5, 'Pending', '2017-10-14 16:34:58', 2, 0, 0),
+(7, '17-104-7', 6, 'Approved', '2017-10-15 11:54:14', 2, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -148,10 +151,10 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employee_id`, `department_id`, `username`, `position`, `lname`, `fname`, `mname`, `sex`, `password`) VALUES
-('15-101-001', 101, 'Ancheta29', 'Professor', 'Ancheta', 'Christian Daniel', 'Mozo', 'm', 'mozo'),
-('15-101-002', 101, 'DummyMo', 'Professor', 'Dummy', 'Employee', 'Entry', 'f', 'dummy'),
-('15-201-005', 201, 'Mozo', 'Head', 'Mozo', 'Daniella', 'Gagote', 'f', 'part'),
-('15-202-001', 102, 'Dummy', 'Professor', 'Dummy', 'Dummy', 'Dummy', 'f', 'full'),
+('15-101-001', 101, 'Ancheta29', 'Professor', 'Ancheta', 'Christian Daniel', 'Mozo', 'm', '25d55ad283aa400af464c76d713c07ad'),
+('15-101-002', 101, 'DummyMo', 'Professor', 'Dummy', 'Employee', 'Entry', 'f', '25d55ad283aa400af464c76d713c07ad'),
+('15-201-005', 201, 'Mozo', 'Head', 'Mozo', 'Daniella', 'Gagote', 'f', '25d55ad283aa400af464c76d713c07ad'),
+('15-202-001', 102, 'Dummy', 'Professor', 'Dummy', 'Dummy', 'Dummy', 'f', '25d55ad283aa400af464c76d713c07ad'),
 ('15-202-002', 202, 'Jung', 'Professor', 'Jungkook', 'BTS', 'kpop', 'm', '25d55ad283aa400af464c76d713c07ad'),
 ('17-101-6', 101, 'Lenovo', 'Intern', 'Lenovo', 'Daniel', 'Asus', 'm', '25d55ad283aa400af464c76d713c07ad'),
 ('17-104-7', 104, 'geisher09', 'Dean', 'Bernabe', 'Geisher', 'Gonzalo', 'f', '56ad349e35056b1b289fae48e8e03830');
@@ -199,15 +202,18 @@ CREATE TABLE `signatory` (
 
 INSERT INTO `signatory` (`signatory_id`, `document_id`, `response`, `employee_id`, `comment`, `date_responded`) VALUES
 (1, 1, 'Pending', '15-101-001', 'none', '2017-10-08 11:29:58'),
-(2, 2, 'Pending', '17-104-7', 'none', '2017-10-08 11:30:51'),
-(3, 2, 'Pending', '15-101-001', 'none', '2017-10-08 11:30:58'),
+(2, 2, 'Rejected', '17-104-7', 'None', '2017-10-15 11:52:09'),
+(3, 2, 'Approved', '15-101-001', 'None', '2017-10-15 11:51:09'),
 (4, 1, 'Pending', '15-201-005', 'none', '2017-10-09 09:40:52'),
 (5, 3, 'Pending', '17-104-7', 'none', '2017-10-13 10:37:10'),
-(6, 2, 'Pending', '15-201-005', 'none', '2017-10-14 02:44:23'),
+(6, 2, 'Approved', '15-201-005', 'None', '2017-10-15 11:53:13'),
 (7, 3, 'Pending', '15-101-001', 'none', '2017-10-14 03:37:44'),
-(8, 4, 'Pending', '15-101-001', 'none', '2017-10-14 04:33:01'),
-(9, 4, 'Pending', '17-104-7', 'none', '2017-10-14 04:33:36'),
-(10, 5, 'Pending', '15-202-001', 'none', '2017-10-14 04:35:56');
+(8, 4, 'Rejected', '15-101-001', 'None', '2017-10-15 11:50:19'),
+(9, 4, 'Approved', '17-104-7', 'Good job!!', '2017-10-14 10:32:54'),
+(10, 5, 'Pending', '15-202-001', 'none', '2017-10-14 04:35:56'),
+(11, 5, 'Pending', '15-202-002', 'none', '2017-10-14 06:22:10'),
+(12, 6, 'Approved', '15-101-001', 'None', '2017-10-15 12:18:38'),
+(13, 6, 'Approved', '17-101-6', 'None', '2017-10-15 11:54:14');
 
 --
 -- Indexes for dumped tables
@@ -239,7 +245,10 @@ ALTER TABLE `documentation`
   ADD PRIMARY KEY (`documentation_id`),
   ADD KEY `employee_id` (`employee_id`,`document_id`,`signatory`),
   ADD KEY `document_id` (`document_id`),
-  ADD KEY `signatories` (`signatory`);
+  ADD KEY `signatories` (`signatory`),
+  ADD KEY `approved` (`approved`),
+  ADD KEY `rejected` (`rejected`),
+  ADD KEY `approved_2` (`approved`);
 
 --
 -- Indexes for table `employee`
@@ -271,12 +280,12 @@ ALTER TABLE `signatory`
 -- AUTO_INCREMENT for table `documentation`
 --
 ALTER TABLE `documentation`
-  MODIFY `documentation_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `documentation_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `signatory`
 --
 ALTER TABLE `signatory`
-  MODIFY `signatory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `signatory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
