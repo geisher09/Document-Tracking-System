@@ -301,11 +301,34 @@ class Home extends CI_Controller {
 		$user['username']=$this->session->userdata('username');
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
+
+		// $userprof = $this->dts_model->get_user($user);
+		// $output = array(
+
+		// 				"userprof" => $userprof
+
+		// 		);
+
 		$header_data['title']="Edit Profile";
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
-		$this->load->view('accountsettings', ['prof'=>$profile]);
+		$this->load->view('accountsettings', ['pro'=>$profile]);
 		$this->load->view('footer');
+
+		//output to json format
+		//echo json_encode($output);
+	}
+
+	public function edit_list(){
+		$user['username']=$this->session->userdata('username');
+		$this->load->model('dts_model');
+		$userprof = $this->dts_model->get_user($user);
+		$output = array(
+
+						"userprof" => $userprof
+
+				);
+		echo json_encode($output);
 	}
 
 	public function signup(){

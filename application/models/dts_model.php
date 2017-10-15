@@ -126,6 +126,17 @@
 			 return $result->result_array();
 		}
 
+		public function get_user($user){
+
+			$this->db->select('a.username,a.lname,a.fname,a.mname,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
+			$this->db->from('employee a');
+			$this->db->join('department b','a.department_id = b.department_id');
+			$this->db->where('a.username',$user['username']);
+			$result = $this->db->get();
+
+			 return $result->row();
+		}
+
 		public function get_profile_inbox($user){
 
 			$this->db->where('username', $user['username']);

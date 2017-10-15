@@ -15,7 +15,11 @@
 				<div class="col-md-4 col-sm-12 text-center">
 					<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"alt="Profile Picture" id="profilepic-settings" data-toggle="tooltip" title="Profile Picture" />
 					<br />
-					<p id="settings-uname"><?php echo $username; ?></p>
+
+					<?php foreach ($pro as $prof){ ?>
+						<p id="settings-uname"><?php echo $prof['username']; ?></p>
+					<?php } ?>
+
 					<a href="#" class="btn btn-default btn-sm" role="button" data-toggle="modal" data-target="#change-dp">
 						Change Profile Picture...</a>
 					<br /><br /><br /><br />
@@ -26,42 +30,23 @@
 				<form action="" class="lgform" method="post" accept-charset="utf-8">
 					<h3>Profile</h3>
 					<div class="form-group">
-						<label for="lname">Last Name:</label>
-						<input type="text" name="lname" class="form-control"  value="<?php echo $lname; ?>"/>
+						<label for="lastname">Last Name:</label>
+						<input type="text" id="lastname" name="lastname" class="form-control" />
 					</div>
 					<div class="form-group">
 						<label for="fname">First Name:</label>
-						<input type="text" name="fname" value="<?php echo $fname; ?>" class="form-control"  />
+							<input type="text" id="fname" name="fname" class="form-control" />					
 					</div>
 					<div class="form-group">
 						<label for="mname">Middle Name:</label>
-						<input type="text" name="mname" value="<?php echo $mname; ?>" class="form-control" />
+						<input type="text" id="mname" name="mname" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label for="department">Department:</label>
+						<label for="dept">Department:</label>
 						<div class="col-lg-12">
 							 <div class="col-sm-6">
-								<select name="department" class="form-control">							        	
-									<option value="101" >Audio Visual Department</option>
-									<option value="102">Computer Department</option>
-									<option value="103" selected>Construction Engineering and Management Department</option>
-									<option value="104">Electrical Department</option>
-									<option value="105">sssss</option>
-									<option value="106">efdfdsfsdf</option>
-									<option value="201">Dean's Office</option>
-									<option value="202">Math Department</option>
-									<option value="203">Physics Department</option>
-									<option value="204">Chemistry Department</option>
-									<option value="301">New</option>
-									<option value="302">Ancheta</option>
-									<option value="303">Entry</option>
-									<option value="304">Yo</option>
-									<option value="305">Hello</option>
-									<option value="401">Another Dummy Department</option>
-									<option value="402">Name</option>
-									<option value="403">Last na to</option>
-									<option value="404">ABC</option>
-									<option value="405">Dummy Department</option>
+								<select name="dept" id="dept" class="form-control">							        	
+									
 								</select> 
 							  </div>
 						 </div>
@@ -69,15 +54,15 @@
 					 </div>
 					 <br><br>
 					<div class="form-group">
-						<label for="status">Position:</label>
-						<input type="text" name="position" value="<?php echo $position; ?>" class="form-control" />
+						<label for="position">Position:</label>
+						<input type="text" id="position"  name="position" class="form-control" />
 					</div>
 					<br />
 					<br />
 					<h3>Account</h3>
 					<div class="form-group">
 						<label for="username">Username:</label>
-						<input type="text" name="username" value="<?php echo $username; ?>" class="form-control" />
+						<input type="text" name="username" id="username" class="form-control" />
 					</div>
 					<div class="form-group">
 						<label for="pwd">Current Password:</label>
@@ -117,8 +102,7 @@
 						<span class="glyphicon glyphicon-picture"></span> 
 						<span id="phototitle">Choose picture...</span>
 					  </label>
-					  <input type="file" name="photo" id="file" multiple="true"/>
-					  <p>^ note: ang plano ko sana is itago tong input file (display:none;) tapos ung filename sa button magdidisplay -Carlo</p>
+					  <input type="file" name="photo" id="file" multiple="true" style="display:none"/>
 				  
 			  </div>
 			  
@@ -144,7 +128,26 @@
 	
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip();
+			$.ajax({
+			        type: 'POST',
+			        //dataType:'json',
+			        url: 'edit_list',
+				        success: function(data) {
+				        	var obj = $.parseJSON(data);
+				        	console.log(obj);
+
+
+							$('#lastname').val(obj.userprof.lname);
+							$('#fname').val(obj.userprof.fname);
+							$('#mname').val(obj.userprof.mname);
+							$('#position').val(obj.userprof.position);
+							$('#username').val(obj.userprof.username);
+
+				        }
+			});
+		
 	});
+
 	
 </script>
 	

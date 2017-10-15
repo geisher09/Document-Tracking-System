@@ -86,12 +86,13 @@
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
 											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$inboxes["document_file"]) ?>'">Download<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 											
-											<?php if(($inboxes['response'])=='Approved'||($inboxes['response'])=='Rejected'){ ?>
-											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already responded to this file!" disabled>Respond<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
+											<?php if(($inboxes['response'])=='Approved'){ ?>
+											<button class="btn btn-success btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already approved this file!" disabled>Approved<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>
+											<?php }elseif(($inboxes['response'])=='Rejected'){?>
+											<button class="btn btn-danger btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already rejected this file!" disabled>Rejected<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
 											<?php }else{?>
 											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" >Respond<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
 											<?php }?>
-
 									</td>
 								</tr>
 								<?php } ?>
