@@ -3,11 +3,11 @@
 	class dts_model extends CI_Model{
 
 		public function getDocuments(){
-			$this->db->select('d.document_id,d.document_title,d.document_file,d.tracking_no,do.action,do.document_status');
+			$this->db->select('d.document_id,d.document_title,d.document_file,d.tracking_no,do.action,do.approved,do.rejected');
 		    $this->db->from('document d');
 		    $this->db->join('documentation do', 'do.document_id=d.document_id');
-		    $stat="sent";
-		    $this->db->where('do.document_status', $stat);
+		    // $stat="sent";
+		    // $this->db->where('do.document_status', $stat);
 		    $query = $this->db->get();
 		    if($query->num_rows() != 0)
 		    {
@@ -58,8 +58,7 @@
 				  'employee_id' =>	$this->input->post('empid'),
 				  'document_id' => $id,
 				  'action' => 'Pending',
-				  'document_status' => 'sent',
-			      'signatory' => 0
+				  'signatory' => 0
 			   );
 
 			return $this->db->insert('documentation', $docdata);
@@ -151,13 +150,12 @@
 
 			$id = $result->row('employee_id');
 
-			$stat = "sent";
+			
 
-			$this->db->select('a.employee_id,a.document_id,a.document_status,b.tracking_no,b.document_id,b.document_title,b.document_file,a.action');
+			$this->db->select('a.employee_id,a.document_id,b.tracking_no,b.document_id,b.document_title,b.document_file,a.action');
 			$this->db->from('documentation a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->where('a.employee_id', $id);
-			$this->db->where('a.document_status', $stat);
 			$query = $this->db->get();
 			return $query->result_array();
 		}
@@ -229,11 +227,10 @@
 
 			$stat = "received";
 			$act = "Pending";
-			$this->db->select('a.employee_id,a.document_id,a.document_status,b.document_id,b.document_title,a.action,');
+			$this->db->select('a.employee_id,a.document_id,b.document_id,b.document_title,a.action,');
 			$this->db->from('documentation a');
 			$this->db->join('document b','a.document_id = b.document_id');
 			$this->db->where('a.employee_id', $id);
-			$this->db->where('a.document_status', $stat);
 			$this->db->where('a.action', $act);
 			$query = $this->db->get();
 			return $query->result_array();
@@ -299,18 +296,64 @@
 			$response = $this->input->post('response');
 			$comment = $this->input->post('comment');
 			$date = $data['date'].' '.$data['time'];
-			
+			$app="Approved";
+			$rej="Rejected";
 			//print_r($pdata);
+
+				
+
 			if($response=="Approved"){
-				$this->db->set('approved',((int)($resdata->approved)+1));
-				$this->db->where('document_id', $id);
-				$this->db->update('documentation');
+				$this->db->set('approved', 'approved + 1', FALSE); 
+				$this->db->where('document_id', $id); 
+				$this->db->update('documentation'); 
+
+				$this->db->select('*');
+			    $this->db->from('documentation');
+			    $this->db->where('document_id',$id);
+			    $query = $this->db->get();
+				$result = ((int)($query->row('approved')));
+				$signs = ((int)($query->row('signatory')));
+				$resultrej = ((int)($query->row('rejected')));
+
+				if(($result)+1==($signs+1)){
+					$this->db->set('action',$app);
+					$this->db->set('date_of_action',$date);
+					$this->db->where('document_id', $id);
+					$this->db->update('documentation');
+				}
+				elseif(((($result)+1)+($resultrej))==($signs+1)){
+					$this->db->set('action',$rej);
+					$this->db->set('date_of_action',$date);
+					$this->db->where('document_id', $id);
+					$this->db->update('documentation');
+				}
 			}
 
 			elseif($response=="Rejected"){
-				$this->db->set('rejected',((int)($resdata->rejected)+1));
-				$this->db->where('document_id', $id);
-				$this->db->update('documentation');
+				$this->db->set('rejected', 'rejected + 1', FALSE); 
+				$this->db->where('document_id', $id); 
+				$this->db->update('documentation'); 
+
+				$this->db->select('*');
+			    $this->db->from('documentation');
+			    $this->db->where('document_id',$id);
+			    $query = $this->db->get();
+				$result = ((int)($query->row('rejected')));
+				$signs = ((int)($query->row('signatory')));
+				$resultapp = ((int)($query->row('approved')));
+
+				if(($result)+1==($signs+1)){
+					$this->db->set('action',$rej);
+					$this->db->set('date_of_action',$date);
+					$this->db->where('document_id', $id);
+					$this->db->update('documentation');
+				}
+				elseif(((($result)+1)+($resultapp))==($signs+1)){
+					$this->db->set('action',$rej);
+					$this->db->set('date_of_action',$date);
+					$this->db->where('document_id', $id);
+					$this->db->update('documentation');
+				}
 			}
 			
 			$this->db->set('response',$response);
@@ -377,7 +420,6 @@
 			$this->db->join('document', 'documentation.document_id=document.document_id');
 			if ( isset($cdate,$track_num)) {
 				$this->db->where('documentation.document_id',$track_num);
-				$this->db->where('documentation.document_status','sent');
 				$this->db->where('documentation.date_of_action',$cdate);
 			}
 			$query= $this->db->get();

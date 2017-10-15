@@ -85,8 +85,12 @@
 									<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
 											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$inboxes["document_file"]) ?>'">Download<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
-											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)">Respond<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
-
+											
+											<?php if(($inboxes['response'])=='Approved'||($inboxes['response'])=='Rejected'){ ?>
+											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already responded to this file!" disabled>Respond<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
+											<?php }else{?>
+											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" >Respond<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
+											<?php }?>
 
 									</td>
 								</tr>
@@ -252,6 +256,7 @@
 					<h3 class="modal-title" style="text-align:center;">RESPOND TO THIS FILE</h3>
 				</div>
 			      		<div class"form-group">
+
 			      			<?php echo form_open('home/saverespond', ['class'=>'form-horizontal']); ?>
 			      			<div class="col-md-12 form-group">
 			      			<br />
@@ -279,7 +284,9 @@
 							</div>
 
 							<div class="form-group">
-							        &emsp;&nbsp;<button type="submit" class="btn btn-primary">Save</button>
+							        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+							        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+							        <button type="submit" class="btn btn-primary">Save</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						    </div>
 						    <?php echo form_close(); ?>
