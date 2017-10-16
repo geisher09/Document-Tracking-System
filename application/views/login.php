@@ -41,13 +41,13 @@
 		<div class="form-group">
 			<?php echo form_input(['type'=>'text','align'=>'center','name'=>'uname','id'=>'uname','class'=>'form-control input-underline','placeholder'=>'User name', 'value'=>set_value('uname')]); ?>
 			<!-- <input align="center" id="uname" type="text" class="form-control input-underline" name="uname" placeholder="User Name" value='uname'> -->
-			<span style="color: White; "><?php echo form_error('uname'); ?></span>
+			<span style="color: White; "><strong><?php echo form_error('uname'); ?></strong></span>
 		</div> <br />
 
 		<div class="form-group">
 			<?php echo form_input(['type'=>'password','align'=>'center','name'=>'password','id'=>'password','class'=>'form-control input-underline','placeholder'=>'Password', 'value'=>set_value('password')]); ?>
 			<!-- <input align="center" id="password" type="password" class="form-control input-underline" name="password" placeholder="Password" value='password'> -->
-			<span style="color: White; "><?php echo form_error('password'); ?></span>
+			<span style="color: White; "><strong><?php echo form_error('password'); ?></strong></span>
 		</div> <br /><br />
 
 		<div class="form-group">

@@ -68,4 +68,4 @@ $lang['form_validation_error_message_not_set']	= 'Unable to access an error mess
 $lang['form_validation_in_list']		= 'The {field} field must be one of: {param}.';
 $lang['check_if_username_exists']		= 'Sorry, that username is already taken.';
 $lang['check_if_username_exists2']		= 'Sorry, the username you entered is already taken.';
-$lang['check_if_password_match']		= 'Sorry, you have entered a wrong password';
+$lang['check_if_password_match']		= 'Sorry, you have entered a wrong old password';

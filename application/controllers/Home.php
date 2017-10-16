@@ -352,7 +352,6 @@ class Home extends CI_Controller {
 		$this->form_validation->set_rules('mname', 'Middle Name', 'trim|required');
 	 	$this->form_validation->set_rules('position', 'Position', 'trim|required');
 	 	$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[6]|max_length[20]|callback_check_if_username_exists2');
-		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
 
         if ($this->form_validation->run()){
 
@@ -574,7 +573,7 @@ class Home extends CI_Controller {
 
         }
         else{
-        		$this->session->set_flashdata('responsed', 'Failed to save! (Please input necessary details)');
+        		$this->session->set_flashdata('responsed', 'Failed to save!(Please input necessary details)');
             	return redirect('home/profile');
         }
 	}
@@ -623,10 +622,10 @@ class Home extends CI_Controller {
 	 	$this->form_validation->set_rules('fname', 'First Name', 'trim|required');
 		$this->form_validation->set_rules('mname', 'Middle Name', 'trim|required');
 	 	$this->form_validation->set_rules('position', 'Position', 'trim|required');
+	 	$this->form_validation->set_rules('sex', 'Sex', 'required');
 	 	$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[6]|max_length[20]|callback_check_if_username_exists');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|max_length[32]');
 	 	$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required|matches[password]');
-  		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
 
         if ($this->form_validation->run()){
 
