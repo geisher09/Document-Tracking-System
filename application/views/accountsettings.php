@@ -1,14 +1,5 @@
 <div class="container">
 	<div class="container red" >
-	<!--- dummy data!! -->
-	<?php
-	$lname="Santos";
-	$fname="Josefina";
-	$mname="Dimagiba";
-	$position="Head";
-	$username="taongsantos";
-	$password="misterpogi";
-	?>
 	<h2>Settings</h2>
 	<hr/>
 	<div class="row" id="settingsdiv">
@@ -54,18 +45,17 @@
 						 </div>
 
 					 </div>
-					 <br><br>
 					<div class="form-group">
 						<label for="position">Position:</label>
 						<input type="text" id="position"  name="position" class="form-control" />
 					</div>
-					<br />
 					<br />
 					<h3>Account</h3>
 					<div class="form-group">
 						<label for="username">Username:</label>
 						<input type="text" name="username" id="username" class="form-control" />
 					</div>
+					<a href="<?php echo site_url('Home/password_change');?>" role="button" class="btn btn-info btn-md btn-block">Change Password</a>
 					<!-- <div id="password-change" class="collapse">
 						<div class="form-group">
 							<label for="password">Current Password:</label>
@@ -86,8 +76,11 @@
 					<button type="button" class="btn btn-danger btn-sm collapse" id="cancel">Cancel Change</button>
  -->						
 					
-					<button type="submit" class="btn btn-success btn-md btn-block">Save Changes</button>
-					<button type="reset" class="btn btn-danger btn-md btn-block">Discard Changes</button>
+					<br /><br /><br />
+					<div style="float:right;">
+						<button type="submit" class="btn btn-success btn-md">Save Changes</button>
+						<button type="reset" class="btn btn-danger btn-md">Discard Changes</button>
+					</div>
 					<?php echo form_close();?>
 				</div>
 			</div>
@@ -120,20 +113,6 @@
 	
 <!-- script  -->
 <script>
-	$(document).ready(function(){
-		$("#change").click(function(){
-			$("#password-change").show(200);
-			$("#password").show(200);
-			$("#change").hide(200);
-			$("#cancel").show(200);
-		});
-		$("#cancel").click(function(){
-			$("#password-change").hide(200);
-			$("#password").hide(200);
-			$("#cancel").hide(200);
-			$("#change").show(200);
-		});
-	});
 	
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip();

@@ -318,6 +318,16 @@ class Home extends CI_Controller {
 		//output to json format
 		//echo json_encode($output);
 	}
+	
+	public function password_change(){
+		
+		$header_data['title']="Change Password";
+		$this->load->view('header2',$header_data);
+		$this->load->view('header');
+		$this->load->view('password_change');
+		$this->load->view('footer');
+		
+	}
 
 	public function edit_list(){
 		$user['username']=$this->session->userdata('username');
