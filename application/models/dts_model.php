@@ -113,7 +113,7 @@
 
 		public function get_profile($user){
 
-			$this->db->select('a.username,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
+			$this->db->select('a.username,a.lname,a.fname,a.mname,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
 			$this->db->from('employee a');
 			$this->db->join('department b','a.department_id = b.department_id');
 			$this->db->where('a.username',$user['username']);

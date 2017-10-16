@@ -29,6 +29,10 @@
 
 								<?php foreach ($pro as $prof){ ?>
 									<p><?php echo $prof['username']; ?></p><br />
+									<p>	<?php echo $prof['lname']; ?>,
+										<?php echo $prof['fname']; ?>&nbsp;
+										<?php echo $prof['mname']; ?>
+									</p>
 									<p>Employee ID: <?php echo $prof['employee_id']; ?> </p>
 									<p>Department: <?php echo $prof['department_desc']; ?> </p>
 									<p>Department ID: <?php echo $prof['department_id']; ?> </p>
