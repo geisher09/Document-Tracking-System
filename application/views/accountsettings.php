@@ -17,22 +17,25 @@
 					
 				</div>
 				<div class="col-md-8 col-sm-12">
-					<?php echo form_open('home/update_user', ['class'=>'form-horizontal']); ?>
+					<?php echo form_open('home/update_user',['class'=>'lgform']);?>
 					<h3>Profile</h3>
 					<div class="col-md-12 form-group">
 								<input type="hidden" id="user_id" name="user_id"/>
 					</div>
 					<div class="form-group">
 						<label for="lastname">Last Name:</label>
-						<input type="text" id="lastname" name="lastname" class="form-control" />
+						<?php echo form_input(['name'=>'lastname','id'=>'lastname','class'=>'form-control', 'value'=>set_value('lastname')]); ?>
+						<?php echo form_error('lastname'); ?>
 					</div>
 					<div class="form-group">
 						<label for="fname">First Name:</label>
-							<input type="text" id="fname" name="fname" class="form-control" />					
+							<input type="text" id="fname" name="fname" class="form-control" />	
+							<?php echo form_error('fname'); ?>				
 					</div>
 					<div class="form-group">
 						<label for="mname">Middle Name:</label>
 						<input type="text" id="mname" name="mname" class="form-control" />
+						<?php echo form_error('mname'); ?>
 					</div>
 					<div class="form-group">
 						<label for="dept">Department:</label>
@@ -48,33 +51,17 @@
 					<div class="form-group">
 						<label for="position">Position:</label>
 						<input type="text" id="position"  name="position" class="form-control" />
+						<?php echo form_error('position'); ?>
 					</div>
 					<br />
 					<h3>Account</h3>
 					<div class="form-group">
 						<label for="username">Username:</label>
 						<input type="text" name="username" id="username" class="form-control" />
+						<?php echo form_error('username'); ?>
 					</div>
 					<a href="<?php echo site_url('Home/password_change');?>" role="button" class="btn btn-info btn-md btn-block">Change Password</a>
-					<!-- <div id="password-change" class="collapse">
-						<div class="form-group">
-							<label for="password">Current Password:</label>
-							<input type="password" name="password" id="password" class="form-control"  placeholder="Current Password" />
-						</div>
-
-						<div class="form-group">
-							<label for="pwd">New Password:</label>
-							<input type="password" id="password-change" name="password-change" value="" class="form-control" placeholder="New Password"  />
-						</div>
-
-						<div class="form-group">
-							<label for="pwd_2">Confirm New Password:</label>
-							<input name="password_confirm" type="password" class="form-control" id="pwd_2" placeholder="Password Confirmation">
-						</div>
-					</div>
-					<button type="button" class="btn btn-info btn-sm" id="change">Change Password</button>
-					<button type="button" class="btn btn-danger btn-sm collapse" id="cancel">Cancel Change</button>
- -->						
+					
 					
 					<br /><br /><br />
 					<div style="float:right;">

@@ -87,6 +87,34 @@
 			}
 		}
 
+		public function check_if_password_match($password,$user){
+			$pass = (md5($password));
+			$this->db->select('*');
+			$this->db->from('employee');
+			$this->db->where('username',$user['username']);
+			$this->db->where('password',$pass);
+			$query = $this->db->get('');
+
+			if ($query->num_rows()==1) {
+				return TRUE;
+			} else{
+				return FALSE;
+			}
+		}
+
+		public function check_if_username_exists2($username,$user){
+
+			$this->db->where('username', $username);
+			$this->db->where_not_in('username', $user['username']);
+			$result = $this->db->get('employee');
+
+			if ($result->num_rows()>=1) {
+				return FALSE;
+			} else{
+				return TRUE;
+			}
+		}
+
 		// public function login($username,$password){
 		// 	$this->db->select('employee_id,username,lname,fname,mname,password');
 		// 	$this->db->from('employee');
@@ -287,6 +315,16 @@
 			$this->db->where('employee_id', $id);
 			$this->db->update('employee');
 
+		}
+
+		public function saveUpdate_pass($user){
+			$data = array(
+				'password' => $this->input->post('password_change')
+			);
+			$password = md5($data['password']);
+			$this->db->set('password',$password);
+			$this->db->where('username', $user['username']);
+			$this->db->update('employee');
 		}
 
 		public function saveAddSig(){

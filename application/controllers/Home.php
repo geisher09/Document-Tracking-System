@@ -6,6 +6,7 @@ class Home extends CI_Controller {
 	public function __construct(){
                 parent::__construct();
                 $this->load->helper(array('form', 'url'));
+                $this->load->library('form_validation');
     }
 
 
@@ -345,11 +346,37 @@ class Home extends CI_Controller {
 	}
 
 	public function update_user(){
-		$this->load->model('dts_model');
-        $this->dts_model->saveUpdate_user();
-        // $this->session->set_flashdata('response', 'Saved Succesfully!');
 
-		return redirect('home/profile');
+		$this->form_validation->set_rules('lastname', 'Last Name', 'required');
+	 	$this->form_validation->set_rules('fname', 'First Name', 'trim|required');
+		$this->form_validation->set_rules('mname', 'Middle Name', 'trim|required');
+	 	$this->form_validation->set_rules('position', 'Position', 'trim|required');
+	 	$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[6]|max_length[20]|callback_check_if_username_exists2');
+		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
+
+        if ($this->form_validation->run()){
+
+             	$this->load->model('dts_model');
+       			$this->dts_model->saveUpdate_user();
+
+       			return redirect('home/profile');
+
+
+        }
+        else{
+            	$user['username']=$this->session->userdata('username');
+				$this->load->model('dts_model');
+				$profile = $this->dts_model->get_profile($user);
+
+		
+
+				$header_data['title']="Edit Profile";
+				$this->load->view('header2',$header_data);
+				$this->load->view('header');
+				$this->load->view('accountsettings', ['pro'=>$profile]);
+				$this->load->view('footer');
+        }
+		
 	}
 
 	public function signup(){
@@ -565,7 +592,31 @@ class Home extends CI_Controller {
 		return redirect('home/profile');
 	}
 
+	public function change_pass(){
 
+		$user['username']=$this->session->userdata('username');
+		$this->form_validation->set_rules('password', 'Current Password', 'trim|required|min_length[6]|max_length[32]|callback_check_if_password_match');
+		$this->form_validation->set_rules('password_change', 'New Password', 'trim|required|min_length[6]|max_length[32]');
+	 	$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required|matches[password_change]');
+
+  		if ($this->form_validation->run()){
+
+             	$this->load->model('dts_model');
+       			$this->dts_model->saveUpdate_pass($user);
+
+       			return redirect('home/home');
+
+
+        }
+        else{
+            	$header_data['title']="Change Password";
+				$this->load->view('header2',$header_data);
+				$this->load->view('header');
+				$this->load->view('password_change');
+				$this->load->view('footer');
+        }
+
+	}
 
 	public function create_member(){
 		$this->form_validation->set_rules('lname', 'Last Name', 'required');
@@ -606,6 +657,32 @@ class Home extends CI_Controller {
 		$this->load->model('dts_model');
 
 		$username_available = $this->dts_model->check_if_username_exists($requested_username);
+
+		if($username_available){
+			return TRUE;
+		}else {
+			return FALSE;
+		}
+	}
+
+	function check_if_password_match($requested_pass){
+		$user['username']=$this->session->userdata('username');
+		$this->load->model('dts_model');
+
+		$password_match = $this->dts_model->check_if_password_match($requested_pass,$user);
+
+		if($password_match){
+			return TRUE;
+		}else {
+			return FALSE;
+		}
+	}
+
+	function check_if_username_exists2($requested_username){
+		$user['username']=$this->session->userdata('username');
+		$this->load->model('dts_model');
+
+		$username_available = $this->dts_model->check_if_username_exists2($requested_username,$user);
 
 		if($username_available){
 			return TRUE;
