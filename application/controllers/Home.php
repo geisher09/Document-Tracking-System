@@ -323,12 +323,23 @@ class Home extends CI_Controller {
 		$user['username']=$this->session->userdata('username');
 		$this->load->model('dts_model');
 		$userprof = $this->dts_model->get_user($user);
+		$departments = $this->dts_model->getDepartments();
+
 		$output = array(
 
-						"userprof" => $userprof
+						"userprof" => $userprof,
+						"departments" => $departments
 
 				);
 		echo json_encode($output);
+	}
+
+	public function update_user(){
+		$this->load->model('dts_model');
+        $this->dts_model->saveUpdate_user();
+        // $this->session->set_flashdata('response', 'Saved Succesfully!');
+
+		return redirect('home/profile');
 	}
 
 	public function signup(){

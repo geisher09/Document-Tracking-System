@@ -200,7 +200,7 @@
 			<div class="row">
 				<div class=" col-md-10">
 					<label for="">Attach File:</label>
-						<?php echo form_upload(['name'=>'file']); ?>
+						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
 					</div>
 
 					<div class="col-lg-10">

@@ -4,10 +4,10 @@
 		
 	<div class="container red">
 			<div class="h">
-			<h1>Offices</h1>
+			<h1><strong>Offices</strong></h1>
 			<?php foreach($offices as $o) :?>
 			<!-- <?php echo $o; ?> -->
-			<h2><a style="color:white;" href="<?php echo site_url('Home/dept/'.$o["office_id"]); ?>"><?php echo $o["office_desc"]; ?></a></h2>
+			<h3><a style="color:white;" href="<?php echo site_url('Home/dept/'.$o["office_id"]); ?>"><?php echo $o["office_desc"]; ?></a></h3>
 			<!-- <h3><a href=.base_url('Home/dept/'.$o['office_id'])><?php echo $o["office_desc"]; ?></a></h3> -->
 		<?php endforeach; ?>
 <!--

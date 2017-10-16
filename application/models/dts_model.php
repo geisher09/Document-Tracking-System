@@ -268,6 +268,27 @@
 
 		}
 
+		public function saveUpdate_user(){
+			$id = $this->input->post('user_id');
+			$user = array(
+				'fname' =>$this->input->post('fname'),
+				'lname'	=>$this->input->post('lastname'),
+				'mname'	=>$this->input->post('mname'),
+				'position'	=>$this->input->post('position'),
+				'department_id'	=>$this->input->post('dept'),
+				'username'	=>$this->input->post('username')
+			);
+			$this->db->set('lname',$user['lname']);
+			$this->db->set('fname',$user['fname']);
+			$this->db->set('mname',$user['mname']);
+			$this->db->set('position',$user['position']);
+			$this->db->set('username',$user['username']);
+			$this->db->set('department_id',$user['department_id']);
+			$this->db->where('employee_id', $id);
+			$this->db->update('employee');
+
+		}
+
 		public function saveAddSig(){
 			$id = $this->input->post('adddocuno');
 			$sigdata = $this->get_by_id($this->input->post('adddocuno'));

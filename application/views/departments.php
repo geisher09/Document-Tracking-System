@@ -10,7 +10,7 @@
 					<tbody>
 						<?php foreach($dept as $department) :?>
 						<tr>
-							<td><a href="<?php echo site_url('Home/deptEmployees/'.$department["department_id"]); ?>"><?php echo $department["department_desc"]; ?></a></td>
+							<td><a style="color: white" href="<?php echo site_url('Home/deptEmployees/'.$department["department_id"]); ?>"><?php echo $department["department_desc"]; ?></a></td>
 							<td><?php echo $department["department_id"]; ?></td>
 						</tr>
 					<?php endforeach; ?>
