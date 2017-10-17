@@ -5,46 +5,25 @@
 		<h1> Welcome <?php echo $username; ?>!</h1>
 	   </div>
 	   <!-- <div class="col-md-6">
-		
+
 		<h3 style="color:#48C9B0;float:right;margin-top:20px;">
 		  <?php echo $date; ?> | <span id='time'></span>
 		</h3>
 	   </div> -->
 
-	   
+
 	</div>
-				<!--
-				<p id="intro">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Many years ago before the advent of modern technology, people were just scribbling					on dried leaves using coals
-					from burned wood as pens. Soon, mankind discovered how to make paper out of trees, while quills and ink came
-					immediately thereafter. Many brilliant minds convened and soon, the concept of technology became the talk of the town.
-					Technology improved over the course of time, witnessing the greatest wars in the world, surpassing the most dreadful
-					diseases that humankind has ever faced. And here it is now, continues to be modernized by many of the world's cleverest
-					people with knowledge about computers. We do still write on beautifully made parchments, but none would be easier than
-					creating our letters using many different softwares nowadays such as Microsoft Word. Now, we can create documents using
-					these complex machines, save it or share it by any means of "techy" transfer tools. <br /><br />
-
-					Very nice isn't it? How about we realize that in a folder full of documents, each one could just be a speck of dust?
-					How about they each become a butterfly fluttering from one place to another, lost in track? Okay, that was metaphorical
-					but here's the catch: in most companies, transfering documents from one place to another is an essential process. Think
-					about it, what if they get lost? Now imagine departments pointing at each other, each claiming that the other one has
-					the document, and each arguing that they don't have it. Very confusing. My deepest pity to the secretaries. <br /><br />
-
-					That is why after centuries, we have come up with the Document Tracking System-a system that will watch over the
-					documents like an invisible chapperone as they are being passed on to different departments. Now there's no need
-					to worry because the Document Tracking System is here to help you manage and keep track of your documents. From the
-					developers of this Document Tracking System, "HOORAY!"
-
-
-					The current time is: <?php echo $time; ?>
+			<!--		The current time is: <?php echo $time; ?>
 					Today is: <?php echo $date; ?>
 					<?php echo $username; ?> Cute <3
 				</p>
 				-->
-		
+
 			<form>
 				<div class="form-group input-group home-searchbar">
+					<!-- <input type="text" class="form-control" id="system-search" name="q" placeholder="Document to track..." required/> -->
 					<input type="text" class="form-control" id="system-search" name="q" placeholder="Document to track..." required/>
+					<!-- <input type="text" class="form-control" id="search" onkeyup="search()" name="q" placeholder="Search for" required/> -->
 					<span class="input-group-btn">
 						<button type="submit" class="btn btn-success" id="show" >
 							<span class="glyphicon glyphicon-search"></span> Track
@@ -52,64 +31,237 @@
 					</span>
 				</div>
 			</form>
+
+			<!-- <div id="invalid_view" class="collapse" style="margin-left:100px;">
+				<div class="main">
+							<div class="alert alert-danger" >
+								<h2><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Invalid File!</h2>
+								<p id="invalid"></p>
+							</div>
+				</div>
+		</div> -->
+
 		<!-- bale nakatago pa ung details about sa tracking ng document [na may id na "map"] tapos lalabas na lang pag pinindot na ung button [na may id na [show] -->
 			<div id="map" class="collapse" style="margin-left:100px;">
 			<h2><i>Tracking Details Of your Document...</i></h2>
 				<div class="main">
 					<ul class="cbp_tmtimeline">
 						<li>
-							<time class="cbp_tmtime" datetime="2017-01-10 18:30"><span>1/1/17</span> <span>18:30</span></time>
+							<div id="pending_view" >
+							<!-- <time class="cbp_tmtime" datetime="2017-01-10 18:30"><span>1/1/17</span> <span>18:30</span></time> -->
+							<time class="cbp_tmtime"><span id="pending_date"></span><span id="pending_time"></span></time>
+							<div class="cbp_tmicon cbp_tmicon-phone"></div>
+							<div class="cbp_tmlabel">
+								<h2><span class="glyphicon glyphicon-export"></span>&nbsp;Pending</h2>
+								<p id="pending"></p>
+							</div>
+						</div>
+						</li>
+						<li>
+							<div id="summary_view" >
+							<!-- <time class="cbp_tmtime" datetime="2017-01-10 18:30"><span>1/1/17</span> <span>18:30</span></time> -->
+							<time class="cbp_tmtime"><span id="summary_date"></span><span id="summary_time"></span></time>
 							<div class="cbp_tmicon cbp_tmicon-phone"></div>
 							<div class="cbp_tmlabel">
 								<h2><span class="glyphicon glyphicon-export"></span>&nbsp;Sent</h2>
-								<p>Sent by [sender] of [sender's dept.] to [receiver] of [receiver's dept.]</p>
+								<p id="summary"></p>
 							</div>
+						</div>
 						</li>
 						<li>
-							<time class="cbp_tmtime" datetime="2017-01-11T12:01"><span>1/1/17</span> <span>12:01</span></time>
+							<div id="department_view">
+							<time class="cbp_tmtime"><span id="department_date"></span><span id="department_time"></span></time>
 							<div class="cbp_tmicon cbp_tmicon-screen"></div>
 							<div class="cbp_tmlabel">
 								<h2><span class="glyphicon glyphicon-import"></span>&nbsp;Delivered</h2>
-								<p>Delivered to [receiver] of [department]</p>
+								<p id="department"></p>
 							</div>
+						</div>
 						</li>
 						<li>
-							<time class="cbp_tmtime" datetime="2017-01-17 05:36"><span>1/1/17</span> <span>05:36</span></time>
+							<div id="approved_view">
+							<!-- <time class="cbp_tmtime" datetime="2017-01-17 05:36"><span>1/1/17</span> <span>05:36</span></time> -->
+							<time class="cbp_tmtime"><span id="approve_date"></span> <span id="approve_time"></span></time>
 							<div class="cbp_tmicon cbp_tmicon-mail"></div>
 							<div class="cbp_tmlabel">
 								<h2><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2>
-								<p>Approved by [nag-approve]</p>
+								<p id="approved"></p>
 							</div>
+						</div>
 						</li>
 						<li>
-							<time class="cbp_tmtime" datetime="2017-01-15 17:15"><span>1/1/17</span> <span>17:15</span></time>
+							<div id="rejected_view">
+							<!-- <time class="cbp_tmtime" datetime="2017-01-15 17:15"><span>1/1/17</span> <span>17:15</span></time> -->
+							<time class="cbp_tmtime"><span id="reject_date"></span> <span id="reject_time"></span></time>
 							<div class="cbp_tmicon cbp_tmicon-phone"></div>
 							<div class="cbp_tmlabel">
 								<h2><span class="glyphicon glyphicon-remove"></span>&nbsp;Rejected</h2>
-								<p>Rejected by [nag-reject]</p>
+								<p id="rejected"></p>
 							</div>
+						</div>
 						</li>
 						<li>
-							<time class="cbp_tmtime" datetime="2017-01-16 21:30"><span>1/1/17</span> <span>21:30</span></time>
+							<div id="sender_view">
+							<!-- <time class="cbp_tmtime" datetime="2017-01-16 21:30"><span>1/1/17</span> <span>21:30</span></time> -->
+							<time class="cbp_tmtime"><span id="send_date"></span> <span id="send_time"></span></time>
 							<div class="cbp_tmicon cbp_tmicon-earth"></div>
 							<div class="cbp_tmlabel">
-								<h2>Carlo Abendanio</h2>
-								<p>Oh to my water jug... it's been years...</p>
+								<h2 id="sender"></h2>
+								<p id="comment"></p>
 							</div>
+						</div>
 						</li>
 					</ul>
 				</div>
 			</div>
-			
+
 <!-- script for show/hide -->
 <script>
-	$(document).ready(function(){
-		$("#show").click(function(){
-			$("#map").show(500);
-		});
+$(document).ready(function() {
+	$('#show').on('click', function(e) {  //nawala yung sa error message niya pag walang input di pwede sa functin(e)
+			// 	$("#show").click(function(){
+
+		e.preventDefault();
+		var id = $("#system-search").val();
+		if(id != ''){
+			$.ajax({
+							type: 'POST',
+							url: 'histo',
+							 data:{id: id},
+								success: function(data) {
+									// $('#invalid_view').hide(500);
+									// alert(id);
+									// alert(data);
+									var obj = JSON.parse(data);
+									var splitarray = new Array();
+									splitarray= obj.origin.date_of_action.split(" ");
+
+									if(obj.status=="Rejected"){
+										// alert("Rejected");
+										//initial
+										$("#send_view").show();
+										$("#rejected_view").show();
+										$("#pending_view").show();
+										$('#sender').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
+										$('#send_date').html(splitarray[0]);
+										$('#send_time').html(splitarray[1]);
+										$('#comment').html(obj.origin.document_desc);
+
+										//rejected
+										var reject_date = new Array();
+										reject_date= obj.rejected.date_responded.split(" ");
+										$('#rejected').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
+										$('#reject_date').html(reject_date[0]);
+										$('#reject_time').html(reject_date[1]);
+
+										//pending/hold
+										var pending_date = new Array();
+										pending_date= obj.rejected.date_responded.split(" ");
+										// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
+										$('#pending').html('The file: '+obj.origin.document_id+'<br/>Is still in: '+ obj.rejected.department_desc);
+										$('#pending_date').html(pending_date[0]);
+										$('#pending_time').html(pending_date[1]);
+										$('#approved_view').hide();
+										$('#department_view').hide();
+										$('#summary_view').hide();
+										$("#map").show(500);
+
+									}
+									else if(obj.status=="Approved"){
+										// alert("Approved");
+
+										//initial
+										$("#send_view").show();
+										$("#rejected_view").hide();
+										$("#approved_view").show();
+										$("#department_view").show();
+										$("#summary_view").show();
+										$('#sender').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
+										$('#send_date').html(splitarray[0]);
+										$('#send_time').html(splitarray[1]);
+										$('#comment').html(obj.origin.document_desc);
+
+										//rejected
+										// $('#rejected_view').hide();
+
+										//approved
+										var approve_date = new Array();
+										approve_date= obj.approved.date_responded.split(" ");
+										$('#approved').html(obj.approved.lname+', '+obj.approved.fname+' '+obj.approved.mname);
+										$('#approve_date').html(approve_date[0]);
+										$('#approve_time').html(approve_date[1]);
+
+										//rejected
+										// var reject_date = new Array();
+										// reject_date= obj.rejected.date_responded.split(" ");
+										// $('#rejected').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
+										// $('#reject_date').html(reject_date[0]);
+										// $('#reject_time').html(reject_date[1]);
+
+										//department
+										var department_date = new Array();
+										department_date= obj.approved.date_responded.split(" ");
+										$('#department').html(obj.approved.department_desc);
+										$('#department_date').html(department_date[0]);
+										$('#department_time').html(department_date[1]);
+
+										//summary
+										var summary_date = new Array();
+										summary_date= obj.origin.date_of_action.split(" ");
+										$('#summary').html("From Employee: "+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname
+										+'<br/>Department: '+obj.origin.department_desc
+										+'<br/>To Employee: '+obj.approved.lname+', '+obj.approved.fname+' '+obj.approved.mname
+										+'<br/>Department: '+obj.approved.department_desc);
+										$('#summary_date').html(summary_date[0]);
+										$('#summary_time').html(summary_date[1]);
+
+										$('#pending_view').hide();
+
+										$("#map").show(500);
+
+									}
+									else if(obj.status=="Pending"){
+										// alert("Pending");
+										$("#send_view").show();
+										$("#pending_view").show();
+										$("#rejected_view").hide();
+										$("#approved_view").hide();
+										$("#department_view").hide();
+										$("#summary_view").hide();
+										$('#sender').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
+										$('#send_date').html(splitarray[0]);
+										$('#send_time').html(splitarray[1]);
+										$('#comment').html(obj.origin.document_desc);
+
+										//pending
+										var pending_date = new Array();
+										pending_date= obj.pending.date_responded.split(" ");
+										// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
+										$('#pending').html('The file: '+obj.origin.document_id+'<br/>Is still in: '+ obj.pending.department_desc);
+										$('#pending_date').html(pending_date[0]);
+										$('#pending_time').html(pending_date[1]);
+										$("#map").show(500);
+									}
+									else{
+										// $("#invalid_view").show(500);
+									}
+								}
+						});
+		}
+		else {
+			// $("#sender_view").hide(500);
+			// $("#pending_view").hide(500);
+			// $("#rejected_view").hide(500);
+			// $("#approved_view").hide(500);
+			// $("#department_view").hide(500);
+			// $("#summary_view").hide(500);
+			// $("#invalid_view").show(500);
+		}
 	});
+});
 
-
+</script>
+<script>
 	function setTime() {
 	var d = new Date(),
 	  el = document.getElementById("time");
@@ -215,6 +367,6 @@ function drawHand(ctx, pos, length, width) {
     ctx.rotate(-pos);
 }
 </script>
-	
+
 	</div>
 </div>

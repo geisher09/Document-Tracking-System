@@ -35,7 +35,7 @@
 				<li><a href="<?php // echo site_url('Home/add'); ?>" style="color:white;">Send a Document</a></li>
 				<li><a href="<?php // echo site_url('Home/offices'); ?>" style="color:white;">Offices & Employees</a></li>
 			</ul>
-    
+
 			<ul class="nav navbar-nav">
 				<li><a href="<?php // echo site_url('Home/contacts'); ?>" style="color:white;"><span class="glyphicon glyphicon-phone"></span> Contacts</a></li>
 				<li><a href="<?php // echo site_url('Home'); ?>" style="color:white;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -43,7 +43,7 @@
 		</div>
 	</nav>
 	-->
-	
+
 <div class="container">
 	<div class="title-banner">
 		<img src="<?php echo base_url('assets/images/colored.png'); ?>" alt="logo" id="logo" class="img-reponsive" />
@@ -62,11 +62,11 @@
 <!-- script for show/hide -->
 <script>
 
-	$(document).ready(function(){
-		$("#show").click(function(){
-			$("#map").show(500);
-		});
-	});
+	// $(document).ready(function(){
+	// 	$("#show").click(function(){
+	// 		$("#map").show(500);
+	// 	});
+	// });
 
 
 	function setTime() {

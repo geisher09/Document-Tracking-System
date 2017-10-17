@@ -319,15 +319,15 @@ class Home extends CI_Controller {
 		//output to json format
 		//echo json_encode($output);
 	}
-	
+
 	public function password_change(){
-		
+
 		$header_data['title']="Change Password";
 		$this->load->view('header2',$header_data);
 		$this->load->view('header');
 		$this->load->view('password_change');
 		$this->load->view('footer');
-		
+
 	}
 
 	public function edit_list(){
@@ -367,7 +367,7 @@ class Home extends CI_Controller {
 				$this->load->model('dts_model');
 				$profile = $this->dts_model->get_profile($user);
 
-		
+
 
 				$header_data['title']="Edit Profile";
 				$this->load->view('header2',$header_data);
@@ -375,7 +375,7 @@ class Home extends CI_Controller {
 				$this->load->view('accountsettings', ['pro'=>$profile]);
 				$this->load->view('footer');
         }
-		
+
 	}
 
 	public function signup(){
@@ -704,6 +704,53 @@ class Home extends CI_Controller {
 		}else {
 			return FALSE;
 		}
+	}
+
+	//history (single row palang per data)
+	public function histo(){
+			$this->load->model('dts_model');
+			$stat = $this->dts_model->get_file_status($this->input->post('id'));
+			foreach($stat as $o){
+				if($o['action']=='Rejected'){
+					$origin = $this->dts_model->get_file_origin($this->input->post('id'));
+					$rejected = $this->dts_model->rejected($this->input->post('id'));
+	 			 	$approved = $this->dts_model->approved($this->input->post('id'));
+					$output = array(
+						"origin" => $origin,
+						"rejected" => $rejected,
+						"approved" => $approved,
+						"status" => "Rejected"
+					);
+					echo json_encode($output);
+					break;
+					exit();
+				}
+				else if($o['action']=="Approved"){
+					$origin = $this->dts_model->get_file_origin($this->input->post('id'));
+					$approved = $this->dts_model->approved($this->input->post('id'));
+					$output = array(
+						"status" => "Approved",
+						"origin" => $origin,
+						"approved" => $approved
+					);
+					// echo json_decode($output);
+					echo json_encode($output);
+					break;
+					exit();
+				}
+				else if($o['action']=="Pending"){
+					$origin = $this->dts_model->get_file_origin($this->input->post('id'));
+					$pending = $this->dts_model->pending($this->input->post('id'));
+					$output = array(
+						"status" => "Pending",
+						"origin" => $origin,
+						"pending" => $pending
+					);
+					echo json_encode($output);
+					break;
+					exit();
+				}
+			}
 	}
 
 
