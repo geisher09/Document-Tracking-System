@@ -204,7 +204,7 @@
 
 			$id = $result->row('employee_id');
 
-			
+
 
 			$this->db->select('a.employee_id,a.document_id,b.tracking_no,b.document_id,b.document_title,b.document_file,a.action');
 			$this->db->from('documentation a');
@@ -328,7 +328,7 @@
 			$insert = $this->db->insert('employee', $data);
 			return $insert;
 			}
-			
+
 
 		}
 
@@ -417,12 +417,12 @@
 			$rej="Rejected";
 			//print_r($pdata);
 
-				
+
 
 			if($response=="Approved"){
-				$this->db->set('approved', 'approved + 1', FALSE); 
-				$this->db->where('document_id', $id); 
-				$this->db->update('documentation'); 
+				$this->db->set('approved', 'approved + 1', FALSE);
+				$this->db->where('document_id', $id);
+				$this->db->update('documentation');
 
 				$this->db->select('*');
 			    $this->db->from('documentation');
@@ -447,9 +447,9 @@
 			}
 
 			elseif($response=="Rejected"){
-				$this->db->set('rejected', 'rejected + 1', FALSE); 
-				$this->db->where('document_id', $id); 
-				$this->db->update('documentation'); 
+				$this->db->set('rejected', 'rejected + 1', FALSE);
+				$this->db->where('document_id', $id);
+				$this->db->update('documentation');
 
 				$this->db->select('*');
 			    $this->db->from('documentation');
@@ -472,7 +472,7 @@
 					$this->db->update('documentation');
 				}
 			}
-			
+
 			$this->db->set('response',$response);
 			$this->db->set('comment',$comment);
 			$this->db->set('date_responded',$date);
@@ -567,6 +567,89 @@
 
 
 		}
+
+		//File History
+	public function get_file_status($track_num){
+		$this->db->select('documentation.action');
+		$this->db->from('documentation');
+		$this->db->join('document', 'document.document_id = documentation.document_id');  //document's info
+		$this->db->join('employee', 'employee.employee_id = documentation.employee_id');
+		$this->db->where('documentation.document_id', $track_num);
+		$query = $this->db->get();
+		return $query-> result_array();
+		// return $query->row();
+	}
+
+	public function get_file_origin($track_num){
+		$this->db->select('documentation.document_id, documentation.employee_id, documentation.action, documentation.date_of_action,
+											document.document_title, document.document_desc,
+											employee.lname, employee.fname, employee.mname,
+											department.department_desc');
+		$this->db->from('documentation');
+		$this->db->join('document', 'document.document_id = documentation.document_id');  //document's info
+		$this->db->join('employee', 'employee.employee_id = documentation.employee_id');
+		$this->db->join('department', 'department.department_id = employee.department_id');
+		$this->db->where('documentation.document_id', $track_num);
+		$query = $this->db->get();
+		// return $query-> result_array();
+		return $query->row();
+
+	}
+
+	public function signa_date($track_num){
+		$this->db->select('signatory.date_responded');
+		$this->db->from('signatory');
+		$this->db->join('documentation', 'signatory.document_id = documentation.document_id');
+		$this->db->join('employee', 'employee.employee_id = signatory.employee_id');
+		$this->db->join('department', 'department.department_id = employee.department_id');
+		$this->db->where('documentation.document_id',$track_num);
+		$query = $this->db->get();
+		return $query-> result_array();
+
+	}
+	public function rejected($track_num){
+		$this->db->select('documentation.document_id,,
+											signatory.employee_id, signatory.response, signatory.comment, signatory.date_responded,
+											employee.department_id,employee.lname, employee.fname, employee.mname,
+											department.department_desc');
+		$this->db->from('signatory');
+		$this->db->join('documentation', 'signatory.document_id = documentation.document_id');
+		$this->db->join('employee', 'employee.employee_id = signatory.employee_id');
+		$this->db->join('department', 'department.department_id = employee.department_id');
+		$this->db->where('documentation.document_id',$track_num);
+		$this->db->where('signatory.response', "Rejected");
+		$query = $this->db->get();
+		return $query->row();
+	}
+	public function approved($track_num){
+		$this->db->select('documentation.document_id,,
+											signatory.employee_id, signatory.response, signatory.comment, signatory.date_responded,
+											employee.department_id,employee.lname, employee.fname, employee.mname,
+											department.department_desc');
+		$this->db->from('signatory');
+		$this->db->join('documentation', 'signatory.document_id = documentation.document_id');
+		$this->db->join('employee', 'employee.employee_id = signatory.employee_id');
+		$this->db->join('department', 'department.department_id = employee.department_id');
+		$this->db->where('documentation.document_id',$track_num);
+		$this->db->where('signatory.response', "Approved");
+		$query = $this->db->get();
+		// return $query-> result_array();
+		return $query-> row();
+	}
+	public function pending($track_num){
+		$this->db->select('documentation.document_id,,
+											signatory.employee_id, signatory.response, signatory.comment, signatory.date_responded,
+											employee.department_id,employee.lname, employee.fname, employee.mname,
+											department.department_desc');
+		$this->db->from('signatory');
+		$this->db->join('documentation', 'signatory.document_id = documentation.document_id');
+		$this->db->join('employee', 'employee.employee_id = signatory.employee_id');
+		$this->db->join('department', 'department.department_id = employee.department_id');
+		$this->db->where('documentation.document_id',$track_num);
+		$this->db->where('signatory.response', "Pending");
+		$query = $this->db->get();
+		return $query->row();
+	}
 	}
 
 ?>
