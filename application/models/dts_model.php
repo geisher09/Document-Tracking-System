@@ -317,7 +317,7 @@
 
 		}
 
-		public function saveUpdate_user(){
+		public function saveUpdate_user($user){
 			$id = $this->input->post('user_id');
 			$user = array(
 				'fname' =>$this->input->post('fname'),
@@ -333,7 +333,7 @@
 			$this->db->set('position',$user['position']);
 			$this->db->set('username',$user['username']);
 			$this->db->set('department_id',$user['department_id']);
-			$this->db->where('employee_id', $id);
+			$this->db->where('username', $user['username']);
 			$this->db->update('employee');
 
 		}

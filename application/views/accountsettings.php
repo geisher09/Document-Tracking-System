@@ -45,7 +45,7 @@
 						<label for="dept">Department:</label>
 						<div class="col-lg-12">
 							 <div class="col-sm-6">
-									<select name="dept" id="dept" value="haha" class="form-control">							        	
+									<select name="dept" id="dept" class="form-control">							        	
 										
 									</select> 
 							  </div>

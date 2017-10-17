@@ -354,9 +354,9 @@ class Home extends CI_Controller {
 	 	$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[6]|max_length[20]|callback_check_if_username_exists2');
 
         if ($this->form_validation->run()){
-
+        		$user['username']=$this->session->userdata('username');
              	$this->load->model('dts_model');
-       			$this->dts_model->saveUpdate_user();
+       			$this->dts_model->saveUpdate_user($user);
 
        			return redirect('home/profile');
 
