@@ -583,7 +583,7 @@ class Home extends CI_Controller {
 		$type = strtolower($type[count($type)-1]);
 		$url = "./uploads/".uniqid(rand()).'.'.$type;
 
-		if(in_array($type, array("doc", "docs", "pdf", "txt")))
+		if(in_array($type, array("doc", "docx", "pdf", "txt")))
 					if(is_uploaded_file($_FILES["file"]["tmp_name"]))
 						if(move_uploaded_file($_FILES["file"]["tmp_name"],$url))
 								return $url;
