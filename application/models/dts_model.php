@@ -278,8 +278,10 @@
 		public function saveMember(){
 			$username = $this->input->post('username');
 			$lastid = $this->getLastEmployee();
+			$sex = $this->input->post('sex');
 			$now = date('y');
-			$data = array(
+			if($sex=='male'){
+				$data = array(
 				'fname' =>$this->input->post('fname'),
 				'lname'	=>$this->input->post('lname'),
 				'mname'	=>$this->input->post('mname'),
@@ -288,11 +290,30 @@
 				'department_id'	=>$this->input->post('department'),
 				'employee_id'	=>$now.'-'.$this->input->post('department').'-'.$lastid,
 				'password'	=>md5($this->input->post('password')),
-				'username'	=>$this->input->post('username')
+				'username'	=>$this->input->post('username'),
+				'image' => './images/male.png'
 			);
 
 			$insert = $this->db->insert('employee', $data);
 			return $insert;
+			}else{
+				$data = array(
+				'fname' =>$this->input->post('fname'),
+				'lname'	=>$this->input->post('lname'),
+				'mname'	=>$this->input->post('mname'),
+				'sex'	=>$this->input->post('sex'),
+				'position'	=>$this->input->post('position'),
+				'department_id'	=>$this->input->post('department'),
+				'employee_id'	=>$now.'-'.$this->input->post('department').'-'.$lastid,
+				'password'	=>md5($this->input->post('password')),
+				'username'	=>$this->input->post('username'),
+				'image' => './images/female.png'
+			);
+
+			$insert = $this->db->insert('employee', $data);
+			return $insert;
+			}
+			
 
 		}
 
