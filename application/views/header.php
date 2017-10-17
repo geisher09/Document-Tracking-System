@@ -61,6 +61,7 @@
 
 <!-- script for show/hide -->
 <script>
+
 	$(document).ready(function(){
 		$("#show").click(function(){
 			$("#map").show(500);

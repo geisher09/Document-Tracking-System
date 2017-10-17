@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2017 at 06:02 AM
+-- Generation Time: Oct 17, 2017 at 03:30 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -123,7 +123,7 @@ CREATE TABLE `documentation` (
 INSERT INTO `documentation` (`documentation_id`, `employee_id`, `document_id`, `action`, `date_of_action`, `signatory`, `approved`, `rejected`) VALUES
 (2, '15-202-002', 2, 'Rejected', '2017-10-15 11:53:13', 3, 2, 1),
 (3, '15-202-002', 1, 'Pending', '2017-09-28 00:00:00', 2, 0, 0),
-(4, '17-101-6', 3, 'pending', '2017-10-13 00:00:00', 2, 0, 0),
+(4, '17-101-6', 3, 'Pending', '2017-10-13 00:00:00', 2, 0, 1),
 (5, '17-101-6', 4, 'Rejected', '2017-10-15 11:50:19', 2, 1, 1),
 (6, '17-104-7', 5, 'Pending', '2017-10-14 16:34:58', 2, 0, 0),
 (7, '17-104-7', 6, 'Approved', '2017-10-15 11:54:14', 2, 2, 0);
@@ -143,21 +143,22 @@ CREATE TABLE `employee` (
   `fname` varchar(30) NOT NULL,
   `mname` varchar(20) NOT NULL,
   `sex` varchar(1) NOT NULL,
-  `password` varchar(32) NOT NULL
+  `password` varchar(60) NOT NULL,
+  `image` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`employee_id`, `department_id`, `username`, `position`, `lname`, `fname`, `mname`, `sex`, `password`) VALUES
-('15-101-001', 101, 'Ancheta29', 'Professor', 'Ancheta', 'Christian Daniel', 'Mozo', 'm', '25d55ad283aa400af464c76d713c07ad'),
-('15-101-002', 101, 'DummyMo', 'Professor', 'Dummy', 'Employee', 'Entry', 'f', '25d55ad283aa400af464c76d713c07ad'),
-('15-201-005', 201, 'Mozo', 'Head', 'Mozo', 'Daniella', 'Gagote', 'f', '25d55ad283aa400af464c76d713c07ad'),
-('15-202-001', 102, 'Dummy', 'Professor', 'Dummy', 'Dummy', 'Dummy', 'f', '25d55ad283aa400af464c76d713c07ad'),
-('15-202-002', 202, 'Jung', 'Professor', 'Jungkook', 'BTS', 'kpop', 'm', '25d55ad283aa400af464c76d713c07ad'),
-('17-101-6', 101, 'Lenovo', 'Intern', 'Lenovo', 'Daniel', 'Asus', 'm', '25d55ad283aa400af464c76d713c07ad'),
-('17-104-7', 104, 'geisher09', 'Dean', 'Bernabe', 'Geisher', 'Gonzalo', 'f', '56ad349e35056b1b289fae48e8e03830');
+INSERT INTO `employee` (`employee_id`, `department_id`, `username`, `position`, `lname`, `fname`, `mname`, `sex`, `password`, `image`) VALUES
+('15-101-001', 101, 'Ancheta29', 'Professor', 'Ancheta', 'Christian Daniel', 'Mozo', 'm', '25d55ad283aa400af464c76d713c07ad', ''),
+('15-101-002', 101, 'DummyMo', 'Professor', 'Dummy', 'Employee', 'Entry', 'f', '25d55ad283aa400af464c76d713c07ad', ''),
+('15-201-005', 201, 'Mozo', 'Head', 'Mozo', 'Daniella', 'Gagote', 'f', '25d55ad283aa400af464c76d713c07ad', ''),
+('15-202-001', 102, 'Dummy', 'Professor', 'Dummy', 'Dummy', 'Dummy', 'f', '25d55ad283aa400af464c76d713c07ad', ''),
+('15-202-002', 202, 'Jung', 'Professor', 'Jungkook', 'BTS', 'kpop', 'm', '25d55ad283aa400af464c76d713c07ad', ''),
+('17-101-6', 101, 'Lenovo', 'Intern', 'Lenovo', 'Daniel', 'Asus', 'm', 'e389a212c2b3beb2a9a00ad2f13b8c2b', ''),
+('17-104-7', 104, 'geisher09', 'Dean', 'Bernabe', 'Geisher', 'Gonzalo', 'f', '56ad349e35056b1b289fae48e8e03830', './images/3138059e6056fea1ac.jpg');
 
 -- --------------------------------------------------------
 
@@ -205,7 +206,7 @@ INSERT INTO `signatory` (`signatory_id`, `document_id`, `response`, `employee_id
 (2, 2, 'Rejected', '17-104-7', 'None', '2017-10-15 11:52:09'),
 (3, 2, 'Approved', '15-101-001', 'None', '2017-10-15 11:51:09'),
 (4, 1, 'Pending', '15-201-005', 'none', '2017-10-09 09:40:52'),
-(5, 3, 'Pending', '17-104-7', 'none', '2017-10-13 10:37:10'),
+(5, 3, 'Rejected', '17-104-7', 'Wrong file!', '2017-10-15 01:42:16'),
 (6, 2, 'Approved', '15-201-005', 'None', '2017-10-15 11:53:13'),
 (7, 3, 'Pending', '15-101-001', 'none', '2017-10-14 03:37:44'),
 (8, 4, 'Rejected', '15-101-001', 'None', '2017-10-15 11:50:19'),

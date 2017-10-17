@@ -21,8 +21,10 @@
 				<div class="col-md-3 col-sm-12 col-xs-12 roundbox" style="margin-left:0px;">
 
 					<div class="row">
-							<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"
+						<?php foreach ($pro as $prof){ ?>
+							<img src="<?php echo base_url($prof['image']); ?>" class="img-responsive"
 								alt="Profile Picture" id="profilepic" />
+						<?php } ?>
 					</div>
 					<div class="row">
 							<div class="info">

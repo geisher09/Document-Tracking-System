@@ -591,6 +591,22 @@ class Home extends CI_Controller {
 		return redirect('home/profile');
 	}
 
+	public function upload_pic(){
+		$type = explode('.', $_FILES["photo"]["name"]);
+		$type = strtolower($type[count($type)-1]);
+		$url = "./images/".uniqid(rand()).'.'.$type;
+
+		if(in_array($type, array("jpeg", "jpg", "png")))
+					if(is_uploaded_file($_FILES["photo"]["tmp_name"]))
+						if(move_uploaded_file($_FILES["photo"]["tmp_name"],$url))
+								//return $url;
+		$user['username']=$this->session->userdata('username');
+		$this->load->model('dts_model');
+		$this->dts_model->savePic($url,$user);
+
+		return redirect('home/profile');
+	}
+
 	public function change_pass(){
 
 		$user['username']=$this->session->userdata('username');

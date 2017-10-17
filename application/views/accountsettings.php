@@ -4,7 +4,10 @@
 	<hr/>
 	<div class="row" id="settingsdiv">
 				<div class="col-md-4 col-sm-12 text-center">
-					<img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"alt="Profile Picture" id="profilepic-settings" data-toggle="tooltip" title="Profile Picture" />
+					<?php foreach ($pro as $prof){ ?>
+							<img src="<?php echo base_url($prof['image']); ?>" class="img-responsive"
+								alt="Profile Picture" id="profilepic" />
+						<?php } ?>
 					<br />
 
 					<?php foreach ($pro as $prof){ ?>
@@ -81,18 +84,21 @@
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Change Profile Picture </h4>
 			</div>
+			<?php echo form_open_multipart('home/upload_pic',['class'=>'horizontal']);?>
 			<div class="modal-body text-center">
-			  <img src="<?php echo base_url('assets/images/cat.jpg'); ?>" class="img-responsive"alt="Profile Picture" id="profilepic-settings"/>
+						<?php foreach ($pro as $prof){ ?>
+							<img src="<?php echo base_url($prof['image']); ?>" class="img-responsive"
+								alt="Profile Picture" id="profilepic" />
+						<?php } ?>			  
 			  <div class="upload-pic-form">
-				  <form>
 					  <input type="file" name="photo" id="uploadfile" accept="image/*"/>
 			  </div>
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+			  <button type="submit" class="btn btn-success">Save</button>
 			  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			  </form>
 			</div>
+			<?php echo form_close();?>
 		  </div>
 		  
 		</div>

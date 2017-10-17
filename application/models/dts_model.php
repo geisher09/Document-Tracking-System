@@ -141,7 +141,7 @@
 
 		public function get_profile($user){
 
-			$this->db->select('a.username,a.lname,a.fname,a.mname,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
+			$this->db->select('a.username,a.image,a.lname,a.fname,a.mname,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
 			$this->db->from('employee a');
 			$this->db->join('department b','a.department_id = b.department_id');
 			$this->db->where('a.username',$user['username']);
@@ -156,7 +156,7 @@
 
 		public function get_user($user){
 
-			$this->db->select('a.username,a.lname,a.fname,a.mname,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
+			$this->db->select('a.username,a.image,a.lname,a.fname,a.mname,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
 			$this->db->from('employee a');
 			$this->db->join('department b','a.department_id = b.department_id');
 			$this->db->where('a.username',$user['username']);
@@ -323,6 +323,16 @@
 			);
 			$password = md5($data['password']);
 			$this->db->set('password',$password);
+			$this->db->where('username', $user['username']);
+			$this->db->update('employee');
+		}
+
+		public function savePic($url,$user){
+			$data = array(
+				'image' => $url
+			);
+
+			$this->db->set('image',$data['image']);
 			$this->db->where('username', $user['username']);
 			$this->db->update('employee');
 		}
