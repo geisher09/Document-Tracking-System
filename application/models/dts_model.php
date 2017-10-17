@@ -154,6 +154,21 @@
 			 return $result->result_array();
 		}
 
+		public function get_profile2($user){
+
+			$this->db->select('a.username,a.image,a.lname,a.fname,a.mname,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
+			$this->db->from('employee a');
+			$this->db->join('department b','a.department_id = b.department_id');
+			$this->db->where('a.username',$user);
+			$result = $this->db->get();
+
+
+			// $this->db->where('username', $user['username']);
+			// $result = $this->db->get('employee');
+
+			 return $result->result_array();
+		}
+
 		public function get_user($user){
 
 			$this->db->select('a.username,a.image,a.lname,a.fname,a.mname,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
@@ -318,6 +333,7 @@
 		}
 
 		public function saveUpdate_user($user){
+			//$_SESSION['username'] = $this->input->post('username');
 			$id = $this->input->post('user_id');
 			$user = array(
 				'fname' =>$this->input->post('fname'),
@@ -333,7 +349,7 @@
 			$this->db->set('position',$user['position']);
 			$this->db->set('username',$user['username']);
 			$this->db->set('department_id',$user['department_id']);
-			$this->db->where('username', $user['username']);
+			$this->db->where('employee_id', $id);
 			$this->db->update('employee');
 
 		}

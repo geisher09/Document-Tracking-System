@@ -357,7 +357,7 @@ class Home extends CI_Controller {
         		$user['username']=$this->session->userdata('username');
              	$this->load->model('dts_model');
        			$this->dts_model->saveUpdate_user($user);
-
+       			$_SESSION['username'] = $this->input->post('username');
        			return redirect('home/profile');
 
 

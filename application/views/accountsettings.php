@@ -24,6 +24,9 @@
 					<?php echo form_open('home/update_user',['class'=>'lgform']);?>
 					<h3>Profile</h3>
 					<div class="form-group">
+							<input type="hidden" id="user_id" name="user_id" class="form-control"/>				
+					</div>
+					<div class="form-group">
 						<label for="lastname">Last Name:</label>
 						<?php echo form_input(['name'=>'lastname','id'=>'lastname','class'=>'form-control', 'value'=>set_value('lastname')]); ?>
 						<?php echo '<h5 class="pulse animated" style="color: #ff4d4d;
