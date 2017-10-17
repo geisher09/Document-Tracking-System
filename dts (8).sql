@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2017 at 03:30 PM
+-- Generation Time: Oct 17, 2017 at 07:40 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -97,7 +97,9 @@ INSERT INTO `document` (`document_id`, `tracking_no`, `document_title`, `documen
 (3, '', 'Dummy', 'Dummy', './uploads/1408559e0cec705379.pdf', '0000-00-00 00:00:00'),
 (4, '171014-QMSUL-4', 'try', 'try', './uploads/69959e1ca20b4300.pdf', '2017-10-10 21:05:52'),
 (5, '171014-LWMTG-5', '2nd Try', '2nd Try Gei', './uploads/589859e1cc31acc3b.pdf', '2017-10-14 16:34:57'),
-(6, '171014-GNIJU-6', '3rd test', '3rd test', './uploads/206959e1e796eaeb8.pdf', '2017-10-14 18:31:51');
+(6, '171014-GNIJU-6', '3rd test', '3rd test', './uploads/206959e1e796eaeb8.pdf', '2017-10-14 18:31:51'),
+(7, '171017-RSAPZ-7', 'auds', 'auds dummy', './uploads/640659e61183025d5.pdf', '2017-10-17 22:19:47'),
+(8, '171017-EIQCJ-8', 'auds 2', 'auds dummy 2', './uploads/2770559e612d396027.docx', '2017-10-17 22:25:23');
 
 -- --------------------------------------------------------
 
@@ -126,7 +128,9 @@ INSERT INTO `documentation` (`documentation_id`, `employee_id`, `document_id`, `
 (4, '17-101-6', 3, 'Pending', '2017-10-13 00:00:00', 2, 0, 1),
 (5, '17-101-6', 4, 'Rejected', '2017-10-15 11:50:19', 2, 1, 1),
 (6, '17-104-7', 5, 'Pending', '2017-10-14 16:34:58', 2, 0, 0),
-(7, '17-104-7', 6, 'Approved', '2017-10-15 11:54:14', 2, 2, 0);
+(7, '17-104-7', 6, 'Approved', '2017-10-15 11:54:14', 2, 2, 0),
+(8, '17-102-8', 7, 'Pending', '2017-10-17 22:19:48', 0, 0, 0),
+(9, '17-102-8', 8, 'Pending', '2017-10-17 22:25:23', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -152,13 +156,14 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employee_id`, `department_id`, `username`, `position`, `lname`, `fname`, `mname`, `sex`, `password`, `image`) VALUES
-('15-101-001', 101, 'Ancheta29', 'Professor', 'Ancheta', 'Christian Daniel', 'Mozo', 'm', '25d55ad283aa400af464c76d713c07ad', ''),
-('15-101-002', 101, 'DummyMo', 'Professor', 'Dummy', 'Employee', 'Entry', 'f', '25d55ad283aa400af464c76d713c07ad', ''),
-('15-201-005', 201, 'Mozo', 'Head', 'Mozo', 'Daniella', 'Gagote', 'f', '25d55ad283aa400af464c76d713c07ad', ''),
-('15-202-001', 102, 'Dummy', 'Professor', 'Dummy', 'Dummy', 'Dummy', 'f', '25d55ad283aa400af464c76d713c07ad', ''),
-('15-202-002', 202, 'Jung', 'Professor', 'Jungkook', 'BTS', 'kpop', 'm', '25d55ad283aa400af464c76d713c07ad', ''),
-('17-101-6', 101, 'Lenovo', 'Intern', 'Lenovo', 'Daniel', 'Asus', 'm', 'e389a212c2b3beb2a9a00ad2f13b8c2b', ''),
-('17-104-7', 104, 'geisher09', 'Dean', 'Bernabe', 'Geisher', 'Gonzalo', 'f', '56ad349e35056b1b289fae48e8e03830', './images/3138059e6056fea1ac.jpg');
+('15-101-001', 101, 'Ancheta29', 'Professor', 'Ancheta', 'Christian Daniel', 'Mozo', 'm', '25d55ad283aa400af464c76d713c07ad', './images/male.png'),
+('15-101-002', 101, 'DummyMo', 'Professor', 'Dummy', 'Employee', 'Entry', 'f', '25d55ad283aa400af464c76d713c07ad', './images/female.png'),
+('15-201-005', 201, 'Mozo', 'Head', 'Mozo', 'Daniella', 'Gagote', 'f', '25d55ad283aa400af464c76d713c07ad', './images/female.png'),
+('15-202-001', 102, 'Dummy', 'Professor', 'Dummy', 'Dummy', 'Dummy', 'f', '25d55ad283aa400af464c76d713c07ad', './images/male.png'),
+('15-202-002', 202, 'Jungie', 'Professor', 'Jungkook', 'Junnie boy', 'kpop', 'm', '25d55ad283aa400af464c76d713c07ad', './images/male.png'),
+('17-101-6', 101, 'Lenovo', 'Intern', 'Lenovo', 'Daniel', 'Asus', 'm', 'e389a212c2b3beb2a9a00ad2f13b8c2b', './images/male.png'),
+('17-102-8', 102, 'audreywaje', 'Dean', 'Waje', 'Audrey Noelle', 'Pabillaran', 'f', '25d55ad283aa400af464c76d713c07ad', './images/female.png'),
+('17-104-7', 104, 'geisher09', 'Dean', 'Bernabez', 'Geisher', 'Gonzalo', 'f', '56ad349e35056b1b289fae48e8e03830', './images/3138059e6056fea1ac.jpg');
 
 -- --------------------------------------------------------
 
@@ -281,7 +286,7 @@ ALTER TABLE `signatory`
 -- AUTO_INCREMENT for table `documentation`
 --
 ALTER TABLE `documentation`
-  MODIFY `documentation_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `documentation_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `signatory`
 --
