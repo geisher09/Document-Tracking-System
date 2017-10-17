@@ -124,14 +124,15 @@ $(document).ready(function() {
 		e.preventDefault();
 		var id = $("#system-search").val();
 		if(id != ''){
+			// alert(id);
 			$.ajax({
 							type: 'POST',
 							url: 'histo',
 							 data:{id: id},
 								success: function(data) {
 									// $('#invalid_view').hide(500);
-									// alert(id);
 									// alert(data);
+									// alert("pasok");
 									var obj = JSON.parse(data);
 									var splitarray = new Array();
 									splitarray= obj.origin.date_of_action.split(" ");
@@ -155,15 +156,16 @@ $(document).ready(function() {
 										$('#reject_time').html(reject_date[1]);
 
 										//pending/hold
-										var pending_date = new Array();
-										pending_date= obj.rejected.date_responded.split(" ");
+										// var pending_date = new Array();
+										// pending_date= obj.rejected.date_responded.split(" ");
 										// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-										$('#pending').html('The file: '+obj.origin.document_id+'<br/>Is still in: '+ obj.rejected.department_desc);
-										$('#pending_date').html(pending_date[0]);
-										$('#pending_time').html(pending_date[1]);
+										// $('#pending').html('The file: '+obj.origin.document_id+'<br/>Is still in: '+ obj.rejected.department_desc);
+										// $('#pending_date').html(pending_date[0]);
+										// $('#pending_time').html(pending_date[1]);
 										$('#approved_view').hide();
 										$('#department_view').hide();
 										$('#summary_view').hide();
+										$('#pending_view').hide();
 										$("#map").show(500);
 
 									}
@@ -232,15 +234,27 @@ $(document).ready(function() {
 										$('#send_date').html(splitarray[0]);
 										$('#send_time').html(splitarray[1]);
 										$('#comment').html(obj.origin.document_desc);
+										if(obj.pending!=null){
+											//pending
+											var pending_date = new Array();
+											pending_date= obj.pending.date_responded.split(" ");
+											// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
+											$('#pending').html('The file: '+obj.origin.tracking_no+'<br/>Is still in: '+ obj.pending.department_desc);
+											$('#pending_date').html(pending_date[0]);
+											$('#pending_time').html(pending_date[1]);
+											$("#map").show(500);
+										}
+										else{
+											var pending_date = new Array();
+											pending_date= obj.origin.date_of_action.split(" ");
+											// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
+											$('#pending').html('The file: '+obj.origin.tracking_no+'<br/>No response yet');
+											$('#pending_date').html(pending_date[0]);
+											$('#pending_time').html(pending_date[1]);
+											$("#map").show(500);
+											// $("#map").show(500);
+										}
 
-										//pending
-										var pending_date = new Array();
-										pending_date= obj.pending.date_responded.split(" ");
-										// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-										$('#pending').html('The file: '+obj.origin.document_id+'<br/>Is still in: '+ obj.pending.department_desc);
-										$('#pending_date').html(pending_date[0]);
-										$('#pending_time').html(pending_date[1]);
-										$("#map").show(500);
 									}
 									else{
 										// $("#invalid_view").show(500);
