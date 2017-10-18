@@ -38,7 +38,17 @@
 </div>
 </nav>
 
-	<!--
+
+<div class="col-md-6">
+		<?php date_default_timezone_set('Asia/Manila');
+			$date=date('y-m-d'); ?>
+		<h3 class="roundbox"style="color:white;float:right;margin-top:-15px;margin-right:-615px;">
+		  <?php echo $date; ?> | <span id='time'></span>
+		</h3>
+	</div>
+
+
+<!-- 	
 	<nav class="navbar navbar-inverse navbar-fixed">
 		<div id="navigation">
 			<ul class="nav navbar-nav">
@@ -63,15 +73,9 @@
 		<img src="<?php echo base_url('assets/images/colored.png'); ?>" alt="logo" id="logo" class="img-reponsive" />
 		<banner id="bannertitle">DOCUMENT TRACKING SYSTEM</banner>
 	</div>
-	<div class="col-md-6">
-		<?php date_default_timezone_set('Asia/Manila');
-			$date=date('y-m-d'); ?>
-		<h3 class="roundbox"style="color:#555555;float:right;margin-top:-85px;margin-right:-660px;">
-		  <?php echo $date; ?> | <span id='time'></span>
-		</h3>
-	</div>
-</div>
---!>
+	
+</div> -->
+
 
 <!-- script for show/hide -->
 <script>
