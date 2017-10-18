@@ -3,7 +3,7 @@
     position: relative;">Settings</p>
 <div class="container">
 	<div class="container red" >
-	<h2>Settings</h2>
+	<h2>Account Settings</h2>
 	<hr/>
 
 	<div class="row" id="settingsdiv">

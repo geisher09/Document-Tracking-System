@@ -7,7 +7,7 @@
     </div>
 	
 	<ul class="nav navbar-nav navbar-right" id="nav">
-        <li id="home"><a href="<?php echo site_url('Home/home'); ?>" class="text-center">
+        <li><a href="<?php echo site_url('Home/home'); ?>" class="text-center">
          <span class="glyphicon glyphicon-home"></span><br/>Home
         </a></li>
         
