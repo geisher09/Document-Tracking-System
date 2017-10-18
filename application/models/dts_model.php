@@ -525,8 +525,9 @@
 		public function track_docu_latest_date($track_num){ //get the latest date of the file
 			$this->db->select('*');
 			$this->db->from('documentation');
+			$this->db->join('document', 'document.document_id = documentation.document_id');
 			if ( isset($track_num)) {
-				$this->db->where('document_id',$track_num);
+				$this->db->where('document.tracking_no',$track_num);
 			}
 			$query= $this->db->get();
 			return $query-> result_array();
@@ -536,7 +537,7 @@
 			$this->db->from('documentation');
 			$this->db->join('document', 'documentation.document_id=document.document_id');
 			if ( isset($cdate,$track_num)) {
-				$this->db->where('documentation.document_id',$track_num);
+				$this->db->where('document.tracking_no',$track_num);
 				$this->db->where('documentation.date_of_action',$cdate);
 			}
 			$query= $this->db->get();
@@ -647,7 +648,7 @@
 		$this->db->join('documentation', 'signatory.document_id = documentation.document_id');
 		$this->db->join('employee', 'employee.employee_id = signatory.employee_id');
 		$this->db->join('department', 'department.department_id = employee.department_id');
-		$this->db->join('document', 'document.document_id = documentation.document_id');
+		$this->db->join('document', 'd ocument.document_id = documentation.document_id');
 		$this->db->where('document.tracking_no',$track_num);
 		$this->db->where('signatory.response', "Pending");
 		$query = $this->db->get();

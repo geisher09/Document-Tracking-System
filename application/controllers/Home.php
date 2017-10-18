@@ -46,6 +46,7 @@ class Home extends CI_Controller {
 					$emp2 = array(
 						'employee_id' => $r['employee_id'],
 						'document_id' => $r['document_id'],
+						'tracking_no' => $r['tracking_no'],
 						'document_status' => $r['document_status'],
 						'action' => $r['action'],
 						'date_of_action' => $r['date_of_action'],
@@ -59,6 +60,7 @@ class Home extends CI_Controller {
 				$title=$emp2['document_title'];
 				$action=$emp2['action'];
 				$date=$emp2['date_of_action'];
+				$tracking_no=$emp2['tracking_no'];
 				$from=$this->dts_model->track_docu_from($employee);
 				foreach ($from as $r) {
  					$track_from = array(
@@ -70,7 +72,7 @@ class Home extends CI_Controller {
 			 	$dept_desc = $track_from['department_desc'];
 			 	$dept_id = $track_from['department_id'];
 				$this->session->set_flashdata('track',
-				'The File: '.$title. '<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
+				'The File: '.$tracking_no. '<br/>Title :'.$title.'<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
 				redirect('home/index');
 			}
 			else if($emp['document_status']!='sent'){
@@ -83,6 +85,72 @@ class Home extends CI_Controller {
 				redirect('home/index');
 			}
 		}
+	// public function track_docu(){
+	// 	$this->form_validation->set_rules('track_num', 'track_num', 'trim|required');
+	// 	if($this->form_validation->run()){
+	// 		$track_num = $this->input->post('track_num');
+	// 		$this->load->model('dts_model');
+	// 		$doc_date = $this->dts_model->track_docu_latest_date($track_num);
+	// 		if($doc_date!=null){
+  //       foreach ($doc_date as $d) {
+  //         $dates = array(
+  //           'date_of_action' => $d['date_of_action']
+  //         );
+  //         $dates2[]=$dates;
+  //       }
+  //       asort($dates2);
+  //       $date_close=($dates2);
+  //       $cdate = $date_close[0];
+	//
+  //       foreach ($date_close as $d) {
+  //         $cdates = array(
+  //           'date_of_action' => $d['date_of_action']
+  //         );
+  //         $dates3[]=$cdates;
+  //       }
+  //       $use_date = $cdates['date_of_action'];
+  //       $info = $this->dts_model->track_docu_info($use_date,$track_num);
+	// 			foreach ($info as $r) {
+	// 				$emp2 = array(
+	// 					'employee_id' => $r['employee_id'],
+	// 					'document_id' => $r['document_id'],
+	// 					'document_status' => $r['document_status'],
+	// 					'action' => $r['action'],
+	// 					'date_of_action' => $r['date_of_action'],
+	// 					'signatory' => $r['signatory'],
+	// 					'document_title' => $r['document_title'],
+	// 				  'document_desc' => $r['document_desc']
+	// 				);
+  //           $rec[]=$emp2;
+  //       }
+  //     	$employee=$emp2['employee_id'];
+	// 			$title=$emp2['document_title'];
+	// 			$action=$emp2['action'];
+	// 			$date=$emp2['date_of_action'];
+	// 			$from=$this->dts_model->track_docu_from($employee);
+	// 			foreach ($from as $r) {
+ // 					$track_from = array(
+ // 						'employee_id' => $r['employee_id'],
+ // 						'department_id' => $r['department_id'],
+ // 						'department_desc' => $r['department_desc']
+ // 					);
+	// 			}
+	// 		 	$dept_desc = $track_from['department_desc'];
+	// 		 	$dept_id = $track_from['department_id'];
+	// 			$this->session->set_flashdata('track',
+	// 			'The File: '.$title. '<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
+	// 			redirect('home/index');
+	// 		}
+	// 		else if($emp['document_status']!='sent'){
+	// 			$this->session->set_flashdata('error1', 'File not yet accepted or invalid!');
+	// 			redirect('home/index');
+	// 		}
+	// 		}
+	// 		else{
+	// 			$this->session->set_flashdata('error1', 'Please Enter a Document ID!');
+	// 			redirect('home/index');
+	// 		}
+	// 	}
 
 
 	public function login_validation(){
