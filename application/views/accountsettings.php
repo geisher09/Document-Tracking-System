@@ -2,6 +2,7 @@
 	<div class="container red" >
 	<h2>Settings</h2>
 	<hr/>
+
 	<div class="row" id="settingsdiv">
 				<div class="col-md-4 col-sm-12 text-center">
 					<?php foreach ($pro as $prof){ ?>
@@ -78,7 +79,10 @@
 				</div>
 			</div>
 	
-	  <!-- Change DP Modal -->
+	</div>
+</div>
+
+<!-- Change DP Modal -->
 	  <div class="modal fade" id="change-dp" role="dialog">
 		<div class="modal-dialog">
 		
@@ -106,7 +110,7 @@
 		  
 		</div>
 	  </div>
-	
+
 <!-- script  -->
 <script>
 	
@@ -140,6 +144,3 @@
 	});
 	
 </script>
-	
-	</div>
-</div>

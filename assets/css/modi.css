@@ -1,6 +1,9 @@
 /* custom css for DTS */
 
 /* common for all views */
+div.modal div.modal-backdrop {
+    z-index: 0;
+}
 
 .btn, input[type=submit]{
 	box-shadow:none;
