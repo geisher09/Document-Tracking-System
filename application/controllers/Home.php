@@ -52,14 +52,15 @@ class Home extends CI_Controller {
 						'date_of_action' => $r['date_of_action'],
 						'signatory' => $r['signatory'],
 						'document_title' => $r['document_title'],
-					  'document_desc' => $r['document_desc']
+					  'document_desc' => $r['document_desc'],
+					  'date_created' => $r['date_created'],
 					);
             $rec[]=$emp2;
         }
       	$employee=$emp2['employee_id'];
 				$title=$emp2['document_title'];
 				$action=$emp2['action'];
-				$date=$emp2['date_of_action'];
+				$date=$emp2['date_created'];
 				$tracking_no=$emp2['tracking_no'];
 				$from=$this->dts_model->track_docu_from($employee);
 				foreach ($from as $r) {
@@ -72,7 +73,7 @@ class Home extends CI_Controller {
 			 	$dept_desc = $track_from['department_desc'];
 			 	$dept_id = $track_from['department_id'];
 				$this->session->set_flashdata('track',
-				'The File: '.$tracking_no. '<br/>Title :'.$title.'<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
+				'The File: '.$tracking_no. '<br/>Title: '.$title.'<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
 				redirect('home/index');
 			}
 			else if($emp['document_status']!='sent'){

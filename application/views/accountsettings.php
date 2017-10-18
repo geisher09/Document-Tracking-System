@@ -1,3 +1,6 @@
+<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;display: block;
+    z-index: 5;
+    position: relative;">Settings</p>
 <div class="container">
 	<div class="container red" >
 	<h2>Settings</h2>

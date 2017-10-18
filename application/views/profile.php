@@ -11,7 +11,7 @@
 	$title = "Request for tables";
 	$status = "Pending";
 ?>
-
+<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Profile</p>
 <div class="container body">
 		<div class="container red" >
 
@@ -66,12 +66,13 @@
 							</div>
 					<?php endif; ?>
 					<div class="tab">
-						<button class="tablinks" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Inbox </button>
-						<button class="tablinks" onclick="openFolder(event, 'Sent')"> Sent </button>
+						<button class="tablink active" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Inbox </button>
+						<button class="tablink" onclick="openFolder(event, 'Sent')"> Sent </button>
 					</div>
 
-					<div id="Inbox" class="tabcontent"> <br /><br />
+					<div id="Inbox" class="tabcontent">
 						<!--- inbox table -->
+						<h2 style="color:white">Inbox</h2><br />
 						<table class="table table-list-search table-hover table-condensed table-responsive ">
 							<thead>
 								<tr>
@@ -118,14 +119,16 @@
 					</div>
 
 
-					<div id="Sent" class="tabcontent"> <br />
+					<div id="Sent" class="tabcontent">
 						<?php foreach ($pro as $profi){ ?>
-									<button class="btn btn-success btn-md" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
+							<h2 style="color:white; float:left">Sent</h2></br>
+									<button class="btn btn-success btn-md" style="float: right;" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
 										<span class="glyphicon glyphicon-share"></span> Send a Document
-									</button> <br /><br /><br />
+									</button> <br />
 						<?php } ?>
-
-						<!--- sent docus table -->
+						<br /><br />
+						
+						<!--- inbox table -->
 							<table class="table table-list-search table-hover table-condensed table-responsive ">
 								<thead>
 									<tr>
@@ -235,9 +238,9 @@
 	<div id="inbox_details" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
-				<div class="modal-header" style="background-color: #555555">
+				<div class="modal-header" style="background-color: #34495E">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="text-align:center;">DOCUMENT DETAILS</h3>
+					<h3 class="modal-title" style="text-align:center; color:white;">DOCUMENT DETAILS</h3>
 				</div>
 
 				<div class="modal-body zoomIn animated">
@@ -256,9 +259,9 @@
 		<div class="modal-dialog modal-md">
 			<!-- Modal content-->
 			    <div class="modal-content">
-			      <div class="modal-header" style="background-color: #555555">
+			      <div class="modal-header" style="background-color: #34495E">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="text-align:center;">RESPOND TO THIS FILE</h3>
+					<h3 class="modal-title" style="text-align:center; color:white;">RESPOND TO THIS FILE</h3>
 				</div>
 			      		<div class"form-group">
 
@@ -309,11 +312,11 @@
     <div class="modal-dialog modal-lg">
 		<!-- Modal content-->
 		<div class="modal-content">
-			<div class="modal-header" style="background-color: #555555">
+			<div class="modal-header" style="background-color: #34495E">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h3 class="modal-title" style="text-align:center;">View Details</h3>
-					<button class="tablink btn btn-basic" onclick="details(event, 'clientDet')">Document Details</button>
-					<button class="tablink btn btn-basic" onclick="details(event, 'addSig')">Add Signatory</button>
+				<h3 class="modal-title" style="text-align:center; color:white;">View Details</h3>
+					<button class="tablink btn btn-default" onclick="details(event, 'clientDet')">Document Details</button>
+					<button class="tablink btn btn-default" onclick="details(event, 'addSig')">Add Signatory</button>
 			</div>
 
 			<div class="modal-body">
@@ -448,19 +451,20 @@
 <!-- javascript -->
 <script>
 
-function openFolder (event, folderName) {
+function openFolder (evt, folderName) {
+
 	var x, tablinks, tabcontent;
-	tabcontent= document.getElementsByClassName ("tabcontent");
-	for (x=0; x < tabcontent.length; x++) {
-		tabcontent[x].style.display = "none";
+	tablinks= document.getElementsByClassName ("tabcontent");
+	for (x=0; x < tablinks.length; x++) {
+		tablinks[x].style.display = "none";
 	}
 
-	tablinks= document.getElementsByClassName ("tablinks");
+	tabcontent= document.getElementsByClassName ("tablink");
 	for (x=0; x < tablinks.length; x++) {
-		tablinks[x].className= tablinks[x].className.replace("active", "");
+		tabcontent[x].className= tabcontent[x].className.replace("active", " ");
 	}
 	document.getElementById(folderName).style.display = "block";
-	//evt.currentTarget.className += " active";
+	evt.currentTarget.className += " active";
 }
 
 document.getElementById("defaultOpen").click();
@@ -480,10 +484,10 @@ $('.modal').on('hidden.bs.modal', function (e) {
 		}
 		tablinks = document.getElementsByClassName("tablink");
 		for (i = 0; i < x.length; i++) {
-		tablinks[i].classList.remove("w3-light-grey");
+		tablinks[i].className= tablinks[i].className.replace("active", " ");
 		}
 		document.getElementById(windowName).style.display = "block";
-		evt.currentTarget.classList.add("w3-light-grey");
+		evt.currentTarget.className += " active";
 		};
 
 		$(document).ready(function() {

@@ -1,3 +1,4 @@
+<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Home</p>
 <div class="container">
 	<div class="container red" >
 	<div class="row">

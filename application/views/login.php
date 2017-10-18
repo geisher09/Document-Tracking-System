@@ -83,7 +83,7 @@
 
 		<?php if($this->session->flashdata("track")){?>
 		<?php
-		echo '<div class="col-md-8 col-sm-12 col-xs-12 roundbox flipInX animated" style="margin-left:0px;"><h4 style="color: Black; "><strong>'.$this->session->flashdata("track").'</strong></h4></div>'
+		echo '<div class="col-md-8 col-sm-12 col-xs-12 roundbox flipInX animated" style="margin-left:0px;"><h4 style="color: white; "><strong>'.$this->session->flashdata("track").'</strong></h4></div>'
 		?>
 		<?php }?>
 		<?php echo form_close(); ?>

@@ -18,6 +18,14 @@ div.modal div.modal-backdrop {
 	text-decoration: none;
 }
 
+.title{
+	font-family: "Josefin Slab";
+	font-size: 100px;
+	font-style: bold;
+	color: black !important;
+	text-decoration: none;
+}
+
 #brand:hover {
 	color: #fff !important;
 	text-decoration: none !important;
@@ -107,6 +115,15 @@ h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
 .table {
 	color: white;
 	font-size: 16px;
+}
+
+.tabmenu>div:target>a, .tabmenu>div.current>a {
+   background: white;
+}
+
+.tabmenu>div:target>div, .tabmenu>div.current>div {
+   position: absolute;
+   z-index: 1;
 }
 
 .table-hover tbody tr:hover td {
@@ -217,8 +234,23 @@ h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
 }
 
 .tab button.active {
-    background-color: #E74C3C;
+    background-color: black;
 }
+
+/*.navbar #nav > .active > a {
+    color: red;
+}*/
+
+.navbar #nav .active{
+	background-color: #34495E;
+   	border-color: #34495E;
+    border-left-color: #34495E; 
+    border-top-color: #34495E;
+    color: white; 
+}
+
+.black-background {background-color:#000000;}
+.white {color:#ffffff;}
 
 .tab-menu .list-group .list-group-item .active{
 	background-color: #242424;
@@ -226,11 +258,11 @@ h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
 	color:#424242;
 }
 
-.active{
+/*.active{
 	background-color: #48C9B0;
 	font-weight:bold;
 	color:#424242;
-}
+}*/
 
 .tabcontent {
     display: none;
@@ -438,7 +470,7 @@ h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
 #outer-div{
 	max-width:1300px;
 	max-height:700px;
-	background-color:rgba(72,201,176,0.9);
+	background-color:#34495E;
 	margin:20px;
 	padding:30px;
 	padding-top:5px;

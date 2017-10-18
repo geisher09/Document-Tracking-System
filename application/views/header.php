@@ -6,8 +6,8 @@
 		<a class="navbar-brand"> Document Tracking System </a>
     </div>
 	
-	<ul class="nav navbar-nav navbar-right">
-        <li><a href="<?php echo site_url('Home/home'); ?>" class="text-center">
+	<ul class="nav navbar-nav navbar-right" id="nav">
+        <li id="home"><a href="<?php echo site_url('Home/home'); ?>" class="text-center">
          <span class="glyphicon glyphicon-home"></span><br/>Home
         </a></li>
         
@@ -42,7 +42,7 @@
 <div class="col-md-6">
 		<?php date_default_timezone_set('Asia/Manila');
 			$date=date('y-m-d'); ?>
-		<h3 class="roundbox"style="color:white;float:right;margin-top:-15px;margin-right:-615px;">
+		<h3 class="roundbox"style="color:white;float:right;margin-top:-5px;margin-right:-615px;">
 		  <?php echo $date; ?> | <span id='time'></span>
 		</h3>
 	</div>
@@ -85,7 +85,13 @@
 	// 		$("#map").show(500);
 	// 	});
 	// });
-
+	$(function(){
+        $('a').each(function(){
+            if ($(this).prop('href') == window.location.href) {
+                $(this).addClass('active'); $(this).parents('li').addClass('active');
+            }
+        });
+    });
 
 	function setTime() {
 	var d = new Date(),
