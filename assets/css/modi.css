@@ -6,46 +6,47 @@
 	box-shadow:none;
 	outline:0;
 }
-.list-group-item {
-	border:0;
-	font-size: 16px;
+
+.navbar-header>a {
+	font-family: "Josefin Slab";
+	font-size: 30px;
+	color: #fff !important;
+	margin-top: 20px;
+	text-decoration: none;
 }
 
-
-.tab-menu .list-group{
-	list-style-type:none;
-	width:11%;
-	float:left;
-	position:fixed;
-	left:0;
-	cursor:pointer;
-}
-.tab-menu .list-group .list-group-item{
-	background-color: #424242;
-	transition:0.3s;
-	height:95.5px;
-	padding-top:20px;
+#brand:hover {
+	color: #fff !important;
+	text-decoration: none !important;
 }
 
-.tab-menu .list-group .list-group-item:hover {
-	background-color: #48C9B0;
-	font-weight:bold;
-	color:#424242;
+.logo2 {
+	float: left;
+	height: 46px;
+	width: 46px;
+	margin: 20px 10px 0px 70px;
 }
-.tab-menu .list-group .list-group-item span{
-	font-size:24px;
-}
-
-
-.tab-menu .list-group>a {
-	color: #ffffff;
+.navbar {
+	border: 0px !important;
+	border-radius: 0px;
 }
 
-#logo {
-	height: 80px;
-	width: 50px;
-	margin-right: 10px;
-	float:left;
+.navbar-nav li{
+  display: block;
+  color: #ffffff !important;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Josefin Slab";
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.navbar ul li:hover {
+  background-color: #34495E;
+  color: #fff;
 }
 
 body {
@@ -75,15 +76,16 @@ body {
 }
 
 .red {
-	background-color: rgba(66,66,66,0.9);
-	margin: 0px 10px 0px 65px;
-	padding-left: 50px;
-	padding-right: 50px;
+	background-color: #34495E;
+	opacity: 0.9;
+	margin: 40px 0px 40px 0px;
+	padding-left: 70px;
+	padding-right: 40px;
 	padding-top: 20px;
 	padding-bottom:50px;
-	max-width:1160px;
-	min-height:1000px;
-	
+	max-width:1200px;
+	min-height:600px;
+	overflow: auto;
 }
 
 #intro {
@@ -91,7 +93,7 @@ body {
 	font-size: 18px;
 	font-family: Georgia;
 }
-h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
+h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
 .title{ 
 	color:#790000;
 	font-weight:bold; 
@@ -105,14 +107,13 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 }
 
 .table-hover tbody tr:hover td {
-	background-color: #48C9B0 !important;
+	background-color: #696969 !important;
 	opacity: 0.8;
 }
 
 .sbar{
 	margin-top: 25px;
 	width:100%;
-	background-color:#790000;
 	float:right;
 }
 
@@ -145,10 +146,12 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 /* 'Profile' section */
 
 .roundbox {
-	background-color: #48C9B0;
+	background-color: #242424;
+	opacity: 1.0 !important;
 	border-radius: 6px;
-	padding: 20px 20px 20px 20px;
+	padding: 30px 20px 20px 20px;
 	margin-left: 20px;
+	margin-right: 30px;
 }
 /* 'DINAGDAG MO GELO' */
 .userinfo{
@@ -192,7 +195,7 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 }
 
 .tab button {
-    background-color: #48C9B0;
+    background-color: #242424;
     float: left;
     border: none;
     outline: none;
@@ -206,7 +209,7 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 }
 
 .tab button:hover {
-	color: black;
+	color: #5D6D7E;
 	font-weight: bold;
 }
 
@@ -215,7 +218,7 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 }
 
 .tab-menu .list-group .list-group-item .active{
-	background-color: #48C9B0;
+	background-color: #242424;
 	font-weight:bold;
 	color:#424242;
 }
@@ -231,7 +234,7 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
     padding: 10px 12px;
     -webkit-animation: fadeEffect 1s;
     animation: fadeEffect 1s;
-	background-color: #48C9B0;
+	background-color: #242424;
 }
 
 @-webkit-keyframes fadeEffect {
@@ -264,6 +267,13 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 
 
 /* 'Login' section */
+.logo1 {
+	float: left;
+	height: 60px;
+	width: 55px;
+	margin-right: 10px;
+}
+
 .input-underline {
 	background: 0 0;
 	border: none;
@@ -289,11 +299,11 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 .box {
 	width: 440px;
 	height: 550px;
-	background-color: #48C9B0;
+	background-color: #34495E;
 	opacity: 0.9;
 	border: none;
 	float: right;
-	margin-top: 90px;
+	margin-top: 60px;
 	margin-right:50px;
 	padding-top: 30px;
 	padding-left: 40px;
@@ -302,39 +312,40 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 
 .lgbtn {
 	border-radius: 0;
-	background-color: #424949;
+	background-color: #000000;
 	width: 370px;
 	color: white;
 }
 
 .lgbtn:hover {
-	color: #48C9B0;
+	color: #5D6D7E
 }
 
 .subtn {
 	border-radius: 50px;
-	background-color: #424949;
+	background-color: #000000;
 	opacity: 0.8;
 	border-color: white;
 	color: white;
 }
 
 .subtn:hover {
-	color: white;
+	color: #5D6D7E
 }
 
 #title {
-	color: #ffffff;
-	margin-top: 150px;
+	color: #1B2631;
+	margin-top: 200px;
 	margin-left: 70px;
-	font-size: 40px;
+	font-size: 50px;
 	font-weight: bold;
+	font-family: "Josefin Slab";
 }
 
 #tbar {
-	margin-top: 50px;
+	margin-top: 25px;
 	width:650px;
-	margin-left:70px;
+	margin-left:100px;
 }
 
 .bar {
@@ -350,29 +361,21 @@ h1, h2, h3, h4, h5, h6 { color:#48C9B0; }
 	border-radius: 0;
 	width: 100px;
 	height: 41px;
-	background-color: #48C9B0;
-	border-color: #48C9B0;
+	background-color: #34495E;
+	border-color: #34495E;
 	color: #000000;
 }
 
 .tbtn:hover {
-	background-color: #48C9B0;
-	border-color: #48C9B0;
-	color: #000000;
-}
-
-#outputbox {
-	width: 665px;
-	height: 200px;
-	background-color: #A93226;
-	opacity: 0.8;
-	margin-left: 110px;
-	margin-right: 560px;
+	background-color: #34495E;
+	border-color: #34495E;
+	color: #ffffff;
 }
 
 .txtbox {
 	color: white;
 }
+
 /* 'Settings' */
 #password-change label{
 	font-family:Arial;

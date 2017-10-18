@@ -20,12 +20,12 @@
 	</div>
 	
 		<canvas id="canvas" width="130" height="130"
-		style="background-color:66,66,66,0.9; float: left; margin-top:20px; margin-left:60px;">
+		style="background-color:66,66,66,0.9; float: left; margin-top:20px; margin-left:60px; color:#ffffff; ">
 		</canvas>
 	<div  class="box">
 
 		<?php echo form_open('home/login_validation');?>
-		<h1  style="color: #ffffff; "> Login </h1> <br /><br /><br />
+		<p  style="color: #ffffff; font-size: 36px;"> Login </p> <br /><br /><br />
 
 
 			<!--
@@ -61,7 +61,7 @@
 
 	<?php echo form_close(); ?>
 	<div id="title">
-		<img src="<?php echo base_url('assets/images/white.png'); ?>" alt="logo" id="logo" class="img-reponsive" />
+		<img src="<?php echo base_url('assets/images/logo2.png'); ?>" alt="logo" class="img-reponsive logo1" />
 		<p> Document Tracking System </p>
 	</div>
 

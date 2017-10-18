@@ -13,7 +13,7 @@
 
 					<input type="text" class="form-control" id="search" onkeyup="search()" name="q" placeholder="Search for" required/>
 					<span class="input-group-btn">
-						<button type="submit" class="btn btn-success" >
+						<button type="submit" class="btn btn-primary" >
 							<span class="glyphicon glyphicon-search"></span> Search
 						</button>
 					</span>

@@ -1,29 +1,42 @@
 <body>
-<div class="tab-menu">
-    <ul class="list-group text-center">
-        <a href="<?php echo site_url('Home/home'); ?>" class="list-group-item">
+<nav class="navbar navbar-inverse navbar-fixed">
+<div class="container-fluid">
+	<div class="navbar-header">
+		<img src="<?php echo base_url('assets/images/logo2.png');?>" class="img-responsive logo2" alt="logo" />
+		<a class="navbar-brand"> Document Tracking System </a>
+    </div>
+	
+	<ul class="nav navbar-nav navbar-right">
+        <li><a href="<?php echo site_url('Home/home'); ?>" class="text-center">
          <span class="glyphicon glyphicon-home"></span><br/>Home
-        </a>
-        <a href="<?php echo site_url('Home/profile'); ?>" class="list-group-item">
+        </a></li>
+        
+		<li><a href="<?php echo site_url('Home/profile'); ?>" class="text-center">
          <span class="glyphicon glyphicon-user"></span><br/>Profile
-        </a>
-        <a href="<?php echo site_url('Home/docu'); ?>" class="list-group-item text-center">
+        </a></li>
+        
+		<li><a href="<?php echo site_url('Home/docu'); ?>" class="text-center">
          <span class="glyphicon glyphicon-dashboard"></span><br/>Dashboard
-        </a>
-        <a href="<?php echo site_url('Home/offices'); ?>" class="list-group-item">
+        </a></li>
+        
+		<li><a href="<?php echo site_url('Home/offices'); ?>" class="text-center">
          <span class="glyphicon glyphicon-briefcase"></span><br/>Offices
-        </a>
-        <a href="<?php echo site_url('Home/edit'); ?>" class="list-group-item">
-         <span class="glyphicon glyphicon-cog"></span><br/>Settings
-        </a>
-		<a href="<?php echo site_url('Home/contacts'); ?>" class="list-group-item">
+        </a></li>
+		
+		<li><a href="<?php echo site_url('Home/contacts'); ?>" class="text-center">
          <span class="glyphicon glyphicon-phone"></span><br/>Contacts
-        </a>
-		<a href="<?php echo site_url('Home'); ?>" class="list-group-item">
-         <span class="glyphicon glyphicon-log-out"></span><br/>Logout
-        </a>
-    </ul>
+        </a></li>
+	
+		<li><a href="<?php echo site_url('Home/edit'); ?>" class="text-center">
+         <span class="glyphicon glyphicon-cog icon"></span><br/>Settings
+        </a></li>
+		
+		<li><a href="<?php echo site_url('Home'); ?>" class="text-center">
+         <span class="glyphicon glyphicon-log-out icon"></span><br/>Logout
+        </a></li>
+	</ul>
 </div>
+</nav>
 
 	<!--
 	<nav class="navbar navbar-inverse navbar-fixed">
@@ -36,13 +49,14 @@
 				<li><a href="<?php // echo site_url('Home/offices'); ?>" style="color:white;">Offices & Employees</a></li>
 			</ul>
 
-			<ul class="nav navbar-nav">
+			<a href="<?php echo site_url('Home/edit'); ?>" class="text-center">
+         <span class="glyphicon glyphicon-cog icon"></span><br/>Settings
+        </a>
 				<li><a href="<?php // echo site_url('Home/contacts'); ?>" style="color:white;"><span class="glyphicon glyphicon-phone"></span> Contacts</a></li>
 				<li><a href="<?php // echo site_url('Home'); ?>" style="color:white;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
 	</nav>
-	-->
 
 <div class="container">
 	<div class="title-banner">
@@ -57,7 +71,7 @@
 		</h3>
 	</div>
 </div>
-
+--!>
 
 <!-- script for show/hide -->
 <script>
