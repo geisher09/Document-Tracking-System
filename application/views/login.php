@@ -20,7 +20,7 @@
 	</div>
 	
 		<canvas id="canvas" width="130" height="130"
-		style="background-color:66,66,66,0.9; float: left; margin-top:20px; margin-left:60px; color:#ffffff; ">
+		style="background-color:66,66,66,0.9; float: left; margin-top:24px; margin-left:76px; color:#ffffff; ">
 		</canvas>
 	<div  class="box">
 
