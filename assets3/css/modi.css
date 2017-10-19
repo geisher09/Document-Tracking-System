@@ -10,13 +10,13 @@ div.modal div.modal-backdrop {
 	outline:0;
 }
 
-/*.navbar-header>a {
+.navbar-header>a {
 	font-family: "Josefin Slab";
 	font-size: 30px;
 	color: #fff !important;
 	margin-top: 20px;
 	text-decoration: none;
-}*/
+}
 
 .title{
 	font-family: "Josefin Slab";
@@ -37,7 +37,7 @@ div.modal div.modal-backdrop {
 	width: 46px;
 	margin: 20px 10px 0px 70px;
 }
-/*.navbar {
+.navbar {
 	border: 0px !important;
 	border-radius: 0px;
 }
@@ -58,7 +58,7 @@ div.modal div.modal-backdrop {
 .navbar ul li:hover {
   background-color: #34495E;
   color: #fff;
-}*/
+}
 
 body {
 	 background:url(http://[::1]/DTS/assets/images/1.jpg) no-repeat center center fixed;  
@@ -89,14 +89,14 @@ body {
 .red {
 	background-color: #34495E;
 	opacity: 0.9;
-	margin: 0px 0px 0px 0px;
-	padding-left: 0px;
-	padding-right: 0px;
+	margin: 40px 0px 40px 0px;
+	padding-left: 70px;
+	padding-right: 40px;
 	padding-top: 20px;
 	padding-bottom:50px;
 	max-width:1200px;
 	min-height:600px;
-	overflow: auto
+	overflow: auto;
 }
 
 #intro {
@@ -241,13 +241,13 @@ h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
     color: red;
 }*/
 
-/*.navbar #nav .active{
+.navbar #nav .active{
 	background-color: #34495E;
    	border-color: #34495E;
     border-left-color: #34495E; 
     border-top-color: #34495E;
     color: white; 
-}*/
+}
 
 .black-background {background-color:#000000;}
 .white {color:#ffffff;}

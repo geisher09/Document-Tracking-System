@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css"  type="text/css"/>
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/timeline-css.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/modi.css" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/main.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/animate.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/fonts/JosefinSlab-Bold.ttf" />
 	

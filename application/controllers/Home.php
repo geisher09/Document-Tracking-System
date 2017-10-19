@@ -198,7 +198,7 @@ class Home extends CI_Controller {
 			$data['date'] = $date;
 			$data['username'] = $user;
 			$this->load->view('header2',$header_data);
-			$this->load->view('header');
+			//$this->load->view('header');
 			$this->load->view('home',$data);
 			$this->load->view('footer');
 		}
@@ -218,7 +218,7 @@ class Home extends CI_Controller {
 	public function docu(){
 		$header_data['title']="All Documents";
 		$this->load->view('header2',$header_data);
-		$this->load->view('header');
+		//$this->load->view('header');
 		$this->load->model('dts_model');
 		$documents = $this->dts_model->getDocuments();
 		foreach($documents as $a){
@@ -258,7 +258,7 @@ class Home extends CI_Controller {
 		$employees = $this->dts_model->getEmployees($user);
 		$header_data['title']="Profile";
 		$this->load->view('header2',$header_data);
-		$this->load->view('header');
+		//$this->load->view('header');
 		$this->load->view('profile',['pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending,'emp'=>$employees,'docu'=>$ul]);
 		$this->load->view('footer');
 	}
@@ -354,7 +354,7 @@ class Home extends CI_Controller {
 
 
 		$this->load->view('header2',$header_data);
-		$this->load->view('header');
+		//$this->load->view('header');
 	 		$this->load->view('contacts');
 		$this->load->view('footer');
 	}
@@ -362,7 +362,7 @@ class Home extends CI_Controller {
 		$header_data['title']="My Documents";
 
 		$this->load->view('header2',$header_data);
-		$this->load->view('header');
+		//$this->load->view('header');
 		$this->load->view('mydocu');
 		$this->load->view('footer');
 	}
@@ -381,7 +381,7 @@ class Home extends CI_Controller {
 
 		$header_data['title']="Edit Profile";
 		$this->load->view('header2',$header_data);
-		$this->load->view('header');
+		//$this->load->view('header');
 		$this->load->view('accountsettings', ['pro'=>$profile]);
 		$this->load->view('footer');
 
@@ -393,7 +393,7 @@ class Home extends CI_Controller {
 
 		$header_data['title']="Change Password";
 		$this->load->view('header2',$header_data);
-		$this->load->view('header');
+		//$this->load->view('header');
 		$this->load->view('password_change');
 		$this->load->view('footer');
 
@@ -440,7 +440,7 @@ class Home extends CI_Controller {
 
 				$header_data['title']="Edit Profile";
 				$this->load->view('header2',$header_data);
-				$this->load->view('header');
+				//$this->load->view('header');
 				$this->load->view('accountsettings', ['pro'=>$profile]);
 				$this->load->view('footer');
         }
@@ -466,7 +466,7 @@ class Home extends CI_Controller {
 			//print_r($data);
 
 			$this->load->view('header2',$header_data);
-			$this->load->view('header');
+			//$this->load->view('header');
 			$this->load->view('offices',$data);
 			$this->load->view('footer');
 		}
@@ -502,7 +502,7 @@ class Home extends CI_Controller {
 			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
-			$this->load->view('header');
+			//$this->load->view('header');
 			$this->load->view('departments',$data);
 			$this->load->view('footer');
 		}
@@ -517,7 +517,7 @@ class Home extends CI_Controller {
 			//print_r($data);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
-			$this->load->view('header');
+			//$this->load->view('header');
 			$this->load->view('department/employee',$data);
 			$this->load->view('footer');
 		}
@@ -615,7 +615,7 @@ class Home extends CI_Controller {
         else{
         $header_data['title']="Add Documents";
 				$this->load->view('header2',$header_data);
-				$this->load->view('header');
+				//$this->load->view('header');
 				$this->load->view('saveDept');
 				$this->load->view('footer');
         }
@@ -695,7 +695,7 @@ class Home extends CI_Controller {
         else{
             	$header_data['title']="Change Password";
 				$this->load->view('header2',$header_data);
-				$this->load->view('header');
+				//$this->load->view('header');
 				$this->load->view('password_change');
 				$this->load->view('footer');
         }
