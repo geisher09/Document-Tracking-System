@@ -198,7 +198,7 @@ class Home extends CI_Controller {
 			$data['date'] = $date;
 			$data['username'] = $user;
 			$this->load->view('header2',$header_data);
-			//$this->load->view('header');
+			$this->load->view('header');
 			$this->load->view('home',$data);
 			$this->load->view('footer');
 		}
@@ -258,7 +258,7 @@ class Home extends CI_Controller {
 		$employees = $this->dts_model->getEmployees($user);
 		$header_data['title']="Profile";
 		$this->load->view('header2',$header_data);
-		//$this->load->view('header');
+		$this->load->view('header');
 		$this->load->view('profile',['pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending,'emp'=>$employees,'docu'=>$ul]);
 		$this->load->view('footer');
 	}
@@ -354,7 +354,7 @@ class Home extends CI_Controller {
 
 
 		$this->load->view('header2',$header_data);
-		//$this->load->view('header');
+		$this->load->view('header');
 	 		$this->load->view('contacts');
 		$this->load->view('footer');
 	}
@@ -466,7 +466,7 @@ class Home extends CI_Controller {
 			//print_r($data);
 
 			$this->load->view('header2',$header_data);
-			//$this->load->view('header');
+			$this->load->view('header');
 			$this->load->view('offices',$data);
 			$this->load->view('footer');
 		}
