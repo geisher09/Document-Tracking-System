@@ -67,7 +67,7 @@
 					<?php endif; ?>
 					<div class="tab">
 						<button class="tablink active" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Inbox </button>
-						<button class="tablink" onclick="openFolder(event, 'Sent')"> Sent </button>
+						<button class="tablink notactive" onclick="openFolder(event, 'Sent')"> Sent </button>
 					</div>
 
 					<div id="Inbox" class="tabcontent">
@@ -465,6 +465,12 @@ function openFolder (evt, folderName) {
 	}
 	document.getElementById(folderName).style.display = "block";
 	evt.currentTarget.className += " active";
+
+	// for (x=0; x < tablinks.length; x++) {
+	// 	tabcontent[x].className= tabcontent[x].className.replace("notactive", " ");
+	// }
+	// document.getElementById(folderName).style.display = "block";
+	// evt.currentTarget.className += " notactive";
 }
 
 document.getElementById("defaultOpen").click();

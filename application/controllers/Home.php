@@ -778,19 +778,43 @@ class Home extends CI_Controller {
 	//history (single row palang per data)
 	public function histo(){
 			$this->load->model('dts_model');
-			$stat = $this->dts_model->get_file_status($this->input->post('id'));
+			$dates = $this->dts_model->signa_date($this->input->post('id'));
 			$origin = $this->dts_model->get_file_origin($this->input->post('id'));
+			$stat = $this->dts_model->get_file_status($this->input->post('id'));
+			// $approved = $this->dts_model->approved($this->input->post('id'));
+			// print_r($approved);
+			// echo json_decode(json_encode($approved));
+			$count = 0;
+			$p=0;
+			asort($dates); //sorted na ho!
+			foreach($dates as $d){
+				if($d['date_responded'] != null)
+				{
+					$count++;
+				}
+				// asort($d['date_responded']);
+				$date = array(
+					'date' =>$d['date_responded'],
+				'key' => $p);
+				$p++;
+					$dat[]=$date;
+				// $sorted_dates[]=($dates);
+				// $sorted_dates[] = asort($dates);
+			}
+
 			foreach($stat as $o){
 				if($o['action']=='Rejected'){
 					$origin = $this->dts_model->get_file_origin($this->input->post('id'));
 					$rejected = $this->dts_model->rejected($this->input->post('id'));
-	 			 	$approved = $this->dts_model->approved($this->input->post('id'));
+					$approved = $this->dts_model->approved($this->input->post('id'));
 					$output = array(
-						"status" => "Rejected",
-						"origin" => $origin,
-						"rejected" => $rejected,
-						"approved" => $approved
-					);
+									"status" => "Rejected",
+									"origin" => $origin,
+									"rejected" => $rejected,
+									"approved" => $approved,
+									"date" => $dates,
+									"count" => $count
+								);
 					echo json_encode($output);
 					break;
 					exit();
@@ -799,10 +823,15 @@ class Home extends CI_Controller {
 					$origin = $this->dts_model->get_file_origin($this->input->post('id'));
 					// $rejected = $this->dts_model->rejected($this->input->post('id'));
 					$approved = $this->dts_model->approved($this->input->post('id'));
+					// asort($dates);
+
 					$output = array(
 						"status" => "Approved",
 						"origin" => $origin,
-						"approved" => $approved
+						"approved" => $approved,
+						"date" => $dates,
+						"date_sorted" => $dat,
+						"count" => $count
 						// "rejected" => $rejected
 					);
 					// echo json_decode($output);
@@ -836,6 +865,7 @@ class Home extends CI_Controller {
 			}
 					// echo json_encode($origin);
 	}
+
 
 
 

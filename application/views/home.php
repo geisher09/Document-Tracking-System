@@ -33,82 +33,31 @@
 				</div>
 			</form>
 
-			<!-- <div id="invalid_view" class="collapse" style="margin-left:100px;">
-				<div class="main">
-							<div class="alert alert-danger" >
-								<h2><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Invalid File!</h2>
-								<p id="invalid"></p>
-							</div>
-				</div>
-		</div> -->
 
-		<!-- bale nakatago pa ung details about sa tracking ng document [na may id na "map"] tapos lalabas na lang pag pinindot na ung button [na may id na [show] -->
-			<div id="map" class="collapse" style="margin-left:100px;">
+			<div id="map2" class="collapse" style="margin-left:100px;">
 			<h2><i>Tracking Details Of your Document...</i></h2>
 				<div class="main">
 					<ul class="cbp_tmtimeline">
-						<li>
-							<div id="pending_view" >
-							<!-- <time class="cbp_tmtime" datetime="2017-01-10 18:30"><span>1/1/17</span> <span>18:30</span></time> -->
-							<time class="cbp_tmtime"><span id="pending_date"></span><span id="pending_time"></span></time>
-							<div class="cbp_tmicon cbp_tmicon-phone"></div>
-							<div class="cbp_tmlabel">
-								<h2><span class="glyphicon glyphicon-export"></span>&nbsp;Pending</h2>
-								<p id="pending"></p>
-							</div>
-						</div>
+						<li id="summary">
+
+						</li>
+						<li id="department">
+
+						</li>
+						<li id="approved">
+
+						</li>
+						<li id="rejected">
+
 						</li>
 						<li>
-							<div id="summary_view" >
-							<!-- <time class="cbp_tmtime" datetime="2017-01-10 18:30"><span>1/1/17</span> <span>18:30</span></time> -->
-							<time class="cbp_tmtime"><span id="summary_date"></span><span id="summary_time"></span></time>
-							<div class="cbp_tmicon cbp_tmicon-phone"></div>
-							<div class="cbp_tmlabel">
-								<h2><span class="glyphicon glyphicon-export"></span>&nbsp;Sent</h2>
-								<p id="summary"></p>
-							</div>
-						</div>
-						</li>
-						<li>
-							<div id="department_view">
-							<time class="cbp_tmtime"><span id="department_date"></span><span id="department_time"></span></time>
-							<div class="cbp_tmicon cbp_tmicon-screen"></div>
-							<div class="cbp_tmlabel">
-								<h2><span class="glyphicon glyphicon-import"></span>&nbsp;Delivered</h2>
-								<p id="department"></p>
-							</div>
-						</div>
-						</li>
-						<li>
-							<div id="approved_view">
-							<!-- <time class="cbp_tmtime" datetime="2017-01-17 05:36"><span>1/1/17</span> <span>05:36</span></time> -->
-							<time class="cbp_tmtime"><span id="approve_date"></span> <span id="approve_time"></span></time>
-							<div class="cbp_tmicon cbp_tmicon-mail"></div>
-							<div class="cbp_tmlabel">
-								<h2><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2>
-								<p id="approved"></p>
-							</div>
-						</div>
-						</li>
-						<li>
-							<div id="rejected_view">
-							<!-- <time class="cbp_tmtime" datetime="2017-01-15 17:15"><span>1/1/17</span> <span>17:15</span></time> -->
-							<time class="cbp_tmtime"><span id="reject_date"></span> <span id="reject_time"></span></time>
-							<div class="cbp_tmicon cbp_tmicon-phone"></div>
-							<div class="cbp_tmlabel">
-								<h2><span class="glyphicon glyphicon-remove"></span>&nbsp;Rejected</h2>
-								<p id="rejected"></p>
-							</div>
-						</div>
-						</li>
-						<li>
-							<div id="sender_view">
-							<!-- <time class="cbp_tmtime" datetime="2017-01-16 21:30"><span>1/1/17</span> <span>21:30</span></time> -->
-							<time class="cbp_tmtime"><span id="send_date"></span> <span id="send_time"></span></time>
+							<div id="sender_view2">
+							 <!-- <time class="cbp_tmtime" datetime="2017-01-16 21:30"><span>1/1/17</span> <span>21:30</span></time> -->
+							<time class="cbp_tmtime"><span id="send_date2"></span> <span id="send_time2"></span></time>
 							<div class="cbp_tmicon cbp_tmicon-earth"></div>
 							<div class="cbp_tmlabel">
-								<h2 id="sender"></h2>
-								<p id="comment"></p>
+								<h2 id="sender2"></h2>
+								<p id="comment2"></p>
 							</div>
 						</div>
 						</li>
@@ -133,128 +82,145 @@ $(document).ready(function() {
 								success: function(data) {
 									// $('#invalid_view').hide(500);
 									// alert(data);
-									// alert("pasok");
-									var obj = JSON.parse(data);
+									// var obj = JSON.stringify(data)
+									var obj = JSON.parse(data)
+									//	alert(obj.count);
+									var max = parseInt(obj.count);
+
+									// var con = parseInt(obj.count);
+									// console.log(data);
+									// alert("total count of signatories: "+max);
+									// alert(obj.status);
+									// alert(obj.date[1].date_responded)
+									for (a=0; a<max; a++){
+										// alert(obj.date_sorted[a].date + obj.date[a].date_responded)
+										// alert(obj.approved[a].lname)
+										// alert(obj.rejected[a].lname);
+									}
+									// var a = obj.date_sorted[0].date
+									// alert(obj.date_sorted[0].date);
+									if((obj.date_sorted[0].date) == (obj.date[1].date_responded)){ //check if date is the same
+										// alert("true");
+									}
+									// alert(obj.approved[0].lname);
+									// alert(obj[4]);
+
+									// alert(obj.approved);
+									// var obj = JSON.parse(data);
+									// alert(obj.document_id);
+									// alert("parsed");
+									// alert(obj.approved);
 									var splitarray = new Array();
-									splitarray= obj.origin.date_of_action.split(" ");
-
+									splitarray= obj.origin.date_created.split(" ");
 									if(obj.status=="Rejected"){
-										// alert("Rejected");
+										alert("Rejected");
 										//initial
-										$("#send_view").show();
-										$("#rejected_view").show();
-										$("#pending_view").show();
-										$('#sender').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
-										$('#send_date').html(splitarray[0]);
-										$('#send_time').html(splitarray[1]);
-										$('#comment').html(obj.origin.document_desc);
+										$('#sender2').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
+										$('#send_date2').html(splitarray[0]);
+										$('#comment2').html(obj.origin.document_desc);
+										var s="";
+										// var con = parseInt(max);
+										alert(data);
+										for(var i=0; i<parseInt(obj.approved.length); i++){
+											s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
+											// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
+											+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname+'</p></h2></div>';
+											// con=con+1;
+											$("#approved").html(s);
+											var a=i+1;
+												if(a==i<parseInt(obj.approved.length)){
+														alert(obj.approved[i].lname);
+														var v="";
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_of_action
+														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-import"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.approved[i].department_desc+'</p></h2></div>';
+														$("#department").html(v);
 
-										//rejected
-										var reject_date = new Array();
-										reject_date= obj.rejected.date_responded.split(" ");
-										$('#rejected').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-										$('#reject_date').html(reject_date[0]);
-										$('#reject_time').html(reject_date[1]);
+														var d="";
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
+														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-export"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+														+'<br/>To Employee :'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
+														+'<br/>Department :'+obj.approved[i].department_desc
+														+'</p></h2></div>';
+														$("#summary").html(d);
+													}
+											}
+											$("#map2").show(500);
+											// $("#map2").show(500);
 
-										//pending/hold
-										// var pending_date = new Array();
-										// pending_date= obj.rejected.date_responded.split(" ");
-										// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-										// $('#pending').html('The file: '+obj.origin.document_id+'<br/>Is still in: '+ obj.rejected.department_desc);
-										// $('#pending_date').html(pending_date[0]);
-										// $('#pending_time').html(pending_date[1]);
-										$('#approved_view').hide();
-										$('#department_view').hide();
-										$('#summary_view').hide();
-										$('#pending_view').hide();
-										$("#map").show(500);
 
 									}
 									else if(obj.status=="Approved"){
 										// alert("Approved");
-
 										//initial
-										$("#send_view").show();
-										$("#rejected_view").hide();
-										$("#approved_view").show();
-										$("#department_view").show();
-										$("#summary_view").show();
-										$('#sender').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
-										$('#send_date').html(splitarray[0]);
-										$('#send_time').html(splitarray[1]);
-										$('#comment').html(obj.origin.document_desc);
+										$('#sender2').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
+										$('#send_date2').html(splitarray[0]);
+										$('#comment2').html(obj.origin.document_desc);
+										var s="";
+										// var con = parseInt(max);
+										// alert(data);
+										for(var i=0; i<parseInt(obj.approved.length); i++){
+											s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
+											+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname+'</p></h2></div>';
+											$("#approved").html(s);
+											var a=i+1;
+												if(a==i<parseInt(obj.approved.length)){
+														// alert(obj.approved[i].lname);
+														var v="";
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_of_action
+														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-import"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.approved[i].department_desc+'</p></h2></div>';
+														$("#department").html(v);
 
-										//rejected
-										// $('#rejected_view').hide();
-
-										//approved
-										var approve_date = new Array();
-										approve_date= obj.approved.date_responded.split(" ");
-										$('#approved').html(obj.approved.lname+', '+obj.approved.fname+' '+obj.approved.mname);
-										$('#approve_date').html(approve_date[0]);
-										$('#approve_time').html(approve_date[1]);
-
-										//rejected
-										// var reject_date = new Array();
-										// reject_date= obj.rejected.date_responded.split(" ");
-										// $('#rejected').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-										// $('#reject_date').html(reject_date[0]);
-										// $('#reject_time').html(reject_date[1]);
-
-										//department
-										var department_date = new Array();
-										department_date= obj.approved.date_responded.split(" ");
-										$('#department').html(obj.approved.department_desc);
-										$('#department_date').html(department_date[0]);
-										$('#department_time').html(department_date[1]);
-
-										//summary
-										var summary_date = new Array();
-										summary_date= obj.origin.date_of_action.split(" ");
-										$('#summary').html("From Employee: "+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname
-										+'<br/>Department: '+obj.origin.department_desc
-										+'<br/>To Employee: '+obj.approved.lname+', '+obj.approved.fname+' '+obj.approved.mname
-										+'<br/>Department: '+obj.approved.department_desc);
-										$('#summary_date').html(summary_date[0]);
-										$('#summary_time').html(summary_date[1]);
-
-										$('#pending_view').hide();
-
-										$("#map").show(500);
+														var d="";
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
+														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-export"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+														+'<br/>To Employee :'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
+														+'<br/>Department :'+obj.approved[i].department_desc
+														+'</p></h2></div>';
+														$("#summary").html(d);
+													}
+											}
+											$("#map2").show(500);
+											// $("#map2").show(500);
 
 									}
 									else if(obj.status=="Pending"){
-										// alert("Pending");
-										$("#send_view").show();
-										$("#pending_view").show();
-										$("#rejected_view").hide();
-										$("#approved_view").hide();
-										$("#department_view").hide();
-										$("#summary_view").hide();
-										$('#sender').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
-										$('#send_date').html(splitarray[0]);
-										$('#send_time').html(splitarray[1]);
-										$('#comment').html(obj.origin.document_desc);
-										if(obj.pending!=null){
-											//pending
-											var pending_date = new Array();
-											pending_date= obj.pending.date_responded.split(" ");
-											// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-											$('#pending').html('The file: '+obj.origin.tracking_no+'<br/>Is still in: '+ obj.pending.department_desc);
-											$('#pending_date').html(pending_date[0]);
-											$('#pending_time').html(pending_date[1]);
-											$("#map").show(500);
-										}
-										else{
-											var pending_date = new Array();
-											pending_date= obj.origin.date_of_action.split(" ");
-											// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-											$('#pending').html('The file: '+obj.origin.tracking_no+'<br/>No response yet');
-											$('#pending_date').html(pending_date[0]);
-											$('#pending_time').html(pending_date[1]);
-											$("#map").show(500);
-											// $("#map").show(500);
-										}
+										alert("Pending");
+										// $("#send_view").show();
+										// $("#pending_view").show();
+										// $("#rejected_view").hide();
+										// $("#approved_view").hide();
+										// $("#department_view").hide();
+										// $("#summary_view").hide();
+										// $('#sender').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
+										// $('#send_date').html(splitarray[0]);
+										// $('#send_time').html(splitarray[1]);
+										// $('#comment').html(obj.origin.document_desc);
+										// if(obj.pending!=null){
+										// 	//pending
+										// 	var pending_date = new Array();
+										// 	pending_date= obj.pending.date_responded.split(" ");
+										// 	// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
+										// 	$('#pending').html('The file: '+obj.origin.tracking_no+'<br/>Is still in: '+ obj.pending.department_desc);
+										// 	$('#pending_date').html(pending_date[0]);
+										// 	$('#pending_time').html(pending_date[1]);
+										// 	$("#map").show(500);
+										// }
+										// else{
+										// 	var pending_date = new Array();
+										// 	pending_date= obj.origin.date_of_action.split(" ");
+										// 	// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
+										// 	$('#pending').html('The file: '+obj.origin.tracking_no+'<br/>No response yet');
+										// 	$('#pending_date').html(pending_date[0]);
+										// 	$('#pending_time').html(pending_date[1]);
+										// 	$("#map").show(500);
+										// 	// $("#map").show(500);
+										// }
 
 									}
 									else{

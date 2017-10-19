@@ -421,6 +421,7 @@
 
 			if($response=="Approved"){
 				$this->db->set('approved', 'approved + 1', FALSE);
+				$this->db->set('date_of_action',$date);
 				$this->db->where('document_id', $id);
 				$this->db->update('documentation');
 
@@ -570,7 +571,7 @@
 		}
 
 		//File History
-	public function get_file_status($track_num){
+		public function get_file_status($track_num){
 		$this->db->select('documentation.action');
 		$this->db->from('documentation');
 		$this->db->join('document', 'document.document_id = documentation.document_id');  //document's info
@@ -583,7 +584,7 @@
 
 	public function get_file_origin($track_num){
 		$this->db->select('documentation.document_id, documentation.employee_id, documentation.action, documentation.date_of_action,
-											document.document_title, document.document_desc,document.tracking_no,
+											document.document_title, document.document_desc,document.tracking_no, document.date_created,
 											employee.lname, employee.fname, employee.mname,
 											department.department_desc');
 		$this->db->from('documentation');
@@ -597,17 +598,18 @@
 
 	}
 
-	// public function signa_date($track_num){
-	// 	$this->db->select('signatory.date_responded');
-	// 	$this->db->from('signatory');
-	// 	$this->db->join('documentation', 'signatory.document_id = documentation.document_id');
-	// 	$this->db->join('employee', 'employee.employee_id = signatory.employee_id');
-	// 	$this->db->join('department', 'department.department_id = employee.department_id');
-	// 	$this->db->where('documentation.document_id',$track_num);
-	// 	$query = $this->db->get();
-	// 	return $query-> result_array();
-	//
-	// }
+	public function signa_date($track_num){
+		$this->db->select('signatory.date_responded');
+		$this->db->from('signatory');
+		$this->db->join('documentation', 'signatory.document_id = documentation.document_id');
+		$this->db->join('document', 'document.document_id = documentation.document_id');  //document's info
+		$this->db->join('employee', 'employee.employee_id = signatory.employee_id');
+		$this->db->join('department', 'department.department_id = employee.department_id');
+		$this->db->where('document.tracking_no', $track_num);
+		$query = $this->db->get();
+		return $query-> result_array();
+
+	}
 	public function rejected($track_num){
 		$this->db->select('documentation.document_id,document.tracking_no,
 											signatory.employee_id, signatory.response, signatory.comment, signatory.date_responded,
@@ -621,13 +623,14 @@
 		$this->db->where('document.tracking_no',$track_num);
 		$this->db->where('signatory.response', "Rejected");
 		$query = $this->db->get();
-		return $query->row();
+		return $query-> result_array();
 	}
 	public function approved($track_num){
 		$this->db->select('documentation.document_id,,
 											signatory.employee_id, signatory.response, signatory.comment, signatory.date_responded,
 											employee.department_id,employee.lname, employee.fname, employee.mname,
-											department.department_desc');
+											department.department_desc,
+											documentation.date_of_action');
 		$this->db->from('signatory');
 		$this->db->join('documentation', 'signatory.document_id = documentation.document_id');
 		$this->db->join('employee', 'employee.employee_id = signatory.employee_id');
@@ -636,8 +639,10 @@
 		$this->db->where('document.tracking_no',$track_num);
 		$this->db->where('signatory.response', "Approved");
 		$query = $this->db->get();
-		// return $query-> result_array();
-		return $query-> row();
+		return $query-> result_array();
+		// return json_encode($query-> result());
+		// return $query-> result();
+		// return $query-> row();
 	}
 	public function pending($track_num){
 		$this->db->select('documentation.document_id,,
@@ -652,7 +657,7 @@
 		$this->db->where('document.tracking_no',$track_num);
 		$this->db->where('signatory.response', "Pending");
 		$query = $this->db->get();
-		return $query->row();
+		return $query-> result_array();
 	}
 	}
 
