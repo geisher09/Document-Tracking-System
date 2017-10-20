@@ -456,22 +456,24 @@ class Home extends CI_Controller {
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('departments',['dept'=>$data['dept'],'id'=>$data['id'],'dept_id'=>$data['dept_id'],'pro'=>$profile]);
+			$this->load->view('departments',['dept'=>$data['dept'],'id'=>$data['id'],'dept_id'=>$data['dept_id'],'pro'=>$profile,'office'=>$office_id]);
 			$this->load->view('footer');
 		}
 
-		public function deptEmployees($department_id){
+		public function deptEmployees($department_id,$office_id){
 			$header_data['title']="Department's Employees";
 			$condition = array('department_id'=>$department_id);
 			$this->load->model('dts_model');
 			$hold = $this->dts_model->getEmployee($condition);
+			$user['username']=$this->session->userdata('username');
+			$profile = $this->dts_model->get_profile($user);
 			$data['employees'] = $hold;
 			$data['title'] = "None";
 			//print_r($data);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('department/employee',$data);
+			$this->load->view('department/employee',['employees'=>$data['employees'],'pro'=>$profile,'office'=>$office_id]);
 			$this->load->view('footer');
 		}
 
