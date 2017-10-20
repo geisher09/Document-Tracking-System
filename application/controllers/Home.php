@@ -86,73 +86,6 @@ class Home extends CI_Controller {
 				redirect('home/index');
 			}
 		}
-	// public function track_docu(){
-	// 	$this->form_validation->set_rules('track_num', 'track_num', 'trim|required');
-	// 	if($this->form_validation->run()){
-	// 		$track_num = $this->input->post('track_num');
-	// 		$this->load->model('dts_model');
-	// 		$doc_date = $this->dts_model->track_docu_latest_date($track_num);
-	// 		if($doc_date!=null){
-  //       foreach ($doc_date as $d) {
-  //         $dates = array(
-  //           'date_of_action' => $d['date_of_action']
-  //         );
-  //         $dates2[]=$dates;
-  //       }
-  //       asort($dates2);
-  //       $date_close=($dates2);
-  //       $cdate = $date_close[0];
-	//
-  //       foreach ($date_close as $d) {
-  //         $cdates = array(
-  //           'date_of_action' => $d['date_of_action']
-  //         );
-  //         $dates3[]=$cdates;
-  //       }
-  //       $use_date = $cdates['date_of_action'];
-  //       $info = $this->dts_model->track_docu_info($use_date,$track_num);
-	// 			foreach ($info as $r) {
-	// 				$emp2 = array(
-	// 					'employee_id' => $r['employee_id'],
-	// 					'document_id' => $r['document_id'],
-	// 					'document_status' => $r['document_status'],
-	// 					'action' => $r['action'],
-	// 					'date_of_action' => $r['date_of_action'],
-	// 					'signatory' => $r['signatory'],
-	// 					'document_title' => $r['document_title'],
-	// 				  'document_desc' => $r['document_desc']
-	// 				);
-  //           $rec[]=$emp2;
-  //       }
-  //     	$employee=$emp2['employee_id'];
-	// 			$title=$emp2['document_title'];
-	// 			$action=$emp2['action'];
-	// 			$date=$emp2['date_of_action'];
-	// 			$from=$this->dts_model->track_docu_from($employee);
-	// 			foreach ($from as $r) {
- // 					$track_from = array(
- // 						'employee_id' => $r['employee_id'],
- // 						'department_id' => $r['department_id'],
- // 						'department_desc' => $r['department_desc']
- // 					);
-	// 			}
-	// 		 	$dept_desc = $track_from['department_desc'];
-	// 		 	$dept_id = $track_from['department_id'];
-	// 			$this->session->set_flashdata('track',
-	// 			'The File: '.$title. '<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
-	// 			redirect('home/index');
-	// 		}
-	// 		else if($emp['document_status']!='sent'){
-	// 			$this->session->set_flashdata('error1', 'File not yet accepted or invalid!');
-	// 			redirect('home/index');
-	// 		}
-	// 		}
-	// 		else{
-	// 			$this->session->set_flashdata('error1', 'Please Enter a Document ID!');
-	// 			redirect('home/index');
-	// 		}
-	// 	}
-
 
 	public function login_validation(){
 		$this->form_validation->set_rules('uname', 'Username', 'trim|required');
@@ -188,8 +121,9 @@ class Home extends CI_Controller {
 	public function home(){
 
 		if($this->session->userdata('username') != ''){
-
-			$user=$this->session->userdata('username');
+			$user['username']=$this->session->userdata('username');
+			$this->load->model('dts_model');
+			$profile = $this->dts_model->get_profile($user);
 			$header_data['title']="DTS";
 			date_default_timezone_set('Asia/Manila');
 			$time =date("h:i:sa");
@@ -198,8 +132,8 @@ class Home extends CI_Controller {
 			$data['date'] = $date;
 			$data['username'] = $user;
 			$this->load->view('header2',$header_data);
-			$this->load->view('header');
-			$this->load->view('home',$data);
+			//$this->load->view('header');
+			$this->load->view('home',['pro'=>$profile]);
 			$this->load->view('footer');
 		}
 
@@ -218,8 +152,10 @@ class Home extends CI_Controller {
 	public function docu(){
 		$header_data['title']="All Documents";
 		$this->load->view('header2',$header_data);
-		$this->load->view('header');
+		//$this->load->view('header');
+		$user['username']=$this->session->userdata('username');
 		$this->load->model('dts_model');
+		$profile = $this->dts_model->get_profile($user);
 		$documents = $this->dts_model->getDocuments();
 		foreach($documents as $a){
 			$as = array('document_file' => $a['document_file']);
@@ -228,7 +164,7 @@ class Home extends CI_Controller {
 			$url = "./uploads/".$a['document_title'];
 //			print_r($as);
 		}
-		$this->load->view('documents',['do'=>$documents]);
+		$this->load->view('documents',['do'=>$documents,'pro'=>$profile]);
 		$this->load->view('footer');
 	}
 
@@ -258,7 +194,7 @@ class Home extends CI_Controller {
 		$employees = $this->dts_model->getEmployees($user);
 		$header_data['title']="Profile";
 		$this->load->view('header2',$header_data);
-		$this->load->view('header');
+		//$this->load->view('header');
 		$this->load->view('profile',['pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending,'emp'=>$employees,'docu'=>$ul]);
 		$this->load->view('footer');
 	}
@@ -350,12 +286,12 @@ class Home extends CI_Controller {
 
 	public function contacts(){
 		$header_data['title']="Contacts";
-
-
-
+			$user['username']=$this->session->userdata('username');
+			$this->load->model('dts_model');
+			$profile = $this->dts_model->get_profile($user);
 		$this->load->view('header2',$header_data);
-		$this->load->view('header');
-	 		$this->load->view('contacts');
+		//$this->load->view('header');
+	 	$this->load->view('contacts',['pro'=>$profile]);
 		$this->load->view('footer');
 	}
 	public function myd(){
@@ -381,7 +317,7 @@ class Home extends CI_Controller {
 
 		$header_data['title']="Edit Profile";
 		$this->load->view('header2',$header_data);
-		$this->load->view('header');
+		//$this->load->view('header');
 		$this->load->view('accountsettings', ['pro'=>$profile]);
 		$this->load->view('footer');
 
@@ -460,14 +396,16 @@ class Home extends CI_Controller {
 	//OFFICES & EMPLOYEES
 		public function offices(){
 			$header_data['title']="Offices";
+			$user['username']=$this->session->userdata('username');
 			$this->load->model('dts_model');
+			$profile = $this->dts_model->get_profile($user);
 			$hold = $this->dts_model->getOffices();
 			$data['offices'] = $hold;
 			//print_r($data);
 
 			$this->load->view('header2',$header_data);
-			$this->load->view('header');
-			$this->load->view('offices',$data);
+			//$this->load->view('header');
+			$this->load->view('offices',['offices'=>$hold,'pro'=>$profile]);
 			$this->load->view('footer');
 		}
 
