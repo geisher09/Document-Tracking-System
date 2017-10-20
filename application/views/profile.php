@@ -7,7 +7,9 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+				<a href="index.html" style="font-family: 'Josefin Slab'; font-size: 27px; color: #34495E; ">
+				<img src="<?php echo base_url('assets/images/logo2.png');?>" alt="DTS Logo" class="img-responsive logo2">
+				Document Tracking System </a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -42,8 +44,8 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="<?php echo site_url('Home/profile'); ?>"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-								<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+								<li><a href="<?php echo site_url('Home/edit'); ?>"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+								<li><a href="<?php echo site_url('Home'); ?>"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 							</ul>
 						</li>
 						<!-- <li>
@@ -60,16 +62,16 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="<?php echo site_url('Home/home'); ?>" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="<?php echo site_url('Home/profile'); ?>" class=""><i class="lnr lnr-code"></i> <span>My Documents</span></a></li>
+						<li><a href="<?php echo site_url('Home/docu'); ?>" class=""><i class="lnr lnr-code"></i> <span>My Documents</span></a></li>
 						<li><a href="<?php echo site_url('Home/offices'); ?>" class=""><i class="lnr lnr-chart-bars"></i> <span>Offices</span></a></li>
 						<li><a href="<?php echo site_url('Home/contacts'); ?>" class=""><i class="lnr lnr-cog"></i> <span>Contacts</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages" class="collapse ">
 								<ul class="nav">
-									<li><a href="page-profile.html" class="">Profile</a></li>
-									<li><a href="page-profile.html" class="">Settings</a></li>
-									<li><a href="page-login.html" class="">Logout</a></li>
+									<li><a href="<?php echo site_url('Home/profile'); ?>" class="">Profile</a></li>
+									<li><a href="<?php echo site_url('Home/edit'); ?>" class="">Settings</a></li>
+									<li><a href="<?php echo site_url('Home'); ?>" class="">Logout</a></li>
 								</ul>
 							</div>
 						</li>
@@ -122,7 +124,7 @@
 
 
 				<div class="col-md-8 col-sm-12 col-xs-12" >
-					<h2> My Documents </h2> <br />
+					<h2><strong>My Documents </strong></h2> <br />
 					<?php if( $error = $this->session->flashdata('responsed')): ?>
 							<div class="alert alert-dismissible alert-danger">
 								<?php echo $error; ?>
