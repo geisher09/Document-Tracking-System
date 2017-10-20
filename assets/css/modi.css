@@ -61,13 +61,14 @@ div.modal div.modal-backdrop {
 }*/
 
 body {
-	 background:url(http://[::1]/DTS/assets/images/1.jpg) no-repeat center center fixed;  
-	 -webkit-background-size: cover; 
-	 -moz-background-size: cover; 
-	 -o-background-size: cover; 
-	 background-size: cover; 
-	padding: 0px;
-	margin: 0;
+	 /* background:url(http://[::1]/DTS/assets/images/1.jpg) no-repeat center center fixed;   */
+	 /* -webkit-background-size: cover;  */
+	 /* -moz-background-size: cover;  */
+	 /* -o-background-size: cover;  */
+	 /* background-size: cover;  */
+	/* padding: 0px; */
+	/* margin: 0; */
+	background-color: #D5D8DC;
 }
 .title-banner{
 	margin-top:0;
@@ -165,13 +166,22 @@ h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
 
 /* 'Profile' section */
 
+.profilebox {
+	max-width: 1000px;
+	margin-top: 35px;
+}
+
 .roundbox {
 	background-color: #242424;
 	opacity: 1.0 !important;
-	border-radius: 6px;
-	padding: 30px 20px 20px 20px;
-	margin-left: 20px;
-	margin-right: 30px;
+	border-radius: 0px;
+	background:url(http://[::1]/DTS/assets/images/2.jpg) no-repeat center center fixed;   
+	 -webkit-background-size: cover;  
+	 -moz-background-size: cover;  
+	 -o-background-size: cover;  
+	  background-size: cover;  
+	 padding: 0px; 
+	 margin: 0; 
 }
 /* 'DINAGDAG MO GELO' */
 .userinfo{
@@ -191,18 +201,30 @@ h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
 	postion:relative;
 }
 .info {
-	padding: 10px 20px 20px 20px;
-	color: white;
-	font-size: 18px;
+	padding: 17px;
+	color: black;
+	font-size: 15px;
 	font-family: "Arial", "Helvetica", "sans-serif";
 }
-.info p:first-child{ text-align:center;font-size:20px; }
 
+.hdr {
+	color: #cacaca;
+	font-weight: bold;
+}
+
+.info .hdr {
+	border-bottom: 1px solid #cacaca;
+}
+
+ul.list-justified > li {
+  margin-bottom: 5px; }
+  ul.list-justified > li span {
+    float: center; }
+	
 #profilepic{
 	height:150px;
 	width:150px;
-	border-radius:10px;
-	margin:0px auto;
+	margin:20px auto;
 }
 #profilepic:hover{ cursor:pointer; }
 

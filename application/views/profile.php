@@ -100,24 +100,57 @@
 <div class="main">
 			<!-- MAIN CONTENT -->		
 	<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Home</p>
-<div class="container-fluid">
-	<div class="container-fluid red" >
+<div class="container-fluid profilebox">
 				<div class="row" >
-				<br />
 				<!-- temporary profile picture & sample profile info  -->
-				<div class="col-md-3 col-sm-12 col-xs-12 roundbox" style="margin-left:0px;">
-
-					<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 roundbox">
 						<?php foreach ($pro as $prof){ ?>
-							<img src="<?php echo base_url($prof['image']); ?>" class="img-responsive"
+							<img src="<?php echo base_url($prof['image']); ?>" class="img-responsive img-circle"
 								alt="Profile Picture" id="profilepic" />
+								
+							<p style="color: #fff; font-size: 35px; text-align: center;"><strong><?php echo $prof['username']; ?></strong></p><br />
 						<?php } ?>
 					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12" style="background-color: #424242; height: 20px;">
+					</div>
+				</div>
+				
 					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12" style="background-color: #34495E; overflow: auto;">
 							<div class="info">
 
+								<h4 class="hdr">Personal Info</h4>
+								<div class="row">
+								
+								<div class="col-md-2 col-sm-2 col-xs-2" style="margin: 10px 0px ;">
+								<ul class="list-unstyled list-justified" style="color: #7FB3D5;">
+									<li>Name: </li>
+									<li>Employee ID:</li>
+									<li>Department: </li>
+									<li>Department ID: </li>
+									<li>Position: </li>
+								</ul>
+								</div>
+								
+								<div class="col-md-4 col-sm-4 col-xs-4" style="margin: 10px 0px ;">
+								<ul class="list-unstyled list-justified" style="color: #fff; font-weight: bold;">
+									<?php foreach ($pro as $prof){ ?>
+									<li><span><?php echo $prof['lname']; ?>, <?php echo $prof['fname']; ?>&nbsp;  <?php echo $prof['mname']; ?> </span></li>
+									<li><span><?php echo $prof['employee_id']; ?></span></li>
+									<li><span><?php echo $prof['department_desc']; ?></span></li>
+									<li><span><?php echo $prof['department_id']; ?></span></li>
+									<li><span><?php echo $prof['position']; ?></span></li>
+									<?php } ?>
+								</ul>
+								</div>
+								
+								</div>
+								
+								<!--
 								<?php foreach ($pro as $prof){ ?>
-									<p><?php echo $prof['username']; ?></p><br />
 									<p>	<?php echo $prof['lname']; ?>,
 										<?php echo $prof['fname']; ?>&nbsp;
 										<?php echo $prof['mname']; ?>
@@ -126,7 +159,7 @@
 									<p>Department: <?php echo $prof['department_desc']; ?> </p>
 									<p>Department ID: <?php echo $prof['department_id']; ?> </p>
 									<p>Position: <?php echo $prof['position']; ?> </p> <br />
-								<?php } ?>
+								<?php } ?> -->
 
 								<!-- <p><?php echo $username; ?> </p>
 								<p>Employee ID: <?php echo $employee_id; ?> </p>
@@ -134,410 +167,14 @@
 								<p>Department ID: <?php echo $department_id; ?> </p>
 								<p>Position: <?php echo $position; ?> </p> <br /> -->
 							</div>
-					</div>
-				</div>
-
-
-
-				<div class="col-md-8 col-sm-12 col-xs-12" >
-					<h2><strong>My Documents </strong></h2> <br />
-					<?php if( $error = $this->session->flashdata('responsed')): ?>
-							<div class="alert alert-dismissible alert-danger">
-								<?php echo $error; ?>
-							</div>
-					<?php endif; ?>
-
-					<?php if( $error = $this->session->flashdata('response')): ?>
-							<div class="alert alert-dismissible alert-success">
-								<?php echo $error; ?>
-							</div>
-					<?php endif; ?>
-					<div class="tab">
-						<button class="tablink active" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Inbox </button>
-						<button class="tablink" onclick="openFolder(event, 'Sent')"> Sent </button>
-					</div>
-
-					<div id="Inbox" class="tabcontent">
-						<!--- inbox table -->
-						<h2 style="color:white">Inbox</h2><br />
-						<table class="table table-list-search table-hover table-condensed table-responsive ">
-							<thead>
-								<tr>
-									<th>TRACKING NO. </th>
-									<th>TITLE</th>
-									<th>STATUS</th>
-									<th>ACTION</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<?php foreach ($inb as $inboxes){ ?>
-								<tr>
-									<td><?php echo $inboxes['tracking_no']; ?></td>
-									<td><?php echo $inboxes['document_title']; ?></td>
-									<td><?php echo $inboxes['response']; ?></td>
-									<td>
-											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$inboxes["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
-											
-											<?php if(($inboxes['response'])=='Approved'){ ?>
-											<button class="btn btn-success btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already approved this file!" disabled>Approved&nbsp;<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>
-											<?php }elseif(($inboxes['response'])=='Rejected'){?>
-											<button class="btn btn-danger btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already rejected this file!" disabled>Rejected&nbsp;<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
-											<?php }else{?>
-											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" >Respond&nbsp;<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
-											<?php }?>
-									</td>
-								</tr>
-								<?php } ?>
-								<!-- <tr>
-									<td><?php echo $dtn; ?></td>
-									<td><?php echo $title; ?></td>
-									<td><?php echo $status; ?></td>
-									<td>
-										<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#details">Details</button>
-										<button class="btn btn-success btn-sm">
-											Download <span class="glyphicon glyphicon-download-alt"></span>
-										</button>
-									</td>
-								</tr> -->
-							</tbody>
-						</table>
-					</div>
-
-
-					<div id="Sent" class="tabcontent">
-						<?php foreach ($pro as $profi){ ?>
-							<h2 style="color:white; float:left">Sent</h2></br>
-									<button class="btn btn-success btn-md" style="float: right;" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
-										<span class="glyphicon glyphicon-share"></span> Send a Document
-									</button> <br />
-						<?php } ?>
-						<br /><br />
-						
-						<!--- inbox table -->
-							<table class="table table-list-search table-hover table-condensed table-responsive ">
-								<thead>
-									<tr>
-										<th>TRACKING NO. </th>
-										<th>TITLE</th>
-										<th>STATUS</th>
-										<th>ACTION</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($snt as $sents){ ?>
-									<tr>
-										<td><?php echo $sents['tracking_no']; ?></td>
-										<td><?php echo $sents['document_title']; ?></td>
-										<td><?php echo $sents['action']; ?></td>
-										<td>
-											<button class="btn btn-primary btn-sm" id="<?php echo $sents['document_id']; ?>" type="button" onclick="lol(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$sents["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
-
-											<!-- <button class="btn btn-default btn-sm">
-												Download <span class="glyphicon glyphicon-download-alt"></span>
-											</button> -->
-										</td>
-									</tr>
-									<?php } ?>
-								</tbody>
-							</table> <br/>
-					</div>
-				</div>
-
-				</div>
-
-			</div>
-
-</div>
-
-
-
-
-<!-- modal of details about the document-->
-	<div id="send_details" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-	<!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #555555">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-          <h3 class="modal-title text-center">Add Document</h3>
-        </div>
-        <div class="modal-body">
-
-			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
-			<div class="row">
-					<input type="hidden" id="empid" name="empid"/>
-			</div>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Title:</label>
-					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_title'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Description:</label>
-					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_desc'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Attach File:</label>
-						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
-					</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('file'); ?>
-			  		</div>
-				</div> <br/><br/>
-			<div>
-				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="reset" class="btn btn-default">Reset</button>
-			</div>
-			<?php echo form_close();?>
-        </div>
-      </div>
-
-		</div>
-	</div>
-
-
-
-
-
-
-
-
-<!-- modal of details about the document-->
-	<div id="inbox_details" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header" style="background-color: #34495E">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="text-align:center; color:white;">DOCUMENT DETAILS</h3>
-				</div>
-
-				<div class="modal-body zoomIn animated">
-					<div id="basicid">
-
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-
-<!-- modal of details about the document-->
-	<div id="inbox_response" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-			<!-- Modal content-->
-			    <div class="modal-content">
-			      <div class="modal-header" style="background-color: #34495E">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="text-align:center; color:white;">RESPOND TO THIS FILE</h3>
-				</div>
-			      		<div class"form-group">
-
-			      			<?php echo form_open('home/saverespond', ['class'=>'form-horizontal']); ?>
-			      			<div class="col-md-12 form-group">
-			      			<br />
-							<label for="">Tracking no:</label>
-								  <input type="text" class="form-control" id="track_no" name="track_no" disabled></textarea>
-							</div>
-							<div class="col-md-12 form-group">
-								<input type="hidden" id="sig_id" name="sig_id"/>
-							</div>
-							<div class="col-md-12 form-group">
-								<input type="hidden" id="doc_id" name="doc_id"/>
-							</div>
-							<div class="col-md-12 form-group">
-								<label for="">Response:</label>
-							        <select class="form-control" name="response">
-										  <option value="Approved">Approve</option>
-										  <option value="Rejected">Reject</option>
-									</select>
-							</div>
-							
-							<div class="col-md-12 form-group">
-								<br /><br />
-										<label for="">Comments :</label>
-										<textarea class="form-control" id="comment" name="comment" rows="3">None</textarea>
-							</div>
-
-							<div class="form-group">
-							        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-							        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-							        <button type="submit" class="btn btn-primary">Save</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						    </div>
-						    <?php echo form_close(); ?>
-						</div>    
-			    </div>
-		</div>
-	</div>
-
-
-</div>
-
-
-
-<div class="modal fade" id="clientModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header" style="background-color: #34495E">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h3 class="modal-title" style="text-align:center; color:white;">View Details</h3>
-					<button class="tablink btn btn-default" onclick="details(event, 'clientDet')">Document Details</button>
-					<button class="tablink btn btn-default" onclick="details(event, 'addSig')">Add Signatory</button>
-			</div>
-
-			<div class="modal-body">
-
-					<div class="container-fluid window" id="clientDet">
-					<p class="lead text-center">Document Details</p>
-						<div class="row">
-							<div class=" col-md-5 form-group">
-								<label for="">Tracking no:</label>
-								<input type="text" class="form-control form-inline" id="docuno" name="docuno" value="" disabled="true"/>
-							</div>
-							<div class=" col-md-7 form-group">
-								<label for="">Title:</label>
-								<input type="text" class="form-control form-inline" id="docutitle" name="docutitle" value="" disabled="true"/>
-							</div>
-						</div>
-						<div class="row">
-								<div class=" col-md-8 form-group">
-									<label for="">Description:</label>
-									<textarea id="docudesc"class="form-control" name="docudesc" rows="2" readonly></textarea>
-								</div>
-							</div>
-						<div class="row">
-							<div class="col-md-6 form-group">
-								<label for="">Document Status:</label>
-								<input type="text" class="form-control" id="docustat" name="docustat" value="" disabled="true"/>
-							</div>
-							<div class="col-md-6 form-group">
-								<label for="">As of:</label>
-								<input type="text" class="form-control" id="docudate" name="docudate" value="" disabled="true"/>
-							</div>
-						</div>
-
-					<div class="row">
-						<div class="col-md-6">
-								<p class="lead text-center">List of Signatory(s)</p>
-								<div style="height: 300px; overflow: auto">
-									<table id="sigList" class="table" style="margin-top: 20px;">
-										<th align="center" class="text-center table-bordered bg-info" style="background-color:#000000;">Employee ID</th>
-										<th align="center" class="text-center table-bordered bg-info" style="background-color:#000000;">Response</th>
-										<th align="center" class="text-center table-bordered bg-info" style="background-color:#000000;">View Details</th>
-										<tbody align="center" id="Signatories" style="color: black;" name="Signatories">
-											<!-- <tr>
-												<td>
-													lol
-												</td>
-											</tr> -->
-										</tbody>
-									</table>
-								</div>
-						</div>
-
-						<div class="col-md-6 collapse" id="sig_detail">
-							<p class="lead text-center">Signatory Details</p>
-									<div class="form-group">
-										<span style="white-space: nowrap">
-										<label for="">Employee Name:</label>
-										<input type="text" class="form-control" id="employee_name" name="employee_name" value="" disabled="true">
-										</span>
-									</div>
-
-									<div class="form-group">
-										<label for="">Employee id:</label>
-										<input type="text" class="form-control" id="employee_id" name="employee_id" value="" disabled="true"/>
-									</div>
-
-									<div class="form-group">
-										<label for="">Response:</label>
-										<input type="text" class="form-control" id="response" name="response" value="" disabled="true"/>
-									</div>
-
-
-									<div class="form-group">
-										<label for="">As of:</label>
-										<input type="text" class="form-control" id="asof" name="asof" value="" disabled="true"/>
-									</div>
-
-									<div class="row">
-										<div class="col-md-12 form-group">
-											<label for="">Comment:</label>
-											<textarea id="comments" class="form-control" name="comments" rows="2" readonly></textarea>
-										</div>
-									</div>
-
 						</div>
 					</div>
-				</div>
+				
 
-				<div class="container-fluid window" id="addSig">
-					<p class="lead text-center">Add a Signatory</p>
-					<div class="col-md-2"></div>
-					<form></form>
-					<?php echo form_open('home/savesig', ['class'=>'form-horizontal']); ?>
-					<div class="col-md-8">
-							<div class="col-lg-12">
-							      <div class="col-sm-6">
-							        <select name="employee" class="form-control">
-									<?php foreach ($emp as $empoy){ ?>
-							          <option value="<?php echo $empoy->employee_id; ?>"><?php echo $empoy->lname.','.$empoy->fname.'  '.$empoy->mname; ?></option>
-							        <?php } ?>
-							        </select>
-							      </div>
-				     		</div>
-
-							<div class="form-group">
-								<input type="hidden" id="adddocuno" name="adddocuno"/>
-							</div>
-
-						<div>
-							<button type="submit" class="btn btn-primary">Save</button>
-							<button type="reset" class="btn btn-default">Reset</button>
-						</div>
-						<?php echo form_close();?>
-					</div>
-					<div class="col-md-2"></div>
-				</div>
-
-
-
-			<!-----------------FOOTER ------------>
-			<!-- <div class="modal-footer">
-				<button type="button" onclick="" class="btn btn-primary" data-dismiss="modal">Save</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div> -->
 		</div>
      </div>
 	</div>
 	</div>
-	<div class="clearfix"></div>
-			<footer>
-			<div class="container-fluid">
-				<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
-			</div>
-			</footer>
 </div>
 
 	<!-- END WRAPPER -->
