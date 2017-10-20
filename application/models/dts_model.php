@@ -610,7 +610,7 @@
 		return $query-> result_array();
 
 	}
-	public function rejected($track_num){
+	public function signatories($track_num){
 		$this->db->select('documentation.document_id,document.tracking_no,
 											signatory.employee_id, signatory.response, signatory.comment, signatory.date_responded,
 											employee.department_id,employee.lname, employee.fname, employee.mname,
@@ -621,41 +621,6 @@
 		$this->db->join('department', 'department.department_id = employee.department_id');
 		$this->db->join('document', 'document.document_id = documentation.document_id');
 		$this->db->where('document.tracking_no',$track_num);
-		$this->db->where('signatory.response', "Rejected");
-		$query = $this->db->get();
-		return $query-> result_array();
-	}
-	public function approved($track_num){
-		$this->db->select('documentation.document_id,,
-											signatory.employee_id, signatory.response, signatory.comment, signatory.date_responded,
-											employee.department_id,employee.lname, employee.fname, employee.mname,
-											department.department_desc,
-											documentation.date_of_action');
-		$this->db->from('signatory');
-		$this->db->join('documentation', 'signatory.document_id = documentation.document_id');
-		$this->db->join('employee', 'employee.employee_id = signatory.employee_id');
-		$this->db->join('department', 'department.department_id = employee.department_id');
-		$this->db->join('document', 'document.document_id = documentation.document_id');
-		$this->db->where('document.tracking_no',$track_num);
-		$this->db->where('signatory.response', "Approved");
-		$query = $this->db->get();
-		return $query-> result_array();
-		// return json_encode($query-> result());
-		// return $query-> result();
-		// return $query-> row();
-	}
-	public function pending($track_num){
-		$this->db->select('documentation.document_id,,
-											signatory.employee_id, signatory.response, signatory.comment, signatory.date_responded,
-											employee.department_id,employee.lname, employee.fname, employee.mname,
-											department.department_desc');
-		$this->db->from('signatory');
-		$this->db->join('documentation', 'signatory.document_id = documentation.document_id');
-		$this->db->join('employee', 'employee.employee_id = signatory.employee_id');
-		$this->db->join('department', 'department.department_id = employee.department_id');
-		$this->db->join('document', 'd ocument.document_id = documentation.document_id');
-		$this->db->where('document.tracking_no',$track_num);
-		$this->db->where('signatory.response', "Pending");
 		$query = $this->db->get();
 		return $query-> result_array();
 	}

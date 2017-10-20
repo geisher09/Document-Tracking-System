@@ -775,15 +775,12 @@ class Home extends CI_Controller {
 		}
 	}
 
-	//history (single row palang per data)
+	//history
 	public function histo(){
 			$this->load->model('dts_model');
 			$dates = $this->dts_model->signa_date($this->input->post('id'));
 			$origin = $this->dts_model->get_file_origin($this->input->post('id'));
 			$stat = $this->dts_model->get_file_status($this->input->post('id'));
-			// $approved = $this->dts_model->approved($this->input->post('id'));
-			// print_r($approved);
-			// echo json_decode(json_encode($approved));
 			$count = 0;
 			$p=0;
 			asort($dates); //sorted na ho!
@@ -792,26 +789,21 @@ class Home extends CI_Controller {
 				{
 					$count++;
 				}
-				// asort($d['date_responded']);
 				$date = array(
 					'date' =>$d['date_responded'],
 				'key' => $p);
 				$p++;
 					$dat[]=$date;
-				// $sorted_dates[]=($dates);
-				// $sorted_dates[] = asort($dates);
 			}
 
 			foreach($stat as $o){
 				if($o['action']=='Rejected'){
 					$origin = $this->dts_model->get_file_origin($this->input->post('id'));
-					$rejected = $this->dts_model->rejected($this->input->post('id'));
-					$approved = $this->dts_model->approved($this->input->post('id'));
+					$signatories = $this->dts_model->signatories($this->input->post('id'));
 					$output = array(
 									"status" => "Rejected",
 									"origin" => $origin,
-									"rejected" => $rejected,
-									"approved" => $approved,
+									"signatories" => $signatories,
 									"date" => $dates,
 									"count" => $count
 								);
@@ -821,41 +813,43 @@ class Home extends CI_Controller {
 				}
 				else if($o['action']=="Approved"){
 					$origin = $this->dts_model->get_file_origin($this->input->post('id'));
-					// $rejected = $this->dts_model->rejected($this->input->post('id'));
-					$approved = $this->dts_model->approved($this->input->post('id'));
-					// asort($dates);
-
+					$signatories = $this->dts_model->signatories($this->input->post('id'));
 					$output = array(
 						"status" => "Approved",
 						"origin" => $origin,
-						"approved" => $approved,
+						"signatories" => $signatories,
 						"date" => $dates,
 						"date_sorted" => $dat,
 						"count" => $count
-						// "rejected" => $rejected
 					);
-					// echo json_decode($output);
 					echo json_encode($output);
 					break;
 					exit();
 				}
 				else if($o['action']=="Pending"){
 					$origin = $this->dts_model->get_file_origin($this->input->post('id'));
-					$pending = $this->dts_model->pending($this->input->post('id'));
-					if($pending!=null){
+					$signatories = $this->dts_model->signatories($this->input->post('id'));
+					if($count==0){
 						$output = array(
 							"status" => "Pending",
 							"origin" => $origin,
-							"pending" => $pending
+							"signatories" => $signatories,
+							"date" => $dates,
+							// "date_sorted" => $dat,
+							"count" => $count
 						);
 						echo json_encode($output);
 						break;
 						exit();
 					}
-					else {
+					else{
 						$output = array(
 							"status" => "Pending",
-							"origin" => $origin
+							"origin" => $origin,
+							"signatories" => $signatories,
+							"date" => $dates,
+							"date_sorted" => $dat,
+							"count" => $count
 						);
 						echo json_encode($output);
 						break;
@@ -863,9 +857,7 @@ class Home extends CI_Controller {
 					}
 				}
 			}
-					// echo json_encode($origin);
 	}
-
 
 
 

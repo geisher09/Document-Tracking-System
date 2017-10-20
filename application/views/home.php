@@ -75,14 +75,14 @@
 								</ul>
 							</div>
 						</li>
-						
+
 					</ul>
 				</nav>
 			</div>
 		</div>
 		<!-- END LEFT SIDEBAR -->
 <div class="main">
-			<!-- MAIN CONTENT -->		
+			<!-- MAIN CONTENT -->
 	<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Home</p>
 <div class="container-fluid">
 	<div class="container-fluid red" >
@@ -118,52 +118,40 @@
 				</div>
 			</form>
 
+			<div id="map2" class="collapse" style="margin-left:100px;">
+					<h2><i>Tracking Details Of your Document...</i></h2>
+						<div class="main">
+							<ul class="cbp_tmtimeline">
+								<li id="summary">
 
-			<div id="map2" class="collapse" style="text-align:left;">
-			<h2><i>Tracking Details Of your Document...</i></h2>
-				<div class="main">
-					<ul class="cbp_tmtimeline">
-						<li id="summary">
+								</li>
+								<li id="department">
 
-						</li>
-						<li id="department">
+								</li>
+								<li id="signatories">
 
-						</li>
-						<li id="approved">
-
-						</li>
-						<li id="rejected">
-
-						</li>
-						<li>
-							<div id="sender_view2">
-							 <!-- <time class="cbp_tmtime" datetime="2017-01-16 21:30"><span>1/1/17</span> <span>21:30</span></time> -->
-							<time class="cbp_tmtime"><span id="send_date2"></span> <span id="send_time2"></span></time>
-							<div class="cbp_tmicon cbp_tmicon-earth"></div>
-							<div class="cbp_tmlabel">
-								<h2 id="sender2"></h2>
-								<p id="comment2"></p>
-							</div>
+								</li>
+								<li>
+									<div id="sender_view2">
+									 <!-- <time class="cbp_tmtime" datetime="2017-01-16 21:30"><span>1/1/17</span> <span>21:30</span></time> -->
+									<time class="cbp_tmtime"><span id="send_date2"></span> <span id="send_time2"></span></time>
+									<div class="cbp_tmicon cbp_tmicon-earth"></div>
+									<div class="cbp_tmlabel">
+										<h2 id="sender2"></h2>
+										<p id="comment2"></p>
+									</div>
+								</div>
+								</li>
+							</ul>
 						</div>
-						</li>
-					</ul>
-				</div>
-			</div>
+					</div>
 
-	</div>
-	
-	<div class="clearfix"></div>
-		<footer>
-			<div class="container-fluid">
-				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Document Tracki</a>. All Rights Reserved.</p>
-			</div>
-		</footer>
-	<!-- END WRAPPER -->
-	<!-- Javascript -->
+					<div id="error" class="collapse" style="margin-left:100px;">
+					<div class="col-md-10 col-sm-10 col-xs-10 roundbox flipInX animated" style="margin-center:0px;"><h4 style="color: white; "><span class="glyphicon glyphicon-search"></span>&nbsp;Please search a valid document!</h4></div>
+					</div>
 
-
-<!-- script for show/hide -->
-<script>
+		<!-- script for show/hide -->
+		<script>
 $(document).ready(function() {
 	$('.dropdown-toggle').dropdown();
 
@@ -180,477 +168,244 @@ $(document).ready(function() {
 							 data:{id: id},
 								success: function(data) {
 									// $('#invalid_view').hide(500);
-									// alert(data);
 									// var obj = JSON.stringify(data)
+									$("#error").hide(500);
 									var obj = JSON.parse(data)
-									//	alert(obj.count);
 									var max = parseInt(obj.count);
-
-									// var con = parseInt(obj.count);
-									// console.log(data);
-									// alert("total count of signatories: "+max);
-									// alert(obj.status);
-									// alert(obj.date[1].date_responded)
-									for (a=0; a<max; a++){
-										// alert(obj.date_sorted[a].date + obj.date[a].date_responded)
-										// alert(obj.approved[a].lname)
-										// alert(obj.rejected[a].lname);
-									}
-									// var a = obj.date_sorted[0].date
-									// alert(obj.date_sorted[0].date);
-									if((obj.date_sorted[0].date) == (obj.date[1].date_responded)){ //check if date is the same
-										// alert("true");
-									}
-									// alert(obj.approved[0].lname);
-									// alert(obj[4]);
-
-									// alert(obj.approved);
-									// var obj = JSON.parse(data);
-									// alert(obj.document_id);
-									// alert("parsed");
-									// alert(obj.approved);
 									var splitarray = new Array();
 									splitarray= obj.origin.date_created.split(" ");
 									if(obj.status=="Rejected"){
-										alert("Rejected");
 										//initial
 										$('#sender2').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
 										$('#send_date2').html(splitarray[0]);
 										$('#comment2').html(obj.origin.document_desc);
 										var s="";
-										// var con = parseInt(max);
-										alert(data);
-										for(var i=0; i<parseInt(obj.approved.length); i++){
-											s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
-											// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-											+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname+'</p></h2></div>';
-											// con=con+1;
-											$("#approved").html(s);
+										var v="";
+										var d="";
+										// alert(data);
+										for(var i=0; i<parseInt(obj.signatories.length); i++){
+											if(obj.signatories[i].response == "Rejected"){
+												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-remove"></span>&nbsp;Rejected</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
+												$("#signatories").html(s);
+											}
+											else if(obj.signatories[i].response == "Approved"){
+												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
+												$("#signatories").html(s);
+											}
+											else if(obj.signatories[i].response == "Pending"){
+												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Pending</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
+												$("#signatories").html(s);
+											}
 											var a=i+1;
-												if(a==i<parseInt(obj.approved.length)){
-														alert(obj.approved[i].lname);
-														var v="";
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_of_action
-														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-import"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.approved[i].department_desc+'</p></h2></div>';
+												if(a==i<parseInt(obj.signatories.length)){
+													if(obj.signatories[i].response == "Approved"){
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
 														$("#department").html(v);
 
-														var d="";
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
-														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-export"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
 														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>To Employee :'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'<br/>Department :'+obj.approved[i].department_desc
+														+'<br/>To Employee :'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
+														+'<br/>Department :'+obj.signatories[i].department_desc
 														+'</p></h2></div>';
 														$("#summary").html(d);
 													}
+													else if(obj.signatories[i].response == "Rejected"){
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
+														$("#department").html(v);
+
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+														+'<br/>Was rejected by Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
+														+'<br/>Department: '+obj.signatories[i].department_desc
+														+'</p></h2></div>';
+														$("#summary").html(d);
+													}
+													else if(obj.signatories[i].response == "Pending"){
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Last Department</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
+														$("#department").html(v);
+
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+														+'<br/>Is still in Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
+														+'<br/>Department: '+obj.signatories[i].department_desc
+														+'</p></h2></div>';
+														$("#summary").html(d);
+													}
+
+												}
 											}
 											$("#map2").show(500);
-											// $("#map2").show(500);
-
-
 									}
 									else if(obj.status=="Approved"){
-										// alert("Approved");
 										//initial
 										$('#sender2').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
 										$('#send_date2').html(splitarray[0]);
 										$('#comment2').html(obj.origin.document_desc);
 										var s="";
-										// var con = parseInt(max);
+										var v="";
+										var d="";
 										// alert(data);
-										for(var i=0; i<parseInt(obj.approved.length); i++){
-											s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
-											+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname+'</p></h2></div>';
-											$("#approved").html(s);
+										for(var i=0; i<parseInt(obj.signatories.length); i++){
+											if(obj.signatories[i].response == "Rejected"){
+												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-remove"></span>&nbsp;Rejected</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
+												$("#signatories").html(s);
+											}
+											else if(obj.signatories[i].response == "Approved"){
+												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
+												$("#signatories").html(s);
+											}
+											else if(obj.signatories[i].response == "Pending"){
+												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Pending</h2><p id="comment2">'
+												+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
+												$("#signatories").html(s);
+											}
 											var a=i+1;
-												if(a==i<parseInt(obj.approved.length)){
-														// alert(obj.approved[i].lname);
-														var v="";
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_of_action
-														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-import"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.approved[i].department_desc+'</p></h2></div>';
+												if(a==i<parseInt(obj.signatories.length)){
+													if(obj.signatories[i].response == "Approved"){
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
 														$("#department").html(v);
 
-														var d="";
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
-														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-export"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
 														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>To Employee :'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'<br/>Department :'+obj.approved[i].department_desc
+														+'<br/>To Employee :'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
+														+'<br/>Department :'+obj.signatories[i].department_desc
 														+'</p></h2></div>';
 														$("#summary").html(d);
 													}
+													else if(obj.signatories[i].response == "Rejected"){
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
+														$("#department").html(v);
+
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+														+'<br/>Was rejected by Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
+														+'<br/>Department: '+obj.signatories[i].department_desc
+														+'</p></h2></div>';
+														$("#summary").html(d);
+													}
+													else if(obj.signatories[i].response == "Pending"){
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Last Department</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
+														$("#department").html(v);
+
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+														+'<br/>Is still in Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
+														+'<br/>Department: '+obj.signatories[i].department_desc
+														+'</p></h2></div>';
+														$("#summary").html(d);
+													}
+
+												}
 											}
 											$("#map2").show(500);
-											// $("#map2").show(500);
-
 									}
 									else if(obj.status=="Pending"){
-										alert("Pending");
-										// $("#send_view").show();
-										// $("#pending_view").show();
-										// $("#rejected_view").hide();
-										// $("#approved_view").hide();
-										// $("#department_view").hide();
-										// $("#summary_view").hide();
-										// $('#sender').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
-										// $('#send_date').html(splitarray[0]);
-										// $('#send_time').html(splitarray[1]);
-										// $('#comment').html(obj.origin.document_desc);
-										// if(obj.pending!=null){
-										// 	//pending
-										// 	var pending_date = new Array();
-										// 	pending_date= obj.pending.date_responded.split(" ");
-										// 	// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-										// 	$('#pending').html('The file: '+obj.origin.tracking_no+'<br/>Is still in: '+ obj.pending.department_desc);
-										// 	$('#pending_date').html(pending_date[0]);
-										// 	$('#pending_time').html(pending_date[1]);
-										// 	$("#map").show(500);
-										// }
-										// else{
-										// 	var pending_date = new Array();
-										// 	pending_date= obj.origin.date_of_action.split(" ");
-										// 	// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-										// 	$('#pending').html('The file: '+obj.origin.tracking_no+'<br/>No response yet');
-										// 	$('#pending_date').html(pending_date[0]);
-										// 	$('#pending_time').html(pending_date[1]);
-										// 	$("#map").show(500);
-										// 	// $("#map").show(500);
-										// }
+										// alert("Pending");
+										//initial
+										$('#sender2').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
+										$('#send_date2').html(splitarray[0]);
+										$('#comment2').html(obj.origin.document_desc);
+										var s="";
+										var v="";
+										var d="";
+										// if(parseInt(obj.signatories.length)!=0){
+										if(obj.count!=0){
+										for(var i=0; i<parseInt(obj.signatories.length); i++){
+											if(obj.signatories[i].response == "Rejected"){
+												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-remove"></span>&nbsp;Rejected</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
+												$("#signatories").html(s);
+											}
+											else if(obj.signatories[i].response == "Approved"){
+												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
+												$("#signatories").html(s);
+											}
+											else if(obj.signatories[i].response == "Pending"){
+												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Pending</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
+												$("#signatories").html(s);
+											}
+											var a=i+1;
+												if(a==i<parseInt(obj.signatories.length)){
+													if(obj.signatories[i].response == "Approved"){
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
+														$("#department").html(v);
 
-									}
-									else{
-										// $("#invalid_view").show(500);
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+														+'<br/>To Employee :'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
+														+'<br/>Department :'+obj.signatories[i].department_desc
+														+'</p></h2></div>';
+														$("#summary").html(d);
+													}
+													else if(obj.signatories[i].response == "Rejected"){
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
+														$("#department").html(v);
+
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+														+'<br/>Was rejected by Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
+														+'<br/>Department: '+obj.signatories[i].department_desc
+														+'</p></h2></div>';
+														$("#summary").html(d);
+													}
+													else if(obj.signatories[i].response == "Pending"){
+														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Last Department</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
+														$("#department").html(v);
+
+														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
+														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+														+'<br/>Is still in Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
+														+'<br/>Department: '+obj.signatories[i].department_desc
+														+'</p></h2></div>';
+														$("#summary").html(d);
+
+													}
+												}
+											}
+											$("#map2").show(500);
+										} //end of if
+										else{
+											d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.origin.date_of_action
+											+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
+											+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+											+'<br/>Has no sigantories yet!</p></h2></div>';
+											$("#summary").html(d);
+											$("#map2").show(500);
+
+										}
 									}
 								}
 						});
 		}
 		else {
-			// $("#sender_view").hide(500);
-			// $("#pending_view").hide(500);
-			// $("#rejected_view").hide(500);
-			// $("#approved_view").hide(500);
-			// $("#department_view").hide(500);
-			// $("#summary_view").hide(500);
-			// $("#invalid_view").show(500);
-		}
-	});
-});
-
-</script>
-<script>
-	function setTime() {
-	var d = new Date(),
-	  el = document.getElementById("time");
-
-	  el.innerHTML = formatAMPM(d);
-
-	setTimeout(setTime, 1000);
-	}
-
-	function formatAMPM(date) {
-	  var hours = date.getHours(),
-	    minutes = date.getMinutes(),
-	    seconds = date.getSeconds(),
-	    ampm = hours >= 12 ? 'pm' : 'am';
-	  hours = hours % 12;
-	  hours = hours ? hours : 12; // the hour '0' should be '12'
-	  minutes = minutes < 10 ? '0'+minutes : minutes;
-	  var strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-	  return strTime;
-	}
-
-	setTime();
-
-
-
-	var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-var radius = canvas.height / 2;
-ctx.translate(radius, radius);
-radius = radius * 0.90
-setInterval(drawClock, 1000);
-
-function drawClock() {
-  drawFace(ctx, radius);
-  drawNumbers(ctx, radius);
-  drawTime(ctx, radius);
-}
-
-function drawFace(ctx, radius) {
-  var grad;
-  ctx.beginPath();
-  ctx.arc(0, 0, radius, 0, 2*Math.PI);
-  ctx.fillStyle = 'white';
-  ctx.fill();
-  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
-  grad.addColorStop(0, '#333');
-  grad.addColorStop(0.5, 'white');
-  grad.addColorStop(1, '#333');
-  ctx.strokeStyle = grad;
-  ctx.lineWidth = radius*0.1;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
-  ctx.fillStyle = '#333';
-  ctx.fill();
-}
-
-function drawNumbers(ctx, radius) {
-  var ang;
-  var num;
-  ctx.font = radius*0.15 + "px arial";
-  ctx.textBaseline="middle";
-  ctx.textAlign="center";
-  for(num = 1; num < 13; num++){
-    ang = num * Math.PI / 6;
-    ctx.rotate(ang);
-    ctx.translate(0, -radius*0.85);
-    ctx.rotate(-ang);
-    ctx.fillText(num.toString(), 0, 0);
-    ctx.rotate(ang);
-    ctx.translate(0, radius*0.85);
-    ctx.rotate(-ang);
-  }
-}
-
-function drawTime(ctx, radius){
-    var now = new Date();
-    var hour = now.getHours();
-    var minute = now.getMinutes();
-    var second = now.getSeconds();
-    //hour
-    hour=hour%12;
-    hour=(hour*Math.PI/6)+
-    (minute*Math.PI/(6*60))+
-    (second*Math.PI/(360*60));
-    drawHand(ctx, hour, radius*0.5, radius*0.07);
-    //minute
-    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
-    drawHand(ctx, minute, radius*0.8, radius*0.07);
-    // second
-    second=(second*Math.PI/30);
-    drawHand(ctx, second, radius*0.9, radius*0.02);
-}
-
-function drawHand(ctx, pos, length, width) {
-    ctx.beginPath();
-    ctx.lineWidth = width;
-    ctx.lineCap = "round";
-    ctx.moveTo(0,0);
-    ctx.rotate(pos);
-    ctx.lineTo(0, -length);
-    ctx.stroke();
-    ctx.rotate(-pos);
-}
-</script>
-
-	</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- modi -->
-
-
-
-
-
-
-
-
-
-<!-- main -->
-
-
-
-<!-- script for show/hide -->
-<script>
-$(document).ready(function() {
-	$('#show').on('click', function(e) {  //nawala yung sa error message niya pag walang input di pwede sa functin(e)
-			// 	$("#show").click(function(){
-
-		e.preventDefault();
-		var id = $("#system-search").val();
-		if(id != ''){
-			// alert(id);
-			$.ajax({
-							type: 'POST',
-							url: 'histo',
-							 data:{id: id},
-								success: function(data) {
-									// $('#invalid_view').hide(500);
-									// alert(data);
-									// var obj = JSON.stringify(data)
-									var obj = JSON.parse(data)
-									//	alert(obj.count);
-									var max = parseInt(obj.count);
-
-									// var con = parseInt(obj.count);
-									// console.log(data);
-									// alert("total count of signatories: "+max);
-									// alert(obj.status);
-									// alert(obj.date[1].date_responded)
-									for (a=0; a<max; a++){
-										// alert(obj.date_sorted[a].date + obj.date[a].date_responded)
-										// alert(obj.approved[a].lname)
-										// alert(obj.rejected[a].lname);
-									}
-									// var a = obj.date_sorted[0].date
-									// alert(obj.date_sorted[0].date);
-									if((obj.date_sorted[0].date) == (obj.date[1].date_responded)){ //check if date is the same
-										// alert("true");
-									}
-									// alert(obj.approved[0].lname);
-									// alert(obj[4]);
-
-									// alert(obj.approved);
-									// var obj = JSON.parse(data);
-									// alert(obj.document_id);
-									// alert("parsed");
-									// alert(obj.approved);
-									var splitarray = new Array();
-									splitarray= obj.origin.date_created.split(" ");
-									if(obj.status=="Rejected"){
-										alert("Rejected");
-										//initial
-										$('#sender2').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
-										$('#send_date2').html(splitarray[0]);
-										$('#comment2').html(obj.origin.document_desc);
-										var s="";
-										// var con = parseInt(max);
-										alert(data);
-										for(var i=0; i<parseInt(obj.approved.length); i++){
-											s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
-											// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-											+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname+'</p></h2></div>';
-											// con=con+1;
-											$("#approved").html(s);
-											var a=i+1;
-												if(a==i<parseInt(obj.approved.length)){
-														alert(obj.approved[i].lname);
-														var v="";
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_of_action
-														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-import"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.approved[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var d="";
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
-														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-export"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>To Employee :'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'<br/>Department :'+obj.approved[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-													}
-											}
-											$("#map2").show(500);
-											// $("#map2").show(500);
-
-
-									}
-									else if(obj.status=="Approved"){
-										// alert("Approved");
-										//initial
-										$('#sender2').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
-										$('#send_date2').html(splitarray[0]);
-										$('#comment2').html(obj.origin.document_desc);
-										var s="";
-										// var con = parseInt(max);
-										// alert(data);
-										for(var i=0; i<parseInt(obj.approved.length); i++){
-											s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
-											+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname+'</p></h2></div>';
-											$("#approved").html(s);
-											var a=i+1;
-												if(a==i<parseInt(obj.approved.length)){
-														// alert(obj.approved[i].lname);
-														var v="";
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_of_action
-														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-import"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.approved[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var d="";
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.approved[i].date_responded
-														// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2">'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-export"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>To Employee :'+obj.approved[i].lname+', '+obj.approved[i].fname+' '+obj.approved[i].lname
-														+'<br/>Department :'+obj.approved[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-													}
-											}
-											$("#map2").show(500);
-											// $("#map2").show(500);
-
-									}
-									else if(obj.status=="Pending"){
-										alert("Pending");
-										// $("#send_view").show();
-										// $("#pending_view").show();
-										// $("#rejected_view").hide();
-										// $("#approved_view").hide();
-										// $("#department_view").hide();
-										// $("#summary_view").hide();
-										// $('#sender').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
-										// $('#send_date').html(splitarray[0]);
-										// $('#send_time').html(splitarray[1]);
-										// $('#comment').html(obj.origin.document_desc);
-										// if(obj.pending!=null){
-										// 	//pending
-										// 	var pending_date = new Array();
-										// 	pending_date= obj.pending.date_responded.split(" ");
-										// 	// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-										// 	$('#pending').html('The file: '+obj.origin.tracking_no+'<br/>Is still in: '+ obj.pending.department_desc);
-										// 	$('#pending_date').html(pending_date[0]);
-										// 	$('#pending_time').html(pending_date[1]);
-										// 	$("#map").show(500);
-										// }
-										// else{
-										// 	var pending_date = new Array();
-										// 	pending_date= obj.origin.date_of_action.split(" ");
-										// 	// $('#pending').html(obj.rejected.lname+', '+obj.rejected.fname+' '+obj.rejected.mname);
-										// 	$('#pending').html('The file: '+obj.origin.tracking_no+'<br/>No response yet');
-										// 	$('#pending_date').html(pending_date[0]);
-										// 	$('#pending_time').html(pending_date[1]);
-										// 	$("#map").show(500);
-										// 	// $("#map").show(500);
-										// }
-
-									}
-									else{
-										// $("#invalid_view").show(500);
-									}
-								}
-						});
-		}
-		else {
-			// $("#sender_view").hide(500);
-			// $("#pending_view").hide(500);
-			// $("#rejected_view").hide(500);
-			// $("#approved_view").hide(500);
-			// $("#department_view").hide(500);
-			// $("#summary_view").hide(500);
-			// $("#invalid_view").show(500);
+			$("#map2").hide(500);
+			$("#error").show(500);
 		}
 	});
 });
