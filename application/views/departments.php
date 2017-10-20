@@ -109,11 +109,10 @@
 				<br>
 
 				<table class="table table-list-search table-hover table-condensed table-responsive ">
-
 					<tbody>
 						<?php foreach($dept as $department) :?>
 						<tr>
-							<td><a style="color: white" href="<?php echo site_url('Home/deptEmployees/'.$department["department_id"]); ?>"><?php echo $department["department_desc"]; ?></a></td>
+							<td><a style="color: white" href="<?php echo site_url('Home/deptEmployees/'.$department["department_id"].'/'.$office); ?>"><?php echo $department["department_desc"]; ?></a></td>
 							<td><?php echo $department["department_id"]; ?></td>
 						</tr>
 					<?php endforeach; ?>

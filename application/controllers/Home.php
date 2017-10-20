@@ -124,6 +124,7 @@ class Home extends CI_Controller {
 			$user['username']=$this->session->userdata('username');
 			$this->load->model('dts_model');
 			$profile = $this->dts_model->get_profile($user);
+			$documents = $this->dts_model->getDocuments();
 			$header_data['title']="DTS";
 			date_default_timezone_set('Asia/Manila');
 			$time =date("h:i:sa");
@@ -133,7 +134,7 @@ class Home extends CI_Controller {
 			$data['username'] = $user;
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('home',['pro'=>$profile]);
+			$this->load->view('home',['do'=>$documents,'pro'=>$profile]);
 			$this->load->view('footer');
 		}
 
@@ -157,6 +158,19 @@ class Home extends CI_Controller {
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
 		$documents = $this->dts_model->getDocuments();
+
+		$profile = $this->dts_model->get_profile($user);
+		$inbox = $this->dts_model->get_profile_inbox($user);
+		// $employid = $profile['employee_id'];
+		$ul = array();
+		foreach($inbox as $a){
+			$as = array('document_file' => $a['document_file']);
+			// print_r($as);
+			$ul[] = $as;
+		}
+		$sent = $this->dts_model->get_profile_sent($user);
+		$pending = $this->dts_model->get_inbox_pending($user);
+		$employees = $this->dts_model->getEmployees($user);
 		foreach($documents as $a){
 			$as = array('document_file' => $a['document_file']);
 			$type = explode('.', $a['document_title']);
@@ -164,7 +178,7 @@ class Home extends CI_Controller {
 			$url = "./uploads/".$a['document_title'];
 //			print_r($as);
 		}
-		$this->load->view('documents',['do'=>$documents,'pro'=>$profile]);
+		$this->load->view('documents',['do'=>$documents,'pro'=>$profile,'inb'=>$inbox,'snt'=>$sent,'pen'=>$pending,'emp'=>$employees,'docu'=>$ul]);
 		$this->load->view('footer');
 	}
 
@@ -442,22 +456,24 @@ class Home extends CI_Controller {
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('departments',['dept'=>$data['dept'],'id'=>$data['id'],'dept_id'=>$data['dept_id'],'pro'=>$profile]);
+			$this->load->view('departments',['dept'=>$data['dept'],'id'=>$data['id'],'dept_id'=>$data['dept_id'],'pro'=>$profile,'office'=>$office_id]);
 			$this->load->view('footer');
 		}
 
-		public function deptEmployees($department_id){
+		public function deptEmployees($department_id,$office_id){
 			$header_data['title']="Department's Employees";
 			$condition = array('department_id'=>$department_id);
 			$this->load->model('dts_model');
 			$hold = $this->dts_model->getEmployee($condition);
+			$user['username']=$this->session->userdata('username');
+			$profile = $this->dts_model->get_profile($user);
 			$data['employees'] = $hold;
 			$data['title'] = "None";
 			//print_r($data);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('department/employee',$data);
+			$this->load->view('department/employee',['employees'=>$data['employees'],'pro'=>$profile,'office'=>$office_id]);
 			$this->load->view('footer');
 		}
 
@@ -577,12 +593,12 @@ class Home extends CI_Controller {
 				 else{
              		// $this->session->set_flashdata('response', 'Failed to save!');
 				 }
-				return redirect('home/profile');
+				return redirect('home/docu');
 
         }
         else{
         		$this->session->set_flashdata('responsed', 'Failed to save!(Please input necessary details)');
-            	return redirect('home/profile');
+            	return redirect('home/docu');
         }
 	}
 
