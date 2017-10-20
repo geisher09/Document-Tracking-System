@@ -772,11 +772,11 @@ class Home extends CI_Controller {
 						$output = array(
 							"status" => "Pending",
 							"origin" => $origin,
-							"signatories" => $signatories,
-							"date" => $dates,
 							// "date_sorted" => $dat,
-							"count" => $count
+							"count" => $count,
+							"signa" => "No"
 						);
+						// print_r($output);
 						echo json_encode($output);
 						break;
 						exit();
@@ -788,7 +788,8 @@ class Home extends CI_Controller {
 							"signatories" => $signatories,
 							"date" => $dates,
 							"date_sorted" => $dat,
-							"count" => $count
+							"count" => $count,
+							"signa" => "Yes"
 						);
 						echo json_encode($output);
 						break;
