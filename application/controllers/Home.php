@@ -422,7 +422,7 @@ class Home extends CI_Controller {
 			$this->load->view('offices',['offices'=>$hold,'pro'=>$profile]);
 			$this->load->view('footer');
 		}
-
+		
 		public function dept($office_id){
 			$header_data['title']="Departments";
 			$condition = array('office_id'=>$office_id);

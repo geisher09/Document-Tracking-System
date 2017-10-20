@@ -109,7 +109,32 @@
 			<h1><strong>List of Offices</strong></h1>
 			<?php foreach($offices as $o) :?>
 			<!-- <?php echo $o; ?> -->
-			<h3><a style="color:white;" href="<?php echo site_url('Home/dept/'.$o["office_id"]); ?>"><?php echo $o["office_desc"]; ?></a></h3>
+			<h3 id="office"><a style="color:white;" href="<?php echo site_url('Home/dept/'.$o["office_id"]); ?>"><?php echo $o["office_desc"]; ?></a></h3>
+			
+			<!--- eto ung pulldown na table ng departments, dummy depts. lang muna nilagay ko kasi ayoko pakelaman ung controller --->
+			<!--- 
+			<div class="collapse" id="department" style="background-color:black;margin-left:30px;width:80%;">
+				<h4>Departments of <?php // echo $o["office_desc"]; ?> </h4>
+					<table class="table table-list-search table-hover table-condensed table-responsive ">
+						<tbody>
+							<tr>
+								<td><a style="color:white;" href="#">Blah blah Department</a></td>
+								<td>101</td>
+							</tr>
+							<tr>
+								<td><a style="color:white;" href="#">Blah blah Department</a></td>
+								<td>102</td>
+							</tr>
+						</tbody>
+					</table>
+					<a class="btn btn-success btn-sm" data-toggle="modal" data-target="#add_dept" >
+						<span class="glyphicon glyphicon-plus"></span> Add Department
+					</a>
+					<a href="<?php // echo site_url('Home/offices'); ?>" class="btn btn-default btn-sm" id="hide">
+						<span class="lnr lnr-cross"></span> Close
+					</a>
+			</div>  -->
+		
 			<!-- <h3><a href=.base_url('Home/dept/'.$o['office_id'])><?php echo $o["office_desc"]; ?></a></h3> -->
 		<?php endforeach; ?>
 <!--
@@ -122,7 +147,64 @@
 
 </div>
 
+<!-- start of send document modal -->
+	<div id="send_details" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+	<!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #555555">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
 
+          <h3 class="modal-title text-center">Add Document</h3>
+        </div>
+        <div class="modal-body">
+
+			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
+			<div class="row">
+					<input type="hidden" id="empid" name="empid"/>
+			</div>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Title:</label>
+					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('document_title'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Description:</label>
+					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('document_desc'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Attach File:</label>
+						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
+					</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('file'); ?>
+			  		</div>
+				</div> <br/><br/>
+			<div>
+				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="reset" class="btn btn-default">Reset</button>
+			</div>
+			<?php echo form_close();?>
+        </div>
+      </div>
+
+		</div>
+	</div><!-- end of send document -->
 		
 		<div class="clearfix"></div>
 			<footer>
@@ -201,5 +283,13 @@ $(document).ready(function() {
 	$('.dropdown-toggle').dropdown();	
 	$('.collapsed').collapse();
 });
+// hide and show
+$("#office").click(function(){
+    $("#department").show(200);
+}); 
+$("#hide").click(function(){
+    $("#department").hide(200);
+});
+
 
 </script>
