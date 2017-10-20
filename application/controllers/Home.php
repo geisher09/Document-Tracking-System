@@ -593,12 +593,12 @@ class Home extends CI_Controller {
 				 else{
              		// $this->session->set_flashdata('response', 'Failed to save!');
 				 }
-				return redirect('home/profile');
+				return redirect('home/docu');
 
         }
         else{
         		$this->session->set_flashdata('responsed', 'Failed to save!(Please input necessary details)');
-            	return redirect('home/profile');
+            	return redirect('home/docu');
         }
 	}
 
