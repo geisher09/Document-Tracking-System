@@ -57,12 +57,10 @@
 							</ul>
 						</li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-link"></i> <span>Quicklinks</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Basic Use</a></li>
-								<li><a href="#">Working With Data</a></li>
-								<li><a href="#">Security</a></li>
-								<li><a href="#">Troubleshooting</a></li>
+								<li><a data-toggle="modal" href="#send_details"><i class="lnr lnr-pencil"></i> Compose</a></li>
+								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="lnr lnr-inbox"></i> Inbox</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">

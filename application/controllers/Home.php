@@ -408,7 +408,7 @@ class Home extends CI_Controller {
 			$this->load->view('offices',['offices'=>$hold,'pro'=>$profile]);
 			$this->load->view('footer');
 		}
-
+		
 		public function dept($office_id){
 			$header_data['title']="Departments";
 			$condition = array('office_id'=>$office_id);
@@ -442,7 +442,7 @@ class Home extends CI_Controller {
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('departments',['dept'=>$data['dept'],'pro'=>$profile]);
+			$this->load->view('departments',['dept'=>$data['dept'],'id'=>$data['id'],'dept_id'=>$data['dept_id'],'pro'=>$profile]);
 			$this->load->view('footer');
 		}
 

@@ -147,7 +147,7 @@
 
 </div>
 
-<!-- start of send document -->
+<!-- start of send document modal -->
 	<div id="send_details" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-md">
 	<!-- Modal content-->
