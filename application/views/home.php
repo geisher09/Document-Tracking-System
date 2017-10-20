@@ -67,7 +67,7 @@
 						<li><a href="<?php echo site_url('Home/contacts'); ?>" class=""><i class="lnr lnr-cog"></i> <span>Contacts</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
+							<div id="subPages" class="collapse">
 								<ul class="nav">
 									<li><a href="<?php echo site_url('Home/profile'); ?>" class="">Profile</a></li>
 									<li><a href="<?php echo site_url('Home/edit'); ?>" class="">Settings</a></li>
@@ -165,6 +165,8 @@
 <!-- script for show/hide -->
 <script>
 $(document).ready(function() {
+	$('.dropdown-toggle').dropdown();
+
 	$('#show').on('click', function(e) {  //nawala yung sa error message niya pag walang input di pwede sa functin(e)
 			// 	$("#show").click(function(){
 

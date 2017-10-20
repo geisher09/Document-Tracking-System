@@ -218,7 +218,7 @@ class Home extends CI_Controller {
 	public function docu(){
 		$header_data['title']="All Documents";
 		$this->load->view('header2',$header_data);
-		//$this->load->view('header');
+		$this->load->view('header');
 		$this->load->model('dts_model');
 		$documents = $this->dts_model->getDocuments();
 		foreach($documents as $a){
@@ -381,7 +381,7 @@ class Home extends CI_Controller {
 
 		$header_data['title']="Edit Profile";
 		$this->load->view('header2',$header_data);
-		//$this->load->view('header');
+		$this->load->view('header');
 		$this->load->view('accountsettings', ['pro'=>$profile]);
 		$this->load->view('footer');
 

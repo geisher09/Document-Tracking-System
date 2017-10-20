@@ -524,7 +524,7 @@
 
 <!-- javascript -->
 <script>
-
+$('.dropdown-toggle').dropdown();
 function openFolder (evt, folderName) {
 
 	var x, tablinks, tabcontent;

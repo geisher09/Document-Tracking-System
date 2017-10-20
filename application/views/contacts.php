@@ -343,3 +343,10 @@
 
 	</div>
 </div>
+
+<script>
+$(document).ready(function() {
+	$('.dropdown-toggle').dropdown();	
+});
+
+</script>
