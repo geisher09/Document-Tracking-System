@@ -436,12 +436,13 @@ class Home extends CI_Controller {
 		 $id = $office_id.$num;
 	 }
 			$data['id']=$id;
-
+			$user['username']=$this->session->userdata('username');
+			$profile = $this->dts_model->get_profile($user);
 			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('departments',$data);
+			$this->load->view('departments',['dept'=>$data['dept'],'pro'=>$profile]);
 			$this->load->view('footer');
 		}
 
