@@ -125,7 +125,7 @@
 
 			<div id="map2" class="collapse">
 					<h2><i>Tracking Details Of your Document...</i></h2>
-						<div class="main" style="margin-right:200px;">
+						<div class="">
 							<ul class="cbp_tmtimeline">
 								<li id="summary">
 
