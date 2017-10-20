@@ -102,8 +102,8 @@
 <div class="main">
 			<!-- MAIN CONTENT -->
 	<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Home</p>
-<div class="container-fluid">
-	<div class="container-fluid red" >
+<div class="container-fluid col-md-8">
+	<div class="container-fluid red" >	
 	<div class="row">
 	   <div class="col-md-6">
 	   	<?php foreach ($pro as $prof){ ?>
@@ -111,21 +111,7 @@
 		<?php } ?>
 
 	   </div>
-	   <!-- <div class="col-md-6">
-
-		<h3 style="color:#48C9B0;float:right;margin-top:20px;">
-		  <?php echo $date; ?> | <span id='time'></span>
-		</h3>
-	   </div> -->
-
-
 	</div>
-			<!--		The current time is: <?php echo $time; ?>
-					Today is: <?php echo $date; ?>
-					<?php echo $username; ?> Cute <3
-				</p>
-				-->
-
 			<form>
 				<div class="form-group input-group home-searchbar">
 					<!-- <input type="text" class="form-control" id="system-search" name="q" placeholder="Document to track..." required/> -->
@@ -170,6 +156,13 @@
 					<div id="error" class="collapse" style="margin-left:100px;">
 					<div class="col-md-10 col-sm-10 col-xs-10 roundbox flipInX animated" style="margin-center:0px;"><h4 style="color: white; "><span class="glyphicon glyphicon-search"></span>&nbsp;Please search a valid document!</h4></div>
 					</div>
+
+					<div class="clearfix"></div>
+			<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
+			</div>
+			</footer>
 
 		<!-- script for show/hide -->
 
@@ -613,3 +606,76 @@ function drawHand(ctx, pos, length, width) {
 
 	</div>
 </div>
+
+<div class="container-fluid body col-md-4">
+	<!--body-->
+		<div class="container-fluid red">
+		  <div class="row">
+		  <div class="col-md-6">
+			<h1><strong> All Documents <strong></h1>
+		  </div>
+		  <div class="col-md-12">
+			<!-- search bar -->
+			<form>
+				<div class="form-group sbar input-group">
+										<!-- <input type="text" name="q" onkeyup="search()" placeholder="Search" id="search"/> -->
+
+					<input type="text" class="form-control" id="search" onkeyup="search()" name="q" placeholder="Search for" required/>
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-primary" >
+							<span class="glyphicon glyphicon-search"></span> Search
+						</button>
+					</span>
+				</div>
+			</form>
+		   </div>
+		   </div>
+			<br />
+			<br />
+			
+
+			<!-- table -->
+			<table class="table table-list-search table-hover table-responsive" id="mytable">
+		    <!-- <table class="table table-list-search table-hover table-responsive "> -->
+				<thead>
+					<tr>
+						<th>TRACKING NO. </th>
+						<th>TITLE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php if(isset($do)): ?>
+					<?php foreach ($do as $document){ ?>
+					<tr id="<?php echo $document['tracking_no'];?>" onclick='show(this.id)'>
+						<td><?php echo $document['tracking_no'];?></td>
+						<td><?php echo $document['document_title']; ?></td>
+					</tr>
+					<?php } ?>
+					<?php else: ?>
+							<tr>NO RECORD FOUND!</tr>
+					<?php endif; ?>
+				</tbody>
+			</table>
+			
+			<div class="clearfix"></div>
+			<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
+			</div>
+			</footer>
+		
+		</div>
+
+</div>
+
+</div>
+	<!-- END WRAPPER -->
+	<!-- Javascript -->
+
+	</div>
+</div>
+<script type="text/javascript">
+	function show(id){
+		$('#system-search').val(id);
+	}
+</script>
