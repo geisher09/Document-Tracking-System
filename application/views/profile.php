@@ -99,8 +99,11 @@
 		<!-- END LEFT SIDEBAR -->
 <div class="main">
 			<!-- MAIN CONTENT -->		
-	<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Home</p>
-<div class="container-fluid profilebox">
+<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Home</p>
+<div class="container-fluid body">
+<div class="container-fluid red">
+<h1 style="color: #7FB3D5;"><strong> Profile </strong></h1>
+	<div class="container-fluid profilebox">
 				<div class="row" >
 				<!-- temporary profile picture & sample profile info  -->
 					<div class="col-md-12 col-sm-12 col-xs-12 roundbox">
@@ -113,14 +116,10 @@
 					</div>
 				</div>
 				
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12" style="background-color: #424242; height: 20px;">
-					</div>
-				</div>
 				
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12" style="background-color: #34495E; overflow: auto;">
-							<div class="info">
+						<div class="col-md-12 col-sm-12 col-xs-12 info" style="background-color: #424242; overflow: auto;">
+							
 
 								<h4 class="hdr">Personal Info</h4>
 								<div class="row">
@@ -166,12 +165,14 @@
 								<p>Department: <?php echo $dept; ?> </p>
 								<p>Department ID: <?php echo $department_id; ?> </p>
 								<p>Position: <?php echo $position; ?> </p> <br /> -->
-							</div>
+							
 						</div>
 					</div>
 				
 
 		</div>
+	</div>
+</div>
 		
 		<!-- start of send document modal -->
 	<div id="send_details" class="modal fade" role="dialog">

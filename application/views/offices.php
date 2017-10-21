@@ -106,7 +106,7 @@
 		
 	<div class="container-fluid red">
 			<div>
-			<h1><strong>List of Offices</strong></h1>
+			<h1 style="color: #7FB3D5;"><strong>List of Offices</strong></h1>
 			<?php foreach($offices as $o) :?>
 			<!-- <?php echo $o; ?> -->
 			<h3 id="office"><a style="color:white;" href="<?php echo site_url('Home/dept/'.$o["office_id"]); ?>"><?php echo $o["office_desc"]; ?></a></h3>

@@ -105,7 +105,7 @@
 		<div class="container-fluid red">
 		  <div class="row">
 		  <div class="col-md-6">
-			<h1><strong> All Documents <strong></h1>
+			<h1 style="color: #7FB3D5;"><strong> My Documents <strong></h1>
 		  </div>
 		  <div class="col-md-6">
 			<!-- search bar -->
@@ -144,13 +144,13 @@
 							</div>
 					<?php endif; ?>
 					<div class="tab">
-						<button class="tablink active" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> My Documents </button>
+						<button class="tablink active" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Documents </button>
 						<button class="tablink" onclick="openFolder(event, 'Sent')"> New Document </button>
 					</div>
 
 					<div id="Inbox" class="tabcontent">
 						<!--- inbox table -->
-						<h2 style="color:white">My Documents</h2><br />
+						<h2 style="color:white">Received Documents</h2><br />
 						<table class="table table-list-search table-hover table-condensed table-responsive ">
 							<thead>
 								<tr>

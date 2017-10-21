@@ -105,7 +105,7 @@
 	<div class="row">
 	   <div class="col-md-6">
 	   	<?php foreach ($pro as $prof){ ?>
-	   	<h1><strong>Welcome <?php echo $prof['username'];?>!</strong></h1>
+	   	<h1 style="color: #7FB3D5;"><strong>Welcome <?php echo $prof['username'];?>!</strong></h1>
 		<?php } ?>
 
 	   </div>
@@ -116,7 +116,7 @@
 					<input type="text" class="form-control" id="system-search" name="q" placeholder="Document to track..." required/>
 					<!-- <input type="text" class="form-control" id="search" onkeyup="search()" name="q" placeholder="Search for" required/> -->
 					<span class="input-group-btn">
-						<button type="submit" class="btn btn-success" id="show" >
+						<button type="submit" class="btn btn-info" id="show" >
 							<span class="glyphicon glyphicon-search"></span> Track
 						</button>
 					</span>
@@ -615,7 +615,7 @@ function drawHand(ctx, pos, length, width) {
 		<div class="container-fluid red">
 		  <div class="row">
 		  <div class="col-md-6">
-			<h1><strong> All Documents <strong></h1>
+			<h1 style="color: #7FB3D5;"><strong> All Documents <strong></h1>
 		  </div>
 		  <div class="col-md-12">
 			<!-- search bar -->
@@ -625,7 +625,7 @@ function drawHand(ctx, pos, length, width) {
 
 					<input type="text" class="form-control" id="search" onkeyup="search()" name="q" placeholder="Search for" required/>
 					<span class="input-group-btn">
-						<button type="submit" class="btn btn-primary" >
+						<button type="submit" class="btn btn-info" >
 							<span class="glyphicon glyphicon-search"></span> Search
 						</button>
 					</span>

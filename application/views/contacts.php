@@ -105,7 +105,7 @@
 <!--body-->
 		
 	<div class="container-fluid red">
-	<h1><strong>Contacts</strong></h1>
+	<h1 style="color: #7FB3D5;"><strong>Contacts</strong></h1>
 		<!---------------WARNING! DUMMY DATA AHEAD!-------------->
 			<div style="width:100%;overflow:auto">
 				<table id="mytable" class="table">

@@ -108,7 +108,7 @@
     
   <div class="container-fluid body">
     <div class="container-fluid red">
-      <h2>Employees</h2><br /><br />
+      <h2 style="color: #7FB3D5;">Employees</h2><br /><br />
             <table class="table table-list-search table-hover table-responsive ">
           <thead>
             <tr>

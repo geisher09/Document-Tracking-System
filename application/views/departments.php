@@ -105,7 +105,7 @@
 <!--body-->
 		
 	<div class="container-fluid red">
-<h2>Departments</h2><br />
+<h2 style="color: #7FB3D5;">Departments</h2><br />
 				<br>
 
 				<table class="table table-list-search table-hover table-condensed table-responsive ">
