@@ -256,6 +256,40 @@ class Home extends CI_Controller {
 			}
 
 	}
+	public function view_docu(){
+			if(isset($_GET['file'])){
+				$filenam = array();
+				$fileName = array('file' => $_GET['file']);
+				print_r($fileName);
+				echo "<br/>";
+				$name = basename($_GET['file']);
+				echo "<br/> basenaname <br/>";
+				$filePath = 'uploads/'.$name;
+				echo "<br/>";
+				print_r($filePath);
+				$this->load->model('dts_model');
+				if(!empty($fileName) && file_exists($filePath)){
+					// $file = $filepath;
+					$filename = $name;
+					header('Content-type: application/pdf');
+					header('Content-Disposition: inline; filename="'.$filename.'"');
+					header('Content-Transfer-Encoding: binary');
+					header('Accept-Ranges: bytes');
+					ob_clean();
+					flush();
+					readfile("uploads/".$filename); 
+					exit;
+
+				}
+				else {
+					return redirect('home/docu');
+				}
+			}
+			else{
+				return redirect('home/docu');
+			}
+
+	}
 
 
 	public function ajax_list()
@@ -424,7 +458,7 @@ class Home extends CI_Controller {
 			$this->load->view('offices',['offices'=>$hold,'pro'=>$profile]);
 			$this->load->view('footer');
 		}
-		
+
 		public function dept($office_id){
 			$header_data['title']="Departments";
 			$condition = array('office_id'=>$office_id);

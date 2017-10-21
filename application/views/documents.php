@@ -129,9 +129,9 @@
 									<button class="btn btn-success btn-md" style="float: right;" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
 										<span class="glyphicon glyphicon-share"></span> Compose
 									</button> <br />
-						<?php } ?>			
+						<?php } ?>
 
-					
+
 					<?php if( $error = $this->session->flashdata('responsed')): ?>
 							<div class="alert alert-dismissible alert-danger">
 								<?php echo $error; ?>
@@ -171,8 +171,9 @@
 									<td><?php echo $inboxes['response']; ?></td>
 									<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$inboxes["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
-											
+											<!-- <button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$inboxes["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button> -->
+											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/view_docu/?file='.$inboxes["document_file"]) ?>'">View&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+
 											<?php if(($inboxes['response'])=='Approved'){ ?>
 											<button class="btn btn-success btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already approved this file!" disabled>Approved&nbsp;<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>
 											<?php }elseif(($inboxes['response'])=='Rejected'){?>
@@ -201,9 +202,9 @@
 
 					<div id="Sent" class="tabcontent">
 						<h2 style="color:white; float:left">Sent Documents</h2></br>
-						
+
 						<br /><br />
-						
+
 						<!--- inbox table -->
 							<table class="table table-list-search table-hover table-condensed table-responsive ">
 								<thead>
@@ -222,7 +223,8 @@
 										<td><?php echo $sents['action']; ?></td>
 										<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $sents['document_id']; ?>" type="button" onclick="lol(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$sents["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+											<!-- <button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$sents["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button> -->
+											<button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/view_docu/?file='.$sents["document_file"]) ?>'">View&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
 
 											<!-- <button class="btn btn-default btn-sm">
 												Download <span class="glyphicon glyphicon-download-alt"></span>
@@ -360,7 +362,7 @@
 										  <option value="Rejected">Reject</option>
 									</select>
 							</div>
-							
+
 							<div class="col-md-12 form-group">
 								<br /><br />
 										<label for="">Comments :</label>
@@ -374,7 +376,7 @@
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						    </div>
 						    <?php echo form_close(); ?>
-						</div>    
+						</div>
 			    </div>
 		</div>
 	</div>
@@ -729,17 +731,17 @@ function lol(id){
 	</div>
 </div>
 
-			
-			
+
+
 			<div class="clearfix"></div>
 			<footer>
 			<div class="container-fluid">
 				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Document Tracki</a>. All Rights Reserved.</p>
 			</div>
 			</footer>
-		
+
 		</div>
-		
+
 		<!-- start of send document modal -->
 	<div id="send_details" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-md">
@@ -799,7 +801,7 @@ function lol(id){
 		</div>
 	</div><!-- end of send document -->
 
-		
+
 <!-- start of send document modal -->
 	<div id="send_details" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-md">
@@ -858,7 +860,7 @@ function lol(id){
 
 		</div>
 	</div><!-- end of send document -->
-		
+
 </div>
 
 </div>
@@ -897,7 +899,7 @@ function lol(id){
 
 <script>
 $(document).ready(function() {
-	$('.dropdown-toggle').dropdown();	
+	$('.dropdown-toggle').dropdown();
 });
 
 </script>
