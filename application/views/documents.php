@@ -87,7 +87,7 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="<?php echo site_url('Home/home'); ?>" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="<?php echo site_url('Home/docu'); ?>" class="active"><i class="lnr lnr-inbox"></i> <span>My Documents</span></a></li>
+						<li><a href="<?php echo site_url('Home/docu'); ?>" class="active"><i class="lnr lnr-envelope"></i> <span>My Documents</span></a></li>
 						<li><a href="<?php echo site_url('Home/offices'); ?>" class=""><i class="lnr lnr-apartment"></i><span>Offices and </span><i class="lnr lnr-users"></i><span>Employees</span></a></li>
 						<li><a href="<?php echo site_url('Home/contacts'); ?>" class=""><i class="lnr lnr-phone"></i> <span>Contacts</span></a></li>
 						<li><a href="<?php echo site_url('Home/profile'); ?>" class=""><i class="lnr lnr-user"></i> <span>Profile</span></a></li>
@@ -144,35 +144,25 @@
 							</div>
 					<?php endif; ?>
 					<div class="tab">
-						<button class="tablink active" onclick="openFolder(event, 'Inbox')" id="defaultOpen"> Documents </button>
-						<button class="tablink" onclick="openFolder(event, 'Sent')"> New Document </button>
+						<button class="tablink active" onclick="openFolder(event, 'Inbox')" id="defaultOpen"><i class="lnr lnr-inbox"></i> Inbox&nbsp;<span class="badge bg-danger">5</span></button>
+						<button class="tablink" onclick="openFolder(event, 'Sent')"><i class="lnr lnr-rocket"></i> Sent</button>
 					</div>
 
 					<div id="Inbox" class="tabcontent">
+						<br />
 						<!--- inbox table -->
-						<h2 style="color:white">Received Documents</h2><br />
 						<table class="table table-list-search table-hover table-condensed table-responsive ">
-							<thead>
-								<tr>
-									<th>FROM</th>
-									<th>TRACKING NO. </th>
-									<th>TITLE</th>
-									<th>STATUS</th>
-									<th>ACTION</th>
-								</tr>
-							</thead>
 							<tbody>
 
 								<?php foreach ($inb as $inboxes){ ?>
 								<tr class="dropdown">
-									<td><img style="width: 25px; border: 2px solid white;" src="<?php echo base_url($inboxes['image']); ?>" class="img-circle" alt="Avatar"><span></span>&emsp;<?php echo $inboxes['lname']; ?>, <?php echo $inboxes['fname']; ?> <?php echo $inboxes['mname']; ?></td>
-									<td><?php echo $inboxes['tracking_no']; ?></td>
-									<td><?php echo $inboxes['document_title']; ?></td>
-									<td><?php echo $inboxes['response']; ?></td>
-									<td>
+									<td><img style="width: 30px; border: 2px solid gray;" src="<?php echo base_url($inboxes['image']); ?>" class="img-thumbnail" alt="Avatar"><span></span>&emsp;<?php echo $inboxes['lname']; ?>, <?php echo $inboxes['fname']; ?> <?php echo $inboxes['mname']; ?></td>
+									<td>Forwarded file: <?php echo $inboxes['tracking_no']; ?>&nbsp;
+										Entitled: 
+									<?php echo $inboxes['document_title']; ?>...</td>
+									<td><?php echo $inboxes['date_responded']; ?></td>
+									<!--  <td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<!-- <button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$inboxes["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button> -->
-											<!-- <button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/view_docu/?file='.$inboxes["document_file"]) ?>'">View&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button> -->
 											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$inboxes["document_file"]) ?>')">View&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
 
 											<?php if(($inboxes['response'])=='Approved'){ ?>
@@ -182,7 +172,7 @@
 											<?php }else{?>
 											<button class="btn btn-info btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" >Respond&nbsp;<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
 											<?php }?>
-									</td>
+									</td> -->
 								</tr>
 								<?php } ?>
 								<!-- <tr>
@@ -202,20 +192,10 @@
 
 
 					<div id="Sent" class="tabcontent">
-						<h2 style="color:white; float:left">Sent Documents</h2></br>
-
-						<br /><br />
+						<br />
 
 						<!--- inbox table -->
 							<table class="table table-list-search table-hover table-condensed table-responsive ">
-								<thead>
-									<tr>
-										<th>TRACKING NO. </th>
-										<th>TITLE</th>
-										<th>STATUS</th>
-										<th>ACTION</th>
-									</tr>
-								</thead>
 								<tbody>
 									<?php foreach ($snt as $sents){ ?>
 									<tr>

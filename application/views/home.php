@@ -171,6 +171,12 @@
 
 		<script>
 $(document).ready(function() {
+		// $("#system-search").keypress( function(e) {
+ //    var chr = String.fromCharCode(e.which);
+ //    if ("12345NOABC".indexOf(chr) < 0)
+ //        return false;
+	// });
+
 	$('.dropdown-toggle').dropdown();
 
 	$('#show').on('click', function(e) {

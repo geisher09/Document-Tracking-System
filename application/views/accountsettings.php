@@ -176,14 +176,16 @@
 							"><strong>'.form_error('username').'</strong></h5>'; ?>
 					</div>
 					<div style="float:right;">
-						<button type="submit" class="btn btn-success btn-md">Save Changes</button>
-						<button type="reset" class="btn btn-danger btn-md">Discard Changes</button>
-					</div>
+					<button type="submit" class="btn btn-success btn-md">Save Changes</button>
 					<?php echo form_close();?>
-					
+					<?php echo form_open('home/edit',['class'=>'lgform']);?>
+					<br />
+					<button type="submit" class="btn btn-danger btn-md">Discard Changes</button>
+					<?php echo form_close();?>
+					</div>
 				</div>
 	</div>
-	
+	<br /><br />
 		<div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
