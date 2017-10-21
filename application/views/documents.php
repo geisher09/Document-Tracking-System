@@ -172,7 +172,8 @@
 									<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="wow(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
 											<!-- <button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$inboxes["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button> -->
-											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/view_docu/?file='.$inboxes["document_file"]) ?>'">View&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+											<!-- <button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/view_docu/?file='.$inboxes["document_file"]) ?>'">View&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button> -->
+											<button class="btn btn-default btn-sm" id="<?php echo $inboxes['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$inboxes["document_file"]) ?>')">View&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
 
 											<?php if(($inboxes['response'])=='Approved'){ ?>
 											<button class="btn btn-success btn-sm" id="<?php echo $inboxes['signatory_id']; ?>" type="button" onclick="sos(this.id)" title="You already approved this file!" disabled>Approved&nbsp;<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>
@@ -224,7 +225,8 @@
 										<td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $sents['document_id']; ?>" type="button" onclick="lol(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
 											<!-- <button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/download_docu/?file='.$sents["document_file"]) ?>'">Download&nbsp;<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button> -->
-											<button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="location.href = '<?php echo site_url('Home/view_docu/?file='.$sents["document_file"]) ?>'">View&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+											<!-- <button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sents["document_file"]) ?>')">View&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button> -->
+											<button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sents["document_file"]) ?>')">Viewasa&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
 
 											<!-- <button class="btn btn-default btn-sm">
 												Download <span class="glyphicon glyphicon-download-alt"></span>
