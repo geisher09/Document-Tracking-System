@@ -277,7 +277,7 @@ class Home extends CI_Controller {
 					header('Accept-Ranges: bytes');
 					ob_clean();
 					flush();
-					readfile("uploads/".$filename); 
+					readfile("uploads/".$filename);
 					exit;
 
 				}
