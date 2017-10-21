@@ -189,9 +189,11 @@
 
 			// $stat = "received";
 
-			$this->db->select('a.signatory_id,a.employee_id,a.document_id,a.response,a.comment,b.tracking_no,b.document_desc, b.document_id,b.document_title,b.document_file'); //for download
+			$this->db->select('a.signatory_id,a.employee_id,a.document_id,a.response,a.comment,b.tracking_no,b.document_desc, b.document_id,b.document_title,b.document_file,c.document_id,c.employee_id,d.lname,d.fname,d.mname,d.image,d.employee_id'); //for download
 			$this->db->from('signatory a');
 			$this->db->join('document b','a.document_id = b.document_id');
+			$this->db->join('documentation c','a.document_id = c.document_id');
+			$this->db->join('employee d','c.employee_id = d.employee_id ');
 			$this->db->where('a.employee_id', $id);
 			$query = $this->db->get();
 			return $query->result_array();

@@ -1,6 +1,4 @@
 <!doctype html>
-<html lang="en">
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -20,6 +18,7 @@
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
 
+
 	<script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js');?>"></script>
@@ -27,7 +26,6 @@
 	<script src="<?php echo base_url('assets/vendor/chartist/js/chartist.min.jss');?>"></script>
 	<script src="<?php echo base_url('assets/scripts/klorofil-common.js');?>"></script>
 </head>
-
 <body>
 	<!-- WRAPPER -->
 	<div id="wrapper">
@@ -66,7 +64,9 @@
 							</ul>
 						</li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<?php foreach ($pro as $prof){ ?>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<?php echo base_url($prof['image']); ?>" class="img-circle" alt="Avatar"> <span><?php echo $prof['username'];?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<?php } ?>
 							<ul class="dropdown-menu">
 								<li><a href="<?php echo site_url('Home/profile'); ?>"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="<?php echo site_url('Home/edit'); ?>"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
@@ -86,29 +86,24 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="<?php echo site_url('Home/home'); ?>" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="<?php echo site_url('Home/docu'); ?>" class=""><i class="lnr lnr-code"></i> <span>My Documents</span></a></li>
-						<li><a href="<?php echo site_url('Home/offices'); ?>" class=""><i class="lnr lnr-chart-bars"></i> <span>Offices</span></a></li>
-						<li><a href="<?php echo site_url('Home/contacts'); ?>" class=""><i class="lnr lnr-cog"></i> <span>Contacts</span></a></li>
+						<li><a href="<?php echo site_url('Home/home'); ?>" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<li><a href="<?php echo site_url('Home/docu'); ?>" class=""><i class="lnr lnr-inbox"></i> <span>My Documents</span></a></li>
+						<li><a href="<?php echo site_url('Home/offices'); ?>" class=""><i class="lnr lnr-apartment"></i><span>Offices and </span><i class="lnr lnr-users"></i><span>Employees</span></a></li>
+						<li><a href="<?php echo site_url('Home/contacts'); ?>" class=""><i class="lnr lnr-phone"></i> <span>Contacts</span></a></li>
+						<li><a href="<?php echo site_url('Home/profile'); ?>" class="active"><i class="lnr lnr-user"></i> <span>Profile</span></a></li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
-								<ul class="nav">
-									<li><a href="<?php echo site_url('Home/profile'); ?>" class="">Profile</a></li>
-									<li><a href="<?php echo site_url('Home/edit'); ?>" class="">Settings</a></li>
-									<li><a href="<?php echo site_url('Home'); ?>" class="">Logout</a></li>
-								</ul>
-							</div>
-						</li>
-						
 					</ul>
 				</nav>
 			</div>
 		</div>
 		<!-- END LEFT SIDEBAR -->
 <div class="main">
-			<!-- MAIN CONTENT -->
+			<!-- MAIN CONTENT -->		
+	<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Offices</p>
 <div class="container-fluid body">
+
+<!--body-->
+		
 	<div class="container-fluid red">
 	<div class="row">
 		<div class="col-md-3">
@@ -146,138 +141,78 @@
 		<div class="col-md-3">
 		</div>
 	</div>
-	
-		<div class="clearfix"></div>
-		<footer>
-			<div class="container-fluid">
-				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Document Tracki</a>. All Rights Reserved.</p>
-			</div>
-		</footer>
-		
-		
-<!-- start of send document modal -->
-	<div id="send_details" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-	<!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #555555">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h3 class="modal-title text-center">Add Document</h3>
-        </div>
-        <div class="modal-body">
-
-			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
-			<div class="row">
-					<input type="hidden" id="empid" name="empid"/>
-			</div>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Title:</label>
-					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_title'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Description:</label>
-					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_desc'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Attach File:</label>
-						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
-					</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('file'); ?>
-			  		</div>
-				</div> <br/><br/>
-			<div>
-				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="reset" class="btn btn-default">Reset</button>
-			</div>
-			<?php echo form_close();?>
-        </div>
-      </div>
-
-		</div>
-	</div><!-- end of send document -->
-		
-	</div>
-</div>
-
-<!-- start of send document modal -->
-	<div id="send_details" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-	<!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #555555">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-          <h3 class="modal-title text-center">Add Document</h3>
-        </div>
-        <div class="modal-body">
-
-			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
-			<div class="row">
-					<input type="hidden" id="empid" name="empid"/>
-			</div>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Title:</label>
-					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_title'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Description:</label>
-					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_desc'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Attach File:</label>
-						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
-					</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('file'); ?>
-			  		</div>
-				</div> <br/><br/>
-			<div>
-				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="reset" class="btn btn-default">Reset</button>
-			</div>
-			<?php echo form_close();?>
-        </div>
-      </div>
-
-		</div>
-	</div><!-- end of send document -->
-
-</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
 
 	</div>
+</div>
+
+<!-- start of send document modal -->
+	<div id="send_details" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+	<!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #555555">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h3 class="modal-title text-center">Add Document</h3>
+        </div>
+        <div class="modal-body">
+
+			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
+			<div class="row">
+					<input type="hidden" id="empid" name="empid"/>
+			</div>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Title:</label>
+					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('document_title'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Description:</label>
+					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('document_desc'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Attach File:</label>
+						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
+					</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('file'); ?>
+			  		</div>
+				</div> <br/><br/>
+			<div>
+				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="reset" class="btn btn-default">Reset</button>
+			</div>
+			<?php echo form_close();?>
+        </div>
+      </div>
+
+		</div>
+	</div><!-- end of send document -->
+
+<script>
+$(document).ready(function() {
+	$('.dropdown-toggle').dropdown();	
+});
+
+</script>
+
+
+

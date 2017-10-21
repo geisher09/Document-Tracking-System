@@ -88,7 +88,7 @@
 					<ul class="nav">
 						<li><a href="<?php echo site_url('Home/home'); ?>" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
 						<li><a href="<?php echo site_url('Home/docu'); ?>" class="active"><i class="lnr lnr-inbox"></i> <span>My Documents</span></a></li>
-						<li><a href="<?php echo site_url('Home/offices'); ?>" class=""><i class="lnr lnr-apartment"></i> <span>Offices</span></a></li>
+						<li><a href="<?php echo site_url('Home/offices'); ?>" class=""><i class="lnr lnr-apartment"></i><span>Offices and </span><i class="lnr lnr-users"></i><span>Employees</span></a></li>
 						<li><a href="<?php echo site_url('Home/contacts'); ?>" class=""><i class="lnr lnr-phone"></i> <span>Contacts</span></a></li>
 						<li><a href="<?php echo site_url('Home/profile'); ?>" class=""><i class="lnr lnr-user"></i> <span>Profile</span></a></li>
 						<li>
@@ -121,11 +121,15 @@
 					</span>
 				</div>
 			</form>
+
 		   </div>
 		   </div>
 			<br />
-			<br />
-			
+			<?php foreach ($pro as $profi){ ?>
+									<button class="btn btn-success btn-md" style="float: right;" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
+										<span class="glyphicon glyphicon-share"></span> Compose
+									</button> <br />
+						<?php } ?>			
 
 					
 					<?php if( $error = $this->session->flashdata('responsed')): ?>
@@ -150,6 +154,7 @@
 						<table class="table table-list-search table-hover table-condensed table-responsive ">
 							<thead>
 								<tr>
+									<th>FROM</th>
 									<th>TRACKING NO. </th>
 									<th>TITLE</th>
 									<th>STATUS</th>
@@ -159,7 +164,8 @@
 							<tbody>
 
 								<?php foreach ($inb as $inboxes){ ?>
-								<tr>
+								<tr class="dropdown">
+									<td><img style="width: 25px; border: 2px solid white;" src="<?php echo base_url($inboxes['image']); ?>" class="img-circle" alt="Avatar"><span></span>&emsp;<?php echo $inboxes['lname']; ?>, <?php echo $inboxes['fname']; ?> <?php echo $inboxes['mname']; ?></td>
 									<td><?php echo $inboxes['tracking_no']; ?></td>
 									<td><?php echo $inboxes['document_title']; ?></td>
 									<td><?php echo $inboxes['response']; ?></td>
@@ -194,12 +200,8 @@
 
 
 					<div id="Sent" class="tabcontent">
-						<?php foreach ($pro as $profi){ ?>
-							<h2 style="color:white; float:left">Sent Documents</h2></br>
-									<button class="btn btn-success btn-md" style="float: right;" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
-										<span class="glyphicon glyphicon-share"></span> Send a Document
-									</button> <br />
-						<?php } ?>
+						<h2 style="color:white; float:left">Sent Documents</h2></br>
+						
 						<br /><br />
 						
 						<!--- inbox table -->

@@ -90,7 +90,7 @@
           <ul class="nav">
             <li><a href="<?php echo site_url('Home/home'); ?>" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
             <li><a href="<?php echo site_url('Home/docu'); ?>" class=""><i class="lnr lnr-inbox"></i> <span>My Documents</span></a></li>
-            <li><a href="<?php echo site_url('Home/offices'); ?>" class="active"><i class="lnr lnr-apartment"></i> <span>Offices</span></a></li>
+            <li><a href="<?php echo site_url('Home/offices'); ?>" class="active"><i class="lnr lnr-apartment"></i><span>Offices and </span><i class="lnr lnr-users"></i><span>Employees</span></a></li>
             <li><a href="<?php echo site_url('Home/contacts'); ?>" class=""><i class="lnr lnr-phone"></i> <span>Contacts</span></a></li>
             <li><a href="<?php echo site_url('Home/profile'); ?>" class=""><i class="lnr lnr-user"></i> <span>Profile</span></a></li>
             <li>
@@ -131,7 +131,7 @@
           </tbody>
         </table>
         
-        <a href="<?php echo site_url('Home/dept/'.$office); ?>" class="btn btn-default btn-md">
+        <a href="<?php echo site_url('Home/dept/'.$office); ?>" class="btn btn-primary btn-md">
           <!-- matic na sa office of VP of research and extensions muna to -->
           <span class="lnr lnr-pointer-left"></span>Back
         </a>

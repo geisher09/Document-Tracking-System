@@ -340,11 +340,13 @@ class Home extends CI_Controller {
 	}
 
 	public function password_change(){
-
+		$user['username']=$this->session->userdata('username');
+		$this->load->model('dts_model');
+		$profile = $this->dts_model->get_profile($user);
 		$header_data['title']="Change Password";
 		$this->load->view('header2',$header_data);
 		//$this->load->view('header');
-		$this->load->view('password_change');
+		$this->load->view('password_change',['pro'=>$profile]);
 		$this->load->view('footer');
 
 	}
@@ -648,10 +650,13 @@ class Home extends CI_Controller {
 
         }
         else{
+        		$user['username']=$this->session->userdata('username');
+				$this->load->model('dts_model');
+				$profile = $this->dts_model->get_profile($user);
             	$header_data['title']="Change Password";
 				$this->load->view('header2',$header_data);
 				//$this->load->view('header');
-				$this->load->view('password_change');
+				$this->load->view('password_change',['pro'=>$profile]);
 				$this->load->view('footer');
         }
 

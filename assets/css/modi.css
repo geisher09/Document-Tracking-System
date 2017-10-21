@@ -232,14 +232,14 @@ ul.list-justified > li {
 
 .tab {
     overflow: hidden;
-    border: none;
+    border: 0;
     background-color: none;
 }
 
 .tab button {
-    background-color: #242424;
+    background-color: #34495E;
     float: left;
-    border: none;
+    border: 0;
     outline: none;
     cursor: pointer;
     padding: 6px 16px;
@@ -256,7 +256,7 @@ ul.list-justified > li {
 }
 
 .tab button.active {
-    background-color: black;
+    background-color: #242424;
 }
 
 /*.navbar #nav > .active > a {
