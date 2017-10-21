@@ -470,7 +470,7 @@ ul.list-justified > li {
  {
 	font-family:Arial;
 	font-size:16px;
-	background-color:#34495E;
+	background-color:#486684;
 	padding:10px;
 	color:#FFFFFF;
 	border-radius:5px;
@@ -478,7 +478,7 @@ ul.list-justified > li {
 	margin:auto;
  }
  input[type="file"]:hover::-webkit-file-upload-button{ 
-	background-color:#298976;
+	background-color:#34495E;
 	cursor:pointer;
  }
 /* end of 'Settings' */

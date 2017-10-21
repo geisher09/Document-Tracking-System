@@ -59,8 +59,8 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-link"></i> <span>Quicklinks</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a data-toggle="modal" href="#send_details"><i class="lnr lnr-pencil"></i> Compose</a></li>
-								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="lnr lnr-inbox"></i> Inbox</a></li>
+								<li><a data-toggle="modal" href="#send_details"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
+								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="glyphicon glyphicon-inbox"></i> Inbox</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
