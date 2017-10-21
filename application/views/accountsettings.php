@@ -105,7 +105,7 @@
     position: relative;">Settings</p>
 <div class="container-fluid">
 	<div class="container-fluid red" >
-	<h2><strong>Account Settings</strong></h2>
+	<h2 style="color: #7FB3D5;"><strong>Account Settings</strong></h2>
 	<hr/>
 
 	<div class="row" id="settingsdiv">
