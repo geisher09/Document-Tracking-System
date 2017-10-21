@@ -93,10 +93,23 @@ body {
 	margin: 0px 0px 0px 0px;
 	padding-left: 20px;
 	padding-right: 20px;
-	padding-top: 10px;
-	padding-bottom:20px;
+	padding-top: 20px;
+	padding-bottom:50px;
 	max-width:1100px;
 	min-height:600px;
+	overflow: auto
+}
+
+.blue {
+	background-color: #242424;
+	opacity: 0.9;
+	margin: 0px 0px 0px 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	padding-bottom:50px;
+	max-width:1200px;
+	min-height:300px;
 	overflow: auto
 }
 
@@ -117,9 +130,15 @@ h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
 	color: white;
 	font-size: 16px;
 }
+.tablet {
+	color: white;
+	font-size: 16px;
+}
+
+
 
 .tabmenu>div:target>a, .tabmenu>div.current>a {
-   background: white;
+   background: black;
 }
 
 .tabmenu>div:target>div, .tabmenu>div.current>div {
@@ -167,8 +186,8 @@ h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
 /* 'Profile' section */
 
 .profilebox {
-	max-width: 900px;
-	margin-top: 15px;
+	max-width: 1000px;
+	margin-top: 35px;
 }
 
 .roundbox {
@@ -201,7 +220,8 @@ h1, h2, h3, h4, h5, h6 { color:#000000; font-weight: bold; }
 	postion:relative;
 }
 .info {
-	padding: 5px;
+	padding: 17px;
+	color: black;
 	font-size: 15px;
 	font-family: "Arial", "Helvetica", "sans-serif";
 }
@@ -290,7 +310,7 @@ ul.list-justified > li {
     padding: 10px 12px;
     -webkit-animation: fadeEffect 1s;
     animation: fadeEffect 1s;
-	background-color: #242424;
+	background-color:#242424;
 }
 
 @-webkit-keyframes fadeEffect {
@@ -470,7 +490,7 @@ ul.list-justified > li {
  {
 	font-family:Arial;
 	font-size:16px;
-	background-color:#486684;
+	background-color:#34495E;
 	padding:10px;
 	color:#FFFFFF;
 	border-radius:5px;
@@ -478,7 +498,7 @@ ul.list-justified > li {
 	margin:auto;
  }
  input[type="file"]:hover::-webkit-file-upload-button{ 
-	background-color:#34495E;
+	background-color:#298976;
 	cursor:pointer;
  }
 /* end of 'Settings' */

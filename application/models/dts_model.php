@@ -89,6 +89,15 @@
 			return $query-> result_array();
 		}
 
+		public function getEmployees($user){
+			$this->db->select('*');
+			$this->db->from('employee');
+			$this->db->where_not_in('username', $user['username']);
+			$query = $this->db->get();
+			return $query->result();
+
+		}
+
 		public function getDepartments(){
 			$query = $this->db->get('department');
 			return $query->result();
@@ -104,6 +113,38 @@
 			$result = $this->db->get();
 
 			 return $result->row();
+		}
+
+		public function get_profile_sent($user){
+			$this->db->select('a.document_id,a.document_title,a.document_file,a.tracking_no,a.date_created,b.status,b.employee_id,c.employee_id,c.username');
+		    $this->db->from('document a');
+		    $this->db->join('documentation b', 'b.document_id=a.document_id');
+		    $this->db->join('employee c', 'b.employee_id=c.employee_id');
+		    $this->db->order_by('a.date_created','DESC');
+		    $this->db->where('c.username',$user['username']);
+		    $query = $this->db->get();
+		    if($query->num_rows() != 0)
+		    {
+		        return $query->result_array();
+		    }
+		    else
+		    {
+		        return false;
+		    }
+		}
+
+		public function get_by_id($id)
+		{
+			$this->db->select('a.document_id,a.status,a.date_of_action,a.recipient,b.employee_id,b.lname,b.fname,b.mname,b.department_id,
+				c.document_id,c.tracking_no,c.document_title,c.document_desc,c.date_created,d.department_desc,d.department_id');
+			$this->db->from('documentation a');
+			$this->db->join('employee b','a.recipient = b.employee_id');
+			$this->db->join('document c','a.document_id = c.document_id');
+			$this->db->join('department d','b.department_id = d.department_id');
+			$this->db->where('c.tracking_no',$id);
+			$query = $this->db->get();
+
+			return $query->result_array();
 		}
 
 		public function savePic($url,$user){
@@ -146,6 +187,62 @@
 			$this->db->set('password',$password);
 			$this->db->where('username', $user['username']);
 			$this->db->update('employee');
+		}
+
+		public function getLastDoc(){
+			$query = $this->db->get('document');
+
+			return $query->num_rows();
+		}
+
+		public function saveDocuments($url){
+			$id = ($this->getLastDoc())+1;
+			date_default_timezone_set('Asia/Manila');
+			$yr=date('ymd');
+			$length = 5;
+			$randomletter = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
+
+			$ddata = array(
+				  'document_id' => $id,
+				  'tracking_no' => $yr.'-'.$randomletter.'-'.$id,
+			      'document_title' => $this->input->post('document_title') ,
+			      'document_desc' => $this->input->post('document_desc') ,
+			      'document_file' => $url
+			   );
+
+			return $this->db->insert('document', $ddata);
+		}
+
+		public function saveDocumentation(){
+			$id = ($this->getLastDoc());
+
+			$docdata = array(
+				  'employee_id' =>	$this->input->post('empid'),
+				  'document_id' => $id,
+				  'status' => "For Approval",
+				  'recipient' => $this->input->post('employee')
+			   );
+
+			return $this->db->insert('documentation', $docdata);
+		}
+
+		public function saveHistory(){
+			$id = ($this->getLastDoc());
+			date_default_timezone_set('Asia/Manila');
+			$time =date("h:i:sa");
+			$date = date("Y-m-d");
+			$data['date'] = $date;
+			$data['time'] = $time;
+			$hisdata = array(
+				  'employee_id' =>	$this->input->post('employee'),
+				  'document_id' => $id,
+				  'response' => 'For Approval',
+				  'comment' => 'none',
+				  'date_responded' => $data['date'].' '.$data['time'],
+				  'sender' => $this->input->post('empid')
+			   );
+
+			return $this->db->insert('history', $hisdata);
 		}
 
 		public function check_if_username_exists($username){

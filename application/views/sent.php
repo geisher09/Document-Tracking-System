@@ -104,113 +104,43 @@
 	<!--body-->
 		<div class="container-fluid red">
 		  <div class="row">
-		  <div class="col-md-6">
-			<h1 style="color: #7FB3D5;"><strong> My Documents <strong></h1>
-		  </div>
-		  <div class="col-md-6">
-			<!-- search bar -->
-			<form>
-				<div class="form-group sbar input-group">
-										<!-- <input type="text" name="q" onkeyup="search()" placeholder="Search" id="search"/> -->
-
-					<input type="text" class="form-control" id="search" onkeyup="search()" name="q" placeholder="Search for" required/>
-					<span class="input-group-btn">
-						<button type="submit" class="btn btn-primary" >
-							<span class="glyphicon glyphicon-search"></span> Search
-						</button>
-					</span>
-				</div>
-			</form>
-
-		   </div>
-		   </div>
-			<br />
-			<?php foreach ($pro as $profi){ ?>
-									<button class="btn btn-success btn-md" style="float: right;" type="button" id="<?php echo $profi['employee_id']; ?>" onclick="send(this.id)" style="float:right;">
-										<span class="glyphicon glyphicon-share"></span> Compose
-									</button> <br />
-						<?php } ?>
-
-
-					<?php if( $error = $this->session->flashdata('responsed')): ?>
-							<div class="alert alert-dismissable alert-danger col col-md-6">
-								<a href="<?php echo site_url('Home/docu'); ?>" class="close" data-dismiss="alert" aria-label="close">×</a>
-								<i class="fa fa-window-close-o" aria-hidden="true"></i><?php echo $error; ?>
-							</div>
-							<br /><br /><br /><br />
-					<?php endif; ?>
-
-					<?php if( $error = $this->session->flashdata('response')): ?>
-							<div class="alert alert-dismissable alert-success col col-md-6">
-								<a href="<?php echo site_url('Home/docu'); ?>" class="close" data-dismiss="alert" aria-label="close">×</a>
-								<i class="fa fa-check-square-o" aria-hidden="true"></i><?php echo $error; ?>
-							</div>
-							<br /><br /><br /><br />
-					<?php endif; ?>
-					<div class="tab">
-						<button class="tablink active" onclick="openFolder(event, 'Inbox')" id="defaultOpen"><i class="lnr lnr-inbox"></i> Inbox&nbsp;<span class="badge bg-danger">5</span></button>
-						<button class="tablink" onclick="openFolder(event, 'Sent')"><i class="lnr lnr-rocket"></i> Sent</button>
-					</div>
-
-					<div id="Inbox" class="tabcontent">
-						<br />
-						<!--- inbox table -->
-						<table class="tablet table-list-search table-hover table-condensed table-responsive ">
-							<tbody>
-
-							</tbody>
-						</table>
-					</div>
-
-
-					<div id="Sent" class="tabcontent">
-						<br />
-
-						<!--- inbox table -->
-							<table class="tablet table-list-search table-hover table-condensed table-responsive ">
-								<tbody>
-									<?php foreach ($snt as $sents){ ?>
-									<?php
-									 	$mydate = strtotime($sents['date_created']);
-									 	date_default_timezone_set('Asia/Manila');
-									 	$myd = date('Y-m-d',$mydate);
-										$time =date("h:i:sa");
-										$date = date("Y-m-d");
-										$data['date'] = $date;
-										$data['time'] = $time;
-									?>
-									<tr id="<?php echo $sents['tracking_no'];?>" onclick="window.location='<?php echo site_url('Home/sent/'.$sents['tracking_no']);?>'">
-										<td><?php echo $sents['tracking_no']; ?>
-											&emsp;&emsp;
-										</td>
-										<td><?php echo $sents['document_title']; ?>
-											&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-											&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-											&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-											&emsp;&emsp;&emsp;&emsp;
-										</td>
-										<?php if($myd==$date){?>
-										<td><?php echo "Today"; ?></td>
-										<?php }else{?>
-										<td><?php echo date('M d, Y', $mydate); }?></td>
-										<!-- <td>
-											<button class="btn btn-primary btn-sm" id="<?php echo $sents['document_id']; ?>" type="button" onclick="lol(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-											<button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sents["document_file"]) ?>')">Viewasa&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
-										</td> -->
-									</tr>
-									<?php } ?>
-								</tbody>
-							</table> <br/>
-					</div>
-				</div>
-
-				</div>
-
+		  	<div class="container-fluid blue">
+		  	<?php foreach ($pro as $prof){ ?>
+							<img style="width:30px;" src="<?php echo base_url($prof['image']); ?>" class="img-circle" alt="Avatar"><span style="font-size:20px;color: white;"><strong>
+							<?php echo $prof['lname'];?>, <?php echo $prof['fname'];?>
+							</strong></span>
+							<span style="font-size:20px; color: white;"> /<?php echo $prof['username'];?>/</span>
+			<?php } ?>
+			<br>
+			<p style="font-size:20px; color: white;">--------------------------------------------</p>
+			<p style="font-size:20px; color: white;  font-style:italic;" text-align="center">SENT FILE DETAILS</p>
+			<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Document Tracking no:</label>
+			<strong>&emsp;<?php echo $idno;?><strong></p>
+			<?php foreach ($snt as $sent){ ?>
+			<p style="font-size:20px; font-weight: normal; color: white;">Title:&emsp;<?php echo $sent['document_title'];?>
+			</p>
+			<p style="font-size:20px; font-weight: normal; color: white;">Description:&emsp;<?php echo $sent['document_desc'];?>
+			</p>
+			<p style="font-size:20px; font-weight: normal; color: white;">Document was last sent to:&emsp;<?php echo $sent['lname'];?>, <?php echo $sent['fname'];?> <?php echo $sent['mname'];?>
+			</p>
+			<p style="font-size:20px; font-weight: normal; color: white;">In the:&emsp;<?php echo $sent['department_desc'];?>
+			</p>
+			<p style="font-size:20px; font-weight: normal; color: white;">Current Status:&emsp;<?php echo $sent['status'];?>
+			</p>
+			<?php
+					date_default_timezone_set('Asia/Manila');
+					$mydate = strtotime($sent['date_of_action']);
+					
+			?>
+			<p style="font-size:20px; font-weight: normal; color: white;">As of:&emsp;<?php echo date('F d,Y g:i: a', $mydate);?>				
+			</p>
+			<br>
+				
+				<button class="btn btn-default btn-sm" id="<?php echo $sent['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sent["tracking_no"]) ?>')">View file&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+				<button class="btn btn-primary btn-sm" type="button" onclick="window.location='<?php echo site_url('Home/docu');?>'">Back&nbsp;<span class="fa fa-arrow-left" aria-hidden="true"></span></button>
+			
+			<?php } ?>
 			</div>
-
-</div>
-
-
 
 
 <!-- modal of details about the document-->

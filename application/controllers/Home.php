@@ -73,6 +73,52 @@ class Home extends CI_Controller {
 		}
 	}
 
+	public function docu(){
+		$header_data['title']="All Documents";
+		$this->load->view('header2',$header_data);
+		//$this->load->view('header');
+		$user['username']=$this->session->userdata('username');
+		$this->load->model('dts_model');
+		$profile = $this->dts_model->get_profile($user);
+		$employees = $this->dts_model->getEmployees($user);
+		$sent = $this->dts_model->get_profile_sent($user);
+		//$inbox = $this->dts_model->get_profile_inbox($user);
+// 		$documents = $this->dts_model->getDocuments();
+
+// 		$profile = $this->dts_model->get_profile($user);
+// 		$inbox = $this->dts_model->get_profile_inbox($user);
+// 		// $employid = $profile['employee_id'];
+// 		$ul = array();
+// 		foreach($inbox as $a){
+// 			$as = array('document_file' => $a['document_file']);
+// 			// print_r($as);
+// 			$ul[] = $as;
+// 		}
+// 		$sent = $this->dts_model->get_profile_sent($user);
+// 		$pending = $this->dts_model->get_inbox_pending($user);
+// 		$employees = $this->dts_model->getEmployees($user);
+// 		foreach($documents as $a){
+// 			$as = array('document_file' => $a['document_file']);
+// 			$type = explode('.', $a['document_title']);
+// 			$type = strtolower($type[count($type)-1]);
+// 			$url = "./uploads/".$a['document_title'];
+// //			print_r($as);
+// 		}
+		$this->load->view('documents',['pro'=>$profile,'emp'=>$employees,'snt'=>$sent]);
+		$this->load->view('footer');
+	}
+
+	public function sent($id){
+		$header_data['title']="Sent File";
+			$user['username']=$this->session->userdata('username');
+			$this->load->model('dts_model');
+			$profile = $this->dts_model->get_profile($user);
+			$sent = $this->dts_model->get_by_id($id);
+		$this->load->view('header2',$header_data);
+	 	$this->load->view('sent',['pro'=>$profile,'idno'=>$id,'snt'=>$sent]);
+		$this->load->view('footer');
+	}
+
 
 	//OFFICES & EMPLOYEES
 	public function offices(){
@@ -172,6 +218,25 @@ class Home extends CI_Controller {
 		$this->load->view('header2',$header_data);
 		$this->load->view('accountsettings', ['pro'=>$profile]);
 		$this->load->view('footer');
+	}
+
+	public function ajax_list()
+	{
+		$this->load->model('dts_model');
+		// $sent = $this->dts_model->get_by_id($this->input->post('id'));
+		// $signatories = $this->dts_model->get_ownSignatories($this->input->post('id'));
+		// $signatory = $this->dts_model->getSignatory_by_id($this->input->post('id'));
+		// $inbox = $this->dts_model->getInbox_by_id($this->input->post('id'));
+		// $output = array(
+
+		// 				"sent" => $sent,
+		// 				"signatories" => $signatories,
+		// 				"signatory" => $signatory,
+		// 				"inbox" => $inbox
+
+		// 		);
+		//output to json format
+		echo json_encode($output);
 	}
 
 	public function edit_list(){
@@ -315,6 +380,44 @@ class Home extends CI_Controller {
 		}else {
 			return FALSE;
 		}
+	}
+
+	public function do_upload(){
+		$type = explode('.', $_FILES["file"]["name"]);
+		$type = strtolower($type[count($type)-1]);
+		$url = "./uploads/".uniqid(rand()).'.'.$type;
+
+		if(in_array($type, array("doc", "docx", "pdf", "txt")))
+					if(is_uploaded_file($_FILES["file"]["tmp_name"]))
+						if(move_uploaded_file($_FILES["file"]["tmp_name"],$url))
+								return $url;
+
+		return redirect('home/docu');
+	}
+
+	public function save(){
+	  	$this->form_validation->set_rules('document_title', 'Title', 'required');
+	 	$this->form_validation->set_rules('document_desc', 'Description', 'required');
+  		$this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
+
+        if ($this->form_validation->run()){
+
+               	//$data = $this->input->post();
+               	$url = $this->do_upload();
+             	$this->load->model('dts_model');
+             	if (($this->dts_model->saveDocuments($url))&&($this->dts_model->saveDocumentation())&&($this->dts_model->saveHistory())){
+             		$this->session->set_flashdata('response', 'Sent Succesfully!');
+				 }
+				 else{
+             		// $this->session->set_flashdata('response', 'Failed to save!');
+				 }
+				return redirect('home/docu');
+
+        }
+        else{
+        		$this->session->set_flashdata('responsed', 'Failed to send!(Please input necessary details)');
+            	return redirect('home/docu');
+        }
 	}
 
 	public function logout(){
