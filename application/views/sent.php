@@ -132,7 +132,8 @@
 					$mydate = strtotime($sent['date_of_action']);
 					
 			?>
-			<p style="font-size:20px; font-weight: normal; color: white;">As of:&emsp;<?php echo date('F d,Y g:i: a', $mydate);?>				
+			<p style="font-size:20px; font-weight: normal; color: white;">As of:&emsp;<?php echo date('F d,Y ', $mydate);?>				
+			 at <?php echo date('g:i: a', $mydate);?>
 			</p>
 			<br>
 				

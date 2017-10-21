@@ -171,8 +171,8 @@
 								<tbody>
 									<?php foreach ($snt as $sents){ ?>
 									<?php
+										date_default_timezone_set('Asia/Manila');
 									 	$mydate = strtotime($sents['date_created']);
-									 	date_default_timezone_set('Asia/Manila');
 									 	$myd = date('Y-m-d',$mydate);
 										$time =date("h:i:sa");
 										$date = date("Y-m-d");
@@ -187,12 +187,14 @@
 											&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 											&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 											&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-											&emsp;&emsp;&emsp;&emsp;
+											&emsp;
 										</td>
 										<?php if($myd==$date){?>
-										<td><?php echo "Today"; ?></td>
+										<td><?php echo "Today"; ?> at <?php echo date('g:h a', $mydate);?></td>
 										<?php }else{?>
-										<td><?php echo date('M d, Y', $mydate); }?></td>
+										<td><?php echo date('M d, Y ', $mydate);?>
+											 at <?php echo date('g:h a', $mydate); }?>
+										</td>
 										<!-- <td>
 											<button class="btn btn-primary btn-sm" id="<?php echo $sents['document_id']; ?>" type="button" onclick="lol(this.id)">View Details&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
 											<button class="btn btn-default btn-sm" id="<?php echo $sents['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sents["document_file"]) ?>')">Viewasa&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
