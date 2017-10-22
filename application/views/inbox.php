@@ -113,7 +113,7 @@
 				</span>
 				<button id="<?php echo $inbox['document_id'];?>" class="btn btn-md btn-primary" type="button" onclick="update(this.id)"><span class="lnr lnr-pencil"></span> Update Status </button>
 				<button data-toggle="modal" data-target="#forward" class="btn btn-md btn-success" ><span class="lnr lnr-location"></span> Forward </button>
-				
+				<button class="btn btn-default btn-md" id="<?php echo $inbox['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$inbox["document_file"]) ?>')">View file&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
 				<button data-toggle="modal" data-target="#response" class="btn btn-md btn-danger" ><span class="lnr lnr-bullhorn"></span> Return </button>
 				<button class="btn btn-default btn-md" type="button" onclick="window.location='<?php echo site_url('Home/docu');?>'">Back&nbsp;<span class="fa fa-arrow-left" aria-hidden="true"></span></button>
 
@@ -146,7 +146,7 @@
 				<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Employee id:</label>
 				<strong>&emsp;<?php echo $origin['lname'];?>, <?php echo $origin['fname'];?> <?php echo $origin['mname'];?></strong></p>
 				<?php } ?>
-				
+
 
 
 
@@ -342,7 +342,7 @@ $(document).ready(function() {
 			<div class="row">
 					<input type="hidden" id="<?php echo $inbox['employee_id'];?>" name="sender" value="<?php echo $inbox['employee_id'];?>"/>
 			</div>
-			<?php }?>	
+			<?php }?>
 
 			<?php foreach ($pro as $prof){ ?>
 			<div class="row">
@@ -375,7 +375,7 @@ $(document).ready(function() {
 			<textarea style="border:2px solid red;" class="form-control" id="comment" name="comment" rows="3">none</textarea> <br>
 			</div>
 		</div>
-		
+
 		<div class="modal-footer">
 			<button type="submit" class="btn btn-info">Return</button>
 			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -404,13 +404,13 @@ $(document).ready(function() {
 			<p style="font-size:20px;"><strong> TITLE: </strong></p>
 			<p style="font-size:20px; color: black;">
 			<strong><?php echo $inbox['document_title'];?></strong></p>
-		<?php }?>	
+		<?php }?>
 			<p style="font-size:20px;"><strong> RECEIVER: </strong><p>
 			<select name="employee" class="form-control">
 							<?php foreach ($emp as $empoy){ ?>
 							    <option value="<?php echo $empoy->employee_id; ?>"><?php echo $empoy->lname.','.$empoy->fname.'  '.$empoy->mname; ?></option>
 							<?php } ?>
-			</select>	
+			</select>
 			<?php foreach ($inb as $inbox){ ?>
 			<div class="row">
 					<input type="hidden" id="<?php echo $inbox['document_id'];?>" name="document_id" value="<?php echo $inbox['document_id'];?>"/>
@@ -422,7 +422,7 @@ $(document).ready(function() {
 			</div>
 			<?php }?>
 		</div>
-		
+
 		<div class="modal-footer">
 			<button type="submit" class="btn btn-info">Save</button>
 			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -455,8 +455,8 @@ $(document).ready(function() {
 			<div class="row">
 					<input type="hidden" id="<?php echo $prof['employee_id'];?>" name="employee_id" value="<?php echo $prof['employee_id'];?>"/>
 			</div>
-		<?php }?>	
-		
+		<?php }?>
+
 		<div class="modal-body">
 			<br><p style="font-size:20px;"><strong> SELECT STATUS: </strong><p>
 			<div class="dropdown">
@@ -467,13 +467,13 @@ $(document).ready(function() {
 					<?php } ?>
 				</select>
 			</div><br><br>
-			
+
 			<div style="width:90%;">
 			<p style="font-size:20px;"><strong> COMMENTS/REMARKS: </strong></p>
 			<textarea class="form-control" id="comment" name="comment" rows="5">none</textarea> <br>
 			</div><br>
 		</div>
-		
+
 		<div class="modal-footer">
 			<button type="submit" class="btn btn-info">Save</button>
 			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
