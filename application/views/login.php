@@ -5,6 +5,7 @@
 			<img src="<?php echo base_url('assets/images/1.jpg'); ?>" alt="one">
 		</div>
 
+		<!--
 		<div class="item">
 			<img src="<?php echo base_url('assets/images/2.jpg'); ?>" alt="two">
 		</div>
@@ -16,6 +17,8 @@
 		<div class="item">
 			<img src="<?php echo base_url('assets/images/4.jpg'); ?>" alt="four">
 		</div>
+		-->
+		
     </div>
 	</div>
 	
