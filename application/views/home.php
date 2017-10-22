@@ -58,6 +58,7 @@
 								<li><a data-toggle="modal" id="<?php echo $prof['employee_id']; ?>" onclick="send(this.id)"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
 								<?php } ?>
 								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="glyphicon glyphicon-inbox"></i> Inbox</a></li>
+								<li><a data-toggle="modal" id="<?php echo $sta ?>" onclick="status(this.id)"><i class="glyphicon glyphicon-plus"></i> Add status</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -98,7 +99,7 @@
 			<!-- MAIN CONTENT -->
 	<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Home</p>
 <div class="container-fluid col-md-8">
-	<div class="container-fluid red" >	
+	<div class="container-fluid red" >
 	<div class="row">
 	   <div class="col-md-6">
 	   	<?php foreach ($pro as $prof){ ?>
@@ -120,387 +121,138 @@
 				</div>
 			</form>
 
-			<div id="map2" class="collapse">
-					<h2><i>Tracking Details Of your Document...</i></h2>
-						<div class="">
-							<ul class="cbp_tmtimeline">
-								<li id="summary">
-
-								</li>
-								<li id="department">
-
-								</li>
-								<li id="signatories">
-
-								</li>
-								<li>
-									<div id="sender_view2">
-									 <!-- <time class="cbp_tmtime" datetime="2017-01-16 21:30"><span>1/1/17</span> <span>21:30</span></time> -->
-									 <time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;"></span></time>
-									<div class="cbp_tmicon cbp_tmicon-earth"></div>
-									<div class="cbp_tmlabel">
-										<h2 id="sender2"></h2>
-										<p id="comment2"></p>
+			<div id="flow" class="collapse">
+								<h2><i>Tracking Details Of your Document...</i></h2>
+									<div class="">
+										<ul class="cbp_tmtimeline">
+											<li>
+												<div id="sender_view2">
+													<!-- <time class="cbp_tmtime" datetime="2017-01-16 21:30"><span>1/1/17</span> <span>21:30</span></time> -->
+													<time class="cbp_tmtime"><span id="send_date" style="font-size:15px;"></span></time>
+													<div class="cbp_tmicon cbp_tmicon-earth"></div>
+													<div class="cbp_tmlabel">
+														<h2 id="sender"></h2>
+														<p id="comment"></p>
+													</div>
+												</div>
+											</li>
+											<li id="signatories"></li>
+											<li id="summary"></li>
+										</ul>
 									</div>
 								</div>
-								</li>
-							</ul>
-						</div>
-					</div>
 
-					<div id="error" class="collapse" style="margin-left:100px;">
-					<div class="col-md-10 col-sm-10 col-xs-10 roundbox flipInX animated" style="margin-center:0px;"><h4 style="color: white; "><span class="glyphicon glyphicon-search"></span>&nbsp;Please search a valid document!</h4></div>
-					</div>
-					
-	
-	
-
-			<div class="clearfix"></div>
-			<footer>
-				<div class="container-fluid">
-					<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
-				</div>
-			</footer>
-			
-			
-			
-		<!-- script for show/hide -->
-
-		<script>
-$(document).ready(function() {
-		// $("#system-search").keypress( function(e) {
- //    var chr = String.fromCharCode(e.which);
- //    if ("12345NOABC".indexOf(chr) < 0)
- //        return false;
-	// });
-
-	$('.dropdown-toggle').dropdown();
-
-	$('#show').on('click', function(e) {
-		e.preventDefault();
-		var id = $("#system-search").val();
-		if(id != ''){
-			// alert(id);
-			$.ajax({
-							type: 'POST',
-							url: 'histo',
-							 data:{id: id},
-								success: function(data) {
-									// $('#invalid_view').hide(500);
-									// var obj = JSON.stringify(data)
-									// alert(data);
-									$("#error").hide(500);
-									$("#map2").hide(500);
-									var obj = JSON.parse(data)
-									var max = parseInt(obj.count);
-									var splitarray = new Array();
-									splitarray= obj.origin.date_created.split(" ");
-									var dateTime = moment( obj.origin.date_created).format('MM-DD-YYYY HH:mm:ss');
-									var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-									// var date = new Date(obj.origin.date_created);
-									// alert(new Date(obj.origin.date_created));
+								<div id="error" class="collapse" style="margin-left:100px;">
+								<!-- <div class="col-md-10 col-sm-10 col-xs-10 roundbox flipInX animated"<class="pulse animated" style="color: red; "> style="margin-center:0px;"><h4 style="color: white; "><span class="glyphicon glyphicon-search"></span>&nbsp;Please search a valid document!</h4></div> -->
+								<div class="pulse animated" style="color: red; margin-center:0px;"><h4 style="color: Red; "><span class="glyphicon glyphicon-search"></span>&nbsp;Please search a valid document!</h4></div>
+								</div>
 
 
-									if(obj.status=="Rejected"){
-										//initial
-										$('#sender2').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
-										$('#send_date2').html(date);
-										$('#comment2').html(obj.origin.document_desc);
-										var s="";
-										var v="";
-										var d="";
+
+
+						<div class="clearfix"></div>
+						<footer>
+							<div class="container-fluid">
+								<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
+							</div>
+						</footer>
+
+
+
+					<!-- script for show/hide -->
+
+					<script>
+					$(document).ready(function() {
+						$('.dropdown-toggle').dropdown();
+						//
+						$('#show').on('click', function(e) {
+							e.preventDefault();
+							var id = $("#system-search").val();
+							if(id != ''){
+								// alert(id);
+								$('#error').hide(500);
+								$.ajax({
+									type: "post",
+									url: "history",
+									data:{id:id},
+									success: function(data){
+										var obj = JSON.parse(data)
+										$('#flow').hide(300);
 										// alert(data);
-										for(var i=0; i<parseInt(obj.signatories.length); i++){
-											if(obj.signatories[i].response == "Rejected"){
-												var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-												var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-remove"></span>&nbsp;Rejected</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
-												$("#signatories").html(s);
-											}
-											else if(obj.signatories[i].response == "Approved"){
-							          var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-												var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-												// alert(mom2);
-												// s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:20px;">'+obj.signatories[i].date_responded
-												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
-												$("#signatories").html(s);
-											}
-											else if(obj.signatories[i].response == "Pending"){
-												var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-												var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Pending</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
-												$("#signatories").html(s);
-											}
-											var a=i+1;
-												if(a==i<parseInt(obj.signatories.length)){
-													if(obj.signatories[i].response == "Approved"){
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>To Employee :'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
-														+'<br/>Department :'+obj.signatories[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-													}
-													else if(obj.signatories[i].response == "Rejected"){
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>Was rejected by Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
-														+'<br/>Department: '+obj.signatories[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-													}
-													else if(obj.signatories[i].response == "Pending"){
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Last Department</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>Is still in Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
-														+'<br/>Department: '+obj.signatories[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-													}
-
-												}
-											}
-											$("#map2").show(500);
-									}
-									else if(obj.status=="Approved"){
+										// alert(s);
+										var init ="";
+										var recip ="";
+										var summ ="";
+										var dateTime = moment( obj.origin.date_created).format('MM-DD-YYYY HH:mm:ss');
+										var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
+										// alert(date);
 										//initial
-										$('#sender2').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
-										$('#send_date2').html(date);
-										$('#comment2').html(obj.origin.document_desc);
-										var s="";
-										var v="";
-										var d="";
-										// alert(data);
-										for(var i=0; i<parseInt(obj.signatories.length); i++){
-											if(obj.signatories[i].response == "Rejected"){
-												var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
+										$('#sender').html("Start of document flow");
+										$('#send_date').html(date);
+										$('#comment').html("Employee:&nbsp;"+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname
+																				+"<br/>Tracking no.&nbsp;"+obj.origin.tracking_no
+																				+"<br/>Title:&nbsp;"+obj.origin.document_title
+																				+"<br/>Department:&nbsp;"+obj.origin.department_desc);
+										//flow
+										var s = parseInt(obj.recipient.length)-1;
+										// var rr = s.val();
+										// alert(s);
+										for(var i=0; i<parseInt(obj.recipient.length); i++){
+										// for(var i=s; i>=0; i--){
+												var dateTime = moment( obj.recipient[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
 												var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-remove"></span>&nbsp;Rejected</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
-												$("#signatories").html(s);
-											}
-											else if(obj.signatories[i].response == "Approved"){
-												var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-												var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
-												$("#signatories").html(s);
-											}
-											else if(obj.signatories[i].response == "Pending"){
-												var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-												var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Pending</h2><p id="comment2">'
-												+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
-												$("#signatories").html(s);
-											}
-											var a=i+1;
-												if(a==i<parseInt(obj.signatories.length)){
-													if(obj.signatories[i].response == "Approved"){
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>To Employee :'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
-														+'<br/>Department :'+obj.signatories[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-													}
-													else if(obj.signatories[i].response == "Rejected"){
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>Was rejected by Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
-														+'<br/>Department: '+obj.signatories[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-													}
-													else if(obj.signatories[i].response == "Pending"){
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Last Department</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>Is still in Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
-														+'<br/>Department: '+obj.signatories[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-													}
-
+												if(i==0){
+													recip += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
+													+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;'+obj.recipient[i].response
+													+'</h2><p id="comment2">Receiver:&nbsp;&nbsp;'+obj.recipient[i].lname+', '+obj.recipient[i].fname+' '+obj.recipient[i].lname
+													+'<br/>Department:&nbsp;&nbsp;'+obj.recipient[i].department_desc
+													+'<br/>Comment:&nbsp;&nbsp;'+obj.recipient[i].comment
+													+'<br/>Sender:&nbsp;&nbsp;'+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname+'</p></h2></div>';
 												}
-											}
-											$("#map2").show(500);
-									}
-									else if(obj.status=="Pending"){
-										// alert("Pending");
-										//initial
-										$('#sender2').html(obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.mname);
-										$('#send_date2').html(date);
-										$('#comment2').html(obj.origin.document_desc);
-										var s="";
-										var v="";
-										var d="";
-										// if(parseInt(obj.signatories.length)!=0){
-										if(obj.signa=="Yes"){
-										for(var i=0; i<parseInt(obj.signatories.length); i++){
-											if(obj.signatories[i].response == "Rejected"){
-												var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-												var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-remove"></span>&nbsp;Rejected</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
-												$("#signatories").html(s);
-											}
-											else if(obj.signatories[i].response == "Approved"){
-												var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-												var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ok"></span>&nbsp;Approved</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
-												$("#signatories").html(s);
-											}
-											else if(obj.signatories[i].response == "Pending"){
-												var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-												var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-												s += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-												+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Pending</h2><p id="comment2">'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname+'</p></h2></div>';
-												$("#signatories").html(s);
-											}
-											var a=i+1;
-												if(a==i<parseInt(obj.signatories.length)){
-													if(obj.signatories[i].response == "Approved"){
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>To Employee :'+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
-														+'<br/>Department :'+obj.signatories[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-													}
-													else if(obj.signatories[i].response == "Rejected"){
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Delivered</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>Was rejected by Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
-														+'<br/>Department: '+obj.signatories[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-													}
-													else if(obj.signatories[i].response == "Pending"){
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														v += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;Last Department</h2><p id="comment2">'+obj.signatories[i].department_desc+'</p></h2></div>';
-														$("#department").html(v);
-
-														var dateTime = moment( obj.signatories[i].date_responded).format('MM-DD-YYYY HH:mm:ss');
-														var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-														d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-														+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-														+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-														+'<br/>Is still in Employee: '+obj.signatories[i].lname+', '+obj.signatories[i].fname+' '+obj.signatories[i].lname
-														+'<br/>Department: '+obj.signatories[i].department_desc
-														+'</p></h2></div>';
-														$("#summary").html(d);
-
-													}
+												if(i!=0){
+													recip += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
+													+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-road"></span>&nbsp;'+obj.recipient[i].response
+													+'</h2><p id="comment2">Receiver:&nbsp;&nbsp;'+obj.recipient[i].lname+', '+obj.recipient[i].fname+' '+obj.recipient[i].lname
+													+'<br/>Department:&nbsp;&nbsp;'+obj.recipient[i].department_desc
+													+'<br/>Comment:&nbsp;&nbsp;'+obj.recipient[i].comment
+													+'<br/>Sender:&nbsp;&nbsp;'+obj.recipient[i-1].lname+', '+obj.recipient[i-1].fname+' '+obj.recipient[i-1].lname+'</p></h2></div>';
 												}
+												$("#signatories").html(recip);
+												// var a=i+1;
 											}
-											$("#map2").show(500);
-										} //end of if
-										else if(obj.signa=="No"){
-											var dateTime = moment( obj.origin.date_of_action).format('MM-DD-YYYY HH:mm:ss');
+											//current status
+											var dateTime = moment( obj.end.date_of_action).format('MM-DD-YYYY HH:mm:ss');
 											var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
-											d += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
-											+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file: '+obj.origin.tracking_no
-											+'<br/>From Employee: '+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
-											+'<br/>No responses from any sigantories yet</p></h2></div>';
-											$("#summary").html(d);
-											$("#map2").show(500);
+											summ += '<div><time class="cbp_tmtime"><span id="send_date2" style="font-size:15px;">'+date
+											// +'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary'+obj.recipient[i].status+'</h2><p id="comment2">Employee:&nbsp;&nbsp;'+obj.recipient[i].lname+', '+obj.recipient[i].fname+' '+obj.recipient[i].lname
+											+'</span></time><div class="cbp_tmicon cbp_tmicon-earth"></div><div class="cbp_tmlabel"><h2 id="sender2"><span class="glyphicon glyphicon-book"></span>&nbsp;Summary</h2><p id="comment2">The file:&nbsp;'+obj.origin.tracking_no
+											+'<br/>From:&nbsp;&nbsp;'+obj.origin.lname+', '+obj.origin.fname+' '+obj.origin.lname
+											+'<br/>In department:&nbsp;&nbsp;'+obj.origin.department_desc
+											+'<br/>Reciever:&nbsp;&nbsp;'+obj.end.lname+', '+obj.end.fname+' '+obj.end.lname
+											+'<br/>In department:&nbsp;&nbsp;'+obj.end.department_desc
+											+'<br/>Status:&nbsp;&nbsp;'+obj.end.status+'</p></h2></div>';
+											$("#summary").html(summ);
+											$('#flow').show(500);
 
-										}
+									},
+									error: function(data){
+										e.preventDefault();
+										alert("asa");
 									}
-								}
-								// error: function(data){
-								// 	// alert("asasa");
-								// 	$("#map2").hide(500);
-								// 	$("#error").show(500);
-								// }
+								});
+
+							}
+							else{
+								$('#flow').hide(300);
+								$('#error').show(300);
+							}
 						});
+					});
+			</script>
 
-		}
-		else {
-			$("#map2").hide(500);
-			$("#error").show(500);
-		}
-	});
-});
 
+
+<script>
 function send(id){
 			$.ajax({
 			        type: 'POST',
@@ -546,7 +298,7 @@ function send(id){
 		   </div>
 			<br />
 			<br />
-			
+
 
 			<!-- table -->
 			<table class="table table-list-search table-hover table-responsive" id="mytable">
@@ -558,7 +310,7 @@ function send(id){
 						<th>TITLE</th>
 					</tr>
 				</thead>
-				<tbody>					
+				<tbody>
 					<?php foreach ($do as $document){ ?>
 					<tr id="<?php echo $document['tracking_no'];?>" onclick='show(this.id)'>
 						<td><?php echo $document['tracking_no'];?></td>
@@ -570,14 +322,14 @@ function send(id){
 					<?php endif; ?>
 				</tbody>
 			</table>
-			
+
 			<div class="clearfix"></div>
 			<footer>
 			<div class="container-fluid">
 				<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
 			</div>
 			</footer>
-		
+
 		</div>
 
 		<!-- start of send document modal -->
@@ -631,7 +383,7 @@ function send(id){
 				</div>
 			</div>
 
-			<div class="row">		
+			<div class="row">
 			<br/>
 			<div class=" col-md-10">
 					<label for="">Attach File:</label>
@@ -652,12 +404,12 @@ function send(id){
 
 		</div>
 	</div>
-		
-</div>
 
 </div>
 
-				
+</div>
+
+
 	<!-- start of send document modal -->
 	<div id="send_details" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-md">
@@ -726,3 +478,81 @@ function send(id){
 		$('#system-search').val(id);
 	}
 </script>
+<script>
+function status(id){
+			$.ajax({
+			        type: 'POST',
+			         data:{id: id},
+				        success: function(data) {
+				        	var obj = JSON.stringify(data);
+				        	// var obj = JSON.parse(data);
+				        	console.log(id);
+				          $('#status_id').val(id);
+				          $('#new_status').modal('show');
+				        }
+				    });
+		}
+</script>
+<!-- start of new_status document modal -->
+	<div id="new_status" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+	<!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #555555">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">Add Status</h3>
+        </div>
+        <div class="modal-body">
+
+			<?php echo form_open_multipart('home/new_status',['class'=>'form-horizontal']); ?>
+			<div class="row">
+					<input type="hidden" id="empid" name="empid"/>
+			</div>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Status ID:</label>
+					<?php echo form_input(['name'=>'status_id','class'=>'form-control','placeholder'=>$sta, 'value'=>$sta, 'readonly'=>'true']); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('status_id'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Description:</label>
+					<?php echo form_textarea(['name'=>'status_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Status name', 'value'=>set_value('document_desc')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('status_desc'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<!-- <div class="row">
+				<div class=" col-md-10">
+					<label for="forward">Enable forward:</label>
+					<div class="radio-inline">
+						<div class="radio">
+							<?php $yes=0;
+							$no=1; ?>
+						  <label><input type="radio" name="forward" value="<?php echo $yes;?>">yes</label>
+						</div>
+						<div class="radio">
+						  <label><input type="radio" name="forward" value="<?php echo $no;?>">no</label>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<br/><br/>
+			<div>
+				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="reset" class="btn btn-default">Reset</button>
+			</div>
+			<?php echo form_close();?>
+        </div>
+      </div>
+
+		</div>
+	</div><!-- end of new status document -->

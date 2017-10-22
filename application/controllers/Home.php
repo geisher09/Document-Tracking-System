@@ -57,6 +57,15 @@ class Home extends CI_Controller {
 			$documents = $this->dts_model->getDocuments($user);
 			$employees = $this->dts_model->getEmployees($user);
 			$inbox = $this->dts_model->get_profile_inbox($user);
+			$status_count = $this->dts_model->getstatuscount();
+			$stat=1;
+			foreach($status_count as $s){
+				$st = array(
+					'status' => $s['status_id']
+				);
+				$stat=$stat+1;
+			}
+			$st[]=$status_count;
 			$header_data['title']="DTS";
 			date_default_timezone_set('Asia/Manila');
 			$time =date("h:i:sa");
@@ -65,7 +74,7 @@ class Home extends CI_Controller {
 			$data['date'] = $date;
 			$data['username'] = $user;
 			$this->load->view('header2',$header_data);
-			$this->load->view('home',['inb'=>$inbox,'emp'=>$employees,'do'=>$documents,'pro'=>$profile]);
+			$this->load->view('home',['inb'=>$inbox,'emp'=>$employees,'do'=>$documents,'pro'=>$profile, 'sta'=>$stat]);
 			$this->load->view('footer');
 		}
 
@@ -84,7 +93,16 @@ class Home extends CI_Controller {
 		$employees = $this->dts_model->getEmployees($user);
 		$sent = $this->dts_model->get_profile_sent($user);
 		$inbox = $this->dts_model->get_profile_inbox($user);
-		$this->load->view('documents',['pro'=>$profile,'emp'=>$employees,'snt'=>$sent,'inb'=>$inbox]);
+		$status_count = $this->dts_model->getstatuscount();
+		$stat=1;
+		foreach($status_count as $s){
+			$st = array(
+				'status' => $s['status_id']
+			);
+			$stat=$stat+1;
+		}
+		$st[]=$status_count;
+		$this->load->view('documents',['pro'=>$profile,'emp'=>$employees,'snt'=>$sent,'inb'=>$inbox, 'sta'=>$stat]);
 		$this->load->view('footer');
 	}
 
@@ -128,9 +146,17 @@ class Home extends CI_Controller {
 			$data['offices'] = $hold;
 			//print_r($data);
 			$inbox = $this->dts_model->get_profile_inbox($user);
+			$status_count = $this->dts_model->getstatuscount();
+			$stat=1;
+			foreach($status_count as $s){
+				$st = array(
+					'status' => $s['status_id']
+				);
+				$stat=$stat+1;
+			}
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('offices',['inb'=>$inbox,'offices'=>$hold,'pro'=>$profile,'emp'=>$employees]);
+			$this->load->view('offices',['inb'=>$inbox,'offices'=>$hold,'pro'=>$profile,'emp'=>$employees, 'sta'=>$stat]);
 			$this->load->view('footer');
 	}
 
@@ -200,7 +226,15 @@ class Home extends CI_Controller {
 		$this->load->view('header2',$header_data);
 		//$this->load->view('header');
 		$inbox = $this->dts_model->get_profile_inbox($user);
-	 	$this->load->view('contacts',['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile]);
+		$status_count = $this->dts_model->getstatuscount();
+		$stat=1;
+		foreach($status_count as $s){
+			$st = array(
+				'status' => $s['status_id']
+			);
+			$stat=$stat+1;
+		}
+	 	$this->load->view('contacts',['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile, 'sta'=>$stat]);
 		$this->load->view('footer');
 	}
 
@@ -212,7 +246,15 @@ class Home extends CI_Controller {
 		$header_data['title']="Profile";
 		$this->load->view('header2',$header_data);
 		$inbox = $this->dts_model->get_profile_inbox($user);
-		$this->load->view('profile',['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile]);
+		$status_count = $this->dts_model->getstatuscount();
+		$stat=1;
+		foreach($status_count as $s){
+			$st = array(
+				'status' => $s['status_id']
+			);
+			$stat=$stat+1;
+		}
+		$this->load->view('profile',['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile, 'sta'=>$stat]);
 		$this->load->view('footer');
 	}
 
@@ -580,6 +622,29 @@ class Home extends CI_Controller {
 	// print_r($last);
 	echo json_encode($output);
 	}
+	public function new_status(){
+	  	$this->form_validation->set_rules('status_id', 'status_id', 'required');
+	 	$this->form_validation->set_rules('status_desc', 'status_desc', 'required');
+			// $this->form_validation->set_rules('forward', 'forward', 'required');
+  		// $this->form_validation->set_error_delimiters('<div class="text-danger bg-danger">', '</div>');
 
+        if ($this->form_validation->run()){
+					$statusnew = array(
+						'status_desc' => $_POST['status_desc']
+						// 'forward' => $_POST['forward']
+					);
+					$this->load->model('dts_model');
+						// $new_status = $this->dts_model->make_status($statusnew);
+						if($this->dts_model->make_status($statusnew)){
+							// $this->session->set_flashdata('response', 'Save success!');
+							return redirect('home/home');
+					}
+				 }
+				//  else{
+					//  echo("asas");
+				//  }
+				// return redirect('home/docu');
+
+        }
 
 }

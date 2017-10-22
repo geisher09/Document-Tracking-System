@@ -58,6 +58,7 @@
 								<li><a data-toggle="modal" id="<?php echo $prof['employee_id']; ?>" onclick="send(this.id)"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
 								<?php } ?>
 								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="glyphicon glyphicon-inbox"></i> Inbox</a></li>
+								<li><a data-toggle="modal" id="<?php echo $sta ?>" onclick="status(this.id)"><i class="glyphicon glyphicon-plus"></i> Add status</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -95,21 +96,21 @@
 		</div>
 		<!-- END LEFT SIDEBAR -->
 <div class="main">
-			<!-- MAIN CONTENT -->		
+			<!-- MAIN CONTENT -->
 	<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Offices</p>
 <div class="container-fluid body">
 
 <!--body-->
-		
+
 	<div class="container-fluid red">
 			<div>
 			<h1 style="color: #7FB3D5;"><strong>List of Offices</strong></h1>
 			<?php foreach($offices as $o) :?>
 			<!-- <?php echo $o; ?> -->
 			<h3 id="office"><a style="color:white;" href="<?php echo site_url('Home/dept/'.$o["office_id"]); ?>"><?php echo $o["office_desc"]; ?></a></h3>
-			
+
 			<!--- eto ung pulldown na table ng departments, dummy depts. lang muna nilagay ko kasi ayoko pakelaman ung controller --->
-			<!--- 
+			<!---
 			<div class="collapse" id="department" style="background-color:black;margin-left:30px;width:80%;">
 				<h4>Departments of <?php // echo $o["office_desc"]; ?> </h4>
 					<table class="table table-list-search table-hover table-condensed table-responsive ">
@@ -131,7 +132,7 @@
 						<span class="lnr lnr-cross"></span> Close
 					</a>
 			</div>  -->
-		
+
 			<!-- <h3><a href=.base_url('Home/dept/'.$o['office_id'])><?php echo $o["office_desc"]; ?></a></h3> -->
 		<?php endforeach; ?>
 <!--
@@ -194,7 +195,7 @@
 				</div>
 			</div>
 
-			<div class="row">		
+			<div class="row">
 			<br/>
 			<div class=" col-md-10">
 					<label for="">Attach File:</label>
@@ -215,15 +216,15 @@
 
 		</div>
 	</div>
-		
+
 		<div class="clearfix"></div>
 			<footer>
 			<div class="container-fluid">
 				<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
 			</div>
 			</footer>
-		
-			
+
+
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
@@ -232,13 +233,13 @@
 
 <script>
 $(document).ready(function() {
-	$('.dropdown-toggle').dropdown();	
+	$('.dropdown-toggle').dropdown();
 	$('.collapsed').collapse();
 });
 // hide and show
 $("#office").click(function(){
     $("#department").show(200);
-}); 
+});
 $("#hide").click(function(){
     $("#department").hide(200);
 });
@@ -260,3 +261,81 @@ function send(id){
 
 
 </script>
+<script>
+function status(id){
+			$.ajax({
+			        type: 'POST',
+			         data:{id: id},
+				        success: function(data) {
+				        	var obj = JSON.stringify(data);
+				        	// var obj = JSON.parse(data);
+				        	console.log(id);
+				          $('#status_id').val(id);
+				          $('#new_status').modal('show');
+				        }
+				    });
+		}
+</script>
+<!-- start of new_status document modal -->
+	<div id="new_status" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+	<!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #555555">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">Add Status</h3>
+        </div>
+        <div class="modal-body">
+
+			<?php echo form_open_multipart('home/new_status',['class'=>'form-horizontal']); ?>
+			<div class="row">
+					<input type="hidden" id="empid" name="empid"/>
+			</div>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Status ID:</label>
+					<?php echo form_input(['name'=>'status_id','class'=>'form-control','placeholder'=>$sta, 'value'=>$sta, 'readonly'=>'true']); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('status_id'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Description:</label>
+					<?php echo form_textarea(['name'=>'status_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Status name', 'value'=>set_value('document_desc')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('status_desc'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<!-- <div class="row">
+				<div class=" col-md-10">
+					<label for="forward">Enable forward:</label>
+					<div class="radio-inline">
+						<div class="radio">
+							<?php $yes=0;
+							$no=1; ?>
+						  <label><input type="radio" name="forward" value="<?php echo $yes;?>">yes</label>
+						</div>
+						<div class="radio">
+						  <label><input type="radio" name="forward" value="<?php echo $no;?>">no</label>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<br/><br/>
+			<div>
+				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="reset" class="btn btn-default">Reset</button>
+			</div>
+			<?php echo form_close();?>
+        </div>
+      </div>
+
+		</div>
+	</div><!-- end of new status document -->

@@ -242,7 +242,7 @@
 			$id=$this->input->post('document_id');
 			$update = array(
 				'status' =>$this->input->post('status'),
-				'recipient'	=>$this->input->post('employee_id')		
+				'recipient'	=>$this->input->post('employee_id')
 			);
 			$this->db->set('status',$update['status']);
 			$this->db->set('date_of_action','DATE_ADD(NOW(), INTERVAL 1 SECOND)', FALSE);
@@ -272,7 +272,7 @@
 			$id=$this->input->post('document_id');
 			$update = array(
 				'status' =>'For Approval',
-				'recipient'	=>$this->input->post('employee')	
+				'recipient'	=>$this->input->post('employee')
 			);
 			$this->db->set('status',$update['status']);
 			$this->db->set('date_of_action','DATE_ADD(NOW(), INTERVAL 1 SECOND)', FALSE);
@@ -316,7 +316,7 @@
 			$id=$this->input->post('document_id');
 			$update = array(
 				'status' =>'Returned',
-				'recipient'	=>$this->input->post('recipient')	
+				'recipient'	=>$this->input->post('recipient')
 			);
 			$this->db->set('status',$update['status']);
 			$this->db->set('date_of_action','DATE_ADD(NOW(), INTERVAL 1 SECOND)', FALSE);
@@ -524,6 +524,17 @@
 		$query= $this->db->get();
 		return $query-> row();
 	}
+	public function getstatuscount(){
+	$this->db->select('status_id');
+	$this->db->from('status');
+	$query= $this->db->get();
+	return $query-> result_array();
+}
+//add new status
+public function make_status($statusnew){
+	return $this->db->insert('status', $statusnew);
+}
+
 
 
 	}
