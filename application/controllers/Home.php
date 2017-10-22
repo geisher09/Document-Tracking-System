@@ -609,17 +609,30 @@ class Home extends CI_Controller {
 
 	}
 	public function history(){
+	$user['username']=$this->session->userdata('username');
 	$this->load->model('dts_model');
 	// $origin = $this->dts_model->sender($this->input->post('id'));
-	$origin = $this->dts_model->sender($this->input->post('id'));
-	$recipient = $this->dts_model->docu_flow($this->input->post('id'));
-	$end = $this->dts_model->end($this->input->post('id'));
+	$track_no = $this->input->post('id');
+	$origin = $this->dts_model->sender($track_no,$user);
+	$recipient = $this->dts_model->docu_flow($track_no,$user);
+	$end = $this->dts_model->end($track_no,$user);
+	if($origin != null){
 	$output = array(
 		'origin' => $origin,
 		'recipient' => $recipient,
-		'end' => $end
+		'end' => $end,
+		'con' => "true"
+		// 'user' => $user
 	);
-	// print_r($last);
+	}
+	else if ($origin==null){
+		$output = array(
+			'con'=> "false"
+			// 'user' => $user
+		);
+	}
+	// print_r($user);
+	// echo $user;
 	echo json_encode($output);
 	}
 	public function new_status(){

@@ -141,9 +141,14 @@
 									</div>
 								</div>
 
+
 								<div id="error" class="collapse" style="margin-left:100px;">
 								<!-- <div class="col-md-10 col-sm-10 col-xs-10 roundbox flipInX animated"<class="pulse animated" style="color: red; "> style="margin-center:0px;"><h4 style="color: white; "><span class="glyphicon glyphicon-search"></span>&nbsp;Please search a valid document!</h4></div> -->
 								<div class="pulse animated" style="color: red; margin-center:0px;"><h4 style="color: Red; "><span class="glyphicon glyphicon-search"></span>&nbsp;Please search a valid document!</h4></div>
+								</div>
+								<div id="error2" class="collapse" style="margin-left:100px;">
+								<!-- <div class="col-md-10 col-sm-10 col-xs-10 roundbox flipInX animated"<class="pulse animated" style="color: red; "> style="margin-center:0px;"><h4 style="color: white; "><span class="glyphicon glyphicon-search"></span>&nbsp;Please search a valid document!</h4></div> -->
+								<div class="pulse animated" style="color: red; margin-center:0px;"><h4 style="color: Red; "><span class="glyphicon glyphicon-remove"></span>&nbsp;Not your document!</h4></div>
 								</div>
 
 
@@ -170,12 +175,18 @@
 							if(id != ''){
 								// alert(id);
 								$('#error').hide(500);
+								$('#error2').hide();
 								$.ajax({
 									type: "post",
 									url: "history",
 									data:{id:id},
 									success: function(data){
 										var obj = JSON.parse(data)
+										if(obj.con=="false"){
+											// alert("gbfgbgn");
+											$('#flow').hide(300);
+											$('#error2').show(300);
+										}
 										$('#flow').hide(300);
 										// alert(data);
 										// alert(s);
@@ -185,6 +196,9 @@
 										var dateTime = moment( obj.origin.date_created).format('MM-DD-YYYY HH:mm:ss');
 										var date = moment(dateTime).format('MMMM Do YYYY, h:mm:ss a');  ///okay na!
 										// alert(date);
+										// var dd = parseInt(obj.origin.length);
+										// alert(dd);
+										// alert(obj.origin);
 										//initial
 										$('#sender').html("Start of document flow");
 										$('#send_date').html(date);
@@ -236,19 +250,20 @@
 									},
 									error: function(data){
 										e.preventDefault();
-										alert("asa");
+										// alert("asa");
+										$('#error').show(300);
 									}
 								});
 
 							}
 							else{
+								$('#error2').hide();
 								$('#flow').hide(300);
 								$('#error').show(300);
 							}
 						});
 					});
 			</script>
-
 
 
 <script>
