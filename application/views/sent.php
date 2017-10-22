@@ -140,8 +140,8 @@
 			<br>
 
 				<!-- <button class="btn btn-default btn-sm" id="<?php echo $sent['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sent["tracking_no"]) ?>')">View file&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button> -->
-				<button class="btn btn-default btn-sm" id="<?php echo $sent['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sent["document_file"]) ?>')">View file&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
-				<button class="btn btn-primary btn-sm" type="button" onclick="window.location='<?php echo site_url('Home/docu');?>'">Back&nbsp;<span class="fa fa-arrow-left" aria-hidden="true"></span></button>
+				<button class="btn btn-default btn-md" id="<?php echo $sent['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sent["document_file"]) ?>')">View file&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+				<button class="btn btn-primary btn-md" type="button" onclick="window.location='<?php echo site_url('Home/docu');?>'">Back&nbsp;<span class="fa fa-arrow-left" aria-hidden="true"></span></button>
 
 			<?php } ?>
 			</div>

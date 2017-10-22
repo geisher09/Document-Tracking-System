@@ -59,7 +59,9 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-link"></i> <span>Quicklinks</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a data-toggle="modal" href="#send_details"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
+								<?php foreach ($pro as $prof){ ?>
+								<li><a data-toggle="modal" id="<?php echo $prof['employee_id']; ?>" onclick="send(this.id)"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
+								<?php } ?>
 								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="glyphicon glyphicon-inbox"></i> Inbox</a></li>
 							</ul>
 						</li>
@@ -105,116 +107,55 @@
 		<div class="container-fluid red">
 		  <div class="row">
 		  	<div class="container-fluid blue">
-		  	<?php foreach ($pro as $prof){ ?>
-							<img style="width:30px;" src="<?php echo base_url($prof['image']); ?>" class="img-circle" alt="Avatar"><span style="font-size:20px;color: white;"><strong>
-							<?php echo $prof['lname'];?>, <?php echo $prof['fname'];?>
+		  		<?php foreach ($inb as $inbox){ ?>
+		  		<img style="width:35px;height:35px;float:left;" src="<?php echo base_url($inbox['image']); ?>" class="img-circle" alt="Avatar"><span style="font-size:25px;color:white;margin-left:5px;"><strong>
+							<?php echo $inbox['lname'];?>, <?php echo $inbox['fname'];?>
 							</strong></span>
-							<span style="font-size:20px; color: white;"> /<?php echo $prof['username'];?>/</span>
-			<?php } ?>
-			<br>
-			<hr />
-			<p style="font-size:20px; color: white;">Tracking no:
-			<strong><?php echo $idno;?><strong></p>
+				<span style="font-size:20px;color:white;">
+					&nbsp;<
+					<?php echo $inbox['username'];?>
+					>
+				</span>
+				<br /><br /><br />
+				<p style="font-size:25px; color: white;  font-style:italic;">FORWARDED FILE</p>
+				<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Document Tracking no:</label>
+				<strong>&emsp;<?php echo $idno;?></strong></p>
+				<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Title:</label>
+				<strong>&emsp;<?php echo $inbox['document_title'];?></strong></p>
+				<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Description:</label>
+				<strong>&emsp;<?php echo $inbox['document_desc'];?></strong></p>
+				<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Current Status:</label>
+				<strong>&emsp;<?php echo $inbox['response'];?></strong></p>
+				<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Latest Comment:</label>
+				<strong>&emsp;<?php echo $inbox['comment'];?></strong></p>
+				<?php
+					date_default_timezone_set('Asia/Manila');
+					$mydate = strtotime($inbox['date_responded']);
+
+				?>
+				<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>As of:</label>
+				<strong>&emsp;<?php echo date('F d, Y ', $mydate);?>
+				 at <?php echo date('g:i a', $mydate);?></strong></p>
+				<?php } ?>
+
+				<?php foreach ($orig as $origin){ ?>
+				<p style="font-size:20px; color: white;  font-style:italic;">THIS FILE ORIGINATED FROM</p>
+				<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Employee id:</label>
+				<strong>&emsp;<?php echo $origin['employee_id'];?></strong></p>
+				<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Employee id:</label>
+				<strong>&emsp;<?php echo $origin['lname'];?>, <?php echo $origin['fname'];?> <?php echo $origin['mname'];?></strong></p>
+				<?php } ?>
+				
+
+
+
+
+				<button class="btn btn-md btn-danger" data-toggle="modal" data-target="#response"><span class="lnr lnr-bullhorn"></span> Return </button>
+				<button class="btn btn-md btn-success" data-toggle="modal" data-target="#forward"><span class="lnr lnr-location"></span> Forward </button>
+				<button class="btn btn-md btn-primary" data-toggle="modal" data-target="#update"><span class="lnr lnr-pencil"></span> Update Status </button>
+				<button class="btn btn-default btn-md" type="button" onclick="window.location='<?php echo site_url('Home/docu');?>'">Back&nbsp;<span class="fa fa-arrow-left" aria-hidden="true"></span></button>
 			</div>
 
-
-<!-- modal of details about the document-->
-	<div id="send_details" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-	<!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #555555">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-          <h3 class="modal-title text-center">Add Document</h3>
-        </div>
-        <div class="modal-body">
-
-			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
-			<div class="row">
-					<input type="hidden" id="empid" name="empid"/>
-			</div>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Title:</label>
-					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_title'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Description:</label>
-					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_desc'); ?>
-			  		</div>
-			</div>
-			<br/>
-
-			<div class="row">
-				<div class="col-sm-8">
-			      	<label for="">Send to:</label>
-						<select name="employee" class="form-control">
-							<?php foreach ($emp as $empoy){ ?>
-							    <option value="<?php echo $empoy->employee_id; ?>"><?php echo $empoy->lname.','.$empoy->fname.'  '.$empoy->mname; ?></option>
-							<?php } ?>
-						</select>
-				</div>
-			</div>
-
-			<div class="row">		
-			<br/>
-			<div class=" col-md-10">
-					<label for="">Attach File:</label>
-						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
-					</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('file'); ?>
-			  		</div>
-			</div><br/>
-			<div>
-				<button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send</button>
-				<button type="reset" class="btn btn-default"><i class="fa fa-refresh" aria-hidden="true"></i>Reset</button>
-			</div>
-			<?php echo form_close();?>
-        </div>
-      </div>
-
-		</div>
-	</div>
-
-
-
-
-
-
-
-
-<!-- modal of details about the document-->
-	<div id="inbox_details" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header" style="background-color: #34495E">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title" style="text-align:center; color:white;">DOCUMENT DETAILS</h3>
-				</div>
-
-				<div class="modal-body zoomIn animated">
-					<div id="basicid">
-
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
 
 
 
@@ -439,157 +380,12 @@ function lol(id){
 
 		</div>
 
-		<!-- start of send document modal -->
-	<div id="send_details" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-	<!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #555555">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-          <h3 class="modal-title text-center">Add Document</h3>
-        </div>
-        <div class="modal-body">
-
-			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
-			<div class="row">
-					<input type="hidden" id="empid" name="empid"/>
-			</div>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Title:</label>
-					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_title'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Description:</label>
-					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_desc'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Attach File:</label>
-						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
-					</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('file'); ?>
-			  		</div>
-				</div> <br/><br/>
-			<div>
-				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="reset" class="btn btn-default">Reset</button>
-			</div>
-			<?php echo form_close();?>
-        </div>
-      </div>
-
-		</div>
-	</div><!-- end of send document -->
-
-
-<!-- start of send document modal -->
-	<div id="send_details" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-	<!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #555555">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-          <h3 class="modal-title text-center">Add Document</h3>
-        </div>
-        <div class="modal-body">
-
-			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
-			<div class="row">
-					<input type="hidden" id="empid" name="empid"/>
-			</div>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Title:</label>
-					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_title'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Description:</label>
-					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_desc'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Attach File:</label>
-						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
-					</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('file'); ?>
-			  		</div>
-				</div> <br/><br/>
-			<div>
-				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="reset" class="btn btn-default">Reset</button>
-			</div>
-			<?php echo form_close();?>
-        </div>
-      </div>
-
-		</div>
-	</div><!-- end of send document -->
 
 </div>
 
 </div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
-
-		<!--modal-->
-		<div id="details" class="modal fade" role="dialog">
-			<div class="modal-dialog modal-md">
-				<div class="modal-content">
-					<div class="modal-header" style="background-color: #E74C3C">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h3 class="modal-title" style="color: #641E16 text-align: center;">Document Details</h3>
-					</div>
-
-					<div class="modal-body">
-					 <div>
-						<h4 style="font-weight: bold">
-							Document Tracking Number: <br /><br />
-							Title: <br /><br />
-							Description: <br /><br /><br /><br /><br /><br />
-							Date Submitted: <br /><br />
-							Date Received: <br /><br />
-							Status: <br /><br />
-							Signatories: <br /><br /><br /><br />
-						</h4>
-					 </div>
-					</div>
-
-				</div>
-			</div>
-		</div>
 
 	</div>
 </div>
@@ -600,3 +396,184 @@ $(document).ready(function() {
 });
 
 </script>
+
+
+<!-- modal of details about the document-->
+	<div id="send_details" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+	<!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #555555">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h3 class="modal-title text-center">Add Document</h3>
+        </div>
+        <div class="modal-body">
+
+			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
+			<div class="row">
+					<input type="hidden" id="empid" name="empid"/>
+			</div>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Title:</label>
+					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('document_title'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Description:</label>
+					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('document_desc'); ?>
+			  		</div>
+			</div>
+			<br/>
+
+			<div class="row">
+				<div class="col-sm-8">
+			      	<label for="">Send to:</label>
+						<select name="employee" class="form-control">
+							<?php foreach ($emp as $empoy){ ?>
+							    <option value="<?php echo $empoy->employee_id; ?>"><?php echo $empoy->lname.','.$empoy->fname.'  '.$empoy->mname; ?></option>
+							<?php } ?>
+						</select>
+				</div>
+			</div>
+
+			<div class="row">
+			<br/>
+			<div class=" col-md-10">
+					<label for="">Attach File:</label>
+						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
+					</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('file'); ?>
+			  		</div>
+			</div><br/>
+			<div>
+				<button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send</button>
+				<button type="reset" class="btn btn-default"><i class="fa fa-refresh" aria-hidden="true"></i>Reset</button>
+			</div>
+			<?php echo form_close();?>
+        </div>
+      </div>
+
+		</div>
+	</div>
+
+
+<!-- start of response modal -->
+<div id="response" class="modal fade" role="dialog">
+<div class="modal-dialog modal-md">
+	<div class="modal-content">
+		<div class="modal-header" style="background-color: #34495E; color: #fff; font-family: 'Josefin Slab';">
+			<button type="button" style="color:#fff;" class="close" data-dismiss="modal">&times;</button>
+			<h2 class="text-center modal-title"> Return File </h2>
+		</div>
+		
+		<div class="modal-body">
+			<h4 class="text-center" style="color:red; font-size:26px; font-style:bold;"> You're about to return this file: </h4> <br>
+			<p style="margin-left:70px; font-size:20px;>"><strong>
+				TRACKING NO: <br><br>
+				TITLE: <br>
+			</strong></p>
+			
+			<h4 class="text-center"> To: </h4> <br>
+			<p style="margin-left:70px; font-size:20px;"><strong>
+				EMPLOYEE ID: <br><br>
+				EMPLOYEE NAME: <br><br>
+			</strong></p>
+			
+			<div style="display:block; margin-left:auto; margin-right:auto; width:80%;">
+			<h4 class="text-center"> Comments/Remarks: </h4>
+			<textarea style="border:2px solid red;" class="form-control" id="comment" name="comment" rows="3"></textarea> <br>
+			</div>
+		</div>
+		
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-info">Return</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		</div>
+	</div>
+</div>
+</div>
+<!-- end of response modal -->
+
+
+<!-- start of forward modal -->
+<div id="forward" class="modal fade" role="dialog">
+<div class="modal-dialog modal-md">
+	<div class="modal-content">
+		<div class="modal-header" style="background-color: #34495E; color: #fff; font-family: 'Josefin Slab';">
+			<button type="button" style="color:#fff;" class="close" data-dismiss="modal">&times;</button>
+			<h2 class="text-center modal-title"> Forward File </h2>
+		</div>
+		
+		<div class="modal-body">
+			<p style="font-size:20px;"><strong> TRACKING NO: </strong></p><br>
+			
+			<p style="font-size:20px;"><strong> TITLE: </strong></p><br>
+				
+			
+			<p style="font-size:20px;"><strong> RECEIVER: </strong><p>
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+				employee <span class="caret"></span></button>
+			</div><br><br>
+		</div>
+		
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-info">Save</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		</div>
+	</div>
+</div>
+</div>
+<!-- end of forward modal -->
+
+
+<!-- start of update modal -->
+<div id="update" class="modal fade" role="dialog">
+<div class="modal-dialog modal-md">
+	<div class="modal-content">
+		<div class="modal-header" style="background-color: #34495E; color: #fff; font-family: 'Josefin Slab';">
+			<button type="button" style="color:#fff;" class="close" data-dismiss="modal">&times;</button>
+			<h2 class="text-center modal-title"> Update Status of this File </h2>
+		</div>
+		
+		<div class="modal-body">
+			<br><p style="font-size:20px;"><strong> SELECT STATUS: </strong><p>
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+				status <span class="caret"></span></button>
+				<!-- sample statuses -->
+				<ul class="dropdown-menu">
+					<li><a href="#">Received</a></li>
+					<li><a href="#">Processing</a></li>
+					<li><a href="#">Approved</a></li>
+				</ul>
+			</div><br><br>
+			
+			<div style="width:90%;">
+			<p style="font-size:20px;"><strong> COMMENTS/REMARKS: </strong></p>
+			<textarea class="form-control" id="comment" name="comment" rows="5"></textarea> <br>
+			</div><br>
+		</div>
+		
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-info">Save</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		</div>
+	</div>
+</div>
+</div>
+<!-- end of update modal -->

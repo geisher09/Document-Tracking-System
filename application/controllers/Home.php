@@ -83,29 +83,6 @@ class Home extends CI_Controller {
 		$employees = $this->dts_model->getEmployees($user);
 		$sent = $this->dts_model->get_profile_sent($user);
 		$inbox = $this->dts_model->get_profile_inbox($user);
-		// $inbox = rsort($inboxe);
-		//$inbox = $this->dts_model->get_profile_inbox($user);
-// 		$documents = $this->dts_model->getDocuments();
-
-// 		$profile = $this->dts_model->get_profile($user);
-// 		$inbox = $this->dts_model->get_profile_inbox($user);
-// 		// $employid = $profile['employee_id'];
-// 		$ul = array();
-// 		foreach($inbox as $a){
-// 			$as = array('document_file' => $a['document_file']);
-// 			// print_r($as);
-// 			$ul[] = $as;
-// 		}
-// 		$sent = $this->dts_model->get_profile_sent($user);
-// 		$pending = $this->dts_model->get_inbox_pending($user);
-// 		$employees = $this->dts_model->getEmployees($user);
-// 		foreach($documents as $a){
-// 			$as = array('document_file' => $a['document_file']);
-// 			$type = explode('.', $a['document_title']);
-// 			$type = strtolower($type[count($type)-1]);
-// 			$url = "./uploads/".$a['document_title'];
-// //			print_r($as);
-// 		}
 		$this->load->view('documents',['pro'=>$profile,'emp'=>$employees,'snt'=>$sent,'inb'=>$inbox]);
 		$this->load->view('footer');
 	}
@@ -119,6 +96,20 @@ class Home extends CI_Controller {
 			$employees = $this->dts_model->getEmployees($user);
 		$this->load->view('header2',$header_data);
 	 	$this->load->view('sent',['emp'=>$employees,'pro'=>$profile,'idno'=>$id,'snt'=>$sent]);
+		$this->load->view('footer');
+	}
+
+	public function inbox($id,$employ){
+		$header_data['title']="Inbox File";
+			$user['username']=$this->session->userdata('username');
+			$this->load->model('dts_model');
+			$profile = $this->dts_model->get_profile($user);
+			$inbox = $this->dts_model->getInbox_by_id($id,$employ);
+			$origin = $this->dts_model->get_origin($id);
+			//$sent = $this->dts_model->get_by_id($id);
+			$employees = $this->dts_model->getEmployees($user);
+		$this->load->view('header2',$header_data);
+	 	$this->load->view('inbox',['emp'=>$employees,'pro'=>$profile,'idno'=>$id,'employee'=>$employ,'inb'=>$inbox,'orig'=>$origin]);
 		$this->load->view('footer');
 	}
 

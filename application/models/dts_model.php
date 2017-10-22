@@ -143,6 +143,53 @@
 			return $query->result_array();
 		}
 
+		public function getInbox_by_id($id,$employ){
+			$this->db->where('tracking_no', $id);
+			$result = $this->db->get('document');
+
+			$doc = $result->row('document_id');
+
+			$this->db->select('a.document_id,a.status,a.date_of_action,a.recipient,a.employee_id,
+				b.document_id,b.tracking_no,b.document_title,b.document_desc,b.document_file,b.date_created,
+				c.document_id,c.response,c.employee_id,c.comment,c.date_responded,c.sender,c.history_no,
+				d.employee_id,d.department_id,d.username,d.lname,d.fname,d.image,d.mname,f.history_no
+			');
+			$this->db->from('documentation a');
+			$this->db->join('document b','a.document_id = b.document_id');
+			$this->db->join('history c','a.document_id = c.document_id');
+			$this->db->join('history f','c.document_id = f.document_id AND c.history_no < f.history_no','left');
+			$this->db->join('employee d','c.sender = d.employee_id');
+ 			$this->db->where('c.sender', $employ);
+ 			$this->db->where('c.document_id', $doc);
+ 			$this->db->where('f.history_no IS NULL');
+			$query = $this->db->get();
+			return $query->result_array();
+
+			//return $query->row();
+		}
+
+		public function get_origin($id){
+			$this->db->where('tracking_no', $id);
+			$result = $this->db->get('document');
+
+			$doc = $result->row('document_id');
+
+			$this->db->select('a.document_id,a.status,a.date_of_action,a.recipient,a.employee_id,
+				b.document_id,b.tracking_no,b.document_title,b.document_desc,b.document_file,b.date_created,
+				c.employee_id,c.department_id,c.username,c.lname,c.fname,c.image,c.mname,
+				d.department_id,d.department_id
+			');
+			$this->db->from('documentation a');
+			$this->db->join('document b','a.document_id = b.document_id');
+			$this->db->join('employee c','a.employee_id = c.employee_id');
+			$this->db->join('department d','c.department_id = d.department_id');
+ 			$this->db->where('a.document_id', $doc);
+			$query = $this->db->get();
+			return $query->result_array();
+
+			//return $query->row();
+		}
+
 		public function get_by_id($id)
 		{
 			$this->db->select('a.document_id,a.status,a.date_of_action,a.recipient,b.employee_id,b.lname,b.fname,b.mname,b.department_id,

@@ -160,12 +160,15 @@
 						<table class="tablet table-list-search table-hover table-condensed table-responsive ">
 							<tbody>
 								<?php foreach ($inb as $inboxes){ ?>
-								<tr class="dropdown">
-									<td><img style="width: 30px; border: 2px solid gray;" src="<?php echo base_url($inboxes['image']); ?>" class="img-thumbnail" alt="Avatar"><span></span>&emsp;<?php echo $inboxes['lname']; ?>, <?php echo $inboxes['fname']; ?> <?php echo $inboxes['mname']; ?></td>
-									<td>Forwarded file: <?php echo $inboxes['tracking_no']; ?>&nbsp;
+								<tr id="<?php echo $inboxes['tracking_no']; ?>" onclick="window.location='<?php echo site_url('Home/inbox/'.$inboxes['tracking_no'].'/'.$inboxes['employee_id']);?>'">
+									<td><img style="width: 30px; border: 2px solid gray;" src="<?php echo base_url($inboxes['image']); ?>" class="img-thumbnail" alt="Avatar"><span></span>&emsp;<?php echo $inboxes['lname']; ?>, <?php echo $inboxes['fname']; ?>
+											&emsp;&emsp;&emsp;&emsp;
+									</td>
+									<td>Forwarded a file with track#: <?php echo $inboxes['tracking_no']; ?>
+										&emsp;
 										Entitled: 
 									<?php echo $inboxes['document_title']; ?>...</td>
-									<td><?php echo $inboxes['response']; ?></td>
+									<td><?php echo $inboxes['date_responded']; ?></td>
 								</tr>
 								<?php } ?>
 							</tbody>
