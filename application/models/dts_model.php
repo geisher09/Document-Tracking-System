@@ -146,7 +146,7 @@
 		public function get_by_id($id)
 		{
 			$this->db->select('a.document_id,a.status,a.date_of_action,a.recipient,b.employee_id,b.lname,b.fname,b.mname,b.department_id,
-				c.document_id,c.tracking_no,c.document_title,c.document_desc,c.date_created,d.department_desc,d.department_id');
+				c.document_id,c.tracking_no,c.document_title,c.document_file,c.document_desc,c.date_created,d.department_desc,d.department_id');
 			$this->db->from('documentation a');
 			$this->db->join('employee b','a.recipient = b.employee_id');
 			$this->db->join('document c','a.document_id = c.document_id');

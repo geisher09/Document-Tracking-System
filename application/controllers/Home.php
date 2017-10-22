@@ -513,15 +513,16 @@ class Home extends CI_Controller {
 		//veiw document new table
 	public function view_docu(){
 		if(isset($_GET['file'])){
-			$filenam = array();
+			// $filenam = array();
 			$fileName = array('file' => $_GET['file']);
-			print_r($fileName);
-			echo "<br/>";
+			// print_r($fileName);
+			// echo "<br/>";
 			$name = basename($_GET['file']);
-			echo "<br/> basenaname <br/>";
+			// echo "<br/> basenaname <br/>";
 			$filePath = 'uploads/'.$name;
-			echo "<br/>";
-			print_r($filePath);
+			$filenam = $name.'.pdf';
+			// echo "<br/>";
+			// print_r($filePath);
 			$this->load->model('dts_model');
 			if(!empty($fileName) && file_exists($filePath)){
 				// $file = $filepath;
