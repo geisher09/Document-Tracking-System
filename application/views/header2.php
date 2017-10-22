@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/modi.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/main.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/fonts/JosefinSlab-Bold.ttf" />
 
 
 	<script src="<?php echo base_url('assets/js/jquery.js');?>"></script>

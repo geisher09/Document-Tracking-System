@@ -55,6 +55,7 @@ class Home extends CI_Controller {
 			$this->load->model('dts_model');
 			$profile = $this->dts_model->get_profile($user);
 			$documents = $this->dts_model->getDocuments($user);
+			$employees = $this->dts_model->getEmployees($user);			
 			$header_data['title']="DTS";
 			date_default_timezone_set('Asia/Manila');
 			$time =date("h:i:sa");
@@ -64,7 +65,7 @@ class Home extends CI_Controller {
 			$data['username'] = $user;
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('home',['do'=>$documents,'pro'=>$profile]);
+			$this->load->view('home',['emp'=>$employees,'do'=>$documents,'pro'=>$profile]);
 			$this->load->view('footer');
 		}
 
@@ -114,8 +115,9 @@ class Home extends CI_Controller {
 			$this->load->model('dts_model');
 			$profile = $this->dts_model->get_profile($user);
 			$sent = $this->dts_model->get_by_id($id);
+			$employees = $this->dts_model->getEmployees($user);
 		$this->load->view('header2',$header_data);
-	 	$this->load->view('sent',['pro'=>$profile,'idno'=>$id,'snt'=>$sent]);
+	 	$this->load->view('sent',['emp'=>$employees,'pro'=>$profile,'idno'=>$id,'snt'=>$sent]);
 		$this->load->view('footer');
 	}
 
@@ -127,12 +129,13 @@ class Home extends CI_Controller {
 			$this->load->model('dts_model');
 			$profile = $this->dts_model->get_profile($user);
 			$hold = $this->dts_model->getOffices();
+			$employees = $this->dts_model->getEmployees($user);
 			$data['offices'] = $hold;
 			//print_r($data);
 
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('offices',['offices'=>$hold,'pro'=>$profile]);
+			$this->load->view('offices',['offices'=>$hold,'pro'=>$profile,'emp'=>$employees]);
 			$this->load->view('footer');
 	}
 
@@ -141,6 +144,7 @@ class Home extends CI_Controller {
 			$condition = array('office_id'=>$office_id);
 			$this->load->model('dts_model');
 			$hold = $this->dts_model->getDepartment2($condition);
+
 			//$hold2 = $this->dts_model->getDepartment_id($condition);
 			$data['dept'] = $hold;
 			$data['office'] = $condition;
@@ -165,11 +169,12 @@ class Home extends CI_Controller {
 			$data['id']=$id;
 			$user['username']=$this->session->userdata('username');
 			$profile = $this->dts_model->get_profile($user);
+						$employees = $this->dts_model->getEmployees($user);
 			// print_r($office_id);
 			// echo "Pasok";
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('departments',['dept'=>$data['dept'],'id'=>$data['id'],'dept_id'=>$data['dept_id'],'pro'=>$profile,'office'=>$office_id]);
+			$this->load->view('departments',['emp'=>$employees,'dept'=>$data['dept'],'id'=>$data['id'],'dept_id'=>$data['dept_id'],'pro'=>$profile,'office'=>$office_id]);
 			$this->load->view('footer');
 	}
 
@@ -180,11 +185,12 @@ class Home extends CI_Controller {
 			$hold = $this->dts_model->getEmployee($condition);
 			$user['username']=$this->session->userdata('username');
 			$profile = $this->dts_model->get_profile($user);
+			$employees = $this->dts_model->getEmployees($user);
 			$data['employees'] = $hold;
 			$data['title'] = "None";
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('department/employee',['employees'=>$data['employees'],'pro'=>$profile,'office'=>$office_id]);
+			$this->load->view('department/employee',['emp'=>$employees,'employees'=>$data['employees'],'pro'=>$profile,'office'=>$office_id]);
 			$this->load->view('footer');
 	}
 
@@ -193,9 +199,10 @@ class Home extends CI_Controller {
 			$user['username']=$this->session->userdata('username');
 			$this->load->model('dts_model');
 			$profile = $this->dts_model->get_profile($user);
+			$employees = $this->dts_model->getEmployees($user);
 		$this->load->view('header2',$header_data);
 		//$this->load->view('header');
-	 	$this->load->view('contacts',['pro'=>$profile]);
+	 	$this->load->view('contacts',['emp'=>$employees,'pro'=>$profile]);
 		$this->load->view('footer');
 	}
 
@@ -203,10 +210,10 @@ class Home extends CI_Controller {
 		$user['username']=$this->session->userdata('username');
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
+		$employees = $this->dts_model->getEmployees($user);
 		$header_data['title']="Profile";
 		$this->load->view('header2',$header_data);
-		//$this->load->view('header');
-		$this->load->view('profile',['pro'=>$profile]);
+		$this->load->view('profile',['emp'=>$employees,'pro'=>$profile]);
 		$this->load->view('footer');
 	}
 
@@ -214,9 +221,10 @@ class Home extends CI_Controller {
 		$user['username']=$this->session->userdata('username');
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
+		$employees = $this->dts_model->getEmployees($user);
 		$header_data['title']="Edit Profile";
 		$this->load->view('header2',$header_data);
-		$this->load->view('accountsettings', ['pro'=>$profile]);
+		$this->load->view('accountsettings', ['emp'=>$employees,'pro'=>$profile]);
 		$this->load->view('footer');
 	}
 
@@ -280,8 +288,9 @@ class Home extends CI_Controller {
 
 				$header_data['title']="Edit Profile";
 				$this->load->view('header2',$header_data);
+				$employees = $this->dts_model->getEmployees($user);
 				//$this->load->view('header');
-				$this->load->view('accountsettings', ['pro'=>$profile]);
+				$this->load->view('accountsettings', ['emp'=>$employees,'pro'=>$profile]);
 				$this->load->view('footer');
         }
 
@@ -307,10 +316,11 @@ class Home extends CI_Controller {
 		$user['username']=$this->session->userdata('username');
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
+		$employees = $this->dts_model->getEmployees($user);
 		$header_data['title']="Change Password";
 		$this->load->view('header2',$header_data);
 		//$this->load->view('header');
-		$this->load->view('password_change',['pro'=>$profile]);
+		$this->load->view('password_change',['emp'=>$employees,'pro'=>$profile]);
 		$this->load->view('footer');
 
 	}
@@ -335,10 +345,11 @@ class Home extends CI_Controller {
         		$user['username']=$this->session->userdata('username');
 				$this->load->model('dts_model');
 				$profile = $this->dts_model->get_profile($user);
+				$employees = $this->dts_model->getEmployees($user);
             	$header_data['title']="Change Password";
 				$this->load->view('header2',$header_data);
 				//$this->load->view('header');
-				$this->load->view('password_change',['pro'=>$profile]);
+				$this->load->view('password_change',['emp'=>$employees,'pro'=>$profile]);
 				$this->load->view('footer');
         }
 

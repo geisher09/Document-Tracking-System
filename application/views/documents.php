@@ -59,7 +59,9 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-link"></i> <span>Quicklinks</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a data-toggle="modal" href="#send_details"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
+								<?php foreach ($pro as $prof){ ?>
+								<li><a data-toggle="modal" id="<?php echo $prof['employee_id']; ?>" onclick="send(this.id)"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
+								<?php } ?>
 								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="glyphicon glyphicon-inbox"></i> Inbox</a></li>
 							</ul>
 						</li>
@@ -186,8 +188,7 @@
 										<td><?php echo $sents['document_title']; ?>
 											&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 											&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-											&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-											&emsp;
+											&emsp;&emsp;&emsp;&emsp;&emsp;
 										</td>
 										<?php if($myd==$date){?>
 										<td><?php echo "Today"; ?> at <?php echo date('g:h a', $mydate);?></td>

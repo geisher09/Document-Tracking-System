@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<!-- VENDOR CSS -->
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo base_url();?><?php echo base_url();?>assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/linearicons/style.css">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/vendor/chartist/css/chartist-custom.css">
 	<!-- MAIN CSS -->
@@ -59,7 +59,9 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-link"></i> <span>Quicklinks</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a data-toggle="modal" href="#send_details"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
+								<?php foreach ($pro as $prof){ ?>
+								<li><a data-toggle="modal" id="<?php echo $prof['employee_id']; ?>" onclick="send(this.id)"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
+								<?php } ?>
 								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="glyphicon glyphicon-inbox"></i> Inbox</a></li>
 							</ul>
 						</li>
@@ -147,7 +149,7 @@
 
 </div>
 
-<!-- start of send document modal -->
+<!-- modal of details about the document-->
 	<div id="send_details" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-md">
 	<!-- Modal content-->
@@ -185,8 +187,21 @@
 			  		</div>
 			</div>
 			<br/>
+
 			<div class="row">
-				<div class=" col-md-10">
+				<div class="col-sm-8">
+			      	<label for="">Send to:</label>
+						<select name="employee" class="form-control">
+							<?php foreach ($emp as $empoy){ ?>
+							    <option value="<?php echo $empoy->employee_id; ?>"><?php echo $empoy->lname.','.$empoy->fname.'  '.$empoy->mname; ?></option>
+							<?php } ?>
+						</select>
+				</div>
+			</div>
+
+			<div class="row">		
+			<br/>
+			<div class=" col-md-10">
 					<label for="">Attach File:</label>
 						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
 					</div>
@@ -194,17 +209,17 @@
 					<div class="col-lg-10">
 						<?php echo form_error('file'); ?>
 			  		</div>
-				</div> <br/><br/>
+			</div><br/>
 			<div>
-				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="reset" class="btn btn-default">Reset</button>
+				<button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send</button>
+				<button type="reset" class="btn btn-default"><i class="fa fa-refresh" aria-hidden="true"></i>Reset</button>
 			</div>
 			<?php echo form_close();?>
         </div>
       </div>
 
 		</div>
-	</div><!-- end of send document -->
+	</div>
 		
 		<div class="clearfix"></div>
 			<footer>
@@ -212,65 +227,7 @@
 				<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
 			</div>
 			</footer>
-			
-			<!-- start of send document modal -->
-	<div id="send_details" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md">
-	<!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #555555">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-          <h3 class="modal-title text-center">Add Document</h3>
-        </div>
-        <div class="modal-body">
-
-			<?php echo form_open_multipart('home/save',['class'=>'form-horizontal']); ?>
-			<div class="row">
-					<input type="hidden" id="empid" name="empid"/>
-			</div>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Title:</label>
-					<?php echo form_input(['name'=>'document_title','class'=>'form-control','placeholder'=>'Title', 'value'=>set_value('document_title')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_title'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Description:</label>
-					<?php echo form_textarea(['name'=>'document_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Description', 'value'=>set_value('document_desc')]); ?>
-				</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('document_desc'); ?>
-			  		</div>
-			</div>
-			<br/>
-			<div class="row">
-				<div class=" col-md-10">
-					<label for="">Attach File:</label>
-						<?php echo form_upload(['name'=>'file', 'accept'=>'document/*']); ?>
-					</div>
-
-					<div class="col-lg-10">
-						<?php echo form_error('file'); ?>
-			  		</div>
-				</div> <br/><br/>
-			<div>
-				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="reset" class="btn btn-default">Reset</button>
-			</div>
-			<?php echo form_close();?>
-        </div>
-      </div>
-
-		</div>
-	</div><!-- end of send document -->
+		
 			
 	</div>
 	<!-- END WRAPPER -->
@@ -290,6 +247,21 @@ $("#office").click(function(){
 $("#hide").click(function(){
     $("#department").hide(200);
 });
+
+function send(id){
+			$.ajax({
+			        type: 'POST',
+			         data:{id: id},
+				        success: function(data) {
+				        	var obj = JSON.stringify(data);
+				        	console.log(id);
+
+				          $('#empid').val(id);
+				          $('#send_details').modal('show');
+
+				        }
+				    });
+		}
 
 
 </script>
