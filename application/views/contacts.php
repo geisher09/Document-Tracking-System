@@ -56,6 +56,7 @@
 							<ul class="dropdown-menu">
 								<li><a data-toggle="modal" href="#send_details"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
 								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="glyphicon glyphicon-inbox"></i> Inbox</a></li>
+								<li><a data-toggle="modal" id="<?php echo $sta ?>" onclick="status(this.id)"><i class="glyphicon glyphicon-plus"></i> Add status</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -93,17 +94,17 @@
 		</div>
 		<!-- END LEFT SIDEBAR -->
 <div class="main">
-			<!-- MAIN CONTENT -->		
+			<!-- MAIN CONTENT -->
 	<p class="title" style="float:left;margin-top:-30px;margin-left:-570px;;margin-bottom:-30px;">Offices</p>
 <div class="container-fluid body">
 
 <!--body-->
-		
+
 	<div class="container-fluid red">
 	<h1 style="color: #7FB3D5;"><strong>Contacts</strong></h1>
 		<!---------------WARNING! DUMMY DATA AHEAD!-------------->
 			<div style="width:100%;overflow:auto">
-								
+
 				<table id="mytable" class="table">
 						<thead>
 						<tr>
@@ -111,7 +112,7 @@
 							<th>PABX</th>
 							<th>Direct Number</th>
 							<th>E-mail Address</th>
-							
+
 						</tr>
 						</thead>
 						<tbody >
@@ -222,7 +223,7 @@
 								<td>35</td>
 								<td>405.1945</td>
 								<td>class@gmail.com</td></tr>
-						</tr>								
+						</tr>
 						<tr>
 							<td><li>College of Science (COS)</td>
 							<tr><td><ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dean's Office</ul></td>
@@ -241,15 +242,15 @@
 								<td>54</td>
 								<td>604.1945</td>
 								<td>cosphy@gmail.com</td></tr>
-						</tr>								
-						
+						</tr>
+
 						<tr>
 							<td><li>Commission on Audit (COA)</td>
 							<td>60</td>
-							<td>701.2017</td>	
+							<td>701.2017</td>
 							<td>irtc@gmail.com</td>
 						</tr>
-						
+
 						<tr>
 							<td><li>College of Engineering (COE)</td>
 							<tr><td><ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dean's Office</ul></td>
@@ -268,20 +269,20 @@
 						<tr>
 							<td><li>Integrated Research and Training Center (IRTC)</td>
 							<td>61</td>
-							<td>702.2017</td>	
+							<td>702.2017</td>
 							<td>irtc@gmail.com</td>
 						</tr>
 						<tr>
 							<td><li>Office of the President</td>
 							<td>62</td>
-							<td>703.2017</td>	
+							<td>703.2017</td>
 							<td>op@gmail.com</td>
 						</tr>
 						<tr>
 							<td><li>Office of the Student Affairs (OSA)</td>
 							<td>63</td>
 							<td>704.4567</td>
-							<td>--</td>	
+							<td>--</td>
 						</tr>
 						<tr>
 							<td><li>Office of the University Research and Development Services (URDS)</td>
@@ -301,10 +302,10 @@
 							<td>707.2717</td>
 							<td>vpre@gmail.com</td>
 						</tr>
-						
-						
+
+
 						</tbody>
-						
+
 				</table>
 	</div>
 			</div>
@@ -314,7 +315,7 @@
 					<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
 				</div>
 			</footer>
-			
+
 
 
 		</div>
@@ -370,7 +371,7 @@
 				</div>
 			</div>
 
-			<div class="row">		
+			<div class="row">
 			<br/>
 			<div class=" col-md-10">
 					<label for="">Attach File:</label>
@@ -391,7 +392,7 @@
 
 		</div>
 	</div>
-		
+
 </div>
 
 	<!-- END WRAPPER -->
@@ -402,7 +403,7 @@
 
 <script>
 $(document).ready(function() {
-	$('.dropdown-toggle').dropdown();	
+	$('.dropdown-toggle').dropdown();
 });
 
 
@@ -422,3 +423,81 @@ function send(id){
 		}
 
 </script>
+<script>
+function status(id){
+			$.ajax({
+			        type: 'POST',
+			         data:{id: id},
+				        success: function(data) {
+				        	var obj = JSON.stringify(data);
+				        	// var obj = JSON.parse(data);
+				        	console.log(id);
+				          $('#status_id').val(id);
+				          $('#new_status').modal('show');
+				        }
+				    });
+		}
+</script>
+<!-- start of new_status document modal -->
+	<div id="new_status" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+	<!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #555555">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">Add Status</h3>
+        </div>
+        <div class="modal-body">
+
+			<?php echo form_open_multipart('home/new_status',['class'=>'form-horizontal']); ?>
+			<div class="row">
+					<input type="hidden" id="empid" name="empid"/>
+			</div>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Status ID:</label>
+					<?php echo form_input(['name'=>'status_id','class'=>'form-control','placeholder'=>$sta, 'value'=>$sta, 'readonly'=>'true']); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('status_id'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Description:</label>
+					<?php echo form_textarea(['name'=>'status_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Status name', 'value'=>set_value('document_desc')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('status_desc'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<!-- <div class="row">
+				<div class=" col-md-10">
+					<label for="forward">Enable forward:</label>
+					<div class="radio-inline">
+						<div class="radio">
+							<?php $yes=0;
+							$no=1; ?>
+						  <label><input type="radio" name="forward" value="<?php echo $yes;?>">yes</label>
+						</div>
+						<div class="radio">
+						  <label><input type="radio" name="forward" value="<?php echo $no;?>">no</label>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<br/><br/>
+			<div>
+				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="reset" class="btn btn-default">Reset</button>
+			</div>
+			<?php echo form_close();?>
+        </div>
+      </div>
+
+		</div>
+	</div><!-- end of new status document -->

@@ -58,6 +58,7 @@
 								<li><a data-toggle="modal" id="<?php echo $prof['employee_id']; ?>" onclick="send(this.id)"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
 								<?php } ?>
 								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="glyphicon glyphicon-inbox"></i> Inbox</a></li>
+								<li><a data-toggle="modal" id="<?php echo $sta ?>" onclick="status(this.id)"><i class="glyphicon glyphicon-plus"></i> Add status</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -161,7 +162,7 @@
 									</td>
 									<td>Forwarded a file with track#: <?php echo $inboxes['tracking_no']; ?>
 										&emsp;
-										Entitled: 
+										Entitled:
 									<?php echo $inboxes['document_title']; ?>...</td>
 									<td><?php echo $inboxes['date_responded']; ?></td>
 								</tr>
@@ -277,7 +278,7 @@
 				</div>
 			</div>
 
-			<div class="row">		
+			<div class="row">
 			<br/>
 			<div class=" col-md-10">
 					<label for="">Attach File:</label>
@@ -486,3 +487,81 @@ $(document).ready(function() {
 });
 
 </script>
+<script>
+function status(id){
+			$.ajax({
+			        type: 'POST',
+			         data:{id: id},
+				        success: function(data) {
+				        	var obj = JSON.stringify(data);
+				        	// var obj = JSON.parse(data);
+				        	console.log(id);
+				          $('#status_id').val(id);
+				          $('#new_status').modal('show');
+				        }
+				    });
+		}
+</script>
+<!-- start of new_status document modal -->
+	<div id="new_status" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-md">
+	<!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #555555">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">Add Status</h3>
+        </div>
+        <div class="modal-body">
+
+			<?php echo form_open_multipart('home/new_status',['class'=>'form-horizontal']); ?>
+			<div class="row">
+					<input type="hidden" id="empid" name="empid"/>
+			</div>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Status ID:</label>
+					<?php echo form_input(['name'=>'status_id','class'=>'form-control','placeholder'=>$sta, 'value'=>$sta, 'readonly'=>'true']); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('status_id'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class=" col-md-10">
+					<label for="">Description:</label>
+					<?php echo form_textarea(['name'=>'status_desc','rows'=>'1','class'=>'form-control','placeholder'=>'Status name', 'value'=>set_value('document_desc')]); ?>
+				</div>
+
+					<div class="col-lg-10">
+						<?php echo form_error('status_desc'); ?>
+			  		</div>
+			</div>
+			<br/>
+			<!-- <div class="row">
+				<div class=" col-md-10">
+					<label for="forward">Enable forward:</label>
+					<div class="radio-inline">
+						<div class="radio">
+							<?php $yes=0;
+							$no=1; ?>
+						  <label><input type="radio" name="forward" value="<?php echo $yes;?>">yes</label>
+						</div>
+						<div class="radio">
+						  <label><input type="radio" name="forward" value="<?php echo $no;?>">no</label>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<br/><br/>
+			<div>
+				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="reset" class="btn btn-default">Reset</button>
+			</div>
+			<?php echo form_close();?>
+        </div>
+      </div>
+
+		</div>
+	</div><!-- end of new status document -->
