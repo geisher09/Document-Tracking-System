@@ -108,38 +108,38 @@
 		  <div class="row">
 		  	<div class="container-fluid blue">
 		  	<?php foreach ($pro as $prof){ ?>
-							<img style="width:30px;" src="<?php echo base_url($prof['image']); ?>" class="img-circle" alt="Avatar"><span style="font-size:20px;color: white;"><strong>
+							<img style="width:35px;height:35px;float:left;" src="<?php echo base_url($prof['image']); ?>" class="img-circle" alt="Avatar"><span style="font-size:25px;color:white;margin-left:5px;"><strong>
 							<?php echo $prof['lname'];?>, <?php echo $prof['fname'];?>
 							</strong></span>
-							<span style="font-size:20px; color: white;"> /<?php echo $prof['username'];?>/</span>
+							<span style="font-size:20px;color:white;"> /<?php echo $prof['username'];?>/</span>
 			<?php } ?>
 			<br>
-			<p style="font-size:20px; color: white;">--------------------------------------------</p>
+			<hr />
 			<p style="font-size:20px; color: white;  font-style:italic;" text-align="center">SENT FILE DETAILS</p>
 			<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Document Tracking no:</label>
 			<strong>&emsp;<?php echo $idno;?><strong></p>
 			<?php foreach ($snt as $sent){ ?>
-			<p style="font-size:20px; font-weight: normal; color: white;">Title:&emsp;<?php echo $sent['document_title'];?>
+			<p style="font-size:20px;font-weight:normal;color:white;">Title:&emsp;<?php echo $sent['document_title'];?>
 			</p>
-			<p style="font-size:20px; font-weight: normal; color: white;">Description:&emsp;<?php echo $sent['document_desc'];?>
+			<p style="font-size:20px;font-weight:normal;color:white;">Description:&emsp;<?php echo $sent['document_desc'];?>
 			</p>
-			<p style="font-size:20px; font-weight: normal; color: white;">Document was last sent to:&emsp;<?php echo $sent['lname'];?>, <?php echo $sent['fname'];?> <?php echo $sent['mname'];?>
+			<p style="font-size:20px;font-weight:normal;color:white;">Document was last sent to:&emsp;<?php echo $sent['lname'];?>, <?php echo $sent['fname'];?> <?php echo $sent['mname'];?>
 			</p>
-			<p style="font-size:20px; font-weight: normal; color: white;">In the:&emsp;<?php echo $sent['department_desc'];?>
+			<p style="font-size:20px;font-weight:normal;color:white;">In the:&emsp;<?php echo $sent['department_desc'];?>
 			</p>
-			<p style="font-size:20px; font-weight: normal; color: white;">Current Status:&emsp;<?php echo $sent['status'];?>
+			<p style="font-size:20px;font-weight:normal;color:white;">Current Status:&emsp;<?php echo $sent['status'];?>
 			</p>
 			<?php
 					date_default_timezone_set('Asia/Manila');
 					$mydate = strtotime($sent['date_of_action']);
 					
 			?>
-			<p style="font-size:20px; font-weight: normal; color: white;">As of:&emsp;<?php echo date('F d,Y ', $mydate);?>				
-			 at <?php echo date('g:i: a', $mydate);?>
+			<p style="font-size:20px; font-weight: normal; color: white;">As of:&emsp;<?php echo date('F d, Y ', $mydate);?>				
+			 at <?php echo date('g:i a', $mydate);?>
 			</p>
 			<br>
 				
-				<button class="btn btn-default btn-sm" id="<?php echo $sent['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sent["tracking_no"]) ?>')">View file&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+				<button class="btn btn-default btn-sm" id="<?php echo $sent['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sent["tracking_no"]) ?>')">View file&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
 				<button class="btn btn-primary btn-sm" type="button" onclick="window.location='<?php echo site_url('Home/docu');?>'">Back&nbsp;<span class="fa fa-arrow-left" aria-hidden="true"></span></button>
 			
 			<?php } ?>

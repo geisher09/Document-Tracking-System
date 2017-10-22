@@ -112,7 +112,7 @@
 							<span style="font-size:20px; color: white;"> /<?php echo $prof['username'];?>/</span>
 			<?php } ?>
 			<br>
-			<p style="font-size:20px; color: white;">--------------------------------------------</p>
+			<hr />
 			<p style="font-size:20px; color: white;">Tracking no:
 			<strong><?php echo $idno;?><strong></p>
 			</div>

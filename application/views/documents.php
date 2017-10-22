@@ -169,7 +169,7 @@
 						<br />
 
 						<!--- inbox table -->
-							<table class="tablet table-list-search table-hover table-condensed table-responsive ">
+							<table class="table table-list-search table-hover table-condensed table-responsive ">
 								<tbody>
 									<?php foreach ($snt as $sents){ ?>
 									<?php

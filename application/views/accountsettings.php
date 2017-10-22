@@ -121,11 +121,10 @@
 					<?php foreach ($pro as $prof){ ?>
 						<p id="settings-uname"><?php echo $prof['username']; ?></p>
 					<?php } ?>
-
-					<a href="#" class="btn btn-default btn-md" role="button" data-toggle="modal" data-target="#change-dp">
+					<br />
+					<a href="#" class="btn btn-default btn-md btn-block" role="button" data-toggle="modal" data-target="#change-dp">
 						Change Profile Picture...</a>
-					<br /><br />
-					<a href="<?php echo site_url('Home/password_change');?>" role="button" class="btn btn-primary btn-md">Change Password...</a>
+					<a href="<?php echo site_url('Home/password_change');?>" role="button" class="btn btn-primary btn-md btn-block">Change Password...</a>
 					
 				</div>
 				<div class="col-md-8 col-sm-12">
@@ -163,6 +162,7 @@
 						 </div>
 
 					 </div>
+					 <br /><br />
 					<div class="form-group">
 						<label for="position">Position:</label>
 						<input type="text" id="position"  name="position" class="form-control" />
@@ -177,6 +177,7 @@
 						<?php echo '<h5 class="pulse animated" style="color: #ff4d4d;
 							"><strong>'.form_error('username').'</strong></h5>'; ?>
 					</div>
+					<br />
 					<div style="float:right;">
 					<button type="submit" class="btn btn-success btn-md">Save Changes</button>
 					<?php echo form_close();?>
@@ -191,7 +192,7 @@
 		<div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
-				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Document Tracki</a>. All Rights Reserved.</p>
+				<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
 			</div>
 		</footer>
 
