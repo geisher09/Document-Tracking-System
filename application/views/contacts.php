@@ -56,7 +56,6 @@
 							<ul class="dropdown-menu">
 								<li><a data-toggle="modal" href="#send_details"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
 								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="glyphicon glyphicon-inbox"></i> Inbox</a></li>
-								<li><a data-toggle="modal" id="<?php echo $sta ?>" onclick="status(this.id)"><i class="glyphicon glyphicon-plus"></i> Add status</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">

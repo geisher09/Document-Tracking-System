@@ -14,9 +14,11 @@
 		}
 
 		public function can_login($username){
+			$user=0;
 			$password = md5($this->input->post('password'));
 			$this->db->where('username',$username);
 			$this->db->where('password',$password);
+			$this->db->where('isAdmin',$user);
 			$query = $this->db->get('employee');
 			//Select * from employee table
 

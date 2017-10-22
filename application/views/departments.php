@@ -116,10 +116,6 @@
 
 					</tbody>
 				</table>
-				<a class="btn btn-success btn-md" data-toggle="modal" data-target="#add_dept" >
-					<!-- matic na sa office of VP of research and extensions muna to -->
-					<span class="glyphicon glyphicon-plus"></span> Add Department
-				</a>
 				<a href="<?php echo site_url('Home/offices'); ?>" class="btn btn-default btn-md">
 					<!-- matic na sa office of VP of research and extensions muna to -->
 					<span class="lnr lnr-pointer-left"></span> Back
