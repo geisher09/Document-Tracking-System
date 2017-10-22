@@ -413,35 +413,6 @@ $('.modal').on('hidden.bs.modal', function (e) {
 		});
 
 
-
-function wow(id){
-			$.ajax({
-			        type: 'POST',
-			        url: 'ajax_list',
-			        data:{id: id},
-				        success: function(data) {
-				        	var obj = JSON.parse(data);
-				        	console.log(obj.inbox);
-
-				        	var s="";
-
-							s = '<h4 style="font-weight:bold; color:#000;">Document Tracking Number: '+obj.inbox.tracking_no+'<br /><br />'
-							+'Title: '+obj.inbox.document_title+'<br /><br />'
-							+'Description: '+obj.inbox.document_desc+'<br /><br />'
-							+'Response: '+obj.inbox.response+'<br /><br />'
-							+'As of: '+obj.inbox.date_responded+'<br /><br />'
-							+'From (Employee No.): '+obj.inbox.employee_id+'<br /><br />'
-							+'From (Employee Name.): '+obj.inbox.lname+','+obj.inbox.fname+'&nbsp'+obj.inbox.mname+'<br /><br />'+'</h4>';
-							// Description: <br /><br /><br /><br /><br /><br />
-							// Date Received: <br /><br />
-							// Status: <br /><br />
-				          $('#basicid').html(s);
-				          $('#inbox_details').modal('show');
-				        }
-				    });
-		}
-
-
 function send(id){
 			$.ajax({
 			        type: 'POST',
@@ -457,83 +428,6 @@ function send(id){
 				    });
 		}
 
-
-
-function sos(id){
-			$.ajax({
-			        type: 'POST',
-			        url: 'ajax_list',
-			        data:{id: id},
-				        success: function(data) {
-				        	var obj = JSON.parse(data);
-				        	console.log(obj.inbox.document_id);
-
-				        	var s="";
-
-						  $('#track_no').val(obj.inbox.tracking_no);
-						  $('#doc_id').val(obj.inbox.document_id);
-						  $('#sig_id').val(obj.inbox.signatory_id);
-				          $('#inbox_response').modal('show');
-				        }
-				    });
-		}
-
-
-function pop(id){
-			$.ajax({
-			        type: 'POST',
-			        url: 'ajax_list',
-			        data:{id: id},
-				        success: function(data) {
-				        	var obj = JSON.parse(data);
-				        	console.log(obj.signatory);
-				        	$('#employee_id').val(obj.signatory.employee_id);
-				        	$("#employee_name").val(obj.signatory.lname+','+obj.signatory.fname+' '+obj.signatory.mname);
-				          	$("#response").val(obj.signatory.response);
-				        	$("#asof").val(obj.signatory.date_responded);
-				        	$("#comments").val(obj.signatory.comment);
-
-				          $('#sig_detail').show();
-				        }
-				    });
-		}
-
-
-
-function lol(id){
-			document.getElementById("Signatories").innerHTML="";
-			$('#sig_detail').hide();
-			$.ajax({
-			        type: 'POST',
-			        //dataType:'json',
-			        url: 'ajax_list',
-			        data:{id: id},
-				        success: function(data) {
-				        	var obj = JSON.parse(data);
-				        	console.log(obj.signatories);
-
-				        	var s = "";
-				        	var v = "";
-
-
-								for(var i=0; i<parseInt(obj.signatories.length); i++){
-									s += '<tr><td>'+obj.signatories[i].employee_id+'</td><td>'+obj.signatories[i].response+'</td><td><button class="btn btn-info" id="'+obj.signatories[i].signatory_id+'"type="button" onclick="pop(this.id)">&nbsp;<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button></td></tr>';
-		 					        //v += '<option value='+obj.pets[i].petid+'>'+obj.pets[i].pname+'</option>';
-								}
-								$("#Signatories").html(s);
-								//$("#VpetsOwned").html(v);
-
-
-							$('#adddocuno').val(id);
-				        	$('#docuno').val(obj.sent.tracking_no);
-				        	$('#docutitle').val(obj.sent.document_title);
-				        	$("#docudesc").val(obj.sent.document_desc);
-				        	$("#docustat").val(obj.sent.action);
-				        	$("#docudate").val(obj.sent.date_of_action);
-				        	$('#clientModal').modal('show');
-				        }
-			});
-		}
 
 
 
