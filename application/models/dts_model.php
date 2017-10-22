@@ -9,14 +9,7 @@
 		    $this->db->join('employee c', 'b.employee_id=c.employee_id');
 		    $this->db->where('c.username',$user['username']);
 		    $query = $this->db->get();
-		    if($query->num_rows() != 0)
-		    {
-		        return $query->result_array();
-		    }
-		    else
-		    {
-		        return false;
-		    }
+		   	return $query->result_array();
 
 		}
 		
@@ -123,14 +116,31 @@
 		    $this->db->order_by('a.date_created','DESC');
 		    $this->db->where('c.username',$user['username']);
 		    $query = $this->db->get();
-		    if($query->num_rows() != 0)
-		    {
-		        return $query->result_array();
-		    }
-		    else
-		    {
-		        return false;
-		    }
+		    
+		    return $query->result_array();
+		}
+
+		public function get_profile_inbox($user){
+
+			$this->db->where('username', $user['username']);
+			$result = $this->db->get('employee');
+
+			$id = $result->row('employee_id');
+
+			$this->db->select('a.document_id,a.status,a.date_of_action,a.recipient,
+				b.document_id,b.tracking_no,b.document_title,b.document_desc,b.document_file,b.date_created,
+				c.document_id,c.response,c.employee_id,c.comment,c.date_responded,c.sender,c.history_no,
+				d.employee_id,d.department_id,d.username,d.lname,d.fname,d.image,d.mname,f.history_no
+			');
+			$this->db->from('documentation a');
+			$this->db->join('document b','a.document_id = b.document_id');
+			$this->db->join('history c','a.document_id = c.document_id');
+			$this->db->join('history f','c.document_id = f.document_id AND c.history_no < f.history_no','left');
+			$this->db->join('employee d','c.sender = d.employee_id');
+ 			$this->db->where('c.employee_id', $id);
+ 			$this->db->where('f.history_no IS NULL');
+			$query = $this->db->get();
+			return $query->result_array();
 		}
 
 		public function get_by_id($id)
