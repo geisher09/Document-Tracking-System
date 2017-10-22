@@ -56,6 +56,7 @@ class Home extends CI_Controller {
 			$profile = $this->dts_model->get_profile($user);
 			$documents = $this->dts_model->getDocuments($user);
 			$employees = $this->dts_model->getEmployees($user);
+			$inbox = $this->dts_model->get_profile_inbox($user);
 			$header_data['title']="DTS";
 			date_default_timezone_set('Asia/Manila');
 			$time =date("h:i:sa");
@@ -64,7 +65,7 @@ class Home extends CI_Controller {
 			$data['date'] = $date;
 			$data['username'] = $user;
 			$this->load->view('header2',$header_data);
-			$this->load->view('home',['emp'=>$employees,'do'=>$documents,'pro'=>$profile]);
+			$this->load->view('home',['inb'=>$inbox,'emp'=>$employees,'do'=>$documents,'pro'=>$profile]);
 			$this->load->view('footer');
 		}
 
@@ -94,8 +95,9 @@ class Home extends CI_Controller {
 			$profile = $this->dts_model->get_profile($user);
 			$sent = $this->dts_model->get_by_id($id);
 			$employees = $this->dts_model->getEmployees($user);
+			$inbox = $this->dts_model->get_profile_inbox($user);
 		$this->load->view('header2',$header_data);
-	 	$this->load->view('sent',['emp'=>$employees,'pro'=>$profile,'idno'=>$id,'snt'=>$sent]);
+	 	$this->load->view('sent',['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile,'idno'=>$id,'snt'=>$sent]);
 		$this->load->view('footer');
 	}
 
@@ -125,10 +127,10 @@ class Home extends CI_Controller {
 			$employees = $this->dts_model->getEmployees($user);
 			$data['offices'] = $hold;
 			//print_r($data);
-
+			$inbox = $this->dts_model->get_profile_inbox($user);
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('offices',['offices'=>$hold,'pro'=>$profile,'emp'=>$employees]);
+			$this->load->view('offices',['inb'=>$inbox,'offices'=>$hold,'pro'=>$profile,'emp'=>$employees]);
 			$this->load->view('footer');
 	}
 
@@ -165,9 +167,10 @@ class Home extends CI_Controller {
 						$employees = $this->dts_model->getEmployees($user);
 			// print_r($office_id);
 			// echo "Pasok";
+			$inbox = $this->dts_model->get_profile_inbox($user);
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('departments',['emp'=>$employees,'dept'=>$data['dept'],'id'=>$data['id'],'dept_id'=>$data['dept_id'],'pro'=>$profile,'office'=>$office_id]);
+			$this->load->view('departments',['inb'=>$inbox,'emp'=>$employees,'dept'=>$data['dept'],'id'=>$data['id'],'dept_id'=>$data['dept_id'],'pro'=>$profile,'office'=>$office_id]);
 			$this->load->view('footer');
 	}
 
@@ -181,9 +184,10 @@ class Home extends CI_Controller {
 			$employees = $this->dts_model->getEmployees($user);
 			$data['employees'] = $hold;
 			$data['title'] = "None";
+			$inbox = $this->dts_model->get_profile_inbox($user);
 			$this->load->view('header2',$header_data);
 			//$this->load->view('header');
-			$this->load->view('department/employee',['emp'=>$employees,'employees'=>$data['employees'],'pro'=>$profile,'office'=>$office_id]);
+			$this->load->view('department/employee',['inb'=>$inbox,'emp'=>$employees,'employees'=>$data['employees'],'pro'=>$profile,'office'=>$office_id]);
 			$this->load->view('footer');
 	}
 
@@ -195,7 +199,8 @@ class Home extends CI_Controller {
 			$employees = $this->dts_model->getEmployees($user);
 		$this->load->view('header2',$header_data);
 		//$this->load->view('header');
-	 	$this->load->view('contacts',['emp'=>$employees,'pro'=>$profile]);
+		$inbox = $this->dts_model->get_profile_inbox($user);
+	 	$this->load->view('contacts',['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile]);
 		$this->load->view('footer');
 	}
 
@@ -206,7 +211,8 @@ class Home extends CI_Controller {
 		$employees = $this->dts_model->getEmployees($user);
 		$header_data['title']="Profile";
 		$this->load->view('header2',$header_data);
-		$this->load->view('profile',['emp'=>$employees,'pro'=>$profile]);
+		$inbox = $this->dts_model->get_profile_inbox($user);
+		$this->load->view('profile',['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile]);
 		$this->load->view('footer');
 	}
 
@@ -216,8 +222,9 @@ class Home extends CI_Controller {
 		$profile = $this->dts_model->get_profile($user);
 		$employees = $this->dts_model->getEmployees($user);
 		$header_data['title']="Edit Profile";
+		$inbox = $this->dts_model->get_profile_inbox($user);
 		$this->load->view('header2',$header_data);
-		$this->load->view('accountsettings', ['emp'=>$employees,'pro'=>$profile]);
+		$this->load->view('accountsettings', ['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile]);
 		$this->load->view('footer');
 	}
 
@@ -276,12 +283,12 @@ class Home extends CI_Controller {
 				$profile = $this->dts_model->get_profile($user);
 
 
-
+				$inbox = $this->dts_model->get_profile_inbox($user);
 				$header_data['title']="Edit Profile";
 				$this->load->view('header2',$header_data);
 				$employees = $this->dts_model->getEmployees($user);
 				//$this->load->view('header');
-				$this->load->view('accountsettings', ['emp'=>$employees,'pro'=>$profile]);
+				$this->load->view('accountsettings', ['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile]);
 				$this->load->view('footer');
         }
 
@@ -308,10 +315,11 @@ class Home extends CI_Controller {
 		$this->load->model('dts_model');
 		$profile = $this->dts_model->get_profile($user);
 		$employees = $this->dts_model->getEmployees($user);
+		$inbox = $this->dts_model->get_profile_inbox($user);
 		$header_data['title']="Change Password";
 		$this->load->view('header2',$header_data);
 		//$this->load->view('header');
-		$this->load->view('password_change',['emp'=>$employees,'pro'=>$profile]);
+		$this->load->view('password_change',['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile]);
 		$this->load->view('footer');
 
 	}
@@ -339,8 +347,9 @@ class Home extends CI_Controller {
 				$employees = $this->dts_model->getEmployees($user);
             	$header_data['title']="Change Password";
 				$this->load->view('header2',$header_data);
+				$inbox = $this->dts_model->get_profile_inbox($user);
 				//$this->load->view('header');
-				$this->load->view('password_change',['emp'=>$employees,'pro'=>$profile]);
+				$this->load->view('password_change',['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile]);
 				$this->load->view('footer');
         }
 
