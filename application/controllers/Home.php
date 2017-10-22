@@ -106,10 +106,11 @@ class Home extends CI_Controller {
 			$profile = $this->dts_model->get_profile($user);
 			$inbox = $this->dts_model->getInbox_by_id($id,$employ);
 			$origin = $this->dts_model->get_origin($id);
+			$status = $this->dts_model->getStatus();
 			//$sent = $this->dts_model->get_by_id($id);
 			$employees = $this->dts_model->getEmployees($user);
 		$this->load->view('header2',$header_data);
-	 	$this->load->view('inbox',['emp'=>$employees,'pro'=>$profile,'idno'=>$id,'employee'=>$employ,'inb'=>$inbox,'orig'=>$origin]);
+	 	$this->load->view('inbox',['stat'=>$status,'emp'=>$employees,'pro'=>$profile,'idno'=>$id,'employee'=>$employ,'inb'=>$inbox,'orig'=>$origin]);
 		$this->load->view('footer');
 	}
 
@@ -223,18 +224,16 @@ class Home extends CI_Controller {
 	public function ajax_list()
 	{
 		$this->load->model('dts_model');
+		$status = $this->dts_model->getStatus();
 		// $sent = $this->dts_model->get_by_id($this->input->post('id'));
 		// $signatories = $this->dts_model->get_ownSignatories($this->input->post('id'));
 		// $signatory = $this->dts_model->getSignatory_by_id($this->input->post('id'));
 		// $inbox = $this->dts_model->getInbox_by_id($this->input->post('id'));
-		// $output = array(
+		$output = array(
 
-		// 				"sent" => $sent,
-		// 				"signatories" => $signatories,
-		// 				"signatory" => $signatory,
-		// 				"inbox" => $inbox
+						"stat" => $status
 
-		// 		);
+				);
 		//output to json format
 		echo json_encode($output);
 	}
@@ -421,6 +420,20 @@ class Home extends CI_Controller {
         		$this->session->set_flashdata('responsed', 'Failed to send!(Please input necessary details)');
             	return redirect('home/docu');
         }
+	}
+
+	public function update_file(){
+	  	$this->load->model('dts_model');
+        $this->dts_model->update_history();
+        $this->dts_model->update_documentation();
+        return redirect('home/docu');
+	}
+
+	public function forward_file(){
+	  	$this->load->model('dts_model');
+        $this->dts_model->forward_history();
+        $this->dts_model->forward_documentation();
+        return redirect('home/docu');
 	}
 
 	public function logout(){

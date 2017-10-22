@@ -114,8 +114,14 @@
 				<span style="font-size:20px;color:white;">
 					&nbsp;<
 					<?php echo $inbox['username'];?>
-					>
+					>&emsp;&emsp;
 				</span>
+				<button id="<?php echo $inbox['document_id'];?>" class="btn btn-md btn-primary" type="button" onclick="update(this.id)"><span class="lnr lnr-pencil"></span> Update Status </button>
+				<button data-toggle="modal" data-target="#forward" class="btn btn-md btn-success" ><span class="lnr lnr-location"></span> Forward </button>
+				
+				<button class="btn btn-md btn-danger" ><span class="lnr lnr-bullhorn"></span> Return </button>
+				<button class="btn btn-default btn-md" type="button" onclick="window.location='<?php echo site_url('Home/docu');?>'">Back&nbsp;<span class="fa fa-arrow-left" aria-hidden="true"></span></button>
+
 				<br /><br /><br />
 				<p style="font-size:25px; color: white;  font-style:italic;">FORWARDED FILE</p>
 				<p style="font-size:20px; color: white;"><label style="font-weight: normal; color: white;";>Document Tracking no:</label>
@@ -150,11 +156,7 @@
 
 
 
-				<button class="btn btn-md btn-danger" data-toggle="modal" data-target="#response"><span class="lnr lnr-bullhorn"></span> Return </button>
-				<button class="btn btn-md btn-success" data-toggle="modal" data-target="#forward"><span class="lnr lnr-location"></span> Forward </button>
-				<button class="btn btn-md btn-primary" data-toggle="modal" data-target="#update"><span class="lnr lnr-pencil"></span> Update Status </button>
-				<button class="btn btn-default btn-md" type="button" onclick="window.location='<?php echo site_url('Home/docu');?>'">Back&nbsp;<span class="fa fa-arrow-left" aria-hidden="true"></span></button>
-			</div>
+				</div>
 
 
 
@@ -172,6 +174,24 @@
 <script>
 
 $('.dropdown-toggle').dropdown();
+
+function update(id){
+			$.ajax({
+			        type: 'POST',
+			        data:{id: id},
+				        success: function(data) {
+				        	var obj = JSON.stringify(data);
+				        	//console.log(obj.signatory);
+				        	// $('#employee_id').val(obj.signatory.employee_id);
+				        	// $("#employee_name").val(obj.signatory.lname+','+obj.signatory.fname+' '+obj.signatory.mname);
+				         //  	$("#response").val(obj.signatory.response);
+				        	// $("#asof").val(obj.signatory.date_responded);
+				        	// $("#comments").val(obj.signatory.comment);
+
+				          	$('#update').modal('show');
+				        }
+				    });
+		}
 
 
 function send(id){
@@ -309,6 +329,7 @@ $(document).ready(function() {
 		<div class="modal-body">
 			<h4 class="text-center" style="color:red; font-size:26px; font-style:bold;"> You're about to return this file: </h4> <br>
 			<p style="margin-left:70px; font-size:20px;>"><strong>
+
 				TRACKING NO: <br><br>
 				TITLE: <br>
 			</strong></p>
@@ -343,18 +364,32 @@ $(document).ready(function() {
 			<button type="button" style="color:#fff;" class="close" data-dismiss="modal">&times;</button>
 			<h2 class="text-center modal-title"> Forward File </h2>
 		</div>
-		
+		<?php echo form_open_multipart('home/forward_file',['class'=>'form-horizontal']); ?>
+		<?php foreach ($inb as $inbox){ ?>
 		<div class="modal-body">
-			<p style="font-size:20px;"><strong> TRACKING NO: </strong></p><br>
-			
-			<p style="font-size:20px;"><strong> TITLE: </strong></p><br>
-				
-			
+			<p style="font-size:20px;"><strong> TRACKING NO: </strong></p>
+			<p style="font-size:20px; color: black;">
+			<strong><?php echo $idno;?></strong></p>
+			<p style="font-size:20px;"><strong> TITLE: </strong></p>
+			<p style="font-size:20px; color: black;">
+			<strong><?php echo $inbox['document_title'];?></strong></p>
+		<?php }?>	
 			<p style="font-size:20px;"><strong> RECEIVER: </strong><p>
-			<div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-				employee <span class="caret"></span></button>
-			</div><br><br>
+			<select name="employee" class="form-control">
+							<?php foreach ($emp as $empoy){ ?>
+							    <option value="<?php echo $empoy->employee_id; ?>"><?php echo $empoy->lname.','.$empoy->fname.'  '.$empoy->mname; ?></option>
+							<?php } ?>
+			</select>	
+			<?php foreach ($inb as $inbox){ ?>
+			<div class="row">
+					<input type="hidden" id="<?php echo $inbox['document_id'];?>" name="document_id" value="<?php echo $inbox['document_id'];?>"/>
+			</div>
+			<?php }?>
+			<?php foreach ($pro as $prof){ ?>
+			<div class="row">
+					<input type="hidden" id="<?php echo $prof['employee_id'];?>" name="employee_id" value="<?php echo $prof['employee_id'];?>"/>
+			</div>
+			<?php }?>
 		</div>
 		
 		<div class="modal-footer">
@@ -362,6 +397,7 @@ $(document).ready(function() {
 			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 		</div>
 	</div>
+		<?php echo form_close();?>
 </div>
 </div>
 <!-- end of forward modal -->
@@ -375,23 +411,35 @@ $(document).ready(function() {
 			<button type="button" style="color:#fff;" class="close" data-dismiss="modal">&times;</button>
 			<h2 class="text-center modal-title"> Update Status of this File </h2>
 		</div>
+		<?php echo form_open_multipart('home/update_file',['class'=>'form-horizontal']); ?>
+		<?php foreach ($inb as $inbox){ ?>
+			<div class="row">
+					<input type="hidden" id="<?php echo $inbox['document_id'];?>" name="document_id" value="<?php echo $inbox['document_id'];?>"/>
+			</div>
+			<div class="row">
+					<input type="hidden" id="<?php echo $inbox['sender'];?>" name="sender" value="<?php echo $inbox['sender'];?>"/>
+			</div>
+		<?php }?>
+		<?php foreach ($pro as $prof){ ?>
+			<div class="row">
+					<input type="hidden" id="<?php echo $prof['employee_id'];?>" name="employee_id" value="<?php echo $prof['employee_id'];?>"/>
+			</div>
+		<?php }?>	
 		
 		<div class="modal-body">
 			<br><p style="font-size:20px;"><strong> SELECT STATUS: </strong><p>
 			<div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-				status <span class="caret"></span></button>
 				<!-- sample statuses -->
-				<ul class="dropdown-menu">
-					<li><a href="#">Received</a></li>
-					<li><a href="#">Processing</a></li>
-					<li><a href="#">Approved</a></li>
-				</ul>
+				<select name="status" class="form-control">
+					<?php foreach ($stat as $status){ ?>
+							    <option value="<?php echo $status->status_desc; ?>"><?php echo $status->status_desc;?></option>
+					<?php } ?>
+				</select>
 			</div><br><br>
 			
 			<div style="width:90%;">
 			<p style="font-size:20px;"><strong> COMMENTS/REMARKS: </strong></p>
-			<textarea class="form-control" id="comment" name="comment" rows="5"></textarea> <br>
+			<textarea class="form-control" id="comment" name="comment" rows="5">none</textarea> <br>
 			</div><br>
 		</div>
 		
@@ -400,6 +448,7 @@ $(document).ready(function() {
 			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 		</div>
 	</div>
+		<?php echo form_close();?>
 </div>
 </div>
 <!-- end of update modal -->

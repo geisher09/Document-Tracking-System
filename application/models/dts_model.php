@@ -97,6 +97,14 @@
 
 		}
 
+		public function getStatus(){
+			$this->db->select('*');
+			$this->db->from('status');
+			$query = $this->db->get();
+			return $query->result();
+
+		}
+
 		public function get_user($user){
 
 			$this->db->select('a.username,a.image,a.lname,a.fname,a.mname,b.department_desc,a.employee_id,a.department_id,b.department_id,a.position');
@@ -214,6 +222,66 @@
 			$this->db->update('employee');
 		}
 
+		public function update_history(){
+			date_default_timezone_set('Asia/Manila');
+			$time =date("Y-m-d h:i:s");
+
+			$update = array(
+				'document_id' =>$this->input->post('document_id'),
+				'response'	=>$this->input->post('status'),
+				'employee_id'	=>$this->input->post('employee_id'),
+				'comment'	=>$this->input->post('comment'),
+				'sender'	=>$this->input->post('sender')
+			);
+			return $this->db->insert('history', $update);
+		}
+
+		public function update_documentation(){
+			date_default_timezone_set('Asia/Manila');
+			$time =date("Y-m-d h:i:s");
+			$id=$this->input->post('document_id');
+			$update = array(
+				'status' =>$this->input->post('status'),
+				'recipient'	=>$this->input->post('employee_id')		
+			);
+			$this->db->set('status',$update['status']);
+			$this->db->set('date_of_action','DATE_ADD(NOW(), INTERVAL 1 SECOND)', FALSE);
+			$this->db->set('recipient',$update['recipient']);
+			$this->db->where('document_id', $id);
+			$this->db->update('documentation');
+
+		}
+
+		public function forward_history(){
+			date_default_timezone_set('Asia/Manila');
+			$time =date("Y-m-d h:i:s");
+
+			$update = array(
+				'document_id' =>$this->input->post('document_id'),
+				'response'	=>'For Approval',
+				'employee_id' =>$this->input->post('employee'),
+				'comment'	=>'none',
+				'sender'	=>$this->input->post('employee_id')
+			);
+			return $this->db->insert('history', $update);
+		}
+
+		public function forward_documentation(){
+			date_default_timezone_set('Asia/Manila');
+			$time =date("Y-m-d h:i:s");
+			$id=$this->input->post('document_id');
+			$update = array(
+				'status' =>'For Approval',
+				'recipient'	=>$this->input->post('employee')	
+			);
+			$this->db->set('status',$update['status']);
+			$this->db->set('date_of_action','DATE_ADD(NOW(), INTERVAL 1 SECOND)', FALSE);
+			$this->db->set('recipient',$update['recipient']);
+			$this->db->where('document_id', $id);
+			$this->db->update('documentation');
+
+		}
+
 		public function saveUpdate_user($user){
 			//$_SESSION['username'] = $this->input->post('username');
 			$id = $this->input->post('user_id');
@@ -286,16 +354,12 @@
 		public function saveHistory(){
 			$id = ($this->getLastDoc());
 			date_default_timezone_set('Asia/Manila');
-			$time =date("h:i:sa");
-			$date = date("Y-m-d");
-			$data['date'] = $date;
-			$data['time'] = $time;
+			$time =date("Y-m-d h:i:s");
 			$hisdata = array(
 				  'employee_id' =>	$this->input->post('employee'),
 				  'document_id' => $id,
 				  'response' => 'For Approval',
 				  'comment' => 'none',
-				  'date_responded' => $data['date'].' '.$data['time'],
 				  'sender' => $this->input->post('empid')
 			   );
 
