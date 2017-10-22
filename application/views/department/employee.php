@@ -126,7 +126,7 @@
         
         <a href="<?php echo site_url('Home/dept/'.$office); ?>" class="btn btn-primary btn-md">
           <!-- matic na sa office of VP of research and extensions muna to -->
-          <span class="lnr lnr-pointer-left"></span>Back
+          <span class="lnr lnr-pointer-left"></span> Back
         </a>
     </div>
 </div>

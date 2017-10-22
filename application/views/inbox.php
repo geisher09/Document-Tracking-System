@@ -103,7 +103,7 @@
 		  <div class="row">
 		  	<div class="container-fluid blue">
 		  		<?php foreach ($inb as $inbox){ ?>
-		  		<img style="width:35px;height:35px;float:left;" src="<?php echo base_url($inbox['image']); ?>" class="img-circle" alt="Avatar"><span style="font-size:20px;color:white;margin-left:5px;"><strong>
+		  		<img style="width:35px;height:35px;float:left;" src="<?php echo base_url($inbox['image']); ?>" class="img-circle" alt="Avatar"><span style="font-size:25px;color:white;margin-left:5px;"><strong>
 							<?php echo $inbox['lname'];?>, <?php echo $inbox['fname'];?>
 							</strong></span>
 				<span style="font-size:20px;color:white;">
@@ -215,7 +215,7 @@ function send(id){
 			<div class="clearfix"></div>
 			<footer>
 			<div class="container-fluid">
-				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Document Tracki</a>. All Rights Reserved.</p>
+				<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
 			</div>
 			</footer>
 
@@ -372,7 +372,7 @@ $(document).ready(function() {
 
 			<div style="display:block; margin-left:auto; margin-right:auto; width:80%;">
 			<h4 class="text-center"> Comments/Remarks: </h4>
-			<textarea style="border:2px solid red;" class="form-control" id="comment" name="comment" rows="3">none</textarea> <br>
+			<textarea style="border:2px solid red;" class="form-control" id="comment" name="comment" rows="3">None</textarea> <br>
 			</div>
 		</div>
 		
@@ -470,7 +470,7 @@ $(document).ready(function() {
 			
 			<div style="width:90%;">
 			<p style="font-size:20px;"><strong> COMMENTS/REMARKS: </strong></p>
-			<textarea class="form-control" id="comment" name="comment" rows="5">none</textarea> <br>
+			<textarea class="form-control" id="comment" name="comment" rows="5">None</textarea> <br>
 			</div><br>
 		</div>
 		
