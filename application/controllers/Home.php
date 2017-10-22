@@ -436,6 +436,13 @@ class Home extends CI_Controller {
         return redirect('home/docu');
 	}
 
+	public function return_file(){
+	  	$this->load->model('dts_model');
+        $this->dts_model->return_history();
+        $this->dts_model->return_documentation();
+        return redirect('home/docu');
+	}
+
 	public function logout(){
 		$this->session->unset_userdata('username');
 		$this->session->session_destroy();

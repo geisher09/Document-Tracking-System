@@ -282,6 +282,50 @@
 
 		}
 
+		public function return_history(){
+			date_default_timezone_set('Asia/Manila');
+			$time =date("Y-m-d h:i:s");
+
+			$update = array(
+				'document_id' =>$this->input->post('document_id'),
+				'response'	=>'Returned',
+				'employee_id' =>$this->input->post('recipient'),
+				'comment'	=>$this->input->post('comment'),
+				'sender'	=>$this->input->post('employee_id')
+			);
+			return $this->db->insert('history', $update);
+		}
+
+		public function return_history2(){
+			date_default_timezone_set('Asia/Manila');
+			$time =date("Y-m-d h:i:s");
+
+			$update = array(
+				'document_id' =>$this->input->post('document_id'),
+				'response'	=>'Returned',
+				'employee_id' =>$this->input->post('employee_id'),
+				'comment'	=>$this->input->post('comment'),
+				'sender'	=>$this->input->post('sender')
+			);
+			return $this->db->insert('history', $update);
+		}
+
+		public function return_documentation(){
+			date_default_timezone_set('Asia/Manila');
+			$time =date("Y-m-d h:i:s");
+			$id=$this->input->post('document_id');
+			$update = array(
+				'status' =>'Returned',
+				'recipient'	=>$this->input->post('recipient')	
+			);
+			$this->db->set('status',$update['status']);
+			$this->db->set('date_of_action','DATE_ADD(NOW(), INTERVAL 1 SECOND)', FALSE);
+			$this->db->set('recipient',$update['recipient']);
+			$this->db->where('document_id', $id);
+			$this->db->update('documentation');
+
+		}
+
 		public function saveUpdate_user($user){
 			//$_SESSION['username'] = $this->input->post('username');
 			$id = $this->input->post('user_id');

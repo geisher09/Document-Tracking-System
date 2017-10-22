@@ -108,7 +108,7 @@
 		  <div class="row">
 		  	<div class="container-fluid blue">
 		  		<?php foreach ($inb as $inbox){ ?>
-		  		<img style="width:35px;height:35px;float:left;" src="<?php echo base_url($inbox['image']); ?>" class="img-circle" alt="Avatar"><span style="font-size:25px;color:white;margin-left:5px;"><strong>
+		  		<img style="width:35px;height:35px;float:left;" src="<?php echo base_url($inbox['image']); ?>" class="img-circle" alt="Avatar"><span style="font-size:20px;color:white;margin-left:5px;"><strong>
 							<?php echo $inbox['lname'];?>, <?php echo $inbox['fname'];?>
 							</strong></span>
 				<span style="font-size:20px;color:white;">
@@ -119,7 +119,7 @@
 				<button id="<?php echo $inbox['document_id'];?>" class="btn btn-md btn-primary" type="button" onclick="update(this.id)"><span class="lnr lnr-pencil"></span> Update Status </button>
 				<button data-toggle="modal" data-target="#forward" class="btn btn-md btn-success" ><span class="lnr lnr-location"></span> Forward </button>
 				
-				<button class="btn btn-md btn-danger" ><span class="lnr lnr-bullhorn"></span> Return </button>
+				<button data-toggle="modal" data-target="#response" class="btn btn-md btn-danger" ><span class="lnr lnr-bullhorn"></span> Return </button>
 				<button class="btn btn-default btn-md" type="button" onclick="window.location='<?php echo site_url('Home/docu');?>'">Back&nbsp;<span class="fa fa-arrow-left" aria-hidden="true"></span></button>
 
 				<br /><br /><br />
@@ -325,24 +325,59 @@ $(document).ready(function() {
 			<button type="button" style="color:#fff;" class="close" data-dismiss="modal">&times;</button>
 			<h2 class="text-center modal-title"> Return File </h2>
 		</div>
-		
+		<?php echo form_open_multipart('home/return_file',['class'=>'form-horizontal']); ?>
 		<div class="modal-body">
 			<h4 class="text-center" style="color:red; font-size:26px; font-style:bold;"> You're about to return this file: </h4> <br>
+			<?php foreach ($inb as $inbox){ ?>
 			<p style="margin-left:70px; font-size:20px;>"><strong>
+				TRACKING NO:
+			</p>
+			<p style="margin-left:70px; font-size:20px; color: black;">
+				<strong><?php echo $idno;?></strong></p>
+			<p style="margin-left:70px; font-size:20px;>"><strong>
+				TITLE:
+			</p>
+			<p style="margin-left:70px; font-size:20px; color: black;">
+				<strong><?php echo $inbox['document_title'];?></strong></p>
 
-				TRACKING NO: <br><br>
-				TITLE: <br>
-			</strong></p>
-			
-			<h4 class="text-center"> To: </h4> <br>
-			<p style="margin-left:70px; font-size:20px;"><strong>
-				EMPLOYEE ID: <br><br>
-				EMPLOYEE NAME: <br><br>
-			</strong></p>
-			
+			<div class="row">
+					<input type="hidden" id="<?php echo $inbox['document_id'];?>" name="document_id" value="<?php echo $inbox['document_id'];?>"/>
+			</div>
+
+			<div class="row">
+					<input type="hidden" id="<?php echo $inbox['employee_id'];?>" name="sender" value="<?php echo $inbox['employee_id'];?>"/>
+			</div>
+			<?php }?>	
+
+			<?php foreach ($pro as $prof){ ?>
+			<div class="row">
+					<input type="hidden" id="<?php echo $prof['employee_id'];?>" name="employee_id" value="<?php echo $prof['employee_id'];?>"/>
+			</div>
+			<?php }?>
+
+			<?php foreach ($orig as $origin){ ?>
+			<div class="row">
+					<input type="hidden" id="<?php echo $origin['employee_id'];?>" name="recipient" value="<?php echo $origin['employee_id'];?>"/>
+			</div>
+			<p class="text-center" style="font-size:20px;>"><strong>
+				TO:
+			</p>
+			<p style="margin-left:70px; font-size:20px;>"><strong>
+				EMPLOYEE ID:
+			</p>
+			<p style="margin-left:70px; font-size:20px; color: black;">
+				<strong><?php echo $origin['employee_id'];?></strong></p>
+
+			<p style="margin-left:70px; font-size:20px;>"><strong>
+				EMPLOYEE NAME:
+			</p>
+			<p style="margin-left:70px; font-size:20px; color: black;">
+				<strong><?php echo $origin['lname'];?>,<?php echo $origin['fname'];?> <?php echo $origin['mname'];?></strong></p>
+			<?php }?>
+
 			<div style="display:block; margin-left:auto; margin-right:auto; width:80%;">
 			<h4 class="text-center"> Comments/Remarks: </h4>
-			<textarea style="border:2px solid red;" class="form-control" id="comment" name="comment" rows="3"></textarea> <br>
+			<textarea style="border:2px solid red;" class="form-control" id="comment" name="comment" rows="3">none</textarea> <br>
 			</div>
 		</div>
 		
@@ -351,6 +386,7 @@ $(document).ready(function() {
 			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 		</div>
 	</div>
+	<?php echo form_close();?>
 </div>
 </div>
 <!-- end of response modal -->
