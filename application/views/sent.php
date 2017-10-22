@@ -132,16 +132,17 @@
 			<?php
 					date_default_timezone_set('Asia/Manila');
 					$mydate = strtotime($sent['date_of_action']);
-					
+
 			?>
-			<p style="font-size:20px; font-weight: normal; color: white;">As of:&emsp;<?php echo date('F d, Y ', $mydate);?>				
+			<p style="font-size:20px; font-weight: normal; color: white;">As of:&emsp;<?php echo date('F d, Y ', $mydate);?>
 			 at <?php echo date('g:i a', $mydate);?>
 			</p>
 			<br>
-				
-				<button class="btn btn-default btn-sm" id="<?php echo $sent['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sent["tracking_no"]) ?>')">View file&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+
+				<!-- <button class="btn btn-default btn-sm" id="<?php echo $sent['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sent["tracking_no"]) ?>')">View file&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button> -->
+				<button class="btn btn-default btn-sm" id="<?php echo $sent['tracking_no']; ?>" type="button" onclick="window.open('<?php echo site_url('Home/view_docu/?file='.$sent["document_file"]) ?>')">View file&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
 				<button class="btn btn-primary btn-sm" type="button" onclick="window.location='<?php echo site_url('Home/docu');?>'">Back&nbsp;<span class="fa fa-arrow-left" aria-hidden="true"></span></button>
-			
+
 			<?php } ?>
 			</div>
 
@@ -458,7 +459,7 @@ $(document).ready(function() {
 				</div>
 			</div>
 
-			<div class="row">		
+			<div class="row">
 			<br/>
 			<div class=" col-md-10">
 					<label for="">Attach File:</label>

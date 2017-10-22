@@ -12,7 +12,7 @@
 		   	return $query->result_array();
 
 		}
-		
+
 		public function can_login($username){
 			$password = md5($this->input->post('password'));
 			$this->db->where('username',$username);
@@ -116,7 +116,7 @@
 		    $this->db->order_by('a.date_created','DESC');
 		    $this->db->where('c.username',$user['username']);
 		    $query = $this->db->get();
-		    
+
 		    return $query->result_array();
 		}
 
@@ -146,7 +146,7 @@
 		public function get_by_id($id)
 		{
 			$this->db->select('a.document_id,a.status,a.date_of_action,a.recipient,b.employee_id,b.lname,b.fname,b.mname,b.department_id,
-				c.document_id,c.tracking_no,c.document_title,c.document_desc,c.date_created,d.department_desc,d.department_id');
+				c.document_id,c.tracking_no,c.document_title,c.document_file,c.document_desc,c.date_created,d.department_desc,d.department_id');
 			$this->db->from('documentation a');
 			$this->db->join('employee b','a.recipient = b.employee_id');
 			$this->db->join('document c','a.document_id = c.document_id');
@@ -294,7 +294,83 @@
 			}
 		}
 
-		
+		//track docu Login
+		public function track_docu_latest_date($track_num){ //get the latest date of the file
+			$this->db->select('*');
+			$this->db->from('documentation');
+			$this->db->join('document', 'document.document_id = documentation.document_id');
+			if ( isset($track_num)) {
+				$this->db->where('document.tracking_no',$track_num);
+			}
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+		public function track_docu_info($cdate,$track_num){  //track the file with the latest date and info
+			$this->db->select('*');
+			$this->db->from('documentation');
+			$this->db->join('document', 'documentation.document_id=document.document_id');
+			if ( isset($cdate,$track_num)) {
+				$this->db->where('document.tracking_no',$track_num);
+				$this->db->where('documentation.date_of_action',$cdate);
+			}
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+		public function track_docu_from($employee){ //track the department
+			$this->db->select('*');
+			$this->db->from('employee');
+			$this->db->join('department', 'employee.department_id=department.department_id');
+			if ( isset($employee)) {
+				$this->db->where('employee.employee_id',$employee);
+			}
+			$query= $this->db->get();
+			return $query-> result_array();
+		}
+		//history
+	public function sender($track_no){
+		$this->db->select('document.document_id, document.date_created, document.document_title, document.document_desc, document.tracking_no,
+											employee.employee_id, employee.lname, employee.fname, employee.mname,
+											department.department_desc');
+		$this->db->from('document');
+		$this->db->join('documentation','document.document_id=documentation.document_id');
+		$this->db->join('employee','employee.employee_id=documentation.employee_id');
+		$this->db->join('department','department.department_id=employee.department_id');
+		$this->db->where('document.tracking_no',$track_no);
+		$query= $this->db->get();
+		return $query-> row();
+	}
+
+	public function docu_flow($track_no){
+		// $this->db->select('*');
+		$this->db->select('documentation.document_id, documentation.status, documentation.date_of_action, documentation.status, documentation.recipient,
+											document.tracking_no, document.document_title,
+											history.employee_id, history.response, history.comment, history.date_responded,
+											employee.employee_id, employee.lname, employee.fname, employee.mname,
+											department.department_desc');
+		$this->db->from('document');
+		$this->db->join('documentation','document.document_id=documentation.document_id');
+		$this->db->join('history','history.document_id=documentation.document_id');
+		$this->db->join('employee', 'employee.employee_id=history.employee_id');
+		$this->db->join('department','department.department_id=employee.department_id');
+		$this->db->where('document.tracking_no',$track_no);
+		$query= $this->db->get();
+		return $query-> result_array();
+	}
+	public function end($track_no){
+		$this->db->select('documentation.document_id, documentation.status, documentation.date_of_action, documentation.recipient,
+											employee.lname, employee.fname, employee.mname,
+											department.department_desc');
+		// $this->db->select('*');
+		$this->db->from('document');
+		$this->db->join('documentation', 'documentation.document_id=document.document_id');
+		$this->db->join('employee', 'employee.employee_id=documentation.recipient');
+		$this->db->join('department', 'department.department_id=employee.department_id');
+		$this->db->where('document.tracking_no',$track_no);
+		$query= $this->db->get();
+		return $query-> row();
+	}
+
+
 	}
 
 ?>

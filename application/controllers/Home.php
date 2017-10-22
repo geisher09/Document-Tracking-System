@@ -438,7 +438,128 @@ class Home extends CI_Controller {
 		redirect('home/index','refresh');
 	}
 
+	//track docu not ajax :(
+	public function track_docu(){
+		$this->form_validation->set_rules('track_num', 'track_num', 'trim|required');
+		if($this->form_validation->run()){
+			$track_num = $this->input->post('track_num');
+			$this->load->model('dts_model');
+			$doc_date = $this->dts_model->track_docu_latest_date($track_num);
+			if($doc_date!=null){
+        foreach ($doc_date as $d) {
+          $dates = array(
+            'date_of_action' => $d['date_of_action']
+          );
+          $dates2[]=$dates;
+        }
+        asort($dates2);
+        $date_close=($dates2);
+        $cdate = $date_close[0];
 
+        foreach ($date_close as $d) {
+          $cdates = array(
+            'date_of_action' => $d['date_of_action']
+          );
+          $dates3[]=$cdates;
+        }
+        $use_date = $cdates['date_of_action'];
+        $info = $this->dts_model->track_docu_info($use_date,$track_num);
+				foreach ($info as $r) {
+					$emp2 = array(
+						'employee_id' => $r['employee_id'],
+						'document_id' => $r['document_id'],
+						'tracking_no' => $r['tracking_no'],
+						'document_status' => $r['document_status'],
+						'status' => $r['status'],
+						'date_of_action' => $r['date_of_action'],
+						'document_title' => $r['document_title'],
+					  'document_desc' => $r['document_desc'],
+					  'date_created' => $r['date_created'],
+					);
+            $rec[]=$emp2;
+        }
+      	$employee=$emp2['employee_id'];
+				$title=$emp2['document_title'];
+				$action=$emp2['status'];
+				$date=$emp2['date_created'];
+				$tracking_no=$emp2['tracking_no'];
+				$from=$this->dts_model->track_docu_from($employee);
+				foreach ($from as $r) {
+ 					$track_from = array(
+ 						'employee_id' => $r['employee_id'],
+ 						'department_id' => $r['department_id'],
+ 						'department_desc' => $r['department_desc']
+ 					);
+				}
+				print_r($action);
+			 	$dept_desc = $track_from['department_desc'];
+			 	$dept_id = $track_from['department_id'];
+				$this->session->set_flashdata('track',
+				'The File: '.$tracking_no. '<br/>Title: '.$title.'<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
+				// 'The File: '.$tracking_no. '<br/>Title: '.$title.'<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date);//.'<br/>Last handled by: '.$employee);
+				redirect('home/index');
+			}
+			else if($emp['document_status']!='sent'){
+				$this->session->set_flashdata('error1', 'File not yet accepted or invalid!');
+				redirect('home/index');
+			}
+			}
+			else{
+				$this->session->set_flashdata('error1', 'Please Enter a Document ID!');
+				redirect('home/index');
+			}
+		}
+
+		//veiw document new table
+	public function view_docu(){
+		if(isset($_GET['file'])){
+			// $filenam = array();
+			$fileName = array('file' => $_GET['file']);
+			// print_r($fileName);
+			// echo "<br/>";
+			$name = basename($_GET['file']);
+			// echo "<br/> basenaname <br/>";
+			$filePath = 'uploads/'.$name;
+			$filenam = $name.'.pdf';
+			// echo "<br/>";
+			// print_r($filePath);
+			$this->load->model('dts_model');
+			if(!empty($fileName) && file_exists($filePath)){
+				// $file = $filepath;
+				$filename = $name;
+				header('Content-type: application/pdf');
+				header('Content-Disposition: inline; filename="'.$filename.'"');
+				header('Content-Transfer-Encoding: binary');
+				header('Accept-Ranges: bytes');
+				ob_clean();
+				flush();
+				readfile("uploads/".$filename);
+				exit;
+
+			}
+			else {
+				// return redirect('home/docu');
+			}
+		}
+		else{
+			// return redirect('home/docu');
+		}
+
+	}
+	public function history(){
+	$this->load->model('dts_model');
+	// $origin = $this->dts_model->sender($this->input->post('id'));
+	$origin = $this->dts_model->sender($this->input->post('id'));
+	$recipient = $this->dts_model->docu_flow($this->input->post('id'));
+	$end = $this->dts_model->end($this->input->post('id'));
+	$output = array(
+		'origin' => $origin,
+		'recipient' => $recipient,
+		'end' => $end
+	);
+	// print_r($last);
+	echo json_encode($output);
+	}
 
 
 }
