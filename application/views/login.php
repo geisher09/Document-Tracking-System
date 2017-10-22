@@ -25,7 +25,7 @@
 	<div  class="box">
 
 		<?php echo form_open('home/login_validation');?>
-		<p  style="color: #ffffff; font-size: 36px;"> Login </p> <br /><br /><br />
+		<p  style="color: #ffffff; font-size: 36px;">User Login </p> <br /><br /><br />
 
 
 			<!--

@@ -58,7 +58,6 @@
 								<li><a data-toggle="modal" id="<?php echo $prof['employee_id']; ?>" onclick="send(this.id)"><i class="glyphicon glyphicon-share"></i> Compose</a></li>
 								<?php } ?>
 								<li><a href="<?php echo site_url('Home/docu'); ?>"><i class="glyphicon glyphicon-inbox"></i> Inbox</a></li>
-								<li><a data-toggle="modal" id="<?php echo $sta ?>" onclick="status(this.id)"><i class="glyphicon glyphicon-plus"></i> Add status</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
