@@ -33,7 +33,7 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
 				<img src="<?php echo base_url('assets/images/logo2.png');?>" alt="DTS Logo" class="img-responsive logo2">
-				<a href="index.html" style="font-family: 'Josefin Slab'; font-size: 27px; color: #34495E;">
+				<a href="<?php echo site_url('Home/home'); ?>" style="font-family: 'Josefin Slab'; font-size: 27px; color: #34495E;">
 				Document Tracking System </a>
 			</div>
 			<div class="container-fluid">
@@ -155,11 +155,6 @@
 
 
 						<div class="clearfix"></div>
-						<footer>
-							<div class="container-fluid">
-								<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
-							</div>
-						</footer>
 
 
 
@@ -340,7 +335,7 @@ function send(id){
 			<div class="clearfix"></div>
 			<footer>
 			<div class="container-fluid">
-				<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/home'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
+				<p class="copyright">&copy; 2017 <a href="<?php echo site_url('Home/intro'); ?>" target="_blank">Document Tracking System</a>. All Rights Reserved.</p>
 			</div>
 			</footer>
 

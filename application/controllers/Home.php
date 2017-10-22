@@ -17,6 +17,18 @@ class Home extends CI_Controller {
 			$this->load->view('footer');
 	}
 
+	public function intro(){
+		$header_data['title']="	Introduction";
+		$user['username']=$this->session->userdata('username');
+		$this->load->model('dts_model');
+		$profile = $this->dts_model->get_profile($user);
+		$employees = $this->dts_model->getEmployees($user);
+		$this->load->view('header2',$header_data);
+		$inbox = $this->dts_model->get_profile_inbox($user);
+	 	$this->load->view('intro',['inb'=>$inbox,'emp'=>$employees,'pro'=>$profile]);
+		$this->load->view('footer');
+	}
+
 	public function login_validation(){
 		$this->form_validation->set_rules('uname', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
