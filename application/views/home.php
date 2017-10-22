@@ -557,13 +557,13 @@ function send(id){
 			<table class="table table-list-search table-hover table-responsive" id="mytable">
 		    <!-- <table class="table table-list-search table-hover table-responsive "> -->
 				<thead>
+					<?php if(isset($do) && sizeof($do)>0): ?>
 					<tr>
 						<th>TRACKING NO. </th>
 						<th>TITLE</th>
 					</tr>
 				</thead>
-				<tbody>
-					<?php if(isset($do)): ?>
+				<tbody>					
 					<?php foreach ($do as $document){ ?>
 					<tr id="<?php echo $document['tracking_no'];?>" onclick='show(this.id)'>
 						<td><?php echo $document['tracking_no'];?></td>
@@ -591,7 +591,7 @@ function send(id){
 		<div class="modal-dialog modal-md">
 	<!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="background-color: #555555">
+        <div class="modal-header" style="background-color: #34495E; color:#ffffff;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
           <h3 class="modal-title text-center">Add Document</h3>

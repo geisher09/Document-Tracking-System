@@ -154,7 +154,7 @@
 		<div class="modal-dialog modal-md">
 	<!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="background-color: #555555">
+        <div class="modal-header" style="background-color: #34495E; color:#ffffff;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
           <h3 class="modal-title text-center">Add Document</h3>

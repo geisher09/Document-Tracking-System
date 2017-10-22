@@ -55,7 +55,7 @@ class Home extends CI_Controller {
 			$this->load->model('dts_model');
 			$profile = $this->dts_model->get_profile($user);
 			$documents = $this->dts_model->getDocuments($user);
-			$employees = $this->dts_model->getEmployees($user);			
+			$employees = $this->dts_model->getEmployees($user);
 			$header_data['title']="DTS";
 			date_default_timezone_set('Asia/Manila');
 			$time =date("h:i:sa");
@@ -64,7 +64,6 @@ class Home extends CI_Controller {
 			$data['date'] = $date;
 			$data['username'] = $user;
 			$this->load->view('header2',$header_data);
-			//$this->load->view('header');
 			$this->load->view('home',['emp'=>$employees,'do'=>$documents,'pro'=>$profile]);
 			$this->load->view('footer');
 		}
@@ -83,6 +82,8 @@ class Home extends CI_Controller {
 		$profile = $this->dts_model->get_profile($user);
 		$employees = $this->dts_model->getEmployees($user);
 		$sent = $this->dts_model->get_profile_sent($user);
+		$inbox = $this->dts_model->get_profile_inbox($user);
+		// $inbox = rsort($inboxe);
 		//$inbox = $this->dts_model->get_profile_inbox($user);
 // 		$documents = $this->dts_model->getDocuments();
 
@@ -105,7 +106,7 @@ class Home extends CI_Controller {
 // 			$url = "./uploads/".$a['document_title'];
 // //			print_r($as);
 // 		}
-		$this->load->view('documents',['pro'=>$profile,'emp'=>$employees,'snt'=>$sent]);
+		$this->load->view('documents',['pro'=>$profile,'emp'=>$employees,'snt'=>$sent,'inb'=>$inbox]);
 		$this->load->view('footer');
 	}
 
