@@ -539,6 +539,13 @@
 	$query= $this->db->get();
 	return $query-> result_array();
 }
+	public function track_docu($tracking_no){
+		$this->db->select('*');
+		$this->db->from('document');
+		$this->db->where('tracking_no',$tracking_no);
+		$quert = $this->db->get();
+		return $query->result_array();
+	}
 //add new status
 public function make_status($statusnew){
 	return $this->db->insert('status', $statusnew);

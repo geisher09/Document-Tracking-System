@@ -569,7 +569,7 @@ class Home extends CI_Controller {
 			 	$dept_desc = $track_from['department_desc'];
 			 	$dept_id = $track_from['department_id'];
 				$this->session->set_flashdata('track',
-				'The File: '.$tracking_no. '<br/>Title: '.$title.'<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date.'<br/>File is: '.$action);//.'<br/>Last handled by: '.$employee);
+				'The File: '.$tracking_no. '<br/>Title: '.$title.'<br/>Is in: '.$dept_desc);
 				// 'The File: '.$tracking_no. '<br/>Title: '.$title.'<br/>Is in: '.$dept_desc.'<br/>Date Submitted: '.$date);//.'<br/>Last handled by: '.$employee);
 				redirect('home/index');
 			}
@@ -647,6 +647,16 @@ class Home extends CI_Controller {
 	// echo $user;
 	echo json_encode($output);
 	}
+	
+	public function tracking(){
+		$this->load->model('dts_model');
+		$track = $this->dts_model->track_doc($this->input->post('id'));
+		$output = array(
+		'doc' => $track
+		);
+		echo json+encode($output);
+	}
+	
 	public function new_status(){
 	  	$this->form_validation->set_rules('status_id', 'status_id', 'required');
 	 	$this->form_validation->set_rules('status_desc', 'status_desc', 'required');
